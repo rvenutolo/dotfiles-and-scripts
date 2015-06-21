@@ -71,7 +71,6 @@ alias dt='cd ~/Desktop'
 alias un='extract'
 
 alias mx='chmod a+x'
-alias 000='chmod 000'
 alias 644='chmod 644'
 alias 744='chmod 744'
 alias 755='chmod 755'
@@ -80,10 +79,6 @@ alias update='sudo apt-get update && sudo apt-get upgrade'
 
 alias path='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
-alias print='/usr/bin/lp -o nobanner -d $LPDEST'
-            # Assumes LPDEST is defined (default printer)
-alias pjet='enscript -h -G -fCourier9 -d $LPDEST'
-            # Pretty-print using enscript
 
 alias du='du -kh'       # Makes a more readable output.
 alias df='df -kTh'
@@ -271,5 +266,4 @@ function corename()   # Get name of app that created a corefile.
         echo -n $file : ; gdb --core=$file --batch | head -1
     done 
 }
-
 
