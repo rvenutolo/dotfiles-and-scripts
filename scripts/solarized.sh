@@ -45,5 +45,4 @@ echo "Set gedit color scheme: Edit | Preferences | Font & Color"
 # need to update path to config dir if not at ~/.IntelliJIdea14
 git clone https://github.com/jkaving/intellij-colors-solarized.git
 unzip intellij-colors-solarized/settings.jar 'colors/*' -d ~/.IntelliJIdea14/config/
-echo "Set IntelliJIDEA colors: Settings | Editor | Colors & Fonts
-
+echo "Set IntelliJIDEA colors: Settings | Editor | Colors & Fonts"

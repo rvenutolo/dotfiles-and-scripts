@@ -1,5 +1,5 @@
 for file in ~/.bash_{path,prompt,exports,aliases,functions,extra}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
 
@@ -28,4 +28,3 @@ unset MAILCHECK         # Don't want my shell to warn me of incoming mail.
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
-
