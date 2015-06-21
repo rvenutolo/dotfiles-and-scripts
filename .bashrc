@@ -1,13 +1,3 @@
-
-#-------------------------------------------------------------
-# Source global definitions (if any)
-#-------------------------------------------------------------
-
-
-if [ -f /etc/bashrc ]; then
-        . /etc/bashrc   # --> Read /etc/bashrc, if present.
-fi
-
 #-------------------------------------------------------------
 # Some settings
 #-------------------------------------------------------------
@@ -43,18 +33,51 @@ export EDITOR=nano
 export HISTCONTROL=ignoredups
 
 #-------------------
-# Personnal Aliases
+# Aliases
 #-------------------
-alias nano='nano -c'
+
+# Enable aliases to be sudo’ed
+alias sudo='sudo'
+alias _='sudo'
+
+alias please='sudo $(fc -ln -1)'
+
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+alias md='mkdir -p'
 alias mkdir='mkdir -p'
+alias rd='rmdir'
+
+alias cls='clear'
+alias q='exit'
+
+alias nano='nano -c'
 
 alias h='history'
 alias j='jobs -l'
+
 alias which='type -a'
+
 alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias home='cd ~'
+alias o='cd /opt'
+alias p='cd ~/Projects'
+alias dl='cd ~/Downloads'
+alias dt='cd ~/Desktop'
+
+alias un='extract'
+
+alias mx='chmod a+x'
+alias 000='chmod 000'
+alias 644='chmod 644'
+alias 744='chmod 744'
+alias 755='chmod 755'
+
+alias update='sudo apt-get update && sudo apt-get upgrade'
+
 alias path='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
 alias print='/usr/bin/lp -o nobanner -d $LPDEST'
@@ -65,19 +88,10 @@ alias pjet='enscript -h -G -fCourier9 -d $LPDEST'
 alias du='du -kh'       # Makes a more readable output.
 alias df='df -kTh'
 
-alias home='cd ~'
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="hostname -I"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
-alias un='extract'
-
-alias mx='chmod a+x'
-alias 000='chmod 000'
-alias 644='chmod 644'
-alias 744='chmod 744'
-alias 755='chmod 755'
-
-#-------------------------------------------------------------
-# The 'ls' family (this assumes you use a recent GNU ls)
-#-------------------------------------------------------------
 alias ll="ls -l --group-directories-first"
 alias lla="ls -Al --group-directories-first"
 alias ls='ls -hF --color'  # add colors for filetype recognition
@@ -91,21 +105,6 @@ alias lm='ls -al |more'    # pipe through 'more'
 alias lr='ls -lR'          # recursive ls
 alias tree='tree -Csu'     # nice alternative to 'recursive ls'
 
-# If your version of 'ls' doesn't support --group-directories-first try this:
-# function ll(){ ls -l "$@"| egrep "^d" ; ls -lXB "$@" 2>&-| \
-#                egrep -v "^d|total "; }
-
-#-------------------------------------------------------------
-# tailoring 'less'
-#-------------------------------------------------------------
-
-alias more='less'
-export PAGER=less
-export LESSCHARSET='latin1'
-export LESSOPEN='|/usr/bin/lesspipe.sh %s 2>&-'
-   # Use this if lesspipe.sh exists
-export LESS='-i -N -w  -z-4 -g -e -M -X -F -R -P%t?f%f \
-:stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
 
 #-------------------------------------------------------------
 # Make the following commands run in background automatically:
@@ -273,9 +272,4 @@ function corename()   # Get name of app that created a corefile.
     done 
 }
 
-# Local Variables:
-# mode:shell-script
-# sh-shell:bash
-
-# End:
 
