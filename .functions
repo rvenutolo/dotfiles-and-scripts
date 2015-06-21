@@ -2,9 +2,10 @@
 # Make the following commands run in background automatically:
 #-------------------------------------------------------------
 
-function firefox() { command firefox '$@' & }
-function google-chrome() { command google-chrome '$@' & }
-function gedit() { command gedit '$@' & }
+function firefox() { command firefox "$@" & }
+function google-chrome() { command google-chrome "$@" & }
+funciton chrome() { command google-chrome "$@" & }
+function gedit() { command gedit "$@" & }
 
 #-------------------------------------------------------------
 # File & string-related functions:
