@@ -31,13 +31,16 @@ export HOSTFILE=$HOME/.hosts    # Put list of remote hosts in ~/.hosts ...
 
 export EDITOR=nano
 export HISTCONTROL=ignoredups
+export LANG=en_US.UTF-8;
+export LC_ALL=en_US.UTF-8;
+export MANPAGER='less -X';
+export GREP_OPTIONS='--color=auto';
 
 #-------------------
 # Aliases
 #-------------------
 
-# Enable aliases to be sudo’ed
-alias sudo='sudo'
+alias sudo='sudo '
 alias _='sudo'
 
 alias please='sudo $(fc -ln -1)'
@@ -62,6 +65,7 @@ alias which='type -a'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias .....='cd ../../../..'
 alias home='cd ~'
 alias o='cd /opt'
 alias p='cd ~/Projects'
@@ -83,12 +87,12 @@ alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
 alias du='du -kh'       # Makes a more readable output.
 alias df='df -kTh'
 
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="hostname -I"
+alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias localip='hostname -I'
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
-alias ll="ls -l --group-directories-first"
-alias lla="ls -Al --group-directories-first"
+alias ll='ls -l --group-directories-first'
+alias lla='ls -Al --group-directories-first'
 alias ls='ls -hF --color'  # add colors for filetype recognition
 alias la='ls -Al'          # show hidden files
 alias lx='ls -lXB'         # sort by extension
@@ -105,9 +109,9 @@ alias tree='tree -Csu'     # nice alternative to 'recursive ls'
 # Make the following commands run in background automatically:
 #-------------------------------------------------------------
 
-function firefox() { command firefox "$@" & }
-function google-chrome() { command google-chrome "$@" & }
-function gedit() { command gedit "$@" & }
+function firefox() { command firefox '$@' & }
+function google-chrome() { command google-chrome '$@' & }
+function gedit() { command gedit '$@' & }
 
 
 #-------------------------------------------------------------
@@ -116,35 +120,6 @@ function gedit() { command gedit "$@" & }
 
 # Find a file with a pattern in name:
 function ff() { find . -type f -iname '*'$*'*' -ls ; }
-
-# Find a file with pattern $1 in name and Execute $2 on it:
-function fe()
-{ find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \;  ; }
-
-# Find a pattern in a set of files and highlight them:
-# (needs a recent version of egrep)
-function fstr()
-{
-    OPTIND=1
-    local case=""
-    local usage="fstr: find string in files.
-Usage: fstr [-i] \"pattern\" [\"filename pattern\"] "
-    while getopts :it opt
-    do
-        case "$opt" in
-        i) case="-i " ;;
-        *) echo "$usage"; return;;
-        esac
-    done
-    shift $(( $OPTIND - 1 ))
-    if [ "$#" -lt 1 ]; then
-        echo "$usage"
-        return;
-    fi
-    find . -type f -name "${2:-*}" -print0 | \
-    xargs -0 egrep --color=always -sn ${case} "$1" 2>&- | more 
-
-}
 
 function lowercase()  # move filenames to lowercase
 {
@@ -239,31 +214,70 @@ function ii()   # Get current host related info.
 }
 
 #-------------------------------------------------------------
-# Misc utilities:
+# Prompt
 #-------------------------------------------------------------
 
-function repeat()       # Repeat n times command.
-{
-    local i max
-    max=$1; shift;
-    for ((i=1; i <= max ; i++)); do  # --> C-like syntax
-        eval "$@";
-    done
-}
+if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
+	export TERM='gnome-256color';
+elif infocmp xterm-256color >/dev/null 2>&1; then
+	export TERM='xterm-256color';
+fi;
 
-function ask()          # See 'killps' for example of use.
-{
-    echo -n "$@" '[y/n] ' ; read ans
-    case "$ans" in
-        y*|Y*) return 0 ;;
-        *) return 1 ;;
-    esac
-}
+if tput setaf 1 &> /dev/null; then
+	tput sgr0; # reset colors
+	bold=$(tput bold);
+	reset=$(tput sgr0);
+	# Solarized colors, taken from http://git.io/solarized-colors.
+	black=$(tput setaf 0);
+	blue=$(tput setaf 33);
+	cyan=$(tput setaf 37);
+	green=$(tput setaf 64);
+	orange=$(tput setaf 166);
+	purple=$(tput setaf 125);
+	red=$(tput setaf 124);
+	violet=$(tput setaf 61);
+	white=$(tput setaf 15);
+	yellow=$(tput setaf 136);
+else
+	bold='';
+	reset="\e[0m";
+	black="\e[1;30m";
+	blue="\e[1;34m";
+	cyan="\e[1;36m";
+	green="\e[1;32m";
+	orange="\e[1;33m";
+	purple="\e[1;35m";
+	red="\e[1;31m";
+	violet="\e[1;35m";
+	white="\e[1;37m";
+	yellow="\e[1;33m";
+fi;
 
-function corename()   # Get name of app that created a corefile.
-{ 
-    for file ; do
-        echo -n $file : ; gdb --core=$file --batch | head -1
-    done 
-}
+# Highlight the user name when logged in as root.
+if [[ "${USER}" == "root" ]]; then
+	userStyle="${red}";
+else
+	userStyle="${orange}";
+fi;
+
+# Highlight the hostname when connected via SSH.
+if [[ "${SSH_TTY}" ]]; then
+	hostStyle="${bold}${red}";
+else
+	hostStyle="${yellow}";
+fi;
+
+# Set the terminal title to the current working directory.
+PS1="\[\033]0;\w\007\]";
+PS1+="\[${bold}\]";
+PS1+="\[${userStyle}\]\u"; # username
+PS1+="\[${white}\]@";
+PS1+="\[${hostStyle}\]\h"; # host
+PS1+="\[${white}\] ";
+PS1+="\[${green}\]\w "; # working directory
+PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
+export PS1;
+
+PS2="\[${yellow}\]→ \[${reset}\]";
+export PS2;
 
