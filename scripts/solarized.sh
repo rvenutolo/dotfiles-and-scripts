@@ -39,10 +39,11 @@ git clone https://github.com/mukashi/solarized.git mukashi_solarized
 cp mukashi_solarized/gedit-colors-solarized/*.xml ~/.gnome2/gedit/styles
 # modifying ~/.gconf/apps/gedit-2/preferences/editor/colors/%gconf.xml doesn't seem to work to set color scheme :(
 # xmlstarlet edit -L -u "/gconf/entry[@name='scheme']/stringvalue" -v 'solarized_dark' ~/.gconf/apps/gedit-2/preferences/editor/colors/%gconf.xml
-echo "Set gedit color scheme: Edit | Preferences | Font & Color"
 
 # intellij
 # need to update path to config dir if not at ~/.IntelliJIdea14
 git clone https://github.com/jkaving/intellij-colors-solarized.git
 unzip intellij-colors-solarized/settings.jar 'colors/*' -d ~/.IntelliJIdea14/config/
+
+echo "Set gedit color scheme: Edit | Preferences | Font & Color"
 echo "Set IntelliJIDEA colors: Settings | Editor | Colors & Fonts"
