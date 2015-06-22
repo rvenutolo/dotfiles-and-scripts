@@ -14,3 +14,7 @@ rsync -rt "${dotfile_src_dir}/" "${DOTFILED_TARGET_DIR}/"
 
 echo "syncing ${scripts_src_dir}/ to ${SCRIPTS_TARGET_DIR}/"
 rsync -rt "${scripts_src_dir}/" "${SCRIPTS_TARGET_DIR}/"
+
+# remove this script from ~/scripts so I don't accidentally execute it
+this_script_file_name=`basename ${this_script}`
+rm "${SCRIPTS_TARGET_DIR}/$this_script_file_name"
