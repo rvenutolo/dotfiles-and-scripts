@@ -21,7 +21,7 @@ alias nano='nano -c'
 alias h='history'
 alias j='jobs -l'
 
-alias which='type -a'
+#alias which='type -a'
 
 alias ..='cd ..'
 alias ...='cd ../..'
