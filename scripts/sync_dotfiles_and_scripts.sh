@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+DOTFILED_TARGET_DIR=~
+SCRIPTS_TARGET_DIR=~/scripts
+
+this_script=`readlink -f "$0"`
+scripts_src_dir=`dirname "$this_script"`
+dotfile_src_dir=`readlink -f "$scripts_src_dir/../dotfiles"`
+
+echo "syncing ${dotfile_src_dir}/ to ${DOTFILED_TARGET_DIR}/"
+rsync -rt "${dotfile_src_dir}/" "${DOTFILED_TARGET_DIR}/"
+
+echo "syncing ${scripts_src_dir}/ to ${SCRIPTS_TARGET_DIR}/"
+rsync -rt "${scripts_src_dir}/" "${SCRIPTS_TARGET_DIR}/"
