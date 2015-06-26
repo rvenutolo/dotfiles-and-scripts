@@ -18,3 +18,6 @@ rsync -rt "${scripts_src_dir}/" "${SCRIPTS_TARGET_DIR}/"
 # remove this script from ~/Scripts so I don't accidentally execute it
 this_script_file_name=`basename ${this_script}`
 rm "${SCRIPTS_TARGET_DIR}/$this_script_file_name"
+
+# reload the shell (i.e. invoke as a login shell)
+exec $SHELL -l
