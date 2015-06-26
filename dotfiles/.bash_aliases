@@ -45,7 +45,7 @@ alias update='sudo apt-get update && sudo apt-get upgrade && sudo apt-get autore
 alias path='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
 
-alias du='du -kh'       # Makes a more readable output.
+alias du='du -ckh'       # Makes a more readable output.
 alias df='df -kTh'
 
 alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
