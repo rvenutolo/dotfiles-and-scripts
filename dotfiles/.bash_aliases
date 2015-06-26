@@ -42,6 +42,8 @@ alias 755='chmod 755'
 
 alias update='sudo apt-get update && sudo apt-get upgrade && sudo apt-get autoremove && sudo apt-get clean'
 
+alias brc='source ~/.bashrc'
+
 alias path='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
 
