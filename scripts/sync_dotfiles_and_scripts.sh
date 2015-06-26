@@ -3,7 +3,7 @@
 set -e
 
 DOTFILES_TARGET_DIR=~
-SCRIPTS_TARGET_DIR=~/scripts
+SCRIPTS_TARGET_DIR=~/Scripts
 
 this_script=`readlink -f "$0"`
 scripts_src_dir=`dirname "$this_script"`
