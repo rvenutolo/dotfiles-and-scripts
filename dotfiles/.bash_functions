@@ -39,11 +39,11 @@ function swap()  # Swap 2 filenames around, if they exist
 }
 
 extract () {
-  if [ $# -ne 1 ]
-  then
-    echo "Error: No file specified."
-    return 1
-  fi
+    if [ $# -ne 1 ]
+    then
+        echo "Error: No file specified."
+        return 1
+    fi
     if [ -f $1 ] ; then
         case $1 in
             *.tar.bz2) tar xvjf $1   ;;
@@ -161,7 +161,16 @@ function down4me ()
 
 function pmdown()
 {
-    markdown $1 | bcat
+    if [ $# -ne 1 ]
+    then
+        echo "Error: No file specified."
+        return 1
+    fi
+    if [ -f $1 ] ; then
+        echo "<html><head><title>`basename $1`</title></head><body>`markdown $1`</body></html>" | bcat
+    else
+        echo "'$1' is not a valid file"
+    fi
 }
 
 function mkcd ()
