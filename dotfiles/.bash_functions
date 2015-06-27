@@ -94,15 +94,15 @@ function killps()                 # Kill by process name.
 function ii()   # Get current host related info.
 {
     echo -e "\nYou are logged on $(hostname)"
-    echo -e "\nAdditionnal information: " ; uname -a
+    echo -e "\nAdditional information: " ; uname -a
     echo -e "\nUsers logged on: " ; w -h
-    echo -e "\nCurrent date : " ; date
-    echo -e "\nMachine stats : " ; uptime
-    echo -e "\nMemory stats : " ; free
+    echo -e "\nCurrent date: " ; date
+    echo -e "\nMachine stats: " ; uptime
+    echo -e "\nMemory stats: " ; free
     my_ip 2>&- ;
-    echo -e "\nLocal IP Address :" ; echo ${MY_IP:-"Not connected"}
-    echo -e "\nISP Address :" ; echo ${MY_ISP:-"Not connected"}
-    echo -e "\nOpen connections : "; netstat -pan --inet;
+    echo -e "\nLocal IP Addresses:" ; echo `localip`
+    echo -e "\nExternal IP Address:" ; echo `ip`
+    echo -e "\nOpen connections: "; netstat -pan --inet;
     echo
 }
 
