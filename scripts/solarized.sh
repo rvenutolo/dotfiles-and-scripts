@@ -33,6 +33,14 @@ set t_Co=256
 set background=dark
 colorscheme default " >> ~/.vimrc.after
 
+# nano
+# http://antesarkkinen.com/blog/add-colors-to-os-x-terminal-including-ls-and-nano/
+#curl -OL http://85.159.208.243/share/givemecolors.tar.gz
+#sudo mkdir -p /usr/share/nano
+#sudo tar -zxvf givemecolors.tar.gz
+#sudo cp givemecolors/*.nanorc /usr/share/nano/
+#sudo cp givemecolors/nanorc /etc/nanorc
+
 # gedit
 mkdir -p ~/.gnome2/gedit/styles/
 git clone https://github.com/mukashi/solarized.git mukashi_solarized
