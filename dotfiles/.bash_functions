@@ -39,12 +39,11 @@ function swap()  # Swap 2 filenames around, if they exist
 }
 
 extract () {
-    if [ $# -ne 1 ]
-    then
+    if [ $# -ne 1 ]; then
         echo "Error: No file specified."
         return 1
     fi
-    if [ -f $1 ] ; then
+    if [ -f $1 ]; then
         case $1 in
             *.tar.bz2) tar xvjf $1   ;;
             *.tar.gz)  tar xvzf $1   ;;
@@ -161,12 +160,11 @@ function down4me ()
 
 function pmdown()
 {
-    if [ $# -ne 1 ]
-    then
+    if [ $# -ne 1 ]; then
         echo "Error: No file specified."
         return 1
     fi
-    if [ -f $1 ] ; then
+    if [ -f $1 ]; then
         echo "<html><head><title>`basename $1`</title></head><body>`markdown $1`</body></html>" | bcat
     else
         echo "'$1' is not a valid file"
@@ -181,7 +179,15 @@ function mkcd ()
 
 function bak ()
 {
-    local filename=$1
-    local filetime=$(date +%Y%m%d_%H%M%S)
-    cp -a "${filename}" "${filename}.${filetime}.bak"
+    if [ $# -ne 1 ]; then
+        echo "Error: No file specified."
+        return 1
+    fi
+    if [ -f $1 ] || [ -d $1 ]; then
+        local filename=$1
+        local filetime=$(date +%Y%m%d_%H%M%S)
+        cp -a "${filename}" "${filename}.${filetime}.bak"
+    else
+        echo "'$1' is not a valid file"
+    fi
 }
