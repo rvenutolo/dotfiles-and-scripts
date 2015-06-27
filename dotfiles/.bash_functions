@@ -152,3 +152,27 @@ function getcertnames()
         return 1;
     fi;
 }
+
+
+function down4me ()
+{
+    curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'
+}
+
+function pmdown()
+{
+    markdown $1 | bcat
+}
+
+function mkcd ()
+{
+    mkdir -p -- "$*"
+    cd -- "$*"
+}
+
+function bak ()
+{
+    local filename=$1
+    local filetime=$(date +%Y%m%d_%H%M%S)
+    cp -a "${filename}" "${filename}.${filetime}.bak"
+}
