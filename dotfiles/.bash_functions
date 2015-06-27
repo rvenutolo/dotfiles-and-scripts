@@ -1,15 +1,7 @@
-#-------------------------------------------------------------
-# Make the following commands run in background automatically:
-#-------------------------------------------------------------
-
 function firefox() { command firefox "$@" & }
 function google-chrome() { command google-chrome "$@" & }
 function chrome() { command google-chrome "$@" & }
 function gedit() { command gedit "$@" & }
-
-#-------------------------------------------------------------
-# File & string-related functions:
-#-------------------------------------------------------------
 
 # Find a file with a pattern in name:
 function ff() { find . -type f -iname '*'$*'*' -ls ; }
@@ -46,33 +38,34 @@ function swap()  # Swap 2 filenames around, if they exist
     mv $TMPFILE "$2"
 }
 
-function extract()      # Handy Extract Program.
-{
-     if [ -f $1 ] ; then
-         case $1 in
-             *.tar.bz2)   tar xvjf $1     ;;
-             *.tar.gz)    tar xvzf $1     ;;
-             *.bz2)       bunzip2 $1      ;;
-             *.rar)       unrar x $1      ;;
-             *.gz)        gunzip $1       ;;
-             *.tar)       tar xvf $1      ;;
-             *.tbz2)      tar xvjf $1     ;;
-             *.tgz)       tar xvzf $1     ;;
-             *.zip)       unzip $1        ;;
-             *.Z)         uncompress $1   ;;
-             *.7z)        7z x $1         ;;
-             *)           echo "'$1' cannot be extracted via >extract<" ;;
-         esac
-     else
-         echo "'$1' is not a valid file"
-     fi
+extract () {
+  if [ $# -ne 1 ]
+  then
+    echo "Error: No file specified."
+    return 1
+  fi
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2) tar xvjf $1   ;;
+            *.tar.gz)  tar xvzf $1   ;;
+            *.bz2)     bunzip2 $1    ;;
+            *.rar)     unrar x $1    ;;
+            *.gz)      gunzip $1     ;;
+            *.tar)     tar xvf $1    ;;
+            *.tbz2)    tar xvjf $1   ;;
+            *.tgz)     tar xvzf $1   ;;
+            *.zip)     unzip $1      ;;
+            *.Z)       uncompress $1 ;;
+            *.7z)      7z x $1       ;;
+            *)         echo "'$1' cannot be extracted via extract" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
 }
 
-#-------------------------------------------------------------
-# Process/system related functions:
-#-------------------------------------------------------------
-
 function my_ps() { ps $@ -u $USER -o pid,%cpu,%mem,bsdtime,command ; }
+
 function pp() { my_ps f | awk '!/awk/ && $0~var' var=${1:-".*"} ; }
 
 function killps()                 # Kill by process name.
@@ -91,7 +84,8 @@ function killps()                 # Kill by process name.
     done
 }
 
-function ii()   # Get current host related info.
+# Get current host related info.
+function ii()
 {
     echo -e "\nYou are logged on $(hostname)"
     echo -e "\nAdditional information: " ; uname -a
@@ -106,12 +100,8 @@ function ii()   # Get current host related info.
     echo
 }
 
-#-------------------------------------------------------------
-# Miscellaneous:
-#-------------------------------------------------------------
-
-# Simple calculator
-function calc() {
+function calc()
+{
     local result="";
     result="$(printf "scale=10;$*\n" | bc --mathlib | tr -d '\\\n')";
     #                       └─ default (when `--mathlib` is used) is 20
@@ -130,7 +120,8 @@ function calc() {
 
 # Show all the names (CNs and SANs) listed in the SSL certificate
 # for a given domain
-function getcertnames() {
+function getcertnames()
+{
     if [ -z "${1}" ]; then
         echo "ERROR: No domain specified.";
         return 1;
