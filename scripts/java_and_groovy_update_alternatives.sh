@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 update-alternatives --install /usr/bin/groovy groovy /opt/groovy/groovy-current/bin/groovy 1
 update-alternatives --set groovy /opt/groovy/groovy-current/bin/groovy
