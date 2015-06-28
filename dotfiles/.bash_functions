@@ -14,7 +14,7 @@ function lowercase()  # move filenames to lowercase
         */*) dirname==${file%/*} ;;
         *) dirname=.;;
         esac
-        nf=$(echo $filename | tr A-Z a-z)
+        nf=$(echo "$filename" | tr A-Z a-z)
         newname="${dirname}/${nf}"
         if [ "$nf" != "$filename" ]; then
             mv "$file" "$newname"
@@ -33,9 +33,9 @@ function swap()  # Swap 2 filenames around, if they exist
     [ ! -e $1 ] && echo "swap: $1 does not exist" && return 1
     [ ! -e $2 ] && echo "swap: $2 does not exist" && return 1
 
-    mv "$1" $TMPFILE 
+    mv "$1" "$TMPFILE"
     mv "$2" "$1"
-    mv $TMPFILE "$2"
+    mv "$TMPFILE" "$2"
 }
 
 extract () {
