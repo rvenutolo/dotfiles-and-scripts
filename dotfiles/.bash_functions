@@ -145,7 +145,7 @@ function pmdown()
         return 1
     fi
     if [ -f $1 ]; then
-        echo "<html><head><title>`basename $1`</title></head><body>`markdown $1`</body></html>" | bcat
+        echo -e "<html>\n<head>\n<title>`basename $1`</title>\n</head>\n<body>\n`markdown $1`\n</body>\n</html>" | bcat
     else
         echo "'$1' is not a valid file"
     fi
