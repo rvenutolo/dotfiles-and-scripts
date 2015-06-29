@@ -152,7 +152,7 @@ function pghfm()
     fi
     if [ -f "$inputfile" ]; then
         local filetime=$(date +%Y%m%d_%H%M%S)
-        local filename="/tmp/`basename \"inputfile\"`.$filetime.html"
+        local filename="/tmp/`basename \"$inputfile\"`.$filetime.html"
         grip "$inputfile" --export "$filename"
         x-www-browser "$filename"
     else
