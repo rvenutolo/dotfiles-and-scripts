@@ -139,15 +139,14 @@ function down4me ()
 
 function pghfm()
 {
-    if command -v grxp &>/dev/null; then
+    if command -v grip &>/dev/null; then
         local inputfile
         if [ $# -eq 0 ]; then
             inputfile='README.md'
         elif [ $# -eq 1 ]; then
             inputfile=$1
         else
-            echo "ERROR: Too many arguments"
-            echo "Usage: 'pmdown README.md' or 'pmdown'"
+            echo "ERROR: Expected 0 or 1 file path arguments"
             return 1
         fi
         if [ -f "$inputfile" ]; then
@@ -160,7 +159,7 @@ function pghfm()
             echo "'$inputfile' is not a valid file"
         fi
     else
-      echo "Error: Need to install Grip ('pip install grip')"
+      echo "Error: Need to install Grip ('sudo pip install grip')"
     fi
 }
 
