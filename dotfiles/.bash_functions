@@ -199,5 +199,6 @@ function pless() {
         pygmentize $2 | less "$1r"
     else
         echo "Error: bad arguments"
+        echo "Usage: 'pless [-options] /path/to/file'"
     fi
 }
