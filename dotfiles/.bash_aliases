@@ -88,7 +88,7 @@ alias a='atom'
 alias ah='atom .'
 alias apmup='apm update --no-confirm'
 
-alias pmdown='pgfm'
+alias pmdown='pghfm'
 
 alias gcl='git clone'
 alias ga='git add'
