@@ -139,24 +139,28 @@ function down4me ()
 
 function pghfm()
 {
-    local inputfile
-    if [ $# -eq 0 ]; then
-        inputfile='README.md'
-    elif [ $# -eq 1 ]; then
-        inputfile=$1
+    if command -v grxp &>/dev/null; then
+        local inputfile
+        if [ $# -eq 0 ]; then
+            inputfile='README.md'
+        elif [ $# -eq 1 ]; then
+            inputfile=$1
+        else
+            echo "ERROR: Too many arguments"
+            echo "Usage: 'pmdown README.md' or 'pmdown'"
+            return 1
+        fi
+        if [ -f "$inputfile" ]; then
+            # grip - https://github.com/joeyespo/grip
+            local filetime=$(date +%Y%m%d_%H%M%S)
+            local filename="/tmp/`basename \"inputfile\"`.$filetime.html"
+            grip "$inputfile" --export "$filename"
+            x-www-browser "$filename"
+        else
+            echo "'$inputfile' is not a valid file"
+        fi
     else
-        echo "ERROR: Too many arguments"
-        echo "Usage: 'pmdown README.md' or 'pmdown'"
-        return 1
-    fi
-    if [ -f "$inputfile" ]; then
-        # grip - https://github.com/joeyespo/grip
-        local filetime=$(date +%Y%m%d_%H%M%S)
-        local filename="/tmp/`basename \"inputfile\"`.$filetime.html"
-        grip "$inputfile" --export "$filename"
-        x-www-browser "$filename"
-    else
-        echo "'$inputfile' is not a valid file"
+      echo "Error: Need to install Grip ('pip install grip')"
     fi
 }
 
