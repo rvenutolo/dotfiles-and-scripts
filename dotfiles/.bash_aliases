@@ -2,6 +2,7 @@ alias sudo='sudo '
 alias _='sudo'
 
 alias please='sudo $(fc -ln -1)'
+alias plz='please'
 
 alias rm='rm -i'
 alias cp='cp -i'
