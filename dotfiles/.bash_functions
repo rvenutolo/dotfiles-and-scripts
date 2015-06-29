@@ -137,7 +137,7 @@ function down4me ()
     curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'
 }
 
-function pmdown()
+function pgfm()
 {
     local inputfile
     if [ $# -eq 0 ]; then
