@@ -139,6 +139,8 @@ function down4me ()
 
 function pghfm()
 {
+    # grip - https://github.com/joeyespo/grip
+    # sudo pip install grip
     local inputfile
     if [ $# -eq 0 ]; then
         inputfile='README.md'
@@ -151,7 +153,6 @@ function pghfm()
     if [ -f "$inputfile" ]; then
         local filetime=$(date +%Y%m%d_%H%M%S)
         local filename="/tmp/`basename \"inputfile\"`.$filetime.html"
-        # grip - https://github.com/joeyespo/grip
         grip "$inputfile" --export "$filename"
         x-www-browser "$filename"
     else
@@ -177,5 +178,26 @@ function bak ()
         cp -a "${filename}" "${filename}.${filetime}.bak"
     else
         echo "'$1' is not a valid file"
+    fi
+}
+
+function pcat() {
+    # pygmentize - http://pygments.org/
+    # sudo pip install Pygments
+    for var;
+    do
+        pygmentize -g "$var"
+    done
+}
+
+function pless() {
+    # pygmentize - http://pygments.org/
+    # sudo pip install Pygments
+    if [ $# -eq 1 ]; then
+        pygmentize -g $1 | less -r
+    elif [ $# -eq 2 ] && [[ $1 == -* ]]; then
+        pygmentize $2 | less "$1r"
+    else
+        echo "Error: bad arguments"
     fi
 }
