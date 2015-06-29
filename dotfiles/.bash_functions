@@ -139,27 +139,23 @@ function down4me ()
 
 function pghfm()
 {
-    if command -v grip &>/dev/null; then
-        local inputfile
-        if [ $# -eq 0 ]; then
-            inputfile='README.md'
-        elif [ $# -eq 1 ]; then
-            inputfile=$1
-        else
-            echo "ERROR: Expected 0 or 1 file path arguments"
-            return 1
-        fi
-        if [ -f "$inputfile" ]; then
-            # grip - https://github.com/joeyespo/grip
-            local filetime=$(date +%Y%m%d_%H%M%S)
-            local filename="/tmp/`basename \"inputfile\"`.$filetime.html"
-            grip "$inputfile" --export "$filename"
-            x-www-browser "$filename"
-        else
-            echo "'$inputfile' is not a valid file"
-        fi
+    local inputfile
+    if [ $# -eq 0 ]; then
+        inputfile='README.md'
+    elif [ $# -eq 1 ]; then
+        inputfile=$1
     else
-      echo "Error: Need to install Grip ('sudo pip install grip')"
+        echo "ERROR: Expected 0 or 1 file path arguments"
+        return 1
+    fi
+    if [ -f "$inputfile" ]; then
+        local filetime=$(date +%Y%m%d_%H%M%S)
+        local filename="/tmp/`basename \"inputfile\"`.$filetime.html"
+        # grip - https://github.com/joeyespo/grip
+        grip "$inputfile" --export "$filename"
+        x-www-browser "$filename"
+    else
+        echo "'$inputfile' is not a valid file"
     fi
 }
 
