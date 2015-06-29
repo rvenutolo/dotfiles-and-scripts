@@ -132,7 +132,6 @@ function getcertnames()
     fi;
 }
 
-
 function down4me ()
 {
     curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'
@@ -140,14 +139,24 @@ function down4me ()
 
 function pmdown()
 {
-    if [ $# -ne 1 ]; then
-        echo "Error: No file specified."
+    local inputfile
+    if [ $# -eq 0 ]; then
+        inputfile='README.md'
+    elif [ $# -eq 1 ]; then
+        inputfile=$1
+    else
+        echo "ERROR: Too many arguments"
+        echo "Usage: 'pmdown README.md' or 'pmdown'"
         return 1
     fi
-    if [ -f $1 ]; then
-        echo -e "<html>\n<head>\n<title>`basename $1`</title>\n</head>\n<body>\n`markdown $1`\n</body>\n</html>" | bcat
+    if [ -f "$inputfile" ]; then
+        # grip - https://github.com/joeyespo/grip
+        local filetime=$(date +%Y%m%d_%H%M%S)
+        local filename="/tmp/`basename \"inputfile\"`.$filetime.html"
+        grip "$inputfile" --export "$filename"
+        x-www-browser "$filename"
     else
-        echo "'$1' is not a valid file"
+        echo "'$inputfile' is not a valid file"
     fi
 }
 
