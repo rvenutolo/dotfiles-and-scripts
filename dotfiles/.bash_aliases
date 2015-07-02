@@ -44,7 +44,8 @@ alias o='cd /opt'
 
 alias un='extract'
 
-alias mx='chmod a+x'
+alias chux='chmod u+x'
+alias chax='chmod a+x'
 alias 644='chmod 644'
 alias 744='chmod 744'
 alias 755='chmod 755'
