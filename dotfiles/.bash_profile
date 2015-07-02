@@ -1,5 +1,8 @@
+#@IgnoreInspection AddShebang
+#@IgnoreInspection BashAddSheban
+
 # Load .profile, containing login, non-bash related initializations.
-source ~/.profile
+source $HOME/.profile
  
 # Load .bashrc, containing non-login related bash initializations.
-source ~/.bashrc
+source $HOME/.bashrc

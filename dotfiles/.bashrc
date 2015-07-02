@@ -1,4 +1,11 @@
-for file in ~/.bash_{path,prompt,exports,aliases,functions,extra}; do
+#@IgnoreInspection AddShebang
+#@IgnoreInspection BashAddSheban
+
+if [ -r /etc/bashrc ]; then
+    source /etc/bashrc
+fi
+
+for file in $HOME/.bash_{path,prompt,exports,aliases,functions,extra}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -26,5 +33,17 @@ shopt -s dirspell
 shopt -u mailwarn
 unset MAILCHECK         # Don't want my shell to warn me of incoming mail.
 
-# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+# disable core dumps
+ulimit -S -c 0
+
+# default umask
+umask 0022
+
+# Add tab completion for SSH hostnames based on $HOME/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" \
+-W "$(grep "^Host" $HOME/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+
+# put ~/bin first on PATH
+if [ -d "$HOME/bin" ]; then
+    PATH="$HOME/bin:$PATH"
+fi

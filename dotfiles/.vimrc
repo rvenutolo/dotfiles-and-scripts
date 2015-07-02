@@ -21,10 +21,10 @@ set ttyfast
 set encoding=utf-8 nobomb
 
 " Centralize backups, swapfiles and undo history
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
+set backupdir=$HOME/.vim/backups
+set directory=$HOME/.vim/swaps
 if exists("&undodir")
-    set undodir=~/.vim/undo
+    set undodir=$HOME/.vim/undo
 endif
 
 " Don’t create backups when editing files in certain directories

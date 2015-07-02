@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-if [ ! -d ~/Hollywood ]; then
-  mkdir ~/Hollywood
+if [ ! -d $HOME/Hollywood ]; then
+    mkdir $HOME/Hollywood
 fi
 
-sshfs rvenutolo@hollywood:/home/ ~/Hollywood
+sshfs hollywood:/home/ $HOME/Hollywood

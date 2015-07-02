@@ -3,13 +3,13 @@
 set -e
 
 # store all solarized files in one place
-mkdir ~/.solarized
-cd ~/.solarized
+mkdir $HOME/.solarized
+cd $HOME/.solarized
 
 # dircolors
 git clone https://github.com/seebi/dircolors-solarized.git
-eval `dircolors ~/.solarized/dircolors-solarized/dircolors.256dark`
-ln -s ~/.solarized/dircolors-solarized/dircolors.256dark ~/.dir_colors
+eval `dircolors $HOME/.solarized/dircolors-solarized/dircolors.256dark`
+ln -s $HOME/.solarized/dircolors-solarized/dircolors.256dark $HOME/.dir_colors
 
 # gnome terminal
 git clone https://github.com/sigurdga/gnome-terminal-colors-solarized.git
@@ -23,7 +23,7 @@ git clone https://github.com/coolwanglu/guake-colors-solarized
 git clone https://github.com/seebi/tmux-colors-solarized.git
 echo "
 set -g default-terminal \"screen-256color-bce\"
-source ~/.solarized/tmux-colors-solarized/tmuxcolors-256.conf" >> ~/.tmux.conf
+source $HOME/.solarized/tmux-colors-solarized/tmuxcolors-256.conf" >> $HOME/.tmux.conf
 
 # vim
 echo "
@@ -31,7 +31,7 @@ set term=screen-256color-bce
 let g:solarized_termcolors=256
 set t_Co=256
 set background=dark
-colorscheme default " >> ~/.vimrc.after
+colorscheme default " >> $HOME/.vimrc.after
 
 # nano
 # http://antesarkkinen.com/blog/add-colors-to-os-x-terminal-including-ls-and-nano/
@@ -42,16 +42,16 @@ colorscheme default " >> ~/.vimrc.after
 #sudo cp givemecolors/nanorc /etc/nanorc
 
 # gedit
-mkdir -p ~/.gnome2/gedit/styles/
+mkdir -p $HOME/.gnome2/gedit/styles/
 git clone https://github.com/mukashi/solarized.git mukashi_solarized
-cp mukashi_solarized/gedit-colors-solarized/*.xml ~/.gnome2/gedit/styles
-# modifying ~/.gconf/apps/gedit-2/preferences/editor/colors/%gconf.xml doesn't seem to work to set color scheme :(
-# xmlstarlet edit -L -u "/gconf/entry[@name='scheme']/stringvalue" -v 'solarized_dark' ~/.gconf/apps/gedit-2/preferences/editor/colors/%gconf.xml
+cp mukashi_solarized/gedit-colors-solarized/*.xml $HOME/.gnome2/gedit/styles
+# modifying $HOME/.gconf/apps/gedit-2/preferences/editor/colors/%gconf.xml doesn't seem to work to set color scheme :(
+# xmlstarlet edit -L -u "/gconf/entry[@name='scheme']/stringvalue" -v 'solarized_dark' $HOME/.gconf/apps/gedit-2/preferences/editor/colors/%gconf.xml
 
 # intellij
-# need to update path to config dir if not at ~/.IntelliJIdea14
+# need to update path to config dir if not at $HOME/.IntelliJIdea14
 git clone https://github.com/jkaving/intellij-colors-solarized.git
-unzip intellij-colors-solarized/settings.jar 'colors/*' -d ~/.IntelliJIdea14/config/
+unzip intellij-colors-solarized/settings.jar 'colors/*' -d $HOME/.IntelliJIdea14/config/
 
 echo ""
 echo "########################################"

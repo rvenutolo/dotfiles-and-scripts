@@ -1,3 +1,6 @@
+#@IgnoreInspection AddShebang
+#@IgnoreInspection BashAddSheban
+
 function firefox() { command firefox "$@" & }
 function google-chrome() { command google-chrome "$@" & }
 function chrome() { command google-chrome "$@" & }
@@ -18,9 +21,9 @@ function lowercase()  # move filenames to lowercase
         newname="${dirname}/${nf}"
         if [ "$nf" != "$filename" ]; then
             mv "$file" "$newname"
-            echo "lowercase: $file --> $newname"
+            echo "$0: $file --> $newname"
         else
-            echo "lowercase: $file not changed."
+            echo "$0: $file not changed."
         fi
     done
 }
@@ -38,7 +41,7 @@ function swap()  # Swap 2 filenames around, if they exist
     mv "$TMPFILE" "$2"
 }
 
-extract () {
+function extract () {
     if [ $# -ne 1 ]; then
         echo "Error: No file specified."
         return 1
@@ -199,6 +202,6 @@ function pless() {
         pygmentize $2 | less "$1r"
     else
         echo "Error: bad arguments"
-        echo "Usage: 'pless [-options] /path/to/file'"
+        echo "Usage: '$0 [-options] /path/to/file'"
     fi
 }

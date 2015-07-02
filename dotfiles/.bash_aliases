@@ -1,3 +1,6 @@
+#@IgnoreInspection AddShebang
+#@IgnoreInspection BashAddSheban
+
 alias sudo='sudo '
 alias _='sudo'
 
@@ -32,11 +35,12 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias -- -='cd -'
-alias home='cd ~'
+
+alias home='cd $HOME'
+alias p='cd $HOME/Projects'
+alias dl='cd $HOME/Downloads'
+alias dt='cd $HOME/Desktop'
 alias o='cd /opt'
-alias p='cd ~/Projects'
-alias dl='cd ~/Downloads'
-alias dt='cd ~/Desktop'
 
 alias un='extract'
 
@@ -52,7 +56,7 @@ alias update='\
     && sudo apt-get clean \
 '
 
-alias brc='source ~/.bashrc'
+alias brc='source $HOME/.bashrc'
 
 alias path='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'

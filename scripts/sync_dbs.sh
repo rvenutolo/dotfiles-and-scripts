@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-rsync --progress -av rvenutolo@hollywood:/digitalenvoy/netacuity/to_release/\*.db $HOME/nadbs/
+rsync --progress -av hollywood:/digitalenvoy/netacuity/to_release/\*.db $HOME/nadbs/

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-fusermount -u ~/Hollywood
+fusermount -u $HOME/Hollywood
 
-if [ -d ~/Hollywood ]; then
-  rmdir ~/Hollywood
+if [ -d $HOME/Hollywood ]; then
+    rmdir $HOME/Hollywood
 fi

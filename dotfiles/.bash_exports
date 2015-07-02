@@ -1,3 +1,6 @@
+#@IgnoreInspection AddShebang
+#@IgnoreInspection BashAddShebang
+
 export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
 
 export HISTSIZE='32768'
@@ -10,7 +13,9 @@ export HOSTFILE=$HOME/.hosts
 export EDITOR='vim'
 
 export LANG='en_US.UTF-8'
+export LANGUAGE='en'
+export LC_CTYPE='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
-export PAGER='less'
+export PAGER='less -Fi'
 export MANPAGER="$PAGER"
