@@ -2,6 +2,7 @@
 .bash_extra
 
 .idea/
+*.iml
 
 *.swp
 *.bak
