@@ -184,6 +184,13 @@ function bak ()
     fi
 }
 
+function hide() {
+    for f in "$@"
+    do
+      mv -v "$f" $(dirname "$f")/.$(basename "$f")
+    done
+}
+
 function pcat() {
     # pygmentize - http://pygments.org/
     # sudo pip install Pygments
