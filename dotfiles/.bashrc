@@ -42,9 +42,13 @@ umask 0022
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" \
 -W "$(grep "^Host" $HOME/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 
+# https://github.com/joelthelion/autojump
 if [ -r /usr/share/autojump/autojump.sh ]; then
     source /usr/share/autojump/autojump.sh
 fi
+
+# https://github.com/clvv/fasd
+eval "$(fasd --init auto)"
 
 # put ~/bin first on PATH
 if [ -d "$HOME/bin" ]; then

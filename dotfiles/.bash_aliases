@@ -90,9 +90,9 @@ alias nano='nano -c'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 
-alias a='atom'
-alias ah='atom .'
-alias apmup='apm update --no-confirm'
+#alias a='atom'
+#alias ah='atom .'
+#alias apmup='apm update --no-confirm'
 
 alias pmdown='pghfm'
 
