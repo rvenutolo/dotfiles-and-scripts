@@ -1,4 +1,3 @@
-#@IgnoreInspection AddShebang
 #@IgnoreInspection BashAddShebang
 
 if [ -r /etc/bashrc ]; then

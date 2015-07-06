@@ -1,4 +1,3 @@
-#@IgnoreInspection AddShebang
 #@IgnoreInspection BashAddShebang
 
 # Load .profile, containing login, non-bash related initializations.
