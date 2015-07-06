@@ -5,8 +5,8 @@ if [ -r /etc/bashrc ]; then
     source /etc/bashrc
 fi
 
-for file in $HOME/.bash_{path,prompt,exports,aliases,functions,extra}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file";
+for file in "$HOME/.bash_{path,prompt,exports,aliases,functions,extra"}; do
+    [ -r "${file}" ] && [ -f "${file}" ] && source "${file}";
 done;
 unset file;
 

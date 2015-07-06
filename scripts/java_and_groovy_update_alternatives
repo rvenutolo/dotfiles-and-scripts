@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 update-alternatives --install /usr/bin/groovy groovy /opt/groovy/groovy-current/bin/groovy 1
 update-alternatives --set groovy /opt/groovy/groovy-current/bin/groovy
 update-alternatives --install /usr/bin/groovyc groovyc /opt/groovy/groovy-current/bin/groovyc 1

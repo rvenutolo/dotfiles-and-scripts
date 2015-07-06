@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 if [ ! -d $HOME/Hollywood ]; then
     mkdir $HOME/Hollywood
 fi

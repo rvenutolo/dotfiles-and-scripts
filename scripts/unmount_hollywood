@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 fusermount -u $HOME/Hollywood
 
 if [ -d $HOME/Hollywood ]; then
