@@ -25,7 +25,7 @@ alias lock='gnome-screensaver-command -l'
 alias afk='lock'
 
 alias h='history'
-alias j='jobs -l'
+alias jobs='jobs -l'
 
 alias which='type -a'
 
