@@ -1,5 +1,5 @@
 #@IgnoreInspection AddShebang
-#@IgnoreInspection BashAddSheban
+#@IgnoreInspection BashAddShebang
 
 if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
     export TERM='gnome-256color';

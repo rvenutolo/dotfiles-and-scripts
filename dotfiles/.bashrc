@@ -1,5 +1,5 @@
 #@IgnoreInspection AddShebang
-#@IgnoreInspection BashAddSheban
+#@IgnoreInspection BashAddShebang
 
 if [ -r /etc/bashrc ]; then
     source /etc/bashrc

@@ -1,5 +1,5 @@
 #@IgnoreInspection AddShebang
-#@IgnoreInspection BashAddSheban
+#@IgnoreInspection BashAddShebang
 
 alias sudo='sudo '
 alias _='sudo'

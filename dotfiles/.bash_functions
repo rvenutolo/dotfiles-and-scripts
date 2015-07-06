@@ -1,5 +1,5 @@
 #@IgnoreInspection AddShebang
-#@IgnoreInspection BashAddSheban
+#@IgnoreInspection BashAddShebang
 
 function firefox() { command firefox "$@" & }
 function google-chrome() { command google-chrome "$@" & }
