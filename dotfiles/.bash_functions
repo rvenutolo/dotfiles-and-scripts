@@ -11,7 +11,7 @@ function gedit() { command gedit "$@" & }
 
 # Find a file with a pattern in name:
 function ff() {
-    find . -type f -iname '*'$*'*' -ls
+    find . -type f -iname '*'$@'*' -ls
 }
 
 # Move filenames to lowercase
@@ -158,8 +158,8 @@ function pghfm() {
 }
 
 function mkcd () {
-    mkdir -p -- "$*"
-    cd -- "$*"
+    mkdir -p -- "$@"
+    cd -- "$@"
     return 0
 }
 
