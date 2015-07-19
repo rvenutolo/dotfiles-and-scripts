@@ -27,7 +27,7 @@ function lowercase() {
         nf=$(echo "${filename}" | tr A-Z a-z)
         local newname
         newname="${dirname}/${nf}"
-        if [ "${nf}" != "${filename}" ]; then
+        if [[ "${nf}" != "${filename}" ]]; then
             mv "${file}" "${newname}" || exit 1
             echo "$FUNCNAME: ${file} --> ${newname}"
             return 0
@@ -42,9 +42,9 @@ function lowercase() {
 function swap() {
     local temp_file
     temp_file="tmp.$$"
-    [ $# -ne 2 ] && err "swap: 2 arguments needed" && return 1
-    [ ! -e $1 ] && err "swap: $1 does not exist" && return 1
-    [ ! -e $2 ] && err "swap: $2 does not exist" && return 1
+    [[ $# -ne 2 ]] && err "swap: 2 arguments needed" && return 1
+    [[ ! -e $1 ]] && err "swap: $1 does not exist" && return 1
+    [[ ! -e $2 ]] && err "swap: $2 does not exist" && return 1
     mv "$1" "${temp_file}" || exit 1
     mv "$2" "$1" || exit 1
     mv "${temp_file}" "$2" || exit 1
@@ -53,11 +53,11 @@ function swap() {
 }
 
 function extract () {
-    if [ $# -ne 1 ]; then
+    if [[ $# -ne 1 ]]; then
         err "No file specified"
         return 1
     fi
-    if [ -f $1 ]; then
+    if [[ -f $1 ]]; then
         case $1 in
             *.tar.bz2) tar xvjf $1   && return 0 ;;
             *.tar.gz)  tar xvzf $1   && return 0 ;;
@@ -97,7 +97,7 @@ function ii() {
 # Show all the names (CNs and SANs) listed in the SSL certificate
 # for a given domain
 function getcertnames() {
-    if [ -z "$1" ]; then
+    if [[ -z "$1" ]]; then
         err "No domain specified"
         return 1
     fi
@@ -135,15 +135,15 @@ function getcertnames() {
 # sudo pip install grip
 function pghfm() {
     local inputfile
-    if [ $# -eq 0 ]; then
+    if [[ $# -eq 0 ]]; then
         inputfile='README.md'
-    elif [ $# -eq 1 ]; then
+    elif [[ $# -eq 1 ]]; then
         inputfile=$1
     else
         err "Expected 0 or 1 file path arguments"
         return 1
     fi
-    if [ -f "${inputfile}" ]; then
+    if [[ -f "${inputfile}" ]]; then
         local filetime
         filetime=$(date +%Y%m%d_%H%M%S)
         local filename
@@ -164,11 +164,11 @@ function mkcd () {
 }
 
 function bak () {
-    if [ $# -ne 1 ]; then
+    if [[ $# -ne 1 ]]; then
         err "Error: No file specified"
         return 1
     fi
-    if [ -f $1 ] || [ -d $1 ]; then
+    if [[ -f $1 ]] || [[ -d $1 ]]; then
         local filename
         filename=$1
         local filetime
@@ -182,9 +182,8 @@ function bak () {
 }
 
 function hide() {
-    for f in "$@"
-    do
-      mv -v "$f" $(dirname "$f")/.$(basename "$f") || exit 1
+    for file in "$@"; do
+      mv -v "${file}" $(dirname "${file}")/.$(basename "${file}") || exit 1
     done
     return 0
 }
@@ -194,7 +193,7 @@ function hide() {
 function pcat() {
     for var;
     do
-        pygmentize -g "$var"
+        pygmentize -g "${var}"
     done
     return 0
 }
@@ -202,9 +201,9 @@ function pcat() {
 # pygmentize - http://pygments.org/
 # sudo pip install Pygments
 function pless() {
-    if [ $# -eq 1 ]; then
+    if [[ $# -eq 1 ]]; then
         pygmentize -g $1 | less -r
-    elif [ $# -eq 2 ] && [[ $1 == -* ]]; then
+    elif [[ $# -eq 2 ]] && [[ $1 == -* ]]; then
         pygmentize $2 | less "$1r"
     else
         err "Error: bad arguments"
