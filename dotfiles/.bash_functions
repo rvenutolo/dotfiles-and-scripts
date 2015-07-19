@@ -212,3 +212,36 @@ function pless() {
     fi
     return 0
 }
+
+function symlinks() {
+    if [[ $# -eq 2 ]]; then
+        local src_dir
+        local target_dir
+        src_dir=$1
+        target_dir=$2
+        ! [[ -d "${src_dir}" ]] && err "${src_dir} is not a directory" && return 1
+        ! [[ -d "${target_dir}" ]] && err "${target_dir} is not a directory" && return 1
+        src_dir=$(readlink -m "${src_dir}")
+        target_dir=$(readlink -m "${target_dir}")
+        echo "Creating symlinks of all files in ${src_dir} in ${target_dir}"
+        for src_file in "${src_dir}"/* ; do
+            local target_file
+            target_file="$target_dir/$(basename "${src_file}")"
+            if [[ -e "${target_file}" ]]; then
+                if [[ -h "${target_file}" ]]; then
+                    echo "${target_file} symlink exists; did not overwrite"
+                else
+                    echo "${target_file} file exists; did not overwrite"
+                fi
+            else
+                ln -s "${src_file}" "${target_file}" || exit 1
+                echo "Created ${target_file} symlink"
+            fi
+        done
+        return 0
+    else
+        err "Error: bad arguments"
+        err "Usage: '$FUNCNAME /path/to/src_dir /path/to/target_dir"
+        return 1
+    fi
+}
