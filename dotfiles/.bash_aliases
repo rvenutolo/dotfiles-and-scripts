@@ -46,6 +46,7 @@ alias un='extract'
 alias chux='chmod u+x'
 alias chax='chmod a+x'
 alias 644='chmod 644'
+alias 700='chmod 700'
 alias 744='chmod 744'
 alias 755='chmod 755'
 
