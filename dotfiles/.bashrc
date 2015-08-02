@@ -50,6 +50,9 @@ fi
 # https://github.com/clvv/fasd
 eval "$(fasd --init auto)"
 
+# https://github.com/creationix/nvm
+[ -e "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh"
+
 # put ~/bin first on PATH
 if [ -d "$HOME/bin" ]; then
     PATH="$HOME/bin:$PATH"
