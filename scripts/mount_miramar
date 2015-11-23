@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ ! -d $HOME/Miramar ]; then
+    mkdir $HOME/Miramar
+fi
+
+sshfs miramar:/space/ $HOME/Miramar
