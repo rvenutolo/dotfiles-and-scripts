@@ -7,7 +7,7 @@ elif infocmp xterm-256color >/dev/null 2>&1; then
 fi;
 
 if tput setaf 1 &> /dev/null; then
-    tput sgr0; # reset colors
+    tput sgr0 > /dev/null; # reset colors -- redirect due to unwanted output
     bold=$(tput bold);
     reset=$(tput sgr0);
     # Solarized colors, taken from http://git.io/solarized-colors.
