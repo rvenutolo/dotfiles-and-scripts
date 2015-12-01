@@ -48,7 +48,10 @@ if [ -r /usr/share/autojump/autojump.sh ]; then
 fi
 
 # https://github.com/clvv/fasd
-eval "$(fasd --init auto)"
+if [ "$(type -P fasd)" ]; then
+    eval "$(fasd --init auto)"
+fi
+
 
 # https://github.com/creationix/nvm
 [ -e "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh"
