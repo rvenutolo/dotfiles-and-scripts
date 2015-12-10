@@ -54,10 +54,8 @@ fi;
 PS1="\[\033]0;\w\007\]";
 PS1+="\[${bold}\]";
 PS1+="\[${userStyle}\]\u"; # username
-if [[ "${SSH_TTY}" ]]; then
-    PS1+="\[${white}\]@";
-    PS1+="\[${hostStyle}\]\h"; # host
-fi;
+PS1+="\[${white}\]@";
+PS1+="\[${hostStyle}\]\h"; # host
 PS1+="\[${white}\] ";
 PS1+="\[${green}\]\w "; # working directory
 PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
