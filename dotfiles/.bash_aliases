@@ -43,6 +43,9 @@ alias o='cd /opt'
 
 alias un='extract'
 
+# often want to grep in some IntelliJ IDEA project directory and ignore .idea dir
+alias grep='grep --exclude-dir=.idea --colour=auto'
+
 alias chux='chmod u+x'
 alias chax='chmod a+x'
 alias 644='chmod 644'
