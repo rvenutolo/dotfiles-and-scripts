@@ -57,6 +57,6 @@ fi
 [ -e "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh"
 
 # put ~/bin first on PATH
-if [ -d "$HOME/bin" ]; then
-    PATH="$HOME/bin:$PATH"
+if [ -d "$HOME/.bin" ]; then
+    PATH="$HOME/.bin:$PATH"
 fi
