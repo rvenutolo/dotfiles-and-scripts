@@ -50,11 +50,10 @@ cp mukashi_solarized/gedit-colors-solarized/*.xml $HOME/.gnome2/gedit/styles
 
 # intellij
 # need to update path to config dir if not at $HOME/.IntelliJIdea14
-git clone https://github.com/jkaving/intellij-colors-solarized.git
-unzip intellij-colors-solarized/settings.jar 'colors/*' -d $HOME/.IntelliJIdea14/config/
-
-echo ""
-echo "########################################"
-echo "Set gedit color scheme: Edit | Preferences | Font & Color"
-echo "Set IntelliJIDEA colors: Settings | Editor | Colors & Fonts"
-echo "########################################"
+#git clone https://github.com/jkaving/intellij-colors-solarized.git
+#unzip intellij-colors-solarized/settings.jar 'colors/*' -d $HOME/.IntelliJIdea14/config/
+#echo ""
+#echo "########################################"
+#echo "Set gedit color scheme: Edit | Preferences | Font & Color"
+#echo "Set IntelliJIDEA colors: Settings | Editor | Colors & Fonts"
+#echo "########################################"
