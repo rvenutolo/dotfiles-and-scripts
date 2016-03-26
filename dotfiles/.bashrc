@@ -52,10 +52,6 @@ if [ "$(type -P fasd)" ]; then
     eval "$(fasd --init auto)"
 fi
 
-
-# https://github.com/creationix/nvm
-[ -e "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh"
-
 # put ~/bin first on PATH
 if [ -d "$HOME/.bin" ]; then
     PATH="$HOME/.bin:$PATH"
