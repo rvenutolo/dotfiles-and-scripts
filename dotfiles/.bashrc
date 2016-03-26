@@ -52,7 +52,12 @@ if [ "$(type -P fasd)" ]; then
     eval "$(fasd --init auto)"
 fi
 
-# put ~/bin first on PATH
+# put ~/.bin on PATH
 if [ -d "$HOME/.bin" ]; then
     PATH="$HOME/.bin:$PATH"
+fi
+
+# set dircolors
+if [ -e "$HOME/.dir_colors" ]; then
+    eval `dircolors "$HOME/.dir_colors"`
 fi
