@@ -1,4 +1,4 @@
-#@IgnoreInspection BashAddShebang
+#!/usr/bin/env bash
 
 alias sudo='sudo '
 alias _='sudo'

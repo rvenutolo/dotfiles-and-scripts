@@ -1,4 +1,4 @@
-#@IgnoreInspection BashAddShebang
+#!/usr/bin/env bash
 
 if [ -r /etc/bashrc ]; then
     source /etc/bashrc

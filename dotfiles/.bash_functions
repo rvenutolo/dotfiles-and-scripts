@@ -1,4 +1,4 @@
-#@IgnoreInspection BashAddShebang
+#!/usr/bin/env bash
 
 err() {
     echo "$@" >&2
