@@ -3,7 +3,7 @@
 set -e
 
 readonly DOTFILES_TARGET_DIR=$HOME
-readonly SCRIPTS_TARGET_DIR=$HOME/scripts
+readonly SCRIPTS_TARGET_DIR=$HOME/.bin
 
 this_script=`readlink -f "$0"`
 scripts_src_dir=`dirname "$this_script"`
