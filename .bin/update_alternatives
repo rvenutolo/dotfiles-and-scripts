@@ -124,4 +124,3 @@ update-alternatives --install /usr/bin/wsimport wsimport /opt/java/jdk-current/b
 update-alternatives --set wsimport /opt/java/jdk-current/bin/wsimport
 update-alternatives --install /usr/bin/xjc xjc /opt/java/jdk-current/bin/xjc 1
 update-alternatives --set xjc /opt/java/jdk-current/bin/xjc
-
