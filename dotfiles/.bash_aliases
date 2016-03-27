@@ -62,7 +62,7 @@ alias update='\
 
 alias bashrc='$EDITOR $HOME/.bashrc'
 alias brc='source $HOME/.bashrc'
-alias sdf='$PROJECTS_HOME/dotfiles-and-scripts/.bin/sync_dotfiles_and_scripts; brc'
+alias sdf='$PROJECTS_HOME/dotfiles-and-scripts/bin/sync_dotfiles_and_scripts; brc'
 
 alias path='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
