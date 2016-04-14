@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+for arg; do
+    case "$arg" in
+        /|/usr|/var|/etc|/home|/bin|/lib|/lib64|/boot|/opt|/media|/root)
+            echo "refusing to remove $arg" 1>&2
+            exit 100
+            ;;
+    esac
+done
+
+exec /bin/rm --one-file-system --preserve-root "$@"
