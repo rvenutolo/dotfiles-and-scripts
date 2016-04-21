@@ -1,0 +1,37 @@
+#!/usr/bin/env groovy
+
+final String defaultJdkDir = '/opt/java/jdk-current'
+
+if (args.size() > 1) {
+    System.err.println('Expected at most one argument (path to JDK directory)')
+    System.exit(1)
+}
+
+final String jdkDir
+if (args.size() == 0) {
+    jdkDir = defaultJdkDir
+} else {
+    jdkDir = args[0]
+}
+
+final String securityFilePath = "${jdkDir}/jre/lib/security/java.security"
+final String backupFilePath = "${securityFilePath}.${new Date().format('yyyyMMdd_HHmmss')}.bak"
+
+new File(securityFilePath).renameTo(backupFilePath)
+println("Renamed ${securityFilePath} to ${backupFilePath}")
+
+println("Writing ${securityFilePath}")
+new File(securityFilePath).withWriter('UTF-8') {writer ->
+    new File(backupFilePath).eachLine {line ->
+        if (line.startsWith('jdk.certpath.disabledAlgorithms') && line.contains('MD5, ')) {
+            writer.write("#${line}\n")
+            writer.write("${line - 'MD5, '}\n")
+        } else if (line.startsWith('jdk.tls.disabledAlgorithms') && line.contains('MD5withRSA, ')) {
+            writer.write("#${line}\n")
+            writer.write("${line - 'MD5withRSA, '}\n")
+        } else {
+            writer.write(line + '\n')
+        }
+    }
+}
+println("Wrote ${securityFilePath}")
