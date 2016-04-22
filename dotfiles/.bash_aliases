@@ -54,8 +54,8 @@ alias 744='chmod 744'
 alias 755='chmod 755'
 
 alias update='\
-    sudo apt-get update \
-    && sudo apt-get upgrade \
+    sudo apt update \
+    && sudo apt upgrade \
     && sudo apt-get autoremove \
     && sudo apt-get clean \
 '
