@@ -15,6 +15,10 @@ ln -s $HOME/.solarized/dircolors-solarized/dircolors.256dark $HOME/.dir_colors
 git clone https://github.com/sigurdga/gnome-terminal-colors-solarized.git
 ./gnome-terminal-colors-solarized/install.sh
 
+# mate terminal
+git clone https://github.com/oz123/solarized-mate-terminal.git
+./solarized-mate-terminal/solarized-mate.sh dark
+
 # guake
 git clone https://github.com/coolwanglu/guake-colors-solarized
 ./guake-colors-solarized/set_dark.sh
