@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -eux -o pipefail
 
 # store all solarized files in one place
 mkdir $HOME/.solarized
@@ -16,8 +16,10 @@ git clone https://github.com/sigurdga/gnome-terminal-colors-solarized.git
 ./gnome-terminal-colors-solarized/install.sh
 
 # mate terminal
-git clone https://github.com/oz123/solarized-mate-terminal.git
-./solarized-mate-terminal/solarized-mate.sh dark
+#git clone https://github.com/oz123/solarized-mate-terminal.git
+#./solarized-mate-terminal/solarized-mate.sh dark
+git clone https://github.com/cledoux/mate-terminal-colors-solarized
+./mate-terminal-colors-solarized/install.sh
 
 # guake
 git clone https://github.com/coolwanglu/guake-colors-solarized
