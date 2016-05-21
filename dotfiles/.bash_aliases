@@ -21,9 +21,6 @@ alias pager="$PAGER"
 
 alias q='exit'
 
-alias lock='gnome-screensaver-command -l'
-alias afk='lock'
-
 alias h='history'
 alias jobs='jobs -l'
 
