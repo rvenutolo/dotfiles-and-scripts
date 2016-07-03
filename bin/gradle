@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -eu
+
+readonly GRADLE='/usr/bin/gradle'
+readonly GRADLE_WRAPPER='./gradlew'
+
+if [ -f ${GRADLE_WRAPPER} ];
+then
+   gradle_cmd=${GRADLE_WRAPPER}
+else
+   gradle_cmd=${GRADLE}
+fi
+
+exec ${gradle_cmd} "$@"
