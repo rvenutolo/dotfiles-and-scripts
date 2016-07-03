@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -eu
 
 if [ ! -d $HOME/Miramar ]; then
     mkdir $HOME/Miramar

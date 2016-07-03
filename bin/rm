@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eu
+
 for arg; do
     case "$arg" in
         /|/usr|/var|/etc|/home|/bin|/lib|/lib64|/boot|/opt|/media|/root)
