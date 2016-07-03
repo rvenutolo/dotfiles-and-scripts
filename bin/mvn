@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -eu
+
+readonly MAVEN='/usr/bin/mvn'
+readonly MAVEN_WRAPPER='./mvnw'
+
+if [ -f ${MAVEN_WRAPPER} ];
+then
+   maven_cmd=${MAVEN_WRAPPER}
+else
+   maven_cmd=${MAVEN}
+fi
+
+exec ${maven_cmd} "$@"
