@@ -2,7 +2,7 @@
 
 set -eu
 
-if [ ! -d $HOME/Miramar ]; then
+if [[ ! -d $HOME/Miramar ]]; then
     mkdir $HOME/Miramar
 fi
 

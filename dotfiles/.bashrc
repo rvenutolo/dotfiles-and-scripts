@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-if [ -r /etc/bashrc ]; then
+if [[ -r /etc/bashrc ]]; then
     source /etc/bashrc
 fi
 
 for file in $HOME/.bash_{path,prompt,exports,aliases,functions,extra}; do
-    [ -r "${file}" ] && [ -f "${file}" ] && source "${file}";
+    [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}";
 done;
 unset file;
 
@@ -39,25 +39,25 @@ ulimit -S -c 0
 umask 0022
 
 # Add tab completion for SSH hostnames based on $HOME/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" \
+[[ -e "$HOME/.ssh/config" ]] && complete -o "default" -o "nospace" \
 -W "$(grep "^Host" $HOME/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 
 # https://github.com/joelthelion/autojump
-if [ -r /usr/share/autojump/autojump.sh ]; then
+if [[ -r /usr/share/autojump/autojump.sh ]]; then
     source /usr/share/autojump/autojump.sh
 fi
 
 # https://github.com/clvv/fasd
-if [ "$(type -P fasd)" ]; then
+if [[ "$(type -P fasd)" ]]; then
     eval "$(fasd --init auto)"
 fi
 
 # put ~/.bin at front of PATH
-if [ -d "$HOME/.bin" ] && [[ $PATH != "$HOME/.bin"* ]]; then
+if [[ -d "$HOME/.bin" ]] && [[ $PATH != "$HOME/.bin"* ]]; then
     PATH="$HOME/.bin:$PATH"
 fi
 
 # set dircolors
-if [ -e "$HOME/.dir_colors" ]; then
+if [[ -e "$HOME/.dir_colors" ]]; then
     eval `dircolors "$HOME/.dir_colors"`
 fi

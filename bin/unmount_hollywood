@@ -4,6 +4,6 @@ set -eu
 
 fusermount -u $HOME/Hollywood
 
-if [ -d $HOME/Hollywood ]; then
+if [[ -d $HOME/Hollywood ]]; then
     rmdir $HOME/Hollywood
 fi

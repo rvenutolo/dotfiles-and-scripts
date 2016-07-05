@@ -4,6 +4,6 @@ set -eu
 
 fusermount -u $HOME/Miramar
 
-if [ -d $HOME/Miramar ]; then
+if [[ -d $HOME/Miramar ]]; then
     rmdir $HOME/Miramar
 fi
