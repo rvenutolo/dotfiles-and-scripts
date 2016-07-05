@@ -52,8 +52,8 @@ if [ "$(type -P fasd)" ]; then
     eval "$(fasd --init auto)"
 fi
 
-# put ~/.bin on PATH
-if [ -d "$HOME/.bin" ]; then
+# put ~/.bin at front of PATH
+if [ -d "$HOME/.bin" ] && [[ $PATH != "$HOME/.bin"* ]]; then
     PATH="$HOME/.bin:$PATH"
 fi
 
