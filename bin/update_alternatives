@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eu
+set -euo pipefail
 
 update-alternatives --install /usr/bin/gradle gradle /opt/gradle/gradle-current/bin/gradle 1
 update-alternatives --set gradle /opt/gradle/gradle-current/bin/gradle

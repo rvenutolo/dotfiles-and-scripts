@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eu
+set -euo pipefail
 
 readonly GRADLE='/usr/bin/gradle'
 readonly GRADLE_WRAPPER='./gradlew'

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eu
+set -euo pipefail
 
 readonly DOTFILES_TARGET_DIR=$HOME
 readonly SCRIPTS_TARGET_DIR=$HOME/.bin

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-set -eu
+set -euo pipefail
 
 rsync --progress -av hollywood:/digitalenvoy/netacuity/to_release/\*.db $HOME/nadbs/
