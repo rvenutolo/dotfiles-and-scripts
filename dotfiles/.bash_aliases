@@ -53,7 +53,7 @@ alias 755='chmod 755'
 alias update='\
     sudo apt update \
     && sudo apt upgrade \
-    && sudo apt-get autoremove \
+    && sudo apt autoremove \
 '
 
 alias bashrc='$EDITOR $HOME/.bashrc'
