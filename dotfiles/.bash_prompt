@@ -9,16 +9,18 @@ fi;
 prompt_git() {
     # Check if the current directory is in a Git repository.
     if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
+        local start_delim
+        start_delim="$1"
         local pre_branch
-        pre_branch="$1"
+        pre_branch="$2"
         local branch_name
         branch_name=''
         local post_branch_pre_status
-        post_branch_pre_status="$2"
+        post_branch_pre_status="$3"
         local status
         status=''
-        local post_status
-        post_status="$3"
+        local end_delim
+        end_delim="$4"
         # Check if the current directory is in .git before running git checks
         if [ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == 'false' ]; then
             # Ensure the index is up to date.
@@ -46,9 +48,10 @@ prompt_git() {
         branch_name="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
             git rev-parse --short HEAD 2> /dev/null || \
             echo '(unknown)')";
-        #[ -n "${status}" ] && status=" [${status}]";
-        status="[${status}]";
-        echo -e "${pre_branch}${branch_name}${post_branch_pre_status}${status}${post_status}";
+        local pre_status_and_status=''
+        [ -n "${status}" ] && pre_status_and_status="${post_branch_pre_status}[${status}]";
+#        status="[${status}]";
+        echo -e "${start_delim}${pre_branch}${branch_name}${pre_status_and_status}${end_delim}";
     else
         return;
     fi;
@@ -106,7 +109,7 @@ PS1+="\[${white}\]@";
 PS1+="\[${hostStyle}\]\h"; # host
 PS1+="\[${white}\] ";
 PS1+="\[${green}\]\w "; # working directory
-PS1+="\$(prompt_git \"\[${white}\](branch:\[${violet}\]\" \"\[${white}\] status:\[${blue}\]\" \"\[${white}\])\")"; # Git repository details
+PS1+="\$(prompt_git \"\[${white}\](\" \"branch:\[${violet}\]\" \"\[${white}\] status:\[${blue}\]\" \"\[${white}\])\")"; # Git repository details
 PS1+="\n";
 PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
 export PS1;
