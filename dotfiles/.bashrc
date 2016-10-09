@@ -9,6 +9,14 @@ for file in $HOME/.bash_{path,prompt,exports,aliases,functions,extra}; do
 done;
 unset file;
 
+if [[ ! -f $HOME/.git-completion ]]; then
+    curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > $HOME/.git-completion
+fi
+
+if [[ -f $HOME/.git-completion ]]; then
+    source $HOME/.git-completion
+fi
+
 ulimit -S -c 0          # Don't want any coredumps.
 set -o notify
 set -o noclobber
