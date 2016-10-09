@@ -10,11 +10,19 @@ done;
 unset file;
 
 if [[ ! -f $HOME/.git-completion ]]; then
-    curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > $HOME/.git-completion
+    curl -f -o $HOME/.git-completion https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+fi
+
+if [[ ! -f $HOME/.git-prompt ]]; then
+    curl -f -o $HOME/.git-prompt https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 fi
 
 if [[ -f $HOME/.git-completion ]]; then
     source $HOME/.git-completion
+fi
+
+if [[ -f $HOME/.git-prompt ]]; then
+    source $HOME/.git-prompt
 fi
 
 ulimit -S -c 0          # Don't want any coredumps.
