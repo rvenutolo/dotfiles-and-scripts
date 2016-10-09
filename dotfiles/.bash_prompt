@@ -88,30 +88,53 @@ else
 fi;
 
 if [[ "${USER}" == "root" ]]; then
-    userStyle="${red}";
-    promptChar="#";
+    userStyle="${red}"
+    promptChar="#"
 else
-    userStyle="${orange}";
-    promptChar="$";
+    userStyle="${orange}"
+    promptChar="$"
 fi;
 
-if [[ "${SSH_TTY}" ]]; then
-    hostStyle="${bold}${red}";
+if [[ "${SSH_CONNECTION}" ]]; then
+    hostStyle="${red}"
 else
-    hostStyle="${yellow}";
+    hostStyle="${yellow}"
 fi;
 
-# Set the terminal title to the current working directory.
-PS1="\[\033]0;\w\007\]";
-PS1+="\[${bold}\]";
-PS1+="\[${userStyle}\]\u"; # username
-PS1+="\[${white}\]@";
-PS1+="\[${hostStyle}\]\h"; # host
-PS1+="\[${white}\] ";
-PS1+="\[${green}\]\w "; # working directory
-PS1+="\$(prompt_git \"\[${white}\](\" \"branch:\[${violet}\]\" \"\[${white}\] status:\[${blue}\]\" \"\[${white}\])\")"; # Git repository details
-PS1+="\[${white}\]\[${promptChar}\] \[${reset}\]"; # `$` (and reset color)
-export PS1;
+space="\[${white}\] "
+timestamp="\[${cyan}\]\t"
+user="\[${userStyle}\]\u"
+at="\[${white}\]@"
+host="\[${hostStyle}\]\h"
+in="\[${white}\]in"
+dir="\[${green}\]\w"
+prompt="\[${white}\]\[${promptChar}\]"
 
-PS2="\[${yellow}\]→ \[${reset}\]";
-export PS2;
+PS1="\[\033]0;\w\007\]\[${bold}\]"
+PS1+="${timestamp}"
+PS1+="${space}"
+if [[ -n "${SSH_CONNECTION}" ]]; then
+    PS1+="${user}"
+    PS1+="${at}"
+    PS1+="${host}"
+    PS1+="${space}"
+    PS1+="${in}"
+    PS1+="${space}"
+elif [[ "${LOGNAME}" != "${USER}" ]] || [[ "${USER}" == 'root' ]]; then
+    PS1+="${user}"
+    PS1+="${space}"
+    PS1+="${in}"
+    PS1+="${space}"
+else
+    : # do nothing
+fi
+PS1+="${dir}"
+PS1+="${space}"
+#PS1+="\$(prompt_git \"\[${white}\](\" \"branch:\[${violet}\]\" \"\[${white}\] status:\[${blue}\]\" \"\[${white}\])\")"; # Git repository details
+PS1+="${prompt}"
+PS1+="${space}"
+PS1+="\[${reset}\]"
+export PS1
+
+PS2="\[${yellow}\]→ \[${reset}\]"
+export PS2
