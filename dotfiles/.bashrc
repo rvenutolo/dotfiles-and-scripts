@@ -4,11 +4,6 @@ if [[ -r /etc/bashrc ]]; then
     source /etc/bashrc
 fi
 
-for file in $HOME/.bash_{path,prompt,exports,aliases,functions,extra}; do
-    [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}";
-done;
-unset file;
-
 if [[ ! -f $HOME/.git-completion ]]; then
     curl -f -o $HOME/.git-completion https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 fi
@@ -24,6 +19,11 @@ fi
 if [[ -f $HOME/.git-prompt ]]; then
     source $HOME/.git-prompt
 fi
+
+for file in $HOME/.bash_{path,prompt,exports,aliases,functions,extra}; do
+    [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}";
+done;
+unset file;
 
 ulimit -S -c 0          # Don't want any coredumps.
 set -o notify

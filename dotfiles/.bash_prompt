@@ -85,6 +85,14 @@ else
 fi
 PS1+="${dir}"
 PS1+="${space}"
+GIT_PS1_SHOWDIRTYSTATE="nonempty"
+GIT_PS1_SHOWSTASHSTATE="nonempty"
+GIT_PS1_SHOWUNTRACKEDFILES="nonempty"
+GIT_PS1_SHOWUPSTREAM=""
+GIT_PS1_STATESEPARATOR="|"
+## Must use Hack font (http://sourcefoundry.org/hack/) for branch symbol
+#PS1+="$(__git_ps1 "${space}\[${blue}\]git%s")"
+PS1+='$(__git_ps1 "${blue}%s ")'
 PS1+="${prompt}"
 PS1+="${space}"
 PS1+="${reset}"
