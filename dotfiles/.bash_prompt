@@ -101,11 +101,19 @@ else
     hostStyle="${yellow}"
 fi;
 
+space=" "
+newline="\n"
+timestamp="\[${cyan}\]\t"
+user="\[${userStyle}\]\u";
+at="\[${white}\]@"
+host="\[${hostStyle}\]\h"
+in="\[${white}\]in"
+dir="\[${green}\]\w"
+prompt="\[${white}\]${promptChar}"
+reset="\[${reset}\]"
 
-# Set the terminal title and prompt.
-PS1="\[\033]0;\W\007\]"; # working directory base name
 
-#PS1+="\[${bold}\]\n"; # newline
+PS1="\[\033]0;\W\007\]";
 PS1+="\[${bold}\]";
 
 #if [[ -n "${SSH_CONNECTION}" ]]; then
@@ -123,15 +131,21 @@ PS1+="\[${bold}\]";
 #    PS1+="\[${green}\]\w"; # working directory full path
 #fi
 
-PS1+="\[${userStyle}\]\u"; # username
-PS1+="\[${white}\] at ";
-PS1+="\[${hostStyle}\]\h"; # host
-PS1+="\[${white}\] in ";
-PS1+="\[${green}\]\w"; # working directory full path
+PS1+="${user}";
+PS1+="${at}";
+PS1+="${host}";
+PS1+="${space}"
+PS1+="${in}";
+PS1+="${space}"
+PS1+="${dir}";
 
-PS1+="\$(prompt_git \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
-PS1+="\n";
-PS1+="\[${white}\]\${promptChar} \[${reset}\]"; # `$` (and reset color)
+PS1+="\$(prompt_git \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\")";
+PS1+="${newline}";
+PS1+="${space}"
+PS1+="${space}"
+PS1+="${prompt}"
+PS1+="${space}"
+PS1+="${reset}";
 export PS1;
 
 PS2="\[${yellow}\]→ \[${reset}\]";
