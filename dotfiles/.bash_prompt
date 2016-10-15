@@ -107,6 +107,7 @@ at="\[${white}\]@"
 host="\[${hostStyle}\]\h"
 in="\[${white}\]→"
 dir="\[${green}\]\w"
+# Need FiraCode or Hack for branch symbol
 pre_git_branch="\[${white}\]  \[${violet}\]"
 pre_git_status="\[${blue}\]["
 post_git_status="]"
