@@ -9,9 +9,15 @@ fi
 prompt_git() {
     # Check if the current directory is in a Git repository.
     if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
+        local pre_git_branch
+        pre_git_branch="${1}"
         local git_branch
+        local pre_git_status
+        pre_git_status="${2}"
         local git_status
         git_status=''
+        local post_git_status
+        post_git_status="${3}"
         # Check if the current directory is in .git before running git checks
         if [ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == 'false' ]; then
             # Ensure the index is up to date.
@@ -40,9 +46,9 @@ prompt_git() {
             git rev-parse --short HEAD 2> /dev/null || \
             echo '(unknown)')"
         if [[ -n "${git_status}" ]]; then
-            echo -e "${1}${git_branch}${2}[${git_status}]"
+            echo -e "${pre_git_branch}${git_branch}${pre_git_status}${git_status}${post_git_status}"
         else
-            echo -e "${1}${git_branch}"
+            echo -e "${pre_git_branch}${git_branch}"
         fi
     else
         return
@@ -102,7 +108,8 @@ host="\[${hostStyle}\]\h"
 in="\[${white}\]→"
 dir="\[${green}\]\w"
 pre_git_branch="\[${white}\]  \[${violet}\]"
-pre_git_status="\[${blue}\]"
+pre_git_status="\[${blue}\]["
+post_git_status="]"
 prompt="\[${white}\]${promptChar}"
 reset="\[${reset}\]"
 continuation="\[${yellow}\]→"
@@ -124,7 +131,7 @@ fi
 PS1+="${in}"
 PS1+="${space}"
 PS1+="${dir}"
-PS1+="\$(prompt_git \"${pre_git_branch}\" \"${pre_git_status}\")"
+PS1+="\$(prompt_git \"${pre_git_branch}\" \"${pre_git_status}\" \"${post_git_status}\")"
 PS1+="${newline}"
 #PS1+="${space}"
 #PS1+="${space}"
