@@ -49,7 +49,7 @@ prompt_git() {
             git rev-parse --short HEAD 2> /dev/null || \
             echo '(unknown)')";
 
-        [ -n "${s}" ] && s=" [${s}]";
+        [ -n "${s}" ] && s="[${s}]";
 
         echo -e "${1}${branchName}${2}${s}";
     else
@@ -107,46 +107,38 @@ timestamp="\[${cyan}\]\t"
 user="\[${userStyle}\]\u";
 at="\[${white}\]@"
 host="\[${hostStyle}\]\h"
-in="\[${white}\]in"
+in="\[${white}\]→"
 dir="\[${green}\]\w"
 prompt="\[${white}\]${promptChar}"
 reset="\[${reset}\]"
+continuation="\[${yellow}\]→"
 
 
 PS1="\[\033]0;\W\007\]";
 PS1+="\[${bold}\]";
-
-#if [[ -n "${SSH_CONNECTION}" ]]; then
-#    PS1+="\[${userStyle}\]\u"; # username
-#    PS1+="\[${white}\] at ";
-#    PS1+="\[${hostStyle}\]\h"; # host
-#    PS1+="\[${white}\] in ";
-#    PS1+="\[${green}\]\w"; # working directory full path
-#elif [[ "${LOGNAME}" != "${USER}" ]] || [[ "${USER}" == 'root' ]]; then
-#    PS1+="\[${userStyle}\]\u"; # username
-#    PS1+="\[${white}\] in ";
-#    PS1+="\[${green}\]\w"; # working directory full path
-#else
-#    PS1+="\[${white}\] in ";
-#    PS1+="\[${green}\]\w"; # working directory full path
-#fi
-
-PS1+="${user}";
-PS1+="${at}";
-PS1+="${host}";
-PS1+="${space}"
+PS1+="${newline}"
+if [[ -n "${SSH_CONNECTION}" ]]; then
+    PS1+="${user}";
+    PS1+="${at}";
+    PS1+="${host}";
+    PS1+="${space}"
+elif [[ "${LOGNAME}" != "${USER}" ]] || [[ "${USER}" == 'root' ]]; then
+    PS1+="${user}";
+    PS1+="${space}"
+else
+    :
+fi
 PS1+="${in}";
 PS1+="${space}"
 PS1+="${dir}";
-
-PS1+="\$(prompt_git \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\")";
+PS1+="\$(prompt_git \"\[${white}\]  \[${violet}\]\" \"\[${blue}\]\")";
 PS1+="${newline}";
-PS1+="${space}"
-PS1+="${space}"
+#PS1+="${space}"
+#PS1+="${space}"
 PS1+="${prompt}"
 PS1+="${space}"
 PS1+="${reset}";
 export PS1;
 
-PS2="\[${yellow}\]→ \[${reset}\]";
-export PS2;
+PS2="${continuation} ${reset}"
+export PS22;
