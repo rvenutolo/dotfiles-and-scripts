@@ -9,38 +9,41 @@ fi
 prompt_git() {
     # Check if the current directory is in a Git repository.
     if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
-        local branchName
-        local s
-        s=''
+        local git_branch
+        local git_status
+        git_status=''
         # Check if the current directory is in .git before running git checks
         if [ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == 'false' ]; then
             # Ensure the index is up to date.
             git update-index --really-refresh -q &>/dev/null
             # Check for uncommitted changes in the index.
             if ! $(git diff --quiet --ignore-submodules --cached); then
-                s+='+'
+                git_status+='+'
             fi
             # Check for unstaged changes.
             if ! $(git diff-files --quiet --ignore-submodules --); then
-                s+='!'
+                git_status+='!'
             fi
             # Check for untracked files.
             if [ -n "$(git ls-files --others --exclude-standard)" ]; then
-                s+='?'
+                git_status+='?'
             fi
             # Check for stashed files.
             if $(git rev-parse --verify refs/stash &>/dev/null); then
-                s+='$'
+                git_status+='$'
             fi
         fi
-        [[ -n "${s}" ]] && s="[${s}]"
         # Get the short symbolic ref.
         # If HEAD isn’t a symbolic ref, get the short SHA for the latest commit
         # Otherwise, just give up.
-        branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
+        git_branch="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
             git rev-parse --short HEAD 2> /dev/null || \
             echo '(unknown)')"
-        echo -e "${1}${branchName}${2}${s}"
+        if [[ -n "${git_status}" ]]; then
+            echo -e "${1}${git_branch}${2}[${git_status}]"
+        else
+            echo -e "${1}${git_branch}"
+        fi
     else
         return
     fi
@@ -98,10 +101,11 @@ at="\[${white}\]@"
 host="\[${hostStyle}\]\h"
 in="\[${white}\]→"
 dir="\[${green}\]\w"
+pre_git_branch="\[${white}\]  \[${violet}\]"
+pre_git_status="\[${blue}\]"
 prompt="\[${white}\]${promptChar}"
 reset="\[${reset}\]"
 continuation="\[${yellow}\]→"
-
 
 PS1="\[\033]0;\W\007\]"
 PS1+="\[${bold}\]"
@@ -120,7 +124,7 @@ fi
 PS1+="${in}"
 PS1+="${space}"
 PS1+="${dir}"
-PS1+="\$(prompt_git \"\[${white}\]  \[${violet}\]\" \"\[${blue}\]\")"
+PS1+="\$(prompt_git \"${pre_git_branch}\" \"${pre_git_status}\")"
 PS1+="${newline}"
 #PS1+="${space}"
 #PS1+="${space}"
