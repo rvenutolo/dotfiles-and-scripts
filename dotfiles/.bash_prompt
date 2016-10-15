@@ -129,5 +129,9 @@ PS1+="${space}"
 PS1+="${reset}"
 export PS1
 
-PS2="${continuation} ${reset}"
+PS2="${space}"
+PS2+="${space}"
+PS2+="${continuation}"
+PS2+="${space}"
+PS2+="${reset}"
 export PS2
