@@ -87,10 +87,10 @@ fi
 
 if [[ "${USER}" == "root" ]]; then
     userStyle="${red}"
-    promptChar="#"
+    promptChar='#'
 else
     userStyle="${orange}"
-    promptChar="$"
+    promptChar='$'
 fi
 
 if [[ "${SSH_CONNECTION}" ]]; then
@@ -99,8 +99,8 @@ else
     hostStyle="${yellow}"
 fi
 
-space=" "
-newline="\n"
+space=' '
+newline='\n'
 timestamp="\[${cyan}\]\t"
 user="\[${userStyle}\]\u"
 at="\[${white}\]@"
