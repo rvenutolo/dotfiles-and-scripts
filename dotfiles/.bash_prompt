@@ -119,14 +119,17 @@ PS1="\[\033]0;\W\007\]"
 PS1+="\[${bold}\]"
 #PS1+="${newline}"
 if [[ -n "${SSH_CONNECTION}" ]]; then
+    # SSH'd
     PS1+="${user}"
     PS1+="${at}"
     PS1+="${host}"
     PS1+="${space}"
 elif [[ "${LOGNAME}" != "${USER}" ]] || [[ "${USER}" == 'root' ]]; then
+    # Not me
     PS1+="${user}"
     PS1+="${space}"
 else
+    # Me
     :
 fi
 PS1+="${in}"
