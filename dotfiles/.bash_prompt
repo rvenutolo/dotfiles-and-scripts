@@ -22,15 +22,15 @@ prompt_git() {
         if [ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == 'false' ]; then
             # Ensure the index is up to date.
             git update-index --really-refresh -q &>/dev/null
-            # Check for uncommitted changes in the index.
+            # Check for un-committed changes in the index.
             if ! $(git diff --quiet --ignore-submodules --cached); then
                 git_status+='+'
             fi
-            # Check for unstaged changes.
+            # Check for un-staged changes.
             if ! $(git diff-files --quiet --ignore-submodules --); then
                 git_status+='!'
             fi
-            # Check for untracked files.
+            # Check for un-tracked files.
             if [ -n "$(git ls-files --others --exclude-standard)" ]; then
                 git_status+='?'
             fi
@@ -86,32 +86,32 @@ else
 fi
 
 if [[ "${USER}" == "root" ]]; then
-    userStyle="${red}"
-    promptChar='#'
+    user_color="${red}"
+    prompt_char='#'
 else
-    userStyle="${orange}"
-    promptChar='$'
+    user_color="${orange}"
+    prompt_char='$'
 fi
 
 if [[ "${SSH_CONNECTION}" ]]; then
-    hostStyle="${red}"
+    host_color="${red}"
 else
-    hostStyle="${yellow}"
+    host_color="${yellow}"
 fi
 
 space=' '
 newline='\n'
 timestamp="\[${cyan}\]\t"
-user="\[${userStyle}\]\u"
+user="\[${user_color}\]\u"
 at="\[${white}\]@"
-host="\[${hostStyle}\]\h"
+host="\[${host_color}\]\h"
 in="\[${white}\]→"
 dir="\[${green}\]\w"
-# Need FiraCode or Hack for branch symbol
+# Need FiraCode or Hack fonts for branch symbol
 pre_git_branch="\[${white}\]  \[${violet}\]"
 pre_git_status="\[${blue}\]["
 post_git_status="]"
-prompt="\[${white}\]${promptChar}"
+prompt="\[${white}\]${prompt_char}"
 reset="\[${reset}\]"
 continuation="\[${yellow}\]→"
 
