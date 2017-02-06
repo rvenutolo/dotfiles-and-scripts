@@ -12,14 +12,6 @@ if [[ -f $HOME/.git-completion ]]; then
     source $HOME/.git-completion
 fi
 
-#if [[ ! -f $HOME/.git-prompt ]]; then
-#    curl -f -o $HOME/.git-prompt https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
-#fi
-#
-#if [[ -f $HOME/.git-prompt ]]; then
-#    source $HOME/.git-prompt
-#fi
-
 for file in $HOME/.bash_{path,prompt,exports,aliases,functions,extra}; do
     [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}";
 done;
