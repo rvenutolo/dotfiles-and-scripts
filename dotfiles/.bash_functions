@@ -170,7 +170,7 @@ function bak () {
     fi
     if [[ -f $1 ]] || [[ -d $1 ]]; then
         local filename
-        filename=$1
+        filename=${1%/}
         local filetime
         filetime=$(date +%Y%m%d_%H%M%S)
         cp -a "${filename}" "${filename}.${filetime}.bak" || exit 1
