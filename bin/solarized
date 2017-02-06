@@ -9,7 +9,8 @@ cd $HOME/.solarized
 # dircolors
 git clone https://github.com/seebi/dircolors-solarized.git
 eval `dircolors $HOME/.solarized/dircolors-solarized/dircolors.256dark`
-ln -s $HOME/.solarized/dircolors-solarized/dircolors.256dark $HOME/.dir_colors
+mkdir $HOME/.dir_colors
+ln -s $HOME/.solarized/dircolors-solarized/dircolors.256dark $HOME/.dir_colors/dircolors
 
 # gnome terminal
 git clone https://github.com/sigurdga/gnome-terminal-colors-solarized.git

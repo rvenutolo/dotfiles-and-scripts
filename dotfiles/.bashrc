@@ -66,6 +66,6 @@ if [[ -d "$HOME/.bin" ]] && [[ $PATH != "$HOME/.bin"* ]]; then
 fi
 
 # set dircolors
-if [[ -e "$HOME/.dir_colors" ]]; then
-    eval `dircolors "$HOME/.dir_colors"`
+if [[ -e "$HOME/.dir_colors/dircolors" ]]; then
+    eval `dircolors "$HOME/.dir_colors/dircolors"`
 fi
