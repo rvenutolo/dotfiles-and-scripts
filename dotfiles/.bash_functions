@@ -54,7 +54,7 @@ function swap() {
 
 function extract () {
     if [[ $# -ne 1 ]]; then
-        err "No file specified"
+        err "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
         return 1
     fi
     if [[ -f $1 ]]; then
@@ -74,10 +74,10 @@ function extract () {
             *.7z)      7z x $1       && return 0 ;;
             *.zx)      unxz $1       && return 0 ;;
             *.exe)     cabextract $1 && return 0 ;;
-            *)         err "'$1' cannot be extracted via extract" && return 1;;
+            *)         err "extract: '$1' - unknown archive method" && return 1 ;;
         esac
     else
-        err "'$1' is not a valid file"
+        err "'$1' does not exist"
         return 1
     fi
 }
