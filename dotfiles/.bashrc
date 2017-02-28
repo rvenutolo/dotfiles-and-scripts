@@ -60,6 +60,11 @@ if [[ "$(type -P fasd)" ]]; then
     eval "$(fasd --init auto)"
 fi
 
+# put ~/.local/bin at front of PATH
+if [[ -d "$HOME/.local/bin" ]] && [[ $PATH != "$HOME/.local/bin"* ]]; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
 # put ~/.bin at front of PATH
 if [[ -d "$HOME/.bin" ]] && [[ $PATH != "$HOME/.bin"* ]]; then
     PATH="$HOME/.bin:$PATH"
