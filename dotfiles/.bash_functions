@@ -61,6 +61,8 @@ function extract () {
         case $1 in
             *.tar.bz2) tar xvjf $1   && return 0 ;;
             *.tar.gz)  tar xvzf $1   && return 0 ;;
+            *.tar.xz)  tar xvJf $1   && return 0 ;;
+            *.lzma)    unlzma $1     && return 0 ;;
             *.bz2)     bunzip2 $1    && return 0 ;;
             *.rar)     unrar x $1    && return 0 ;;
             *.gz)      gunzip $1     && return 0 ;;
@@ -70,6 +72,8 @@ function extract () {
             *.zip)     unzip $1      && return 0 ;;
             *.Z)       uncompress $1 && return 0 ;;
             *.7z)      7z x $1       && return 0 ;;
+            *.zx)      unxz $1       && return 0 ;;
+            *.exe)     cabextract $1 && return 0 ;;
             *)         err "'$1' cannot be extracted via extract" && return 1;;
         esac
     else
