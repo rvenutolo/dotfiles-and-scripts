@@ -54,26 +54,26 @@ function swap() {
 
 function extract () {
     if [[ $# -ne 1 ]]; then
-        err "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+        err "Usage: extract <path/file_name>.<7z|bz2|exe|gz|lzma|rar|tar|tar.bz2|tar.gz|tar.xz|tbz2|tgz|Z|zip|zx>"
         return 1
     fi
     if [[ -f $1 ]]; then
         case $1 in
+            *.7z)      7z x $1       && return 0 ;;
+            *.bz2)     bunzip2 $1    && return 0 ;;
+            *.exe)     cabextract $1 && return 0 ;;
+            *.gz)      gunzip $1     && return 0 ;;
+            *.lzma)    unlzma $1     && return 0 ;;
+            *.rar)     unrar x $1    && return 0 ;;
+            *.tar)     tar xvf $1    && return 0 ;;
             *.tar.bz2) tar xvjf $1   && return 0 ;;
             *.tar.gz)  tar xvzf $1   && return 0 ;;
             *.tar.xz)  tar xvJf $1   && return 0 ;;
-            *.lzma)    unlzma $1     && return 0 ;;
-            *.bz2)     bunzip2 $1    && return 0 ;;
-            *.rar)     unrar x $1    && return 0 ;;
-            *.gz)      gunzip $1     && return 0 ;;
-            *.tar)     tar xvf $1    && return 0 ;;
             *.tbz2)    tar xvjf $1   && return 0 ;;
             *.tgz)     tar xvzf $1   && return 0 ;;
-            *.zip)     unzip $1      && return 0 ;;
             *.Z)       uncompress $1 && return 0 ;;
-            *.7z)      7z x $1       && return 0 ;;
+            *.zip)     unzip $1      && return 0 ;;
             *.zx)      unxz $1       && return 0 ;;
-            *.exe)     cabextract $1 && return 0 ;;
             *)         err "extract: '$1' - unknown archive method" && return 1 ;;
         esac
     else
