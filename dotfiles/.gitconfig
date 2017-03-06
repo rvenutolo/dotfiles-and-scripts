@@ -138,10 +138,6 @@
     # Detect copies as well as renames
     renames = copies
 
-[gpg]
-
-    program = /usr/bin/gpg
-
 [grep]
 
     # enable -n
