@@ -147,6 +147,16 @@
     # Automatically correct and execute mistyped commands
     autocorrect = 1
 
+[http]
+
+    # File containing previously stored cookie lines, which should be used in the Git http session,
+    # if they match the server.
+    cookiefile = ~/.gitcookies
+
+    # Store cookies received during requests to the file specified by http.cookieFile.
+    saveCookies = true
+
+
 [merge]
 
     # Include summaries of merged commits in newly created merge commit messages
