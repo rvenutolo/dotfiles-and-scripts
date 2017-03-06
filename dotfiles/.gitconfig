@@ -155,7 +155,10 @@
 
 [push]
 
+    # Push without any refspec will push the current branch out to the same name at the remote
+    # repository only when it is set to track the branch with the same name over there.
     default = simple
+
     # Make `git push` push relevant annotated tags when pushing branches out.
     followTags = true
 
