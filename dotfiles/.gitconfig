@@ -142,6 +142,11 @@
 
     program = /usr/bin/gpg
 
+[grep]
+
+    # enable -n
+    lineNumber = true
+
 [help]
 
     # Automatically correct and execute mistyped commands
