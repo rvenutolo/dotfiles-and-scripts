@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
 # Load .profile, containing login, non-bash related initializations.
-source "$HOME/.profile"
+
+if [[ -r "$HOME/.profile" ]]; then
+    source "$HOME/.profile"
+fi
  
 # Load .bashrc, containing non-login related bash initializations.
-source "$HOME/.bashrc"
+if [[ -r "$HOME/.bashrc" ]]; then
+    source "$HOME/.bashrc"
+fi
