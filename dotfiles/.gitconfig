@@ -141,6 +141,11 @@
     # Detect copies as well as renames
     renames = copies
 
+[fetch]
+
+    # Prune remote tracking references branches which no longer exist on the remote
+    prune = true
+
 [grep]
 
     # enable -n
