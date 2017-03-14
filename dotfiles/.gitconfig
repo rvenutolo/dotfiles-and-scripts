@@ -80,6 +80,9 @@
         fi \
     }; f"
 
+    # Delete merged branches
+    delete-merged-branches = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+
 [apply]
 
     # Detect whitespace errors when applying a patch
