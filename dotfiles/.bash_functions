@@ -168,20 +168,20 @@ function mkcd () {
 }
 
 function bak () {
-    if [[ $# -ne 1 ]]; then
+    if [[ "$#" -ne 1 ]]; then
         err "Error: No file specified"
-        return 1
+        return "1"
     fi
-    if [[ -f $1 ]] || [[ -d $1 ]]; then
+    if [[ -f "$1" ]] || [[ -d "$1" ]]; then
         local filename
-        filename=${1%/}
+        filename="${1%/}"
         local filetime
-        filetime=$(date +%Y%m%d_%H%M%S)
-        cp -a "${filename}" "${filename}.${filetime}.bak" || exit 1
-        return 0
+        filetime="$(date +%Y%m%d_%H%M%S)"
+        cp -a "${filename}" "${filename}.${filetime}.bak" || exit "1"
+        return "0"
     else
         err "'$1' is not a valid file"
-        return 1
+        return "1"
     fi
 }
 
