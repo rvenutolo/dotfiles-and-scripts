@@ -12,7 +12,7 @@ if [[ -f $HOME/.git-completion ]]; then
     source $HOME/.git-completion
 fi
 
-for file in $HOME/.bash_{path,prompt,exports,aliases,functions,extra}; do
+for file in $HOME/.bash_{aliases,exports,functions,prompt,extra,path}; do
     [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}";
 done;
 unset file;
