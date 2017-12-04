@@ -16,3 +16,7 @@ out/
 .directory
 .Trash-*
 .nfs*
+
+
+### Misc
+*.bak
