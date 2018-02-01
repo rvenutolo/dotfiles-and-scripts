@@ -12,6 +12,14 @@ if [[ -f $HOME/.git-completion ]]; then
     source $HOME/.git-completion
 fi
 
+if [[ ! -f $HOME/.docker-completion ]]; then
+    curl -f -o $HOME/.docker-completion https://raw.githubusercontent.com/docker/cli/master/contrib/completion/bash/docker
+fi
+
+if [[ -f $HOME/.docker-completion ]]; then
+    source $HOME/.docker-completion
+fi
+
 for file in $HOME/.bash_{aliases,exports,functions,prompt,extra,path}; do
     [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}";
 done;
