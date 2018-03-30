@@ -4,20 +4,15 @@ if [[ -r /etc/bashrc ]]; then
     source /etc/bashrc
 fi
 
-if [[ ! -f $HOME/.git-completion ]]; then
-    curl -f -o $HOME/.git-completion https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-fi
-
-if [[ -f $HOME/.git-completion ]]; then
-    source $HOME/.git-completion
-fi
-
-if [[ ! -f $HOME/.docker-completion ]]; then
-    curl -f -o $HOME/.docker-completion https://raw.githubusercontent.com/docker/cli/master/contrib/completion/bash/docker
-fi
-
-if [[ -f $HOME/.docker-completion ]]; then
-    source $HOME/.docker-completion
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
 fi
 
 for file in $HOME/.bash_{aliases,exports,functions,prompt,extra,path}; do
@@ -53,10 +48,6 @@ ulimit -S -c 0
 
 # default umask
 umask 0022
-
-# Add tab completion for SSH hostnames based on $HOME/.ssh/config, ignoring wildcards
-[[ -e "$HOME/.ssh/config" ]] && complete -o "default" -o "nospace" \
--W "$(grep "^Host" $HOME/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 
 # https://github.com/joelthelion/autojump
 if [[ -r /usr/share/autojump/autojump.sh ]]; then
