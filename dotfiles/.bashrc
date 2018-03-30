@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
 if [[ -r /etc/bashrc ]]; then
     source /etc/bashrc
 fi
