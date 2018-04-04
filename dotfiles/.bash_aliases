@@ -98,6 +98,10 @@ alias pbpaste='xclip -selection clipboard -o'
 
 alias pmdown='pghfm'
 
+alias mct='mvn clean test'
+alias mcv='mvn clean verify'
+alias mcd='mvn clean deploy'
+
 alias sortpom='\
     mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort \
     -Dsort.keepBlankLines=true \
