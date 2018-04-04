@@ -83,7 +83,7 @@ alias lt='ls -ltr'         # sort by date, most recent last
 alias lm='ls -al |more'    # pipe through 'more'
 alias lr='ls -lR'          # recursive ls
 
-alias fm="$FILEMANAGER"
+alias fm="${FILEMANAGER}"
 
 alias tree='tree -Cugph'
 
