@@ -26,3 +26,5 @@ export PAGER='less -Fi'
 export MANPAGER="$PAGER"
 
 export PROJECTS_HOME="$HOME/Projects/"
+
+export GPGKEY='64DAC28A'
