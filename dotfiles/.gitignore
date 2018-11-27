@@ -8,6 +8,7 @@ hs_err_pid*
 *.iws
 .idea/
 out/
+.attach_pid*
 
 
 ### Linux
