@@ -111,6 +111,16 @@ alias sortpom='\
     -Dsort.nrOfIndentSpace=4 \
 '
 
+alias sortpomanddependencies='\
+    mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort \
+    -Dsort.keepBlankLines=true \
+    -Dsort.predefinedSortOrder="recommended_2008_06" \
+    -Dsort.encoding="UTF-8" \
+    -Dsort.lineSeparator="\n" \
+    -Dsort.nrOfIndentSpace=4 \
+    -Dsort.sortDependencies=scope,groupId,artifactId \
+'
+
 alias list-manual-packages="comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)"
 
 alias gcl='git clone'
