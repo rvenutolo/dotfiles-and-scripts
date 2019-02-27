@@ -1,3 +1,7 @@
+### Maven
+dependency-reduced-pom.xml
+
+
 ### Java HotSpot Error
 hs_err_pid*
 
