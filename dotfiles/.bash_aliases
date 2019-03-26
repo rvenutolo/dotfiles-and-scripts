@@ -56,6 +56,8 @@ alias update='\
     && sudo apt autoremove \
 '
 
+alias weather='curl wttr.in'
+
 alias bashrc='$EDITOR $HOME/.bashrc'
 alias brc='source $HOME/.bashrc'
 alias sdf='$PROJECTS_HOME/dotfiles-and-scripts/bin/sync_dotfiles_and_scripts; brc'
