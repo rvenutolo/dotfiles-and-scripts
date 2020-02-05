@@ -55,6 +55,11 @@ ulimit -S -c 0
 # default umask
 umask 0022
 
+# make less more friendly for non-text input files, see lesspipe(1)
+if [[ -x "/usr/bin/lesspipe" ]]; then
+    eval "$(SHELL=/bin/sh lesspipe)"
+fi
+
 # put ~/.local/bin at front of PATH
 if [[ -d "$HOME/.local/bin" ]] && [[ $PATH != "$HOME/.local/bin"* ]]; then
     PATH="$HOME/.local/bin:$PATH"
