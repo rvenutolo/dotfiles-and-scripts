@@ -4,11 +4,6 @@ err() {
     echo "$@" >&2
 }
 
-function firefox() { command firefox "$@" & }
-function google-chrome() { command google-chrome "$@" & }
-function chrome() { command google-chrome "$@" & }
-function gedit() { command gedit "$@" & }
-
 # Find a file with a pattern in name:
 function ff() {
     find . -type f -iname '*'$@'*' -ls
@@ -131,32 +126,6 @@ function getcertnames() {
         return 0
     else
         err "Certificate not found"
-        return 1
-    fi
-}
-
-# grip - https://github.com/joeyespo/grip
-# sudo pip install grip
-function pghfm() {
-    local inputfile
-    if [[ $# -eq 0 ]]; then
-        inputfile='README.md'
-    elif [[ $# -eq 1 ]]; then
-        inputfile=$1
-    else
-        err "Expected 0 or 1 file path arguments"
-        return 1
-    fi
-    if [[ -f "${inputfile}" ]]; then
-        local filetime
-        filetime=$(date +%Y%m%d_%H%M%S)
-        local filename
-        filename="/tmp/$(basename "${inputfile}").${filetime}.html"
-        grip "${inputfile}" --export "${filename}"
-        x-www-browser "${filename}"
-        return 0
-    else
-        err "'${inputfile}' is not a valid file"
         return 1
     fi
 }
