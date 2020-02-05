@@ -19,4 +19,6 @@ export MANPAGER="$PAGER"
 
 export PROJECTS_HOME="$HOME/Projects/"
 
+export SDKMAN_DIR="$HOME/.sdkman"
+
 export GPGKEY='64DAC28A'
