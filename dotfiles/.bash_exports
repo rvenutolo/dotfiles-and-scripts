@@ -9,14 +9,6 @@ export HISTCONTROL='ignorespace'
 
 export HOSTFILE=$HOME/.hosts
 
-if [[ -n "$(command -v vim)" ]]; then
-    export EDITOR='vim'
-else
-    export EDITOR='vi'
-fi
-
-export FILEMANAGER='caja'
-
 export LANG='en_US.UTF-8'
 export LANGUAGE='en'
 export LC_CTYPE='en_US.UTF-8'
