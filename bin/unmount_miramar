@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-set -euo pipefail
-
-fusermount -u $HOME/Miramar
-
-if [[ -d $HOME/Miramar ]]; then
-    rmdir $HOME/Miramar
-fi

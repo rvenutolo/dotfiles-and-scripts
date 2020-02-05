@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-set -euo pipefail
-
-fusermount -u $HOME/Hollywood
-
-if [[ -d $HOME/Hollywood ]]; then
-    rmdir $HOME/Hollywood
-fi
