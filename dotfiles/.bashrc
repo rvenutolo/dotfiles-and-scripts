@@ -14,10 +14,10 @@ fi
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
+  if [[ -f '/usr/share/bash-completion/bash_completion' ]]; then
+    source '/usr/share/bash-completion/bash_completion'
+  elif [[ -f '/etc/bash_completion' ]]; then
+    source '/etc/bash_completion'
   fi
 fi
 
@@ -55,24 +55,9 @@ ulimit -S -c 0
 # default umask
 umask 0022
 
-# https://github.com/joelthelion/autojump
-if [[ -r /usr/share/autojump/autojump.sh ]]; then
-    source /usr/share/autojump/autojump.sh
-fi
-
-# https://github.com/clvv/fasd
-if [[ "$(type -P fasd)" ]]; then
-    eval "$(fasd --init auto)"
-fi
-
 # put ~/.local/bin at front of PATH
 if [[ -d "$HOME/.local/bin" ]] && [[ $PATH != "$HOME/.local/bin"* ]]; then
     PATH="$HOME/.local/bin:$PATH"
-fi
-
-# put ~/.cargo/bin at front of PATH
-if [[ -d "$HOME/.cargo/bin" ]] && [[ $PATH != "$HOME/.cargo/bin"* ]]; then
-    PATH="$HOME/.cargo/bin:$PATH"
 fi
 
 # put ~/.bin at front of PATH
@@ -80,7 +65,11 @@ if [[ -d "$HOME/.bin" ]] && [[ $PATH != "$HOME/.bin"* ]]; then
     PATH="$HOME/.bin:$PATH"
 fi
 
-# set dircolors
-if [[ -e "$HOME/.dir_colors/dircolors" ]]; then
-    eval `dircolors "$HOME/.dir_colors/dircolors"`
+# put ~/.cargo/bin at front of PATH
+if [[ -d "$HOME/.cargo/bin" ]] && [[ $PATH != "$HOME/.cargo/bin"* ]]; then
+    PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+if [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
