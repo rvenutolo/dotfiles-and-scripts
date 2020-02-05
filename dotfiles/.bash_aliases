@@ -10,8 +10,6 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
-alias md='mkdir'
-alias rd='rmdir'
 
 alias c='clear'
 alias cls='clear'
@@ -58,7 +56,6 @@ alias update='\
 
 alias weather='curl wttr.in'
 
-alias bashrc='$EDITOR $HOME/.bashrc'
 alias brc='source $HOME/.bashrc'
 alias sdf='$PROJECTS_HOME/dotfiles-and-scripts/bin/sync_dotfiles_and_scripts; brc'
 
@@ -93,16 +90,6 @@ alias nano='nano -c'
 
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
-
-#alias a='atom'
-#alias ah='atom .'
-#alias apmup='apm update --no-confirm'
-
-alias pmdown='pghfm'
-
-alias mct='mvn clean test'
-alias mcv='mvn clean verify'
-alias mcd='mvn clean deploy'
 
 alias sortpom='\
     mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort \
