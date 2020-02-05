@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-readonly GRADLE='/usr/bin/gradle'
+readonly GRADLE="$(which gradle)"
 readonly GRADLE_WRAPPER='./gradlew'
 
 if [[ -f ${GRADLE_WRAPPER} ]]; then
