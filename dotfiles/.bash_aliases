@@ -14,9 +14,6 @@ alias mkdir='mkdir -p'
 alias c='clear'
 alias cls='clear'
 
-alias edit="$EDITOR"
-alias pager="$PAGER"
-
 alias q='exit'
 
 alias h='history'
@@ -81,8 +78,6 @@ alias lu='ls -ltur'        # sort by and show access time, most recent last
 alias lt='ls -ltr'         # sort by date, most recent last
 alias lm='ls -al |more'    # pipe through 'more'
 alias lr='ls -lR'          # recursive ls
-
-alias fm="${FILEMANAGER}"
 
 alias tree='tree -Cugph'
 
