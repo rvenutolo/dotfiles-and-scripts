@@ -21,7 +21,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-for file in $HOME/.bash_{aliases,exports,functions,prompt,extra,path}; do
+for file in $HOME/.bash_{exports,functions,extra,aliases,prompt,path}; do
     [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}";
 done;
 unset file;
