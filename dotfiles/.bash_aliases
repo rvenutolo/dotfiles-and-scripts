@@ -16,7 +16,7 @@ alias cls='clear'
 
 alias edit="$EDITOR"
 alias pager="$PAGER"
-alias fm="${FILEMANAGER}"
+alias fm="$FILEMANAGER"
 
 alias q='exit'
 
