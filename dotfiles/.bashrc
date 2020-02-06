@@ -65,11 +65,6 @@ if [[ -d "$HOME/.local/bin" ]] && [[ $PATH != "$HOME/.local/bin"* ]]; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# put ~/.bin at front of PATH
-if [[ -d "$HOME/.bin" ]] && [[ $PATH != "$HOME/.bin"* ]]; then
-    PATH="$HOME/.bin:$PATH"
-fi
-
 # put ~/.cargo/bin at front of PATH
 if [[ -d "$HOME/.cargo/bin" ]] && [[ $PATH != "$HOME/.cargo/bin"* ]]; then
     PATH="$HOME/.cargo/bin:$PATH"
@@ -77,4 +72,9 @@ fi
 
 if [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
     source "$HOME/.sdkman/bin/sdkman-init.sh"
+fi
+
+# put ~/.bin at front of PATH
+if [[ -d "$HOME/.bin" ]] && [[ $PATH != "$HOME/.bin"* ]]; then
+    PATH="$HOME/.bin:$PATH"
 fi
