@@ -14,6 +14,10 @@ alias mkdir='mkdir -p'
 alias c='clear'
 alias cls='clear'
 
+alias edit="$EDITOR"
+alias pager="$PAGER"
+alias fm="${FILEMANAGER}"
+
 alias q='exit'
 
 alias h='history'
