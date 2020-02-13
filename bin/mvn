@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-readonly MAVEN="$(which mvn)"
+readonly MAVEN='/usr/bin/mvn'
 readonly MAVEN_WRAPPER='./mvnw'
 
 if [[ -f ${MAVEN_WRAPPER} ]]; then
