@@ -5,9 +5,6 @@
 
 [alias]
 
-    # View aliases
-    aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
-
     # View abbreviated SHA, description, and history graph of the latest 20 commits
     l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
@@ -21,7 +18,7 @@
     di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
     # Pull in remote changes for the current repository and all its submodules
-    p = !"git pull; git submodule foreach git pull origin master"
+    p = git pull --recurse-submodules
 
     # Clone a repository including all submodules
     c = clone --recursive
@@ -36,6 +33,9 @@
     tags = tag -l
     branches = branch -a
     remotes = remote -v
+
+    # List aliases
+    aliases = config --get-regexp alias
 
     # Amend the currently staged files to the latest commit
     amend = commit --amend --reuse-message=HEAD
@@ -68,29 +68,29 @@
     # List contributors with number of commits
     contributors = shortlog --summary --numbered
 
-    # Merge GitHub pull request on top of the `master` branch
+    # Merge GitHub pull request on top of the current branch or,
+    # if a branch name is specified, on top of the specified branch
     mpr = "!f() { \
+        declare currentBranch=\"$(git symbolic-ref --short HEAD)\"; \
+        declare branch=\"${2:-$currentBranch}\"; \
         if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
             git fetch origin refs/pull/$1/head:pr/$1 && \
-            git rebase master pr/$1 && \
-            git checkout master && \
+            git checkout -B $branch && \
+            git rebase $branch pr/$1 && \
+            git checkout -B $branch && \
             git merge pr/$1 && \
             git branch -D pr/$1 && \
             git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
         fi \
     }; f"
 
-    # Delete merged branches
-    delete-merged-branches = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+    # Show the user email for the current repository.
+    whoami = config user.email
 
 [apply]
 
     # Detect whitespace errors when applying a patch
     whitespace = fix
-
-[commit]
-
-    ##gpgsign = true
 
 [core]
 
@@ -103,16 +103,14 @@
     # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
     whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
-    # Make `git rebase` safer on OS X
-    # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
-    trustctime = false
 
     # Prevent showing files whose names contain non-ASCII symbols as unversioned.
     # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
     precomposeunicode = false
 
-    # No output conversion is performed.
-    autocrlf = input
+    # Speed up commands involving untracked files such as `git status`.
+    # https://git-scm.com/docs/git-update-index#_untracked_cache
+    untrackedCache = true
 
 [color]
 
@@ -139,48 +137,35 @@
     changed = green
     untracked = cyan
 
+[commit]
+
+    # https://help.github.com/articles/signing-commits-using-gpg/
+    gpgsign = true
+
 [diff]
 
     # Detect copies as well as renames
     renames = copies
 
-[fetch]
+[diff "bin"]
 
-    # Prune remote tracking references branches which no longer exist on the remote
-    prune = true
-
-[grep]
-
-    # enable -n
-    lineNumber = true
+    # Use `hexdump` to diff binary files
+    textconv = hexdump -v -C
 
 [help]
 
     # Automatically correct and execute mistyped commands
     autocorrect = 1
 
-[http]
-
-    # File containing previously stored cookie lines, which should be used in the Git http session,
-    # if they match the server.
-    cookiefile = ~/.gitcookies
-
-    # Store cookies received during requests to the file specified by http.cookieFile.
-    saveCookies = true
-
-
 [merge]
 
     # Include summaries of merged commits in newly created merge commit messages
     log = true
-    tool = meld
 
 [push]
 
-    # Push without any refspec will push the current branch out to the same name at the remote
-    # repository only when it is set to track the branch with the same name over there.
+    # https://git-scm.com/docs/git-config#git-config-pushdefault
     default = simple
-
     # Make `git push` push relevant annotated tags when pushing branches out.
     followTags = true
 
@@ -205,5 +190,3 @@
 [url "git://gist.github.com/"]
 
     insteadOf = "gist:"
-
-
