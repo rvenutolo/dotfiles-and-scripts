@@ -43,6 +43,7 @@ alias grep='grep --exclude-dir=.idea --exclude-dir=.git --colour=auto'
 alias egrep='egrep --exclude-dir=.idea --exclude-dir=.git --colour=auto'
 alias fgrep='fgrep --exclude-dir=.idea --exclude-dir=.git --colour=auto'
 
+alias map='xargs -n1'
 
 alias chux='chmod u+x'
 alias chax='chmod a+x'
