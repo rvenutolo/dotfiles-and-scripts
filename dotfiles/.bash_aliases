@@ -40,6 +40,9 @@ alias o='cd /opt'
 alias un='extract'
 
 alias grep='grep --exclude-dir=.idea --exclude-dir=.git --colour=auto'
+alias egrep='egrep --exclude-dir=.idea --exclude-dir=.git --colour=auto'
+alias fgrep='fgrep --exclude-dir=.idea --exclude-dir=.git --colour=auto'
+
 
 alias chux='chmod u+x'
 alias chax='chmod a+x'
