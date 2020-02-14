@@ -101,7 +101,7 @@ fi
 
 space=' '
 newline='\n'
-timestamp="\[${cyan}\]\t"
+timestamp="\[${cyan}\]\D{%I:%M:%S}"
 user="\[${user_color}\]\u"
 at="\[${white}\]@"
 host="\[${host_color}\]\h"
@@ -111,7 +111,7 @@ dir="\[${green}\]\w"
 pre_git_branch="\[${white}\]  \[${violet}\]"
 pre_git_status="\[${blue}\]["
 post_git_status="]"
-prompt="\[${white}\]${prompt_char}"
+prompt="${timestamp} \[${white}\]${prompt_char}"
 reset="\[${reset}\]"
 continuation="\[${yellow}\]→"
 
