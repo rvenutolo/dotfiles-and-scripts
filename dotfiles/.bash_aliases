@@ -68,7 +68,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias weather='curl wttr.in'
 
 alias brc='source $HOME/.bashrc'
-alias sdf='$PROJECTS_DIR/dotfiles-and-scripts/bin/sync_dotfiles_and_scripts; brc'
+alias sdf='$PROJECTS_DIR/dotfiles-and-scripts/bin/sync-dotfiles-and-scripts; brc'
 
 alias path='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
