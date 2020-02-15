@@ -32,6 +32,9 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias -- -='cd -'
 
+alias br='br -dhp'
+alias bs='br --sizes'
+
 alias home='cd $HOME'
 alias p='cd $HOME/Projects'
 alias dl='cd $HOME/Downloads'
