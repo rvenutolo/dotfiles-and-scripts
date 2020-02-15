@@ -22,3 +22,5 @@ export PROJECTS_DIR="$HOME/Projects"
 export SDKMAN_DIR="$HOME/.sdkman"
 
 export GPGKEY='64DAC28A'
+
+export WTTR_CITY='Atlanta'
