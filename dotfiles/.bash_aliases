@@ -178,3 +178,6 @@ alias gnew='git log HEAD@{1}..HEAD@{0}'
 # Add uncommitted and unstaged changes to the last commit
 alias gcaa='git commit -a --amend -C HEAD'
 alias gtls='git tag -l | sort -V'
+
+# the terminal rickroll
+alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
