@@ -7,7 +7,7 @@ read -p 'New email address: ' new_email
 read -p 'New name: ' new_name
 
 # adapted from https://help.github.com/articles/changing-author-info/
-git filter-branch --env-filter "
+git filter-branch -f --env-filter "
 OLD_EMAIL='${old_email}'
 CORRECT_NAME='${new_name}'
 CORRECT_EMAIL='${new_email}'
