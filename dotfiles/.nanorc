@@ -1,3 +1,5 @@
+## From https://github.com/dotphiles/dotphiles/tree/master/nano
+
 # Use auto-indentation.
 set autoindent
 
@@ -85,3 +87,53 @@ set tabstospaces
 # as part of a word.
 set wordbounds
 
+#apacheconf
+#include "~/.nano.d/syntax-highlighting/apacheconf.nanorc"
+#asm
+#include "~/.nano.d/syntax-highlighting/asm.nanorc"
+#c
+include "~/.nano.d/syntax-highlighting/c.nanorc"
+#conf
+include "~/.nano.d/syntax-highlighting/conf.nanorc"
+#css
+include "~/.nano.d/syntax-highlighting/css.nanorc"
+#cython
+#include "~/.nano.d/syntax-highlighting/cython.nanorc"
+#fortran
+#include "~/.nano.d/syntax-highlighting/fortran.nanorc"
+#gentoo
+#include "~/.nano.d/syntax-highlighting/gentoo.nanorc"
+#groff
+#include "~/.nano.d/syntax-highlighting/groff.nanorc"
+#html
+include "~/.nano.d/syntax-highlighting/html.nanorc"
+#java
+include "~/.nano.d/syntax-highlighting/java.nanorc"
+#lua
+#include "~/.nano.d/syntax-highlighting/lua.nanorc"
+#man
+include "~/.nano.d/syntax-highlighting/man.nanorc"
+#mutt
+#include "~/.nano.d/syntax-highlighting/mutt.nanorc"
+#nanorc
+include "~/.nano.d/syntax-highlighting/nanorc.nanorc"
+#patch
+include "~/.nano.d/syntax-highlighting/patch.nanorc"
+#perl
+include "~/.nano.d/syntax-highlighting/perl.nanorc"
+#php
+include "~/.nano.d/syntax-highlighting/php.nanorc"
+#pov
+#include "~/.nano.d/syntax-highlighting/pov.nanorc"
+#python
+include "~/.nano.d/syntax-highlighting/python.nanorc"
+#reST
+#include "~/.nano.d/syntax-highlighting/reST.nanorc"
+#ruby
+include "~/.nano.d/syntax-highlighting/ruby.nanorc"
+#sh
+include "~/.nano.d/syntax-highlighting/sh.nanorc"
+#tex
+include "~/.nano.d/syntax-highlighting/tex.nanorc"
+#xml
+include "~/.nano.d/syntax-highlighting/xml.nanorc"
