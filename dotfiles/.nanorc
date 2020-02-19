@@ -1,8 +1,5 @@
 ## From https://github.com/dotphiles/dotphiles/tree/master/nano
 
-# Use auto-indentation.
-set autoindent
-
 # Use bold text instead of reverse video text.
 set boldtext
 
