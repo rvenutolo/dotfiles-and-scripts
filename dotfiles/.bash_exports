@@ -6,7 +6,6 @@ export HISTSIZE='32768'
 export HISTFILESIZE="${HISTSIZE}"
 export HISTTIMEFORMAT='%F %T | '
 export HISTCONTROL='ignorespace'
-PROMPT_COMMAND='history -a;history -n'
 
 export HOSTFILE=$HOME/.hosts
 
