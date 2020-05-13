@@ -56,25 +56,31 @@ ulimit -S -c 0
 umask 0022
 
 # make less more friendly for non-text input files, see lesspipe(1)
-if [[ -x "/usr/bin/lesspipe" ]]; then
+if command -v lesspipe >/dev/null 2>&1; then
     eval "$(SHELL=/bin/sh lesspipe)"
 fi
 
-# put ~/.local/bin at front of PATH
-if [[ -d "$HOME/.local/bin" ]] && [[ $PATH != "$HOME/.local/bin"* ]]; then
+if [[ -d "$HOME/.local/bin" ]] && [[ $PATH != *"$HOME/.local/bin"* ]]; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# put ~/.cargo/bin at front of PATH
-if [[ -d "$HOME/.cargo/bin" ]] && [[ $PATH != "$HOME/.cargo/bin"* ]]; then
+if [[ -d "$HOME/.cargo/bin" ]] && [[ $PATH != *"$HOME/.cargo/bin"* ]]; then
     PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+if [[ -d "$HOME/.bin" ]] && [[ $PATH != *"$HOME/.bin"* ]]; then
+    PATH="$HOME/.bin:$PATH"
 fi
 
 if [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
     source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
 
-# put ~/.bin at front of PATH
-if [[ -d "$HOME/.bin" ]] && [[ $PATH != "$HOME/.bin"* ]]; then
-    PATH="$HOME/.bin:$PATH"
+if [[ -r "$HOME/.dir_colors" ]]; then
+    eval $(dircolors "$HOME/.dir_colors")
 fi
+
+if command -v fasd >/dev/null 2>&1; then
+    eval "$(fasd --init auto)"
+fi
+
