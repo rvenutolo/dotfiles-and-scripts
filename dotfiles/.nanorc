@@ -27,7 +27,7 @@ unset morespace
 
 # Enable mouse support, so that mouse clicks can be used to place the cursor,
 # set the mark (with a double click), or execute shortcuts.
-unset mouse
+set mouse
 
 # Allow inserting files into their own buffers.
 set multibuffer
