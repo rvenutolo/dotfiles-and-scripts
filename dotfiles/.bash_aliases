@@ -17,7 +17,6 @@ alias fgrep='fgrep --exclude-dir=.idea --exclude-dir=.git --colour=auto'
 alias du='du -ckh'
 alias df='df -kTh'
 alias free='free -m'
-alias ls="ls -hF --color"
 alias tree='tree -Cugph'
 alias nano='nano -c'
 
@@ -25,7 +24,6 @@ alias nano='nano -c'
 alias which='type -a'
 
 ## shorter aliases
-alias c='clear'
 alias cls='clear'
 alias q='exit'
 alias h='history'
@@ -37,14 +35,15 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-alias -- -='cd -'
 alias home='cd $HOME'
 alias dl='cd $HOME/Downloads'
 alias dt='cd $HOME/Desktop'
+alias c='cd $CODE_DIR'
 
 ## ls aliases
-alias ll='ls -l --group-directories-first'
-alias lla='ls -Al --group-directories-first'
+alias ls="ls -hF --color --group-directories-first"
+alias ll='ls -l'
+alias lla='ls -Al'
 alias llx='ll -XB' # sort by extension
 alias llax='lla -XB'
 alias llk='ll -lSr' # sort by size, biggest last
@@ -57,6 +56,16 @@ alias llt='ll -tr' # sort by date, most recent last
 alias llat='lla -tr'
 alias llr='ll -R' # recursive ls
 alias llar='lla -R'
+
+## fasd aliases
+alias a='fasd -a'        # any
+alias s='fasd -si'       # show / search / select
+alias d='fasd -d'        # directory
+alias f='fasd -f'        # file
+alias sd='fasd -sid'     # interactive directory selection
+alias sf='fasd -sif'     # interactive file selection
+alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+alias zz='fasd_cd -d -i' # cd with interactive selection
 
 ## git aliases
 alias g='git'
@@ -143,9 +152,7 @@ alias sortpomanddependencies='\
     -Dsort.lineSeparator="\n" \
     -Dsort.nrOfIndentSpace=4 \
     -Dsort.sortDependencies=scope,groupId,artifactId'
-alias weather='curl wttr.in/$WTTR_CITY'
-# the terminal rickroll
-alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
+alias wttr='curl wttr.in/$WTTR_CITY'
 
 ## generic aliases
 alias edit="$EDITOR"
