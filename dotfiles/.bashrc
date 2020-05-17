@@ -69,7 +69,7 @@ if command -v fasd >/dev/null 2>&1; then
     eval "$(fasd --init auto)"
 fi
 
-for dir in ( "$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.bin" )
+for dir in "$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.bin"
 do
     if [[ -d "$dir" ]] && [[ $PATH != *"$dir"* ]]; then
         PATH=""$dir":$PATH"
