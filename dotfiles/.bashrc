@@ -21,6 +21,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
+if [[ -f '/usr/share/git/completion/git-prompt.sh' ]]; then
+  source '/usr/share/git/completion/git-prompt.sh'
+fi
+
 for file in $HOME/.bash_{exports,functions,extra,aliases,prompt,path}; do
     [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}";
 done;
