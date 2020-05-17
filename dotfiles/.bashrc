@@ -19,37 +19,32 @@ fi
 
 for file in $HOME/.bash_{exports,functions,extra,aliases,prompt,path}; do
     [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}";
-done;
-unset file;
+done
+unset file
 
-ulimit -S -c 0          # Don't want any coredumps.
+umask 0022
+ulimit -S -c 0 # no core dumps
 set -o notify
 set -o noclobber
 set -o ignoreeof
-#set -o xtrace          # Useful for debuging.
 
-# Enable options:
-shopt -s cdspell
-shopt -s cdable_vars
-shopt -s checkhash
-shopt -s checkwinsize
-shopt -s sourcepath
-shopt -s no_empty_cmd_completion
-shopt -s cmdhist
-shopt -s histappend histreedit histverify
-shopt -s extglob        # Necessary for programmable completion.
-shopt -s nocaseglob
-shopt -s dirspell
-
-# Disable options:
-shopt -u mailwarn
-unset MAILCHECK         # Don't want my shell to warn me of incoming mail.
-
-# disable core dumps
-ulimit -S -c 0
-
-# default umask
-umask 0022
+shopt -s \
+    cdable_vars \
+    cdspell \
+    checkhash \
+    checkwinsize \
+    cmdhist \
+    direxpand \
+    dirspell \
+    dotglob \
+    extglob \
+    extquote \
+    histappend \
+    no_empty_cmd_completion \
+    nocaseglob \
+    progcomp \
+    progcomp_alias \
+    sourcepath
 
 if [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
     source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -69,5 +64,5 @@ do
         PATH=""$dir":$PATH"
     fi
 done
-
+unset dir
 
