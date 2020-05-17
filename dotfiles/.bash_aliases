@@ -19,6 +19,7 @@ alias df='df -kTh'
 alias free='free -m'
 alias tree='tree -Cugph'
 alias nano='nano -c'
+alias pacman='pacman --color auto'
 
 ## aliases to replace one command with another
 alias which='type -a'
