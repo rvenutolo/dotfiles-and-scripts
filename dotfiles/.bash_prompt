@@ -61,6 +61,7 @@ __prompt_command() {
 
   local exit_code="$?"
 
+  ## nord color theme assumed
   local reset='\[\e[0m\]'
   local grey='\[\e[1;30m\]'
   local red='\[\e[1;31m\]'
