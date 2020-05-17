@@ -3,19 +3,20 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-if [[ -r /etc/bashrc ]]; then
-    source /etc/bashrc
+if [[ -r '/etc/bash.bashrc' ]]; then
+    source '/etc/bash.bashrc'
+elif [[ -r '/etc/bashrc' ]]; then
+    source '/etc/bashrc'
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [[ -f '/usr/share/bash-completion/bash_completion' ]]; then
+if [[ -r '/usr/share/bash-completion/bash_completion' ]]; then
     source '/usr/share/bash-completion/bash_completion'
-  elif [[ -f '/etc/bash_completion' ]]; then
+elif [[ -r '/etc/bash_completion' ]]; then
     source '/etc/bash_completion'
-  fi
+fi
+
+if [[ -f '/usr/share/git/completion/git-completion.bash' ]]; then
+  source '/usr/share/git/completion/git-completion.bash'
 fi
 
 if [[ -f '/usr/share/git/completion/git-prompt.sh' ]]; then
