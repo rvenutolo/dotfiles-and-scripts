@@ -76,15 +76,11 @@ if command -v fasd >/dev/null 2>&1; then
     eval "$(fasd --init auto)"
 fi
 
-if [[ -d "$HOME/.local/bin" ]] && [[ $PATH != *"$HOME/.local/bin"* ]]; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
+for dir in ( "$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.bin" )
+do
+    if [[ -d "$dir" ]] && [[ $PATH != *"$dir"* ]]; then
+        PATH=""$dir":$PATH"
+    fi
+done
 
-if [[ -d "$HOME/.cargo/bin" ]] && [[ $PATH != *"$HOME/.cargo/bin"* ]]; then
-    PATH="$HOME/.cargo/bin:$PATH"
-fi
-
-if [[ -d "$HOME/.bin" ]] && [[ $PATH != *"$HOME/.bin"* ]]; then
-    PATH="$HOME/.bin:$PATH"
-fi
 
