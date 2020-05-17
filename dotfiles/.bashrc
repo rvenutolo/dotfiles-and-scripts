@@ -59,11 +59,6 @@ ulimit -S -c 0
 # default umask
 umask 0022
 
-# make less more friendly for non-text input files, see lesspipe(1)
-if command -v lesspipe >/dev/null 2>&1; then
-    eval "$(SHELL=/bin/sh lesspipe)"
-fi
-
 if [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
     source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
