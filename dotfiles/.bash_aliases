@@ -80,29 +80,13 @@ alias 700='chmod 700'
 alias 744='chmod 744'
 alias 755='chmod 755'
 alias map='xargs -n1'
-case $PACKAGE_MANAGER in
-    pacman)
-        ## TODO include removal of orphaned packages
-        alias update='sudo pacman -Syu'
-        ;;
-    apt)
-        alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
-        ;;
-    *)
-        echo "Unknown package manager: $PACKAGE_MANAGER"
-        ;;
-esac
 # use like so: sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias brc='source $HOME/.bashrc'
 alias sdf='$CODE_DIR/dotfiles-and-scripts/bin/sync-dotfiles-and-scripts; brc'
 alias path='echo -e ${PATH//:/\\n}'
 alias du1='du --max-depth=1'
-alias localip='hostname -I'
-alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
-alias list-manual-packages="comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)"
+
 alias sortpom='\
     mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort \
     -Dsort.keepBlankLines=true \
@@ -119,6 +103,22 @@ alias sortpomanddependencies='\
     -Dsort.nrOfIndentSpace=4 \
     -Dsort.sortDependencies=scope,groupId,artifactId'
 alias wttr='curl wttr.in/$WTTR_CITY'
+
+case $PACKAGE_MANAGER in
+    pacman)
+        ## TODO include removal of orphaned packages
+        alias update='sudo pacman -Syu'
+        ## This does not exactly match the apt one as there doesn't appear to be a way to list packages the only the user installed
+        alias list-manual-packages="comm -23 <(pacman -Qqett | sort) <(pacman -Qqg base -g base-devel | sort | uniq)"
+        ;;
+    apt)
+        alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
+        alias list-manual-packages="comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)"
+        ;;
+    *)
+        echo "Unknown package manager: $PACKAGE_MANAGER"
+        ;;
+esac
 
 ## generic aliases
 alias edit="$EDITOR"
