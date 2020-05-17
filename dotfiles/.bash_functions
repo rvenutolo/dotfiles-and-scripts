@@ -83,11 +83,6 @@ function ii() {
     echo -e "\nCurrent date: " ; date
     echo -e "\nMachine stats: " ; uptime
     echo -e "\nMemory stats: " ; free
-    my_ip 2>&-
-    echo -e "\nLocal IP Addresses:" ; echo $(localip)
-    echo -e "\nExternal IP Address:" ; echo $(ip)
-    echo -e "\nOpen connections: "; netstat -pan --inet
-    echo
     return 0
 }
 
