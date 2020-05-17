@@ -11,12 +11,6 @@ fi
 
 if [[ -r '/usr/share/bash-completion/bash_completion' ]]; then
     source '/usr/share/bash-completion/bash_completion'
-elif [[ -r '/etc/bash_completion' ]]; then
-    source '/etc/bash_completion'
-fi
-
-if [[ -f '/usr/share/git/completion/git-completion.bash' ]]; then
-  source '/usr/share/git/completion/git-completion.bash'
 fi
 
 if [[ -f '/usr/share/git/completion/git-prompt.sh' ]]; then
