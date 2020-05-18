@@ -256,10 +256,26 @@ function check-setup() {
 
     for func in \
         br \
-        ff \
         __git_ps1
     do
         declare -f -F $func >/dev/null || echo "Function not available: $func"
+    done
+
+    for file in \
+        "$HOME/.gitconfig.private" \
+        "$HOME/.ssh/config.private" \
+        "$HOME/.bash_extra"
+    do
+        [[ -f $file ]] || echo "Missing file: $file"
+    done
+
+    for var in \
+        "PACKAGE_MANAGER" \
+        "EDITOR" \
+        "PAGER" \
+        "FILE_MANAGER"
+    do
+        [[ -z ${!var} ]] && echo "Environment variable not set: $var"
     done
 
     return 0
