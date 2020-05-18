@@ -251,14 +251,14 @@ function check-setup() {
         aws \
         cargo
     do
-      type -p $cmd >/dev/null || echo "Command not available: $cmd"
+      type -p $cmd >/dev/null 2>&1 || echo "Command not available: $cmd"
     done
 
     for func in \
         br \
         __git_ps1
     do
-        declare -f -F $func >/dev/null || echo "Function not available: $func"
+        declare -f -F $func >/dev/null 2>&1 || echo "Function not available: $func"
     done
 
     for file in \
@@ -277,6 +277,12 @@ function check-setup() {
     do
         [[ -z ${!var} ]] && echo "Environment variable not set: $var"
     done
+
+    if ps -p "$SSH_AGENT_PID" >/dev/null 2>&1 ; then
+        ssh-add -L >/dev/null 2>&1 || echo "SSH agent has no IDs"
+    else
+        echo "SSH agent is not running"
+    fi
 
     return 0
 }
