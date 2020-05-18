@@ -44,14 +44,9 @@ do
 done
 unset file
 
+[[ -r "$HOME/.dir_colors" ]] && [[ -f"$HOME/.dir_colors" ]] && eval $(dircolors "$HOME/.dir_colors")
 
-if [[ -r "$HOME/.dir_colors" ]]; then
-    eval $(dircolors "$HOME/.dir_colors")
-fi
-
-if command -v fasd >/dev/null 2>&1; then
-    eval "$(fasd --init auto)"
-fi
+type -p fasd >/dev/null 2>&1 && eval "$(fasd --init auto)"
 
 for dir in \
     "$HOME/.local/bin" \

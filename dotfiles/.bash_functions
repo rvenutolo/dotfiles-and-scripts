@@ -211,3 +211,56 @@ function symlinks() {
         return 1
     fi
 }
+
+## TODO test these
+function mvn() {
+    local maven_wrapper='./mvnw'
+    if [[ -x ${maven_wrapper} ]]; then
+        exec ${maven_wrapper} "$@"
+    else
+        \mvn "$@"
+    fi
+}
+
+function gradle() {
+    local gradle_wrapper='./gradlew'
+    if [[ -x ${gradle_wrapper} ]]; then
+        exec ${gradle_wrapper} "$@"
+    else
+        \gradle "$@"
+    fi
+}
+
+function check-setup() {
+
+    for cmd in \
+        sdk \
+        java \
+        groovy \
+        maven \
+        gradle \
+        tldr \
+        pygmentize \
+        git \
+        http \
+        rg \
+        fasd \
+        docker \
+        openconnect \
+        broot \
+        aws \
+        cargo
+    do
+      type -p $cmd >/dev/null || echo "Command not available: $cmd"
+    done
+
+    for func in \
+        br \
+        ff \
+        __git_ps1
+    do
+        declare -f -F $func >/dev/null || echo "Function not available: $func"
+    done
+
+    return 0
+}
