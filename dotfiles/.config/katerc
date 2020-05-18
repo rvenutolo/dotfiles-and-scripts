@@ -66,7 +66,7 @@ Word Wrap Marker=true
 
 [KTextEditor View]
 Allow Mark Menu=true
-Auto Brackets=true
+Auto Brackets=false
 Auto Center Lines=0
 Auto Completion=true
 Backspace Remove Composed Characters=false
