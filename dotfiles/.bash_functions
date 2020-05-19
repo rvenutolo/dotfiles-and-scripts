@@ -280,6 +280,9 @@ function check-setup() {
     done
     
     pgrep 'ssh-agent' >/dev/null 2>&1 || echo "SSH agent is not running"
+    
+    # There may be a better way to detect if bash-completion is present
+    type -t _init_completion >/dev/null 2>&1 || echo "bash-completion not present"
 
     return 0
 }
