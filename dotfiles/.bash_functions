@@ -234,23 +234,23 @@ function gradle() {
 function check-setup() {
 
     for cmd in \
-        aws \
-        broot \
-        cargo \
-        docker \
-        fasd \
-        git \
-        gradle \
-        groovy \
-        http \
-        java \
-        mvn \
-        openconnect \
-        pygmentize \
-        rg \
-        sdk \
-        tldr \
-        tree
+        'aws' \
+        'broot' \
+        'cargo' \
+        'docker' \
+        'fasd' \
+        'git' \
+        'gradle' \
+        'groovy' \
+        'http' \
+        'java' \
+        'mvn' \
+        'openconnect' \
+        'pygmentize' \
+        'rg' \
+        'sdk' \
+        'tldr' \
+        'tree'
     do
       type -P -f $cmd >/dev/null 2>&1 || echo "Command not available: $cmd"
     done
@@ -271,18 +271,24 @@ function check-setup() {
     done
 
     for var in \
-        "EDITOR" \
-        "FILE_MANAGER" \
-        "PACKAGE_MANAGER" \
-        "PAGER"
+        'EDITOR' \
+        'FILE_MANAGER' \
+        'PACKAGE_MANAGER' \
+        'PAGER'
     do
         [[ -z ${!var} ]] && echo "Environment variable not set: $var"
     done
     
-    pgrep 'ssh-agent' >/dev/null 2>&1 || echo "SSH agent is not running"
+    for font in \
+      'Hack'
+    do
+      fc-list : family | grep "^$font\$" >/dev/null 2>&1 || echo "Font not available: $font"
+    done
+    
+    pgrep 'ssh-agent' >/dev/null 2>&1 || echo 'SSH agent is not running'
     
     # There may be a better way to detect if bash-completion is present
-    type -t _init_completion >/dev/null 2>&1 || echo "bash-completion not present"
+    type -t '_init_completion' >/dev/null 2>&1 || echo 'bash-completion not present'
 
     return 0
 }
