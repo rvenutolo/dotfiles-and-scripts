@@ -234,46 +234,47 @@ function gradle() {
 function check-setup() {
 
     for cmd in \
-        sdk \
-        java \
-        groovy \
-        maven \
-        gradle \
-        tldr \
-        pygmentize \
-        git \
-        http \
-        rg \
-        fasd \
-        docker \
-        openconnect \
-        broot \
         aws \
-        cargo
+        broot \
+        cargo \
+        docker \
+        fasd \
+        git \
+        gradle \
+        groovy \
+        http \
+        java \
+        mvn \
+        openconnect \
+        pygmentize \
+        rg \
+        sdk \
+        tldr \
+        tree
     do
-      type -p $cmd >/dev/null 2>&1 || echo "Command not available: $cmd"
+      type -P -f $cmd >/dev/null 2>&1 || echo "Command not available: $cmd"
     done
 
     for func in \
-        br \
-        __git_ps1
+        __git_ps1 \
+        br
     do
         declare -f -F $func >/dev/null 2>&1 || echo "Function not available: $func"
     done
 
     for file in \
+        "$HOME/.bash_extra" \
         "$HOME/.gitconfig.private" \
-        "$HOME/.ssh/config.private" \
-        "$HOME/.bash_extra"
+        "$HOME/.ssh/config.private" 
     do
         [[ -f $file ]] || echo "Missing file: $file"
     done
 
     for var in \
-        "PACKAGE_MANAGER" \
         "EDITOR" \
-        "PAGER" \
-        "FILE_MANAGER"
+        "FILE_MANAGER" \
+        "PACKAGE_MANAGER" \
+        "PAGER"
     do
         [[ -z ${!var} ]] && echo "Environment variable not set: $var"
     done
