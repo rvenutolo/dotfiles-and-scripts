@@ -277,12 +277,8 @@ function check-setup() {
     do
         [[ -z ${!var} ]] && echo "Environment variable not set: $var"
     done
-
-    if ps -p "$SSH_AGENT_PID" >/dev/null 2>&1 ; then
-        ssh-add -L >/dev/null 2>&1 || echo "SSH agent has no IDs"
-    else
-        echo "SSH agent is not running"
-    fi
+    
+    pgrep 'ssh-agent' >/dev/null 2>&1 || echo "SSH agent is not running"
 
     return 0
 }
