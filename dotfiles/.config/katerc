@@ -14,11 +14,6 @@ Show Status Bar=true
 Show Tab Bar=true
 Startup Session=manual
 
-[KFileDialog Settings]
-Recent Files[$e]=.bash_prompt,file:$HOME/Downloads/Nord.kateschema,file:$HOME/Code/dotfiles-and-scripts/dotfiles/.Xresources,file:$HOME/Code/dotfiles-and-scripts/dotfiles/.dir_colors,file:$HOME/Code/dotfiles-and-scripts/dotfiles/.alacritty.yml,file:$HOME/.alacritty.yml,file:$HOME/Code/dotfiles-and-scripts/dotfiles/.bash_profile,file:$HOME/Code/dotfiles-and-scripts/dotfiles/.bash_exports,file:$HOME/Code/dotfiles-and-scripts/dotfiles/.bash_aliases,file:$HOME/Code/dotfiles-and-scripts/dotfiles/.bashrc,file:$HOME/Code/dotfiles-and-scripts/dotfiles/.bash_prompt
-Recent URLs[$e]=file:$HOME/Downloads/
-detailViewIconSize=0
-
 [KTextEditor Document]
 Allow End of Line Detection=true
 BOM=false
