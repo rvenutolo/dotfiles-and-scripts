@@ -19,7 +19,6 @@ alias df='df -kTh'
 alias free='free -m'
 alias tree='tree -Cugph'
 alias nano='nano -c'
-alias pacman='pacman --color auto'
 
 ## aliases to replace one command with another
 alias which='type -a'
@@ -106,6 +105,7 @@ alias wttr='curl wttr.in/$WTTR_CITY'
 
 case $PACKAGE_MANAGER in
     pacman)
+        alias pacman='pacman --color auto'
         ## TODO include removal of orphaned packages
         alias update='sudo pacman -Syu'
         ## This does not exactly match the apt one as there doesn't appear to be a way to list packages the only the user installed
