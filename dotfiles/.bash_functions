@@ -233,31 +233,52 @@ function gradle() {
 
 function check-setup() {
 
-    for cmd in \
+  for cmd in \
+        '7z' \
         'aws' \
         'broot' \
+        'bunzip2' \
+        'cabextract' \
         'cargo' \
         'docker' \
+        'dos2unix' \
         'fasd' \
         'git' \
         'gradle' \
         'groovy' \
+        'gunzip' \
         'http' \
+        'iconv' \
         'java' \
+        'javac' \
+        'kotlin' \
+        'mn' \
         'mvn' \
         'openconnect' \
         'pygmentize' \
         'rg' \
-        'sdk' \
+        'sbt' \
+        'scala' \
+        'spark-submit' \
+        'spring' \
+        'tar' \
         'tldr' \
-        'tree'
-    do
+        'tree' \
+        'uncompress' \
+        'unlzma' \
+        'unrar' \
+        'unxz' \
+        'unzip' \
+        'visualvm' \
+        'zip'
+  do
       type -P -f $cmd >/dev/null 2>&1 || echo "Command not available: $cmd"
     done
 
     for func in \
-        __git_ps1 \
-        br
+        '__git_ps1' \
+        'br' \
+        'sdk'
     do
         declare -f -F $func >/dev/null 2>&1 || echo "Function not available: $func"
     done
@@ -280,12 +301,29 @@ function check-setup() {
     done
     
     for font in \
-      'Hack'
+      'Fira Code' \
+      'Hack' \
+      'Hasklig' \
+      'Inconsolata' \
+      'Input Mono' \
+      'Iosevka' \
+      'JetBrains Mono' \
+      'Menlo' \
+      'Monoid' \
+      'Roboto Mono' \
+      'Source Code Pro'
     do
-      fc-list : family | grep "^$font\$" >/dev/null 2>&1 || echo "Font not available: $font"
+      fc-list : family | grep -wq "$font" || echo "Font not available: $font"
     done
     
-    pgrep 'ssh-agent' >/dev/null 2>&1 || echo 'SSH agent is not running'
+    for service in \
+      'docker' \
+      'ssh-agent'
+    do
+      pgrep "$service" >/dev/null 2>&1 || echo "Service not running: $service"
+    done
+    
+    groups $USER | grep -wq 'docker' || echo 'User is not in docker group'
     
     # There may be a better way to detect if bash-completion is present
     type -t '_init_completion' >/dev/null 2>&1 || echo 'bash-completion not present'
