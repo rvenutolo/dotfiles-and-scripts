@@ -248,7 +248,10 @@ function check-setup() {
         'cargo' \
         'docker' \
         'dos2unix' \
+        'exa' \
         'fasd' \
+        'fd' \
+        'fff' \
         'git' \
         'gradle' \
         'groovy' \
@@ -258,11 +261,18 @@ function check-setup() {
         'java' \
         'javac' \
         'kotlin' \
+        'lf' \
+        'locate' \
         'mn' \
         'mvn' \
+        'nano' \
+        'neofetch' \
+        'nvim' \
         'openconnect' \
         'pygmentize' \
+        'ranger' \
         'rg' \
+        'safe-rm' \
         'sbt' \
         'scala' \
         'spark-submit' \
@@ -276,6 +286,7 @@ function check-setup() {
         'unxz' \
         'unzip' \
         'visualvm' \
+        'xsel' \
         'zip'
   do
       type -P -f $cmd >/dev/null 2>&1 || echo "Command not available: $cmd"
