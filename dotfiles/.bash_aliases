@@ -126,22 +126,13 @@ alias sortpomanddependencies='\
     -Dsort.sortDependencies=scope,groupId,artifactId'
 alias wttr='curl wttr.in/$WTTR_CITY'
 
-case $PACKAGE_MANAGER in
-    pacman)
-        alias pacman='pacman --color auto'
-        ## TODO include removal of orphaned packages
-        alias update='sudo pacman -Syu'
-        ## This does not exactly match the apt one as there doesn't appear to be a way to list packages the only the user installed
-        alias list-manual-packages="comm -23 <(pacman -Qqett | sort) <(pacman -Qqg base -g base-devel | sort | uniq)"
-        ;;
-    apt)
-        alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
-        alias list-manual-packages="comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)"
-        ;;
-    *)
-        echo "Unknown package manager: $PACKAGE_MANAGER"
-        ;;
-esac
+if type -P -f 'yay' >/dev/null 2>&1 ; then
+  alias update='yay -Syyu && yay --clean'
+elif type -P -f 'apt' >/dev/null 2>&1 ; then
+  alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
+else
+  echo 'Could not find yay or apt' 1>&2
+fi
 
 ## generic aliases
 alias edit="$EDITOR"
