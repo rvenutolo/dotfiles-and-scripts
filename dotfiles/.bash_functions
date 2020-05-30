@@ -214,22 +214,21 @@ function symlinks() {
     fi
 }
 
-## TODO test these
 function mvn() {
     local maven_wrapper='./mvnw'
     if [[ -x ${maven_wrapper} ]]; then
-        exec ${maven_wrapper} "$@"
+        ${maven_wrapper} "$@"
     else
-        \mvn "$@"
+        command mvn "$@"
     fi
 }
 
 function gradle() {
     local gradle_wrapper='./gradlew'
     if [[ -x ${gradle_wrapper} ]]; then
-        exec ${gradle_wrapper} "$@"
+        ${gradle_wrapper} "$@"
     else
-        \gradle "$@"
+        command gradle "$@"
     fi
 }
 
