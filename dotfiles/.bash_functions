@@ -311,7 +311,7 @@ function check-setup() {
     for var in \
         'EDITOR' \
         'FILE_MANAGER' \
-        'PACKAGE_MANAGER' \
+        'JAVA_HOME' \
         'PAGER'
     do
         [[ -z ${!var} ]] && echo "Environment variable not set: $var"
