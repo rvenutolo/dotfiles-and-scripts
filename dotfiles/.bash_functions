@@ -5,12 +5,12 @@ err() {
 }
 
 function manswitch() {
-  man $1 | less -p "^ +$2"
+  man "$1" | less -p "^ +$2"
 }
 
 # Find a file with a pattern in name:
 function ff() {
-  find . -type f -iname '*'$@'*' -ls
+  find . -type f -iname '*'"$1"'*' -ls
 }
 
 # Move filenames to lowercase
@@ -19,19 +19,19 @@ function lowercase() {
     local filename
     filename=${file##*/}
     case "${filename}" in
-      */*) dirname=="${file%/*}" ;;
+      */*) dirname="${file%/*}" ;;
       *) dirname="." ;;
     esac
     local nf
-    nf=$(echo "${filename}" | tr A-Z a-z)
+    nf=$(echo "${filename}" | tr '[:upper:]' '[:lower:]')
     local newname
     newname="${dirname}/${nf}"
     if [[ "${nf}" != "${filename}" ]]; then
       mv "${file}" "${newname}" || exit 1
-      echo "$FUNCNAME: ${file} --> ${newname}"
+      echo "${FUNCNAME[0]}: ${file} --> ${newname}"
       return 0
     else
-      echo "$FUNCNAME: ${file} not changed"
+      echo "${FUNCNAME[0]}: ${file} not changed"
       return 0
     fi
   done
@@ -58,19 +58,19 @@ function extract() {
   fi
   if [[ -f $1 ]]; then
     case $1 in
-      *.tar.bz2 | *.tbz2) tar xvjf $1 && return 0 ;;
-      *.tar.gz | *.tgz) tar xvzf $1 && return 0 ;;
-      *.tar.xz) tar xvJf $1 && return 0 ;;
-      *.7z) 7z x $1 && return 0 ;;
-      *.bz2) bunzip2 $1 && return 0 ;;
-      *.exe) cabextract $1 && return 0 ;;
-      *.gz) gunzip $1 && return 0 ;;
-      *.lzma) unlzma $1 && return 0 ;;
-      *.rar) unrar x $1 && return 0 ;;
-      *.tar) tar xvf $1 && return 0 ;;
-      *.Z) uncompress $1 && return 0 ;;
-      *.zip) unzip $1 && return 0 ;;
-      *.zx) unxz $1 && return 0 ;;
+      *.tar.bz2 | *.tbz2) tar xvjf "$1" && return 0 ;;
+      *.tar.gz | *.tgz) tar xvzf "$1" && return 0 ;;
+      *.tar.xz) tar xvJf "$1" && return 0 ;;
+      *.7z) 7z x "$1" && return 0 ;;
+      *.bz2) bunzip2 "$1" && return 0 ;;
+      *.exe) cabextract "$1" && return 0 ;;
+      *.gz) gunzip "$1" && return 0 ;;
+      *.lzma) unlzma "$1" && return 0 ;;
+      *.rar) unrar x "$1" && return 0 ;;
+      *.tar) tar xvf "$1" && return 0 ;;
+      *.Z) uncompress "$1" && return 0 ;;
+      *.zip) unzip "$1" && return 0 ;;
+      *.zx) unxz "$1" && return 0 ;;
       *) err "extract: '$1' - unknown archive method" && return 1 ;;
     esac
   else
@@ -133,7 +133,7 @@ function getcertnames() {
 }
 
 function mkcd() {
-  mkdir -p -- "$@" && cd -- "$@"
+  mkdir -p -- "$@" && cd -- "$@" || exit
 }
 
 function bak() {
@@ -156,7 +156,7 @@ function bak() {
 
 function hide() {
   for file in "$@"; do
-    mv -v "${file}" $(dirname "${file}")/.$(basename "${file}") || exit 1
+    mv -v "${file}" "$(dirname "${file}")"/."$(basename "${file}")" || exit 1
   done
   return 0
 }
@@ -174,12 +174,12 @@ function pcat() {
 # sudo pip install Pygments
 function pless() {
   if [[ $# -eq 1 ]]; then
-    pygmentize -g $1 | less -r
+    pygmentize -g "$1" | less -r
   elif [[ $# -eq 2 ]] && [[ $1 == -* ]]; then
-    pygmentize $2 | less "$1r"
+    pygmentize "$2" | less "$1r"
   else
     err "Error: bad arguments"
-    err "Usage: '$FUNCNAME [-options] /path/to/file'"
+    err "Usage: '${FUNCNAME[0]} [-options] /path/to/file'"
     return 1
   fi
   return 0
@@ -213,7 +213,7 @@ function symlinks() {
     return 0
   else
     err "Error: bad arguments"
-    err "Usage: '$FUNCNAME /path/to/src_dir /path/to/target_dir"
+    err "Usage: '${FUNCNAME[0]} /path/to/src_dir /path/to/target_dir"
     return 1
   fi
 }
@@ -238,7 +238,7 @@ function gradle() {
 
 function fff() {
   command fff "$@"
-  cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
+  cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit
 }
 
 function check-setup() {
@@ -363,7 +363,7 @@ function check-setup() {
     'docker' \
     'sys'
   do
-    groups $USER | grep -wq "$group" || echo "User is not in group: $group"
+    groups "$USER" | grep -wq "$group" || echo "User is not in group: $group"
   done
 
   # There may be a better way to detect if bash-completion is present

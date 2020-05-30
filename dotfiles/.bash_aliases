@@ -109,21 +109,21 @@ alias du1='du --max-depth=1'
 alias localip='ip -o route get to 8.8.8.8 | sed -n "s/.*src \([0-9.]\+\).*/\1/p"'
 alias wanip='curl ifconfig.me/ip'
 
-alias sortpom='\
-  mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort \
-  -Dsort.keepBlankLines=true \
-  -Dsort.predefinedSortOrder="recommended_2008_06" \
-  -Dsort.encoding="UTF-8" \
-  -Dsort.lineSeparator="\n" \
-  -Dsort.nrOfIndentSpace=4'
-alias sortpomanddependencies='\
-  mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort \
-  -Dsort.keepBlankLines=true \
-  -Dsort.predefinedSortOrder="recommended_2008_06" \
-  -Dsort.encoding="UTF-8" \
-  -Dsort.lineSeparator="\n" \
-  -Dsort.nrOfIndentSpace=4 \
-  -Dsort.sortDependencies=scope,groupId,artifactId'
+alias sortpom=''\
+  'mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort '\
+  '-Dsort.keepBlankLines=true '\
+  '-Dsort.predefinedSortOrder="recommended_2008_06" '\
+  '-Dsort.encoding="UTF-8" '\
+  '-Dsort.lineSeparator="\n" '\
+  '-Dsort.nrOfIndentSpace=4'
+alias sortpomanddependencies=''\
+  'mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort '\
+  '-Dsort.keepBlankLines=true '\
+  '-Dsort.predefinedSortOrder="recommended_2008_06" '\
+  '-Dsort.encoding="UTF-8" '\
+  '-Dsort.lineSeparator="\n" '\
+  '-Dsort.nrOfIndentSpace=4 '\
+  '-Dsort.sortDependencies=scope,groupId,artifactId'
 alias wttr='curl wttr.in/$WTTR_CITY'
 
 if type -P -f 'yay' >/dev/null 2>&1; then
@@ -135,6 +135,6 @@ else
 fi
 
 ## generic aliases
-alias edit="$EDITOR"
-alias pager="$PAGER"
-alias fm="$FILE_MANAGER"
+alias edit='$EDITOR'
+alias pager='$PAGER'
+alias fm='$FILE_MANAGER'

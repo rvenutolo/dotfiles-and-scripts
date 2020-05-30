@@ -46,7 +46,7 @@ do
 done
 unset file
 
-[[ -r "$HOME/.dir_colors" ]] && [[ -f"$HOME/.dir_colors" ]] && eval $(dircolors "$HOME/.dir_colors")
+[[ -r "$HOME/.dir_colors" ]] && [[ -f "$HOME/.dir_colors" ]] && eval "$(dircolors "$HOME/.dir_colors")"
 
 type -p fasd >/dev/null 2>&1 && eval "$(fasd --init auto)"
 
@@ -55,6 +55,6 @@ for dir in \
   "$HOME/.cargo/bin" \
   "$HOME/.bin"
 do
-  [[ -d "$dir" ]] && [[ $PATH != *"$dir"* ]] && PATH=""$dir":$PATH"
+  [[ -d "$dir" ]] && [[ $PATH != *"$dir"* ]] && PATH="$dir:$PATH"
 done
 unset dir
