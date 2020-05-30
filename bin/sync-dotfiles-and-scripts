@@ -2,19 +2,19 @@
 
 set -euo pipefail
 
-readonly DOTFILES_TARGET_DIR=$HOME
-readonly SCRIPTS_TARGET_DIR=$HOME/.bin
+readonly dotfiles_target_dir=$HOME
+readonly scripts_target_dir=$HOME/.bin
 
-this_script=`readlink -f "$0"`
-scripts_src_dir=`dirname "$this_script"`
-dotfiles_src_dir=`readlink -f "$scripts_src_dir/../dotfiles"`
+readonly this_script=$(readlink -f "$0")
+readonly scripts_src_dir=$(dirname "$this_script")
+readonly dotfiles_src_dir=$(readlink -f "$scripts_src_dir/../dotfiles")
 
-echo "syncing ${dotfiles_src_dir}/ to ${DOTFILES_TARGET_DIR}/"
-rsync -rt "${dotfiles_src_dir}/" "${DOTFILES_TARGET_DIR}/"
+echo "syncing ${dotfiles_src_dir}/ to ${dotfiles_target_dir}/"
+rsync -rt "${dotfiles_src_dir}/" "${dotfiles_target_dir}/"
 
-echo "syncing ${scripts_src_dir}/ to ${SCRIPTS_TARGET_DIR}/"
-rsync -rt "${scripts_src_dir}/" "${SCRIPTS_TARGET_DIR}/"
+echo "syncing ${scripts_src_dir}/ to ${scripts_target_dir}/"
+rsync -rt "${scripts_src_dir}/" "${scripts_target_dir}/"
 
 # remove this script from target scripts dir so I don't accidentally execute it
-this_script_file_name=`basename ${this_script}`
-rm "${SCRIPTS_TARGET_DIR}/$this_script_file_name"
+this_script_file_name=$(basename "${this_script}")
+rm "${scripts_target_dir}/$this_script_file_name"

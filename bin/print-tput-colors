@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 # Adapted from https://raw.githubusercontent.com/l0b0/xterm-color-count/master/xterm-color-count.sh
 
 trap 'tput sgr0' exit # Clean up even if user hits ^C
