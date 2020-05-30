@@ -344,9 +344,13 @@ function check-setup() {
     
     for service in \
       'docker' \
-      'ssh-agent'
+      'org.cups.cupsd' \
+      'ssh-agent' \
+      'sshd'
     do
-      pgrep "$service" >/dev/null 2>&1 || echo "Service not running: $service"
+      [[ $(systemctl show -p SubState --value "$service") == 'running' ]] \
+        || [[ $(systemctl --user show -p SubState --value "$service") == 'running' ]] \
+        || echo "Service not running: $service"
     done
     
     groups $USER | grep -wq 'docker' || echo 'User is not in docker group'
