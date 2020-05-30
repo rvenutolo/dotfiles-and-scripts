@@ -4,7 +4,7 @@ err() {
     echo "$@" >&2
 }
 
-function manswitch () { 
+function manswitch () {
   man $1 | less -p "^ +$2"
 }
 
@@ -275,6 +275,7 @@ function check-setup() {
         'safe-rm' \
         'sbt' \
         'scala' \
+        'shfmt' \
         'spark-submit' \
         'spring' \
         'tar' \
@@ -303,7 +304,7 @@ function check-setup() {
     for file in \
         "$HOME/.bash_extra" \
         "$HOME/.gitconfig.private" \
-        "$HOME/.ssh/config.private" 
+        "$HOME/.ssh/config.private"
     do
         [[ -f $file ]] || echo "Missing file: $file"
     done
@@ -316,7 +317,7 @@ function check-setup() {
     do
         [[ -z ${!var} ]] && echo "Environment variable not set: $var"
     done
-    
+
     for font in \
       'Code New Roman' \
       'Fantasque Sans Mono' \
@@ -341,7 +342,7 @@ function check-setup() {
         || fc-list : family | grep -wiq "$( echo -e "${font}TTF" | tr -d '[:space:]')" \
         || echo "Font not available: $font"
     done
-    
+
     for service in \
       'docker' \
       'org.cups.cupsd' \
@@ -352,14 +353,14 @@ function check-setup() {
         || [[ $(systemctl --user show -p SubState --value "$service") == 'running' ]] \
         || echo "Service not running: $service"
     done
-    
+
     for group in \
       'docker' \
       'sys'
     do
       groups $USER | grep -wq "$group" || echo "User is not in group: $group"
     done
-    
+
     # There may be a better way to detect if bash-completion is present
     type -t '_init_completion' >/dev/null 2>&1 || echo 'bash-completion not present'
 
