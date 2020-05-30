@@ -128,9 +128,7 @@ function getcertnames() {
 }
 
 function mkcd () {
-    mkdir -p -- "$@"
-    cd -- "$@"
-    return 0
+    mkdir -p -- "$@" && cd -- "$@"
 }
 
 function bak () {
