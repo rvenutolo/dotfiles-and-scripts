@@ -279,6 +279,7 @@ function check-setup() {
     'safe-rm' \
     'sbt' \
     'scala' \
+    'shellcheck' \
     'shfmt' \
     'spark-submit' \
     'spring' \
