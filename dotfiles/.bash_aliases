@@ -26,6 +26,9 @@ alias nano='nano -c'
 
 ## aliases to replace one command with another
 alias which='type -a'
+if type -P -f nvim >/dev/null 2>&1 ; then
+  alias vim='nvim'
+fi
 
 ## shorter aliases
 alias cls='clear'
