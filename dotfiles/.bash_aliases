@@ -48,21 +48,35 @@ alias dt='cd $HOME/Desktop'
 alias c='cd $CODE_DIR'
 
 ## ls aliases
-alias ls="ls -hF --color --group-directories-first"
-alias ll='ls -l'
-alias lla='ls -Al'
-alias llx='ll -XB' # sort by extension
-alias llax='lla -XB'
-alias llk='ll -lSr' # sort by size, biggest last
-alias llak='lla -lSr'
-alias llc='ll -tcr' # sort by and show change time, most recent last
-alias llac='lla -tcr'
-alias llu='ll -tur' # sort by and show access time, most recent last
-alias llau='lla -tur'
-alias llt='ll -tr' # sort by date, most recent last
-alias llat='lla -tr'
-alias llr='ll -R' # recursive ls
-alias llar='lla -R'
+if type -P -f 'exa' >/dev/null 2>&1 ; then
+  alias exa='exa --classify --group-directories-first --header --time-style=long-iso --color-scale --git'
+  alias ls='exa'
+  alias ll='exa --long'
+  alias la='exa --all'
+  alias lla='exa --long --all'
+  alias llx='ll --sort=extension'
+  alias llax='lla --sort=extension'
+  alias lls='ll --sort=size'
+  alias llas='lla --sort=size'
+  alias llc='ll --sort=mod'
+  alias llac='lla --sort=mod'
+  alias llr='ll --recurse'
+  alias llar='lla --recurse'
+  alias tree='ll --tree'
+else
+  alias ls="ls -hF --color --group-directories-first"
+  alias ll='ls -l'
+  alias la='ls -A'
+  alias lla='ls -Al'
+  alias llx='ll -XB' # sort by extension
+  alias llax='lla -XB'
+  alias lls='ll -lSr' # sort by size, biggest last
+  alias llas='lla -lSr'
+  alias llc='ll -tcr' # sort by and show change time, most recent last
+  alias llac='lla -tcr'
+  alias llr='ll -R' # recursive ls
+  alias llar='lla -R'
+fi
 
 ## fasd aliases
 alias a='fasd -a'        # any
