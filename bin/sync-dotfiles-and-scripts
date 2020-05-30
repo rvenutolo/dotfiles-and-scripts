@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-readonly dotfiles_target_dir=$HOME
-readonly scripts_target_dir=$HOME/.bin
+readonly dotfiles_target_dir=${HOME}
+readonly scripts_target_dir=${HOME}/.bin
 
 readonly this_script=$(readlink -f "$0")
 readonly scripts_src_dir=$(dirname "$this_script")

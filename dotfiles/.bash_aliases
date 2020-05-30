@@ -42,10 +42,10 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-alias home='cd $HOME'
-alias dl='cd $HOME/Downloads'
-alias dt='cd $HOME/Desktop'
-alias c='cd $CODE_DIR'
+alias home='cd ${HOME}'
+alias dl='cd ${HOME}/Downloads'
+alias dt='cd ${HOME}/Desktop'
+alias c='cd ${CODE_DIR}'
 
 ## ls aliases
 if type -P -f 'exa' >/dev/null 2>&1; then
@@ -102,8 +102,8 @@ alias 755='chmod 755'
 alias map='xargs -n1'
 # use like so: sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-alias brc='source $HOME/.bashrc'
-alias sdf='$CODE_DIR/dotfiles-and-scripts/bin/sync-dotfiles-and-scripts; brc'
+alias brc='source ${HOME}/.bashrc'
+alias sdf='${CODE_DIR}/dotfiles-and-scripts/bin/sync-dotfiles-and-scripts; brc'
 alias path='echo -e ${PATH//:/\\n}'
 alias du1='du --max-depth=1'
 alias localip='ip -o route get to 8.8.8.8 | sed -n "s/.*src \([0-9.]\+\).*/\1/p"'
@@ -124,7 +124,7 @@ alias sortpomanddependencies='\
   -Dsort.lineSeparator="\n" \
   -Dsort.nrOfIndentSpace=4 \
   -Dsort.sortDependencies=scope,groupId,artifactId'
-alias wttr='curl wttr.in/$WTTR_CITY'
+alias wttr='curl wttr.in/${WTTR_CITY}'
 
 if type -P -f 'yay' >/dev/null 2>&1; then
   alias update='yay -Syyu && yay --clean'
@@ -135,6 +135,6 @@ else
 fi
 
 ## generic aliases
-alias edit='$EDITOR'
-alias pager='$PAGER'
-alias fm='$FILE_MANAGER'
+alias edit='${EDITOR}'
+alias pager='${PAGER}'
+alias fm='${FILE_MANAGER}'

@@ -17,13 +17,13 @@ function ff() {
 function lowercase() {
   for file; do
     local filename
-    filename=${file##*/}
+    filename="${file##*/}"
     case "${filename}" in
       */*) dirname="${file%/*}" ;;
       *) dirname="." ;;
     esac
     local nf
-    nf=$(echo "${filename}" | tr '[:upper:]' '[:lower:]')
+    nf="$(echo "${filename}" | tr '[:upper:]' '[:lower:]')"
     local newname
     newname="${dirname}/${nf}"
     if [[ "${nf}" != "${filename}" ]]; then
@@ -41,9 +41,9 @@ function lowercase() {
 function swap() {
   local temp_file
   temp_file="tmp.$$"
-  [[ $# -ne 2 ]] && err "swap: 2 arguments needed" && return 1
-  [[ ! -e $1 ]] && err "swap: $1 does not exist" && return 1
-  [[ ! -e $2 ]] && err "swap: $2 does not exist" && return 1
+  [[ "$#" -ne 2 ]] && err "swap: 2 arguments needed" && return 1
+  [[ ! -e "$1" ]] && err "swap: $1 does not exist" && return 1
+  [[ ! -e "$2" ]] && err "swap: $2 does not exist" && return 1
   mv "$1" "${temp_file}" || exit 1
   mv "$2" "$1" || exit 1
   mv "${temp_file}" "$2" || exit 1
@@ -52,27 +52,28 @@ function swap() {
 }
 
 function extract() {
-  if [[ $# -ne 1 ]]; then
+  if [[ "$#" -ne 1 ]]; then
     err "Usage: extract <path/file_name>.<7z|bz2|exe|gz|lzma|rar|tar|tar.bz2|tar.gz|tar.xz|tbz2|tgz|Z|zip|zx>"
     return 1
   fi
-  if [[ -f $1 ]]; then
-    case $1 in
-      *.tar.bz2 | *.tbz2) tar xvjf "$1" && return 0 ;;
-      *.tar.gz | *.tgz) tar xvzf "$1" && return 0 ;;
-      *.tar.xz) tar xvJf "$1" && return 0 ;;
-      *.7z) 7z x "$1" && return 0 ;;
-      *.bz2) bunzip2 "$1" && return 0 ;;
-      *.exe) cabextract "$1" && return 0 ;;
-      *.gz) gunzip "$1" && return 0 ;;
-      *.lzma) unlzma "$1" && return 0 ;;
-      *.rar) unrar x "$1" && return 0 ;;
-      *.tar) tar xvf "$1" && return 0 ;;
-      *.Z) uncompress "$1" && return 0 ;;
-      *.zip) unzip "$1" && return 0 ;;
-      *.zx) unxz "$1" && return 0 ;;
+  if [[ -f "$1" ]]; then
+    case "$1" in
+      *.tar.bz2 | *.tbz2) tar xvjf "$1" ;;
+      *.tar.gz | *.tgz) tar xvzf "$1" ;;
+      *.tar.xz) tar xvJf "$1" ;;
+      *.7z) 7z x "$1" ;;
+      *.bz2) bunzip2 "$1" ;;
+      *.exe) cabextract "$1" ;;
+      *.gz) gunzip "$1" ;;
+      *.lzma) unlzma "$1" ;;
+      *.rar) unrar x "$1" ;;
+      *.tar) tar xvf "$1" ;;
+      *.Z) uncompress "$1" ;;
+      *.zip) unzip "$1" ;;
+      *.zx) unxz "$1" ;;
       *) err "extract: '$1' - unknown archive method" && return 1 ;;
     esac
+    return 0
   else
     err "'$1' does not exist"
     return 1
@@ -109,21 +110,21 @@ function getcertnames() {
   echo ""
 
   local tmp
-  tmp=$(echo -e "GET / HTTP/1.0\nEOT" |
-    openssl s_client -connect "${domain}:443" -servername "${domain}" 2>&1)
+  tmp="$(echo -e "GET / HTTP/1.0\nEOT" |
+    openssl s_client -connect "${domain}:443" -servername "${domain}" 2>&1)"
 
   if [[ "${tmp}" = *"-----BEGIN CERTIFICATE-----"* ]]; then
     local certText
-    certText=$(echo "${tmp}" |
+    certText="$(echo "${tmp}" |
       openssl x509 -text -certopt "no_aux, no_header, no_issuer, no_pubkey, \
-            no_serial, no_sigdump, no_signame, no_validity, no_version")
+            no_serial, no_sigdump, no_signame, no_validity, no_version")"
     echo "Common Name:"
     echo ""
     echo "${certText}" | grep "Subject:" | sed -e "s/^.*CN=//" | sed -e "s/\/emailAddress=.*//"
     echo ""
     echo "Subject Alternative Name(s):"
     echo ""
-    echo "${certText}" | grep -A 1 "Subject Alternative Name:" |
+    echo "${certText}" | grep -A '1' "Subject Alternative Name:" |
       sed -e "2s/DNS://g" -e "s/ //g" | tr "," "\n" | tail -n +2
     return 0
   else
@@ -173,9 +174,9 @@ function pcat() {
 # pygmentize - http://pygments.org/
 # sudo pip install Pygments
 function pless() {
-  if [[ $# -eq 1 ]]; then
+  if [[ "$#" -eq 1 ]]; then
     pygmentize -g "$1" | less -r
-  elif [[ $# -eq 2 ]] && [[ $1 == -* ]]; then
+  elif [[ "$#" -eq 2 ]] && [[ "$1" == -* ]]; then
     pygmentize "$2" | less "$1r"
   else
     err "Error: bad arguments"
@@ -186,15 +187,15 @@ function pless() {
 }
 
 function symlinks() {
-  if [[ $# -eq 2 ]]; then
+  if [[ "$#" -eq 2 ]]; then
     local src_dir
     local target_dir
-    src_dir=$1
-    target_dir=$2
+    src_dir="$1"
+    target_dir="$2"
     ! [[ -d "${src_dir}" ]] && err "${src_dir} is not a directory" && return 1
     ! [[ -d "${target_dir}" ]] && err "${target_dir} is not a directory" && return 1
-    src_dir=$(readlink -m "${src_dir}")
-    target_dir=$(readlink -m "${target_dir}")
+    src_dir="$(readlink -m "${src_dir}")"
+    target_dir="$(readlink -m "${target_dir}")"
     echo "Creating symlinks of all files in ${src_dir} in ${target_dir}"
     for src_file in "${src_dir}"/*; do
       local target_file
@@ -220,7 +221,7 @@ function symlinks() {
 
 function mvn() {
   local maven_wrapper='./mvnw'
-  if [[ -x ${maven_wrapper} ]]; then
+  if [[ -x "${maven_wrapper}" ]]; then
     ${maven_wrapper} "$@"
   else
     command mvn "$@"
@@ -229,7 +230,7 @@ function mvn() {
 
 function gradle() {
   local gradle_wrapper='./gradlew'
-  if [[ -x ${gradle_wrapper} ]]; then
+  if [[ -x "${gradle_wrapper}" ]]; then
     ${gradle_wrapper} "$@"
   else
     command gradle "$@"
@@ -241,7 +242,7 @@ function fff() {
   cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit
 }
 
-function check-setup() {
+function check_setup() {
 
   for cmd in \
     '7z' \
@@ -295,7 +296,7 @@ function check-setup() {
     'xsel' \
     'zip'
   do
-    type -P -f $cmd >/dev/null 2>&1 || echo "Command not available: $cmd"
+    type -P -f "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
   done
 
   for func in \
@@ -303,15 +304,15 @@ function check-setup() {
     'br' \
     'sdk'
   do
-    declare -f -F $func >/dev/null 2>&1 || echo "Function not available: $func"
+    declare -f -F "${func}" >/dev/null 2>&1 || echo "Function not available: ${func}"
   done
 
   for file in \
-    "$HOME/.bash_extra" \
-    "$HOME/.gitconfig.private" \
-    "$HOME/.ssh/config.private"
+    "${HOME}/.bash_extra" \
+    "${HOME}/.gitconfig.private" \
+    "${HOME}/.ssh/config.private"
   do
-    [[ -f $file ]] || echo "Missing file: $file"
+    [[ -f "${file}" ]] || echo "Missing file: ${file}"
   done
 
   for var in \
@@ -320,7 +321,7 @@ function check-setup() {
     'JAVA_HOME' \
     'PAGER'
   do
-    [[ -z ${!var} ]] && echo "Environment variable not set: $var"
+    [[ -z "${!var}" ]] && echo "Environment variable not set: ${var}"
   done
 
   for font in \
@@ -341,11 +342,11 @@ function check-setup() {
     'Terminess' \
     'Ubuntu Mono'
   do
-    fc-list : family | grep -wiq "$font" ||
+    fc-list : family | grep -wiq "${font}" ||
       fc-list : family | grep -wiq "${font}TTF" ||
-      fc-list : family | grep -wiq "$(echo -e "$font" | tr -d '[:space:]')" ||
+      fc-list : family | grep -wiq "$(echo -e "${font}" | tr -d '[:space:]')" ||
       fc-list : family | grep -wiq "$(echo -e "${font}TTF" | tr -d '[:space:]')" ||
-      echo "Font not available: $font"
+      echo "Font not available: ${font}"
   done
 
   for service in \
@@ -354,16 +355,16 @@ function check-setup() {
     'ssh-agent' \
     'sshd'
   do
-    [[ $(systemctl show -p SubState --value "$service") == 'running' ]] ||
-      [[ $(systemctl --user show -p SubState --value "$service") == 'running' ]] ||
-      echo "Service not running: $service"
+    [[ "$(systemctl show -p SubState --value "${service}")" == 'running' ]] ||
+      [[ "$(systemctl --user show -p SubState --value "${service}")" == 'running' ]] ||
+      echo "Service not running: ${service}"
   done
 
   for group in \
     'docker' \
     'sys'
   do
-    groups "$USER" | grep -wq "$group" || echo "User is not in group: $group"
+    groups "${USER}" | grep -wq "${group}" || echo "User is not in group: ${group}"
   done
 
   # There may be a better way to detect if bash-completion is present

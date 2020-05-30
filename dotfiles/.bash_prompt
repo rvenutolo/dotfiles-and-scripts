@@ -83,7 +83,7 @@ __prompt_command() {
   local timestamp_color="${cyan}"
   local prompt_color="${white}"
 
-  if [[ "${USER}" == "root" ]]; then
+  if [[ "${USER}" == 'root' ]]; then
     user_color="${red}"
   fi
 
@@ -99,7 +99,7 @@ __prompt_command() {
   local prompt="${prompt_color}\\$"
 
   PS1=""
-  if [[ $exit_code != 0 ]]; then
+  if [[ "$exit_code" != 0 ]]; then
     PS1+="${nonzero_exit}\n"
   fi
   if [[ -n "${SSH_CONNECTION}" ]] || [[ "${USER}" == 'root' ]] || [[ "${LOGNAME}" != "${USER}" ]]; then
@@ -116,4 +116,4 @@ __prompt_command() {
 }
 
 PROMPT_COMMAND=__prompt_command
-PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#${HOME}/\~}"'
