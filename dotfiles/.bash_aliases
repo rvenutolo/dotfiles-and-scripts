@@ -4,7 +4,11 @@ alias sudo='sudo '
 alias _='sudo'
 
 ## aliases to add flags to same command
-alias rm='rm -i'
+if type -P -f safe-rm >/dev/null 2>&1 ; then
+  alias rm='safe-rm -i'
+else
+  alias rm='rm -i'
+fi
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
