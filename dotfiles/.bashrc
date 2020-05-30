@@ -26,6 +26,8 @@ shopt -s \
     progcomp \
     progcomp_alias \
     sourcepath
+    
+unalias -a
 
 for file in \
     '/etc/bash.bashrc' \
