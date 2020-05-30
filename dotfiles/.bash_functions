@@ -353,7 +353,12 @@ function check-setup() {
         || echo "Service not running: $service"
     done
     
-    groups $USER | grep -wq 'docker' || echo 'User is not in docker group'
+    for group in \
+      'docker' \
+      'sys'
+    do
+      groups $USER | grep -wq "$group" || echo "User is not in group: $group"
+    done
     
     # There may be a better way to detect if bash-completion is present
     type -t '_init_completion' >/dev/null 2>&1 || echo 'bash-completion not present'
