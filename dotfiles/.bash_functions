@@ -232,6 +232,11 @@ function gradle() {
     fi
 }
 
+function fff() {
+    command fff "$@"
+    cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
+}
+
 function check-setup() {
 
   for cmd in \
