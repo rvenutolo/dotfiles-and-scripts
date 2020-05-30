@@ -72,7 +72,6 @@ __prompt_command() {
   local cyan='\[\e[1;36m\]'
   local white='\[\e[1;37m\]'
 
-
   local nonzero_color="${red}"
   local user_color="${blue}"
   local at_color="${white}"
@@ -118,4 +117,3 @@ __prompt_command() {
 
 PROMPT_COMMAND=__prompt_command
 PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
-

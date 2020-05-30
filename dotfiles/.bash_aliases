@@ -4,7 +4,7 @@ alias sudo='sudo '
 alias _='sudo'
 
 ## aliases to add flags to same command
-if type -P -f safe-rm >/dev/null 2>&1 ; then
+if type -P -f safe-rm >/dev/null 2>&1; then
   alias rm='safe-rm -i'
 else
   alias rm='rm -i'
@@ -26,7 +26,7 @@ alias nano='nano -c'
 
 ## aliases to replace one command with another
 alias which='type -a'
-if type -P -f nvim >/dev/null 2>&1 ; then
+if type -P -f nvim >/dev/null 2>&1; then
   alias vim='nvim'
 fi
 
@@ -48,7 +48,7 @@ alias dt='cd $HOME/Desktop'
 alias c='cd $CODE_DIR'
 
 ## ls aliases
-if type -P -f 'exa' >/dev/null 2>&1 ; then
+if type -P -f 'exa' >/dev/null 2>&1; then
   alias exa='exa --classify --group-directories-first --header --time-style=long-iso --color-scale --git'
   alias ls='exa'
   alias ll='exa --long'
@@ -126,9 +126,9 @@ alias sortpomanddependencies='\
   -Dsort.sortDependencies=scope,groupId,artifactId'
 alias wttr='curl wttr.in/$WTTR_CITY'
 
-if type -P -f 'yay' >/dev/null 2>&1 ; then
+if type -P -f 'yay' >/dev/null 2>&1; then
   alias update='yay -Syyu && yay --clean'
-elif type -P -f 'apt' >/dev/null 2>&1 ; then
+elif type -P -f 'apt' >/dev/null 2>&1; then
   alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
 else
   echo 'Could not find yay or apt' 1>&2
