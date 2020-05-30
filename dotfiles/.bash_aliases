@@ -137,4 +137,4 @@ fi
 ## generic aliases
 alias edit="$EDITOR"
 alias pager="$PAGER"
-alias fm="$FILEMANAGER"
+alias fm="$FILE_MANAGER"
