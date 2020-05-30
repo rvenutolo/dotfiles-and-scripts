@@ -4,6 +4,10 @@ err() {
     echo "$@" >&2
 }
 
+function manswitch () { 
+  man $1 | less -p "^ +$2"
+}
+
 # Find a file with a pattern in name:
 function ff() {
     find . -type f -iname '*'$@'*' -ls
