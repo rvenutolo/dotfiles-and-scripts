@@ -13,7 +13,6 @@ buildNumber.properties
 ### Java HotSpot Error
 hs_err_pid*
 
-
 ### IntelliJ
 *.iml
 *.ipr
@@ -22,14 +21,12 @@ hs_err_pid*
 out/
 .attach_pid*
 
-
 ### Linux
 *~
 .fuse_hidden*
 .directory
 .Trash-*
 .nfs*
-
 
 ### Misc
 *.bak
