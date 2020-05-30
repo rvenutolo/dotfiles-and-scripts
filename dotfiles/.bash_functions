@@ -318,19 +318,28 @@ function check-setup() {
     done
     
     for font in \
+      'Code New Roman' \
+      'Fantasque Sans Mono' \
       'Fira Code' \
       'Hack' \
       'Hasklig' \
       'Inconsolata' \
-      'Input Mono' \
+      'Input' \
       'Iosevka' \
       'JetBrains Mono' \
       'Menlo' \
       'Monoid' \
+      'Mononoki' \
       'Roboto Mono' \
-      'Source Code Pro'
+      'Source Code Pro' \
+      'Terminess' \
+      'Ubuntu Mono'
     do
-      fc-list : family | grep -wq "$font" || echo "Font not available: $font"
+      fc-list : family | grep -wiq "$font" \
+        || fc-list : family | grep -wiq "${font}TTF" \
+        || fc-list : family | grep -wiq "$( echo -e "$font" | tr -d '[:space:]')" \
+        || fc-list : family | grep -wiq "$( echo -e "${font}TTF" | tr -d '[:space:]')" \
+        || echo "Font not available: $font"
     done
     
     for service in \
