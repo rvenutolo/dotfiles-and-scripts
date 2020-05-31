@@ -40,8 +40,7 @@ for file in \
   "${HOME}/.bash_functions" \
   "${HOME}/.bash_extra" \
   "${HOME}/.bash_aliases" \
-  "${HOME}/.bash_prompt"
-do
+  "${HOME}/.bash_prompt"; do
   [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}"
 done
 unset file
@@ -53,8 +52,7 @@ type -p fasd >/dev/null 2>&1 && eval "$(fasd --init auto)"
 for dir in \
   "${HOME}/.local/bin" \
   "${HOME}/.cargo/bin" \
-  "${HOME}/.bin"
-do
+  "${HOME}/.bin"; do
   [[ -d "${dir}" ]] && [[ "${PATH}" != *"${dir}"* ]] && PATH="${dir}:${PATH}"
 done
 unset dir

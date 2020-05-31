@@ -293,24 +293,21 @@ function check_setup() {
     'unzip' \
     'visualvm' \
     'xsel' \
-    'zip'
-  do
+    'zip'; do
     type -P -f "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
   done
 
   for func in \
     '__git_ps1' \
     'br' \
-    'sdk'
-  do
+    'sdk'; do
     declare -f -F "${func}" >/dev/null 2>&1 || echo "Function not available: ${func}"
   done
 
   for file in \
     "${HOME}/.bash_extra" \
     "${HOME}/.gitconfig.private" \
-    "${HOME}/.ssh/config.private"
-  do
+    "${HOME}/.ssh/config.private"; do
     [[ -f "${file}" ]] || echo "Missing file: ${file}"
   done
 
@@ -318,8 +315,7 @@ function check_setup() {
     'EDITOR' \
     'FILE_MANAGER' \
     'JAVA_HOME' \
-    'PAGER'
-  do
+    'PAGER'; do
     [[ -z "${!var}" ]] && echo "Environment variable not set: ${var}"
   done
 
@@ -339,8 +335,7 @@ function check_setup() {
     'Roboto Mono' \
     'Source Code Pro' \
     'Terminess' \
-    'Ubuntu Mono'
-  do
+    'Ubuntu Mono'; do
     fc-list : family | grep -wiq "${font}" ||
       fc-list : family | grep -wiq "${font}TTF" ||
       fc-list : family | grep -wiq "$(echo -e "${font}" | tr -d '[:space:]')" ||
@@ -352,8 +347,7 @@ function check_setup() {
     'docker' \
     'org.cups.cupsd' \
     'ssh-agent' \
-    'sshd'
-  do
+    'sshd'; do
     [[ "$(systemctl show -p SubState --value "${service}")" == 'running' ]] ||
       [[ "$(systemctl --user show -p SubState --value "${service}")" == 'running' ]] ||
       echo "Service not running: ${service}"
@@ -361,8 +355,7 @@ function check_setup() {
 
   for group in \
     'docker' \
-    'sys'
-  do
+    'sys'; do
     groups "${USER}" | grep -wq "${group}" || echo "User is not in group: ${group}"
   done
 
