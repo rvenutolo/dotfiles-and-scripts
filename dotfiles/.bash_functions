@@ -58,22 +58,21 @@ function extract() {
   fi
   if [[ -f "$1" ]]; then
     case "$1" in
-      *.tar.bz2 | *.tbz2) tar xvjf "$1" ;;
-      *.tar.gz | *.tgz) tar xvzf "$1" ;;
-      *.tar.xz) tar xvJf "$1" ;;
-      *.7z) 7z x "$1" ;;
-      *.bz2) bunzip2 "$1" ;;
-      *.exe) cabextract "$1" ;;
-      *.gz) gunzip "$1" ;;
-      *.lzma) unlzma "$1" ;;
-      *.rar) unrar x "$1" ;;
-      *.tar) tar xvf "$1" ;;
-      *.Z) uncompress "$1" ;;
-      *.zip) unzip "$1" ;;
-      *.zx) unxz "$1" ;;
+      *.tar.bz2 | *.tbz2) tar xvjf "$1" && return 0 ;;
+      *.tar.gz | *.tgz) tar xvzf "$1" && return 0 ;;
+      *.tar.xz) tar xvJf "$1" && return 0 ;;
+      *.7z) 7z x "$1" && return 0 ;;
+      *.bz2) bunzip2 "$1" && return 0 ;;
+      *.exe) cabextract "$1" && return 0 ;;
+      *.gz) gunzip "$1" && return 0 ;;
+      *.lzma) unlzma "$1" && return 0 ;;
+      *.rar) unrar x "$1" && return 0 ;;
+      *.tar) tar xvf "$1" && return 0 ;;
+      *.Z) uncompress "$1" && return 0 ;;
+      *.zip) unzip "$1" && return 0 ;;
+      *.zx) unxz "$1" && return 0 ;;
       *) err "extract: '$1' - unknown archive method" && return 1 ;;
     esac
-    return 0
   else
     err "'$1' does not exist"
     return 1
