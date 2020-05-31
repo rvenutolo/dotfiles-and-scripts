@@ -108,7 +108,7 @@ alias path='echo -e ${PATH//:/\\n}'
 alias du1='du --max-depth=1'
 alias localip='ip -o route get to 8.8.8.8 | sed -n "s/.*src \([0-9.]\+\).*/\1/p"'
 alias wanip='curl ifconfig.me/ip'
-
+alias colortest='msgcat --color=test'
 alias sortpom='\
   mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort \
   -Dsort.keepBlankLines=true \
