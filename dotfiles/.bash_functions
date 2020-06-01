@@ -264,6 +264,7 @@ function check_setup() {
     'iconv' \
     'java' \
     'javac' \
+    'jq' \
     'kotlin' \
     'lf' \
     'locate' \
