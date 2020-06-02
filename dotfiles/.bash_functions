@@ -274,6 +274,7 @@ function check_setup() {
     'neofetch' \
     'nvim' \
     'openconnect' \
+    'pandoc' \
     'pygmentize' \
     'ranger' \
     'rg' \
