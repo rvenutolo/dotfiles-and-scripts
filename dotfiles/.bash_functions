@@ -246,6 +246,7 @@ function check_setup() {
   for cmd in \
     '7z' \
     'aws' \
+    'bmon' \
     'broot' \
     'bunzip2' \
     'cabextract' \
@@ -257,8 +258,10 @@ function check_setup() {
     'fd' \
     'fff' \
     'git' \
+    'glances' \
     'gradle' \
     'groovy' \
+    'gtop' \
     'gunzip' \
     'http' \
     'iconv' \
@@ -272,6 +275,7 @@ function check_setup() {
     'mvn' \
     'nano' \
     'neofetch' \
+    'nnn' \
     'nvim' \
     'openconnect' \
     'pandoc' \
