@@ -71,7 +71,7 @@ function un() {
       *.Z) uncompress "$1" && return 0 ;;
       *.zip) unzip "$1" && return 0 ;;
       *.zx) unxz "$1" && return 0 ;;
-      *) err "${FUNCNAME[0]} '$1' - unknown archive method" && return 1 ;;
+      *) err "${FUNCNAME[0]} $1 - unknown archive method" && return 1 ;;
     esac
   else
     err "'$1' does not exist"
@@ -251,6 +251,7 @@ function check_setup() {
     'bunzip2' \
     'cabextract' \
     'cargo' \
+    'dash' \
     'docker' \
     'dos2unix' \
     'exa' \
