@@ -251,6 +251,7 @@ function check_setup() {
     'bunzip2' \
     'cabextract' \
     'cargo' \
+    'checkbashisms' \
     'dash' \
     'docker' \
     'dos2unix' \
