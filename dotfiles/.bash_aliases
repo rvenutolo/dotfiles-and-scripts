@@ -5,13 +5,13 @@ alias _='sudo'
 
 ## aliases to add flags to same command
 if type -P -f safe-rm >/dev/null 2>&1; then
-  alias rm='safe-rm -i'
+  alias rm='safe-rm -iv'
 else
-  alias rm='rm -i'
+  alias rm='rm -iv'
 fi
-alias cp='cp -i'
-alias mv='mv -i'
-alias mkdir='mkdir -p'
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias mkdir='mkdir -pv'
 alias ln='ln -v'
 alias jobs='jobs -l'
 alias br='br -dhp'
