@@ -3,6 +3,7 @@
 alias sudo='sudo '
 alias _='sudo'
 alias please='sudo $(fc -ln -1)'
+alias plz='please'
 
 alias rm='rm -iv'
 alias cp='cp -iv'
@@ -33,7 +34,6 @@ alias cls='clear'
 alias q='exit'
 alias h='history'
 alias un='extract'
-alias plz='please'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -53,7 +53,9 @@ alias wanip='curl ifconfig.me/ip'
 alias colortest='msgcat --color=test'
 alias wttr='curl wttr.in/${WTTR_CITY}'
 
-## aliases to replace one command with another
+alias edit='${EDITOR}'
+alias pager='${PAGER}'
+alias fm='${FILE_MANAGER}'
 
 if type -P -f 'nvim' >/dev/null 2>&1; then
   alias vim='nvim'
@@ -61,11 +63,11 @@ fi
 
 if type -P -f 'safe-rm' >/dev/null 2>&1; then
   alias rm='safe-rm -iv'
-else
+fi
 
 if type -P -f 'nano' >/dev/null 2>&1; then
   alias nano='nano -c'
-else
+fi
 
 ## ls aliases
 if type -P -f 'exa' >/dev/null 2>&1; then
@@ -111,7 +113,7 @@ if type -P -f 'fasd' >/dev/null 2>&1; then
 fi
 
 ## broot aliases
-if type -P -f 'br' >/dev/null 2>&1; then
+if type -P -f 'broot' >/dev/null 2>&1; then
   alias br='br -dhp'
   alias bs='br --sizes'
 fi
@@ -143,8 +145,3 @@ elif type -P -f 'apt' >/dev/null 2>&1; then
 else
   echo 'Could not find yay or apt' 1>&2
 fi
-
-## generic aliases
-alias edit='${EDITOR}'
-alias pager='${PAGER}'
-alias fm='${FILE_MANAGER}'
