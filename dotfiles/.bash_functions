@@ -51,9 +51,9 @@ function swap() {
   return 0
 }
 
-function extract() {
+function un() {
   if [[ "$#" -ne 1 ]]; then
-    err "Usage: extract <path/file_name>.<7z|bz2|exe|gz|lzma|rar|tar|tar.bz2|tar.gz|tar.xz|tbz2|tgz|Z|zip|zx>"
+    err "Usage: ${FUNCNAME[0]} <path/file_name>.<7z|bz2|exe|gz|lzma|rar|tar|tar.bz2|tar.gz|tar.xz|tbz2|tgz|Z|zip|zx>"
     return 1
   fi
   if [[ -f "$1" ]]; then
@@ -71,7 +71,7 @@ function extract() {
       *.Z) uncompress "$1" && return 0 ;;
       *.zip) unzip "$1" && return 0 ;;
       *.zx) unxz "$1" && return 0 ;;
-      *) err "extract: '$1' - unknown archive method" && return 1 ;;
+      *) err "${FUNCNAME[0]} '$1' - unknown archive method" && return 1 ;;
     esac
   else
     err "'$1' does not exist"

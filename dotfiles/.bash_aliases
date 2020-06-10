@@ -33,7 +33,6 @@ alias path='echo -e ${PATH//:/\\n}'
 alias cls='clear'
 alias q='exit'
 alias h='history'
-alias un='extract'
 
 alias ..='cd ..'
 alias ...='cd ../..'
