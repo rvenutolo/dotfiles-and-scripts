@@ -367,6 +367,14 @@ function check_setup() {
     groups "${USER}" | grep -wq "${group}" || echo "User is not in group: ${group}"
   done
 
+  for kvals in \
+    'vm.dirty_background_ratio 5' \
+    'vm.dirty_ratio 5' \
+    'vm.swappiness 10'; do
+    IFS=' ' read k v <<< "${kvals}"
+    [[ $(sysctl -n "${k}") -le "${v}" ]] || echo "Kernel variable ${k} is >${v}: $(sysctl -n "${k}")"
+  done
+
   # There may be a better way to detect if bash-completion is present
   type -t '_init_completion' >/dev/null 2>&1 || echo 'bash-completion not present'
 
