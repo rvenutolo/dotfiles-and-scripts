@@ -352,13 +352,11 @@ function check_setup() {
   done
 
   for service in \
-    'docker' \
-    'org.cups.cupsd' \
+    'dockerd' \
+    'cupsd' \
     'ssh-agent' \
     'sshd'; do
-    [[ "$(systemctl show -p SubState --value "${service}")" == 'running' ]] ||
-      [[ "$(systemctl --user show -p SubState --value "${service}")" == 'running' ]] ||
-      echo "Service not running: ${service}"
+    pgrep -x "${service}" >/dev/null 2>&1 || echo "Service not running: ${service}"
   done
 
   for group in \
