@@ -141,6 +141,4 @@ if type -P -f 'yay' >/dev/null 2>&1; then
   alias update='yay -Syyu && yay --clean'
 elif type -P -f 'apt' >/dev/null 2>&1; then
   alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
-else
-  echo 'Could not find yay or apt' 1>&2
 fi
