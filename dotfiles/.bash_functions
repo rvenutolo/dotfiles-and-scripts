@@ -161,29 +161,29 @@ function hide() {
   return 0
 }
 
-# pygmentize - http://pygments.org/
-# sudo pip install Pygments
-function pcat() {
-  for var; do
-    pygmentize -g "${var}"
-  done
-  return 0
-}
+if type -P -f 'pygmentize' >/dev/null 2>&1; then
 
-# pygmentize - http://pygments.org/
-# sudo pip install Pygments
-function pless() {
-  if [[ "$#" -eq 1 ]]; then
-    pygmentize -g "$1" | less -r
-  elif [[ "$#" -eq 2 ]] && [[ "$1" == -* ]]; then
-    pygmentize "$2" | less "$1r"
-  else
-    err "Error: bad arguments"
-    err "Usage: '${FUNCNAME[0]} [-options] /path/to/file'"
-    return 1
-  fi
-  return 0
-}
+  function pcat() {
+    for var; do
+      pygmentize -g "${var}"
+    done
+    return 0
+  }
+
+  function pless() {
+    if [[ "$#" -eq 1 ]]; then
+      pygmentize -g "$1" | less -r
+    elif [[ "$#" -gt 1 ]]; then
+      err "${FUNCNAME[0]} does not support multiple files"
+    elif [[ ! -t 0 ]]; then
+      pygmentize -g | less -r
+    else
+      err "${FUNCNAME[0]} - No file or stdin"
+    fi
+    return 0
+  }
+
+fi
 
 function symlinks() {
   if [[ "$#" -eq 2 ]]; then
