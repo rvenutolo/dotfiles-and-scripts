@@ -1,5 +1,8 @@
 $include /etc/inputrc
 
+# Don't echo '^C' when Ctrl+C is pressed
+set echo-control-characters off
+
 # Make Tab autocomplete regardless of filename case
 set completion-ignore-case on
 
