@@ -51,6 +51,7 @@ alias localip='ip -o route get to 8.8.8.8 | sed -n "s/.*src \([0-9.]\+\).*/\1/p"
 alias wanip='curl ifconfig.me/ip'
 alias colortest='msgcat --color=test'
 alias wttr='curl wttr.in/${WTTR_CITY}'
+alias coredumps='journalctl | command grep -F "dumped core"'
 
 alias edit='${EDITOR}'
 alias pager='${PAGER}'
