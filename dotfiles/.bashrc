@@ -9,23 +9,60 @@ set -o notify
 set -o noclobber
 set -o ignoreeof
 
-shopt -s \
-  cdable_vars \
-  cdspell \
-  checkhash \
-  checkwinsize \
-  cmdhist \
-  direxpand \
-  dirspell \
-  dotglob \
-  extglob \
-  extquote \
-  histappend \
-  no_empty_cmd_completion \
-  nocaseglob \
-  progcomp \
-  progcomp_alias \
-  sourcepath
+# shopt -p | sort -k3
+shopt -u assoc_expand_once
+shopt -u autocd
+shopt -u cdable_vars
+shopt -s cdspell
+shopt -s checkhash
+shopt -s checkjobs
+shopt -s checkwinsize
+shopt -s cmdhist
+shopt -u compat31
+shopt -u compat32
+shopt -u compat40
+shopt -u compat41
+shopt -u compat42
+shopt -u compat43
+shopt -u compat44
+shopt -s complete_fullquote
+shopt -s direxpand
+shopt -s dirspell
+shopt -s dotglob
+shopt -u execfail
+shopt -s expand_aliases
+shopt -u extdebug
+shopt -s extglob
+shopt -s extquote
+shopt -u failglob
+shopt -s force_fignore
+shopt -s globasciiranges
+shopt -u globstar
+shopt -u gnu_errfmt
+shopt -s histappend
+shopt -u histreedit
+shopt -u histverify
+shopt -u hostcomplete
+shopt -u huponexit
+shopt -u inherit_errexit
+shopt -s interactive_comments
+shopt -u lastpipe
+shopt -u lithist
+shopt -u localvar_inherit
+shopt -u localvar_unset
+shopt -u login_shell
+shopt -u mailwarn
+shopt -s nocaseglob
+shopt -u nocasematch
+shopt -s no_empty_cmd_completion
+shopt -u nullglob
+shopt -s progcomp
+shopt -s progcomp_alias
+shopt -s promptvars
+shopt -u restricted_shell
+shopt -u shift_verbose
+shopt -s sourcepath
+shopt -u xpg_echo
 
 unalias -a
 
