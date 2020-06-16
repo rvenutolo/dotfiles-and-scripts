@@ -33,6 +33,8 @@ alias path='echo -e ${PATH//:/\\n}'
 alias cls='clear'
 alias q='exit'
 alias h='history'
+alias m='man'
+alias ms='manswitch'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -57,17 +59,36 @@ alias edit='${EDITOR}'
 alias pager='${PAGER}'
 alias fm='${FILE_MANAGER}'
 
+if type -P -f 'git' >/dev/null 2>&1; then
+  alias g='git'
+fi
+
+if type -P -f 'kate' >/dev/null 2>&1; then
+  alias k='kate'
+fi
+
+if type -P -f 'nano' >/dev/null 2>&1; then
+  alias nano='nano -c'
+  alias n='nano'
+fi
+
 if type -P -f 'nvim' >/dev/null 2>&1; then
   alias vim='nvim'
+  alias v='nvim'
+elif type -P -f 'vim' >/dev/null 2>&1; then
+  alias v='vim'
+else
+  alias v='vi'
 fi
 
 if type -P -f 'safe-rm' >/dev/null 2>&1; then
   alias rm='safe-rm -iv'
 fi
 
-if type -P -f 'nano' >/dev/null 2>&1; then
-  alias nano='nano -c'
+if type -P -f 'tldr' >/dev/null 2>&1; then
+  alias t='tldr'
 fi
+
 
 ## ls aliases
 if type -P -f 'exa' >/dev/null 2>&1; then
@@ -140,6 +161,8 @@ fi
 ## update alias
 if type -P -f 'yay' >/dev/null 2>&1; then
   alias update='yay -Syyu && yay --clean'
+  alias p='pacman'
+  alias y='yay'
 elif type -P -f 'apt' >/dev/null 2>&1; then
   alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
 fi
