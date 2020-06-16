@@ -61,6 +61,11 @@ alias fm='${FILE_MANAGER}'
 
 if type -P -f 'git' >/dev/null 2>&1; then
   alias g='git'
+  alias ga='git add'
+  alias gc='git commit'
+  alias gs='git status'
+  alias gb='git checkout'
+  alias gm='git merge'
 fi
 
 if type -P -f 'kate' >/dev/null 2>&1; then
