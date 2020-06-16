@@ -22,11 +22,13 @@ alias tree='tree -Cugph'
 alias chux='chmod u+x'
 alias chax='chmod a+x'
 alias 600='chmod 600'
+alias 640='chmod 640'
 alias 644='chmod 644'
 alias 655='chmod 655'
 alias 700='chmod 700'
 alias 744='chmod 744'
 alias 755='chmod 755'
+alias 775='chomd 775'
 alias map='xargs -n1'
 alias which='type -a'
 alias path='echo -e ${PATH//:/\\n}'
@@ -69,6 +71,7 @@ if type -P -f 'git' >/dev/null 2>&1; then
 fi
 
 if type -P -f 'kate' >/dev/null 2>&1; then
+  alias kate='kate >/dev/null 2>&1'
   alias k='kate'
 fi
 
