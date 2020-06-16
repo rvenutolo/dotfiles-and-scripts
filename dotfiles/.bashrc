@@ -87,6 +87,7 @@ unset file
 type -p fasd >/dev/null 2>&1 && eval "$(fasd --init auto)"
 
 for dir in \
+  "$(ruby -e 'puts Gem.user_dir')/bin" \
   "${HOME}/.local/bin" \
   "${HOME}/.cargo/bin" \
   "${HOME}/.bin"; do
