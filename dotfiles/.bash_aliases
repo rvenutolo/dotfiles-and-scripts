@@ -71,7 +71,7 @@ fi
 
 ## ls aliases
 if type -P -f 'exa' >/dev/null 2>&1; then
-  alias exa='exa --classify --group-directories-first --header --time-style=long-iso --color-scale --git'
+  alias exa='exa --classify --group-directories-first --icons --header --time-style=long-iso --color-scale --git'
   alias ls='exa'
   alias ll='exa --long'
   alias la='exa --all'
