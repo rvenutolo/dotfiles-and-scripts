@@ -37,6 +37,8 @@ alias q='exit'
 alias h='history'
 alias m='man'
 alias ms='manswitch'
+alias mv='mvn-or-mvnw'
+alias grade='gradle-or-gradlew'
 
 alias ..='cd ..'
 alias ...='cd ../..'

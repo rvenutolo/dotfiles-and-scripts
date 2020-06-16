@@ -218,21 +218,37 @@ function symlinks() {
   fi
 }
 
-function mvn() {
-  local maven_wrapper='./mvnw'
-  if [[ -x "${maven_wrapper}" ]]; then
-    ${maven_wrapper} "$@"
+function gradle-or-gradlew() {
+  local dir="$PWD" project_root="$PWD"
+  while [[ "$dir" != / ]]; do
+    if [[ -f "$dir/settings.gradle" || -f "$dir/settings.gradle.kts" || -f "$dir/gradlew" ]]; then
+      project_root="$dir"
+      break
+    fi
+    dir="${dir:h}"
+  done
+  if [[ -f "$project_root/gradlew" ]]; then
+    echo "Executing gradlew instead of gradle"
+    "$project_root/gradlew" "$@"
   else
-    command mvn "$@"
+    command gradle "$@"
   fi
 }
 
-function gradle() {
-  local gradle_wrapper='./gradlew'
-  if [[ -x "${gradle_wrapper}" ]]; then
-    ${gradle_wrapper} "$@"
+function mvn-or-mvnw() {
+  local dir="$PWD" project_root="$PWD"
+  while [[ "$dir" != / ]]; do
+    if [[ -f "$dir/pom.xml" || -f "$dir/mvnw" ]]; then
+      project_root="$dir"
+      break
+    fi
+    dir="${dir:h}"
+  done
+  if [[ -f "$project_root/mvnw" ]]; then
+    echo "Executing mvnw instead of mvn"
+    "$project_root/mvnw" "$@"
   else
-    command gradle "$@"
+    command mvn "$@"
   fi
 }
 
