@@ -289,6 +289,7 @@ function check_setup() {
     'kotlin' \
     'lf' \
     'locate' \
+    'micro' \
     'mn' \
     'mvn' \
     'nano' \
