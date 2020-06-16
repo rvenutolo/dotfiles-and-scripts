@@ -336,10 +336,13 @@ function check_setup() {
   done
 
   for var in \
+    'BROWSER' \
+    'DE' \
     'EDITOR' \
     'FILE_MANAGER' \
     'JAVA_HOME' \
-    'PAGER'; do
+    'PAGER' \
+    'VISUAL'; do
     [[ -z "${!var}" ]] && echo "Environment variable not set: ${var}"
   done
 
