@@ -37,6 +37,7 @@ alias q='exit'
 alias h='history'
 alias mvn='mvn-or-mvnw'
 alias gradle='gradle-or-gradlew'
+alias ntfsrsync='rsync --recursive --verbose --human-readable --progress --chmod=D2755,F644 --perms'
 
 alias ..='cd ..'
 alias ...='cd ../..'
