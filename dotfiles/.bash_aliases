@@ -35,10 +35,8 @@ alias path='echo -e ${PATH//:/\\n}'
 alias cls='clear'
 alias q='exit'
 alias h='history'
-alias m='man'
-alias ms='manswitch'
-alias mv='mvn-or-mvnw'
-alias grade='gradle-or-gradlew'
+alias mvn='mvn-or-mvnw'
+alias gradle='gradle-or-gradlew'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -75,6 +73,10 @@ fi
 if type -P -f 'kate' >/dev/null 2>&1; then
   alias kate='kate >/dev/null 2>&1'
   alias k='kate'
+fi
+
+if type -P -f 'micro' >/dev/null 2>&1; then
+  alias m='micro'
 fi
 
 if type -P -f 'nano' >/dev/null 2>&1; then
