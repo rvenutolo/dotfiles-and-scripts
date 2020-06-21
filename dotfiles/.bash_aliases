@@ -18,7 +18,6 @@ alias du='du -ckh'
 alias du1='du --max-depth=1'
 alias df='df -kTh'
 alias free='free -m'
-alias tree='tree -Cugph'
 alias chux='chmod u+x'
 alias chax='chmod a+x'
 alias 600='chmod 600'
@@ -35,8 +34,7 @@ alias path='echo -e ${PATH//:/\\n}'
 alias cls='clear'
 alias q='exit'
 alias h='history'
-alias mvn='mvn-or-mvnw'
-alias gradle='gradle-or-gradlew'
+
 alias ntfsrsync='rsync --recursive --verbose --human-readable --progress --whole-file --compress-level=0 --chmod=D2755,F644 --perms'
 
 alias ..='cd ..'
@@ -48,61 +46,14 @@ alias dl='cd ${HOME}/Downloads'
 alias dt='cd ${HOME}/Desktop'
 alias c='cd ${CODE_DIR}'
 
-# use like so: sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias brc='source ${HOME}/.bashrc'
 alias sdf='${CODE_DIR}/dotfiles-and-scripts/bin/sync-dotfiles-and-scripts; brc'
-alias localip='ip -o route get to 8.8.8.8 | sed -n "s/.*src \([0-9.]\+\).*/\1/p"'
-alias wanip='curl ifconfig.me/ip'
-alias colortest='msgcat --color=test'
-alias wttr='curl wttr.in/${WTTR_CITY}'
-alias coredumps='journalctl | command grep -F "dumped core"'
 
 alias edit='${EDITOR}'
+alias e='edit'
 alias pager='${PAGER}'
 alias fm='${FILE_MANAGER}'
 
-if type -P -f 'git' >/dev/null 2>&1; then
-  alias g='git'
-  alias ga='git add'
-  alias gc='git commit'
-  alias gs='git status'
-  alias gb='git checkout'
-  alias gm='git merge'
-fi
-
-if type -P -f 'kate' >/dev/null 2>&1; then
-  alias k='kate'
-fi
-
-if type -P -f 'micro' >/dev/null 2>&1; then
-  alias m='micro'
-fi
-
-if type -P -f 'nano' >/dev/null 2>&1; then
-  alias nano='nano -c'
-  alias n='nano'
-fi
-
-if type -P -f 'nvim' >/dev/null 2>&1; then
-  alias vim='nvim'
-  alias v='nvim'
-elif type -P -f 'vim' >/dev/null 2>&1; then
-  alias v='vim'
-else
-  alias v='vi'
-fi
-
-if type -P -f 'safe-rm' >/dev/null 2>&1; then
-  alias rm='safe-rm -iv'
-fi
-
-if type -P -f 'tldr' >/dev/null 2>&1; then
-  alias t='tldr'
-fi
-
-
-## ls aliases
 if type -P -f 'exa' >/dev/null 2>&1; then
   alias exa='exa --classify --group-directories-first --icons --header --time-style=long-iso --color-scale --git'
   alias ls='exa'
@@ -133,7 +84,16 @@ else
   alias llar='lla -R'
 fi
 
-## fasd aliases
+if type -P -f 'broot' >/dev/null 2>&1; then
+  alias br='br -dhp'
+  alias bs='br --sizes'
+fi
+
+if type -P -f 'curl' >/dev/null 2>&1; then
+  alias wanip='curl ifconfig.me/ip'
+  alias wttr='curl wttr.in/${WTTR_CITY}'
+fi
+
 if type -P -f 'fasd' >/dev/null 2>&1; then
   alias a='fasd -a'        # any
   alias s='fasd -si'       # show / search / select
@@ -145,14 +105,41 @@ if type -P -f 'fasd' >/dev/null 2>&1; then
   alias zz='fasd_cd -d -i' # cd with interactive selection
 fi
 
-## broot aliases
-if type -P -f 'broot' >/dev/null 2>&1; then
-  alias br='br -dhp'
-  alias bs='br --sizes'
+if type -P -f 'git' >/dev/null 2>&1; then
+  alias g='git'
+  alias ga='git add'
+  alias gc='git commit'
+  alias gs='git status'
+  alias gb='git checkout'
+  alias gm='git merge'
 fi
 
-## mvn aliases
+if type -P -f 'gradle' >/dev/null 2>&1; then
+  alias gradle='gradle-or-gradlew'
+fi
+
+if type -P -f 'ip' >/dev/null 2>&1; then
+  alias localip='ip -o route get to 8.8.8.8 | sed -n "s/.*src \([0-9.]\+\).*/\1/p"'
+fi
+
+if type -P -f 'journalctl' >/dev/null 2>&1; then
+  alias coredumps='journalctl | command grep -F "dumped core"'
+fi
+
+if type -P -f 'kate' >/dev/null 2>&1; then
+  alias k='kate'
+fi
+
+if type -P -f 'micro' >/dev/null 2>&1; then
+  alias m='micro'
+fi
+
+if type -P -f 'msgcat' >/dev/null 2>&1; then
+  alias colortest='msgcat --color=test'
+fi
+
 if type -P -f 'mvn' >/dev/null 2>&1; then
+  alias mvn='mvn-or-mvnw'
   alias sortpom='\
     mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort \
     -Dsort.keepBlankLines=true \
@@ -170,7 +157,37 @@ if type -P -f 'mvn' >/dev/null 2>&1; then
     -Dsort.sortDependencies=scope,groupId,artifactId'
 fi
 
-## update alias
+if type -P -f 'nano' >/dev/null 2>&1; then
+  alias nano='nano -c'
+  alias n='nano'
+fi
+
+if type -P -f 'notify-send' >/dev/null 2>&1; then
+  # use like so: sleep 10; alert
+  alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+fi
+
+if type -P -f 'nvim' >/dev/null 2>&1; then
+  alias vim='nvim'
+  alias v='nvim'
+elif type -P -f 'vim' >/dev/null 2>&1; then
+  alias v='vim'
+else
+  alias v='vi'
+fi
+
+if type -P -f 'safe-rm' >/dev/null 2>&1; then
+  alias rm='safe-rm -iv'
+fi
+
+if type -P -f 'tldr' >/dev/null 2>&1; then
+  alias t='tldr'
+fi
+
+if type -P -f 'tree' >/dev/null 2>&1; then
+  alias tree='tree -Cugph'
+fi
+
 if type -P -f 'yay' >/dev/null 2>&1; then
   alias update='yay -Syyu && yay --clean'
   alias p='pacman'

@@ -161,35 +161,7 @@ function hide() {
   return 0
 }
 
-if type -P -f 'kate' >/dev/null 2>&1; then
-  function kate() {
-    command kate "$@" >/dev/null 2>&1 &
-  }
-fi
 
-if type -P -f 'pygmentize' >/dev/null 2>&1; then
-
-  function pcat() {
-    for var; do
-      pygmentize -g "${var}"
-    done
-    return 0
-  }
-
-  function pless() {
-    if [[ "$#" -eq 1 ]]; then
-      pygmentize -g "$1" | less -r
-    elif [[ "$#" -gt 1 ]]; then
-      err "${FUNCNAME[0]} does not support multiple files"
-    elif [[ ! -t 0 ]]; then
-      pygmentize -g | less -r
-    else
-      err "${FUNCNAME[0]} - No file or stdin"
-    fi
-    return 0
-  }
-
-fi
 
 function symlinks() {
   if [[ "$#" -eq 2 ]]; then
@@ -224,44 +196,80 @@ function symlinks() {
   fi
 }
 
-function gradle-or-gradlew() {
-  local dir="$PWD" project_root="$PWD"
-  while [[ "$dir" != / ]]; do
-    if [[ -f "$dir/settings.gradle" || -f "$dir/settings.gradle.kts" || -f "$dir/gradlew" ]]; then
-      project_root="$dir"
-      break
-    fi
-    dir="${dir:h}"
-  done
-  if [[ -f "$project_root/gradlew" ]]; then
-    echo "Executing gradlew instead of gradle"
-    "$project_root/gradlew" "$@"
-  else
-    command gradle "$@"
-  fi
-}
+if type -P -f 'fff' >/dev/null 2>&1; then
+  function fff() {
+    command fff "$@"
+    cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit
+  }
+fi
 
-function mvn-or-mvnw() {
-  local dir="$PWD" project_root="$PWD"
-  while [[ "$dir" != / ]]; do
-    if [[ -f "$dir/pom.xml" || -f "$dir/mvnw" ]]; then
-      project_root="$dir"
-      break
+if type -P -f 'gradle' >/dev/null 2>&1; then
+  function gradle-or-gradlew() {
+    local dir="$PWD" project_root="$PWD"
+    while [[ "$dir" != / ]]; do
+      if [[ -f "$dir/settings.gradle" || -f "$dir/settings.gradle.kts" || -f "$dir/gradlew" ]]; then
+        project_root="$dir"
+        break
+      fi
+      dir="${dir:h}"
+    done
+    if [[ -f "$project_root/gradlew" ]]; then
+      echo "Executing gradlew instead of gradle"
+      "$project_root/gradlew" "$@"
+    else
+      command gradle "$@"
     fi
-    dir="${dir:h}"
-  done
-  if [[ -f "$project_root/mvnw" ]]; then
-    echo "Executing mvnw instead of mvn"
-    "$project_root/mvnw" "$@"
-  else
-    command mvn "$@"
-  fi
 }
+fi
 
-function fff() {
-  command fff "$@"
-  cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit
-}
+if type -P -f 'kate' >/dev/null 2>&1; then
+  function kate() {
+    command kate "$@" >/dev/null 2>&1 &
+  }
+fi
+
+if type -P -f 'mvn' >/dev/null 2>&1; then
+  function mvn-or-mvnw() {
+    local dir="$PWD" project_root="$PWD"
+    while [[ "$dir" != / ]]; do
+      if [[ -f "$dir/pom.xml" || -f "$dir/mvnw" ]]; then
+        project_root="$dir"
+        break
+      fi
+      dir="${dir:h}"
+    done
+    if [[ -f "$project_root/mvnw" ]]; then
+      echo "Executing mvnw instead of mvn"
+      "$project_root/mvnw" "$@"
+    else
+      command mvn "$@"
+    fi
+  }
+fi
+
+if type -P -f 'pygmentize' >/dev/null 2>&1; then
+
+  function pcat() {
+    for var; do
+      pygmentize -g "${var}"
+    done
+    return 0
+  }
+
+  function pless() {
+    if [[ "$#" -eq 1 ]]; then
+      pygmentize -g "$1" | less -r
+    elif [[ "$#" -gt 1 ]]; then
+      err "${FUNCNAME[0]} does not support multiple files"
+    elif [[ ! -t 0 ]]; then
+      pygmentize -g | less -r
+    else
+      err "${FUNCNAME[0]} - No file or stdin"
+    fi
+    return 0
+  }
+
+fi
 
 function check_setup() {
 
