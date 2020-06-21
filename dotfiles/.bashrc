@@ -66,6 +66,11 @@ shopt -u xpg_echo
 
 unalias -a
 
+## function placed here as it is used all over my dotfiles
+function command_exists() {
+  type -P -f "$1" >/dev/null 2>&1
+}
+
 for file in \
   '/etc/bash.bashrc' \
   '/etc/bashrc' \
@@ -84,7 +89,7 @@ unset file
 
 [[ -r "${HOME}/.dir_colors" ]] && [[ -f "${HOME}/.dir_colors" ]] && eval "$(dircolors "${HOME}/.dir_colors")"
 
-type -p fasd >/dev/null 2>&1 && eval "$(fasd --init auto)"
+command_exists 'fasd' && eval "$(fasd --init auto)"
 
 for dir in \
   "$(ruby -e 'puts Gem.user_dir')/bin" \

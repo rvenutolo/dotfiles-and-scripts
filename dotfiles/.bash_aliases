@@ -54,7 +54,7 @@ alias e='edit'
 alias pager='${PAGER}'
 alias fm='${FILE_MANAGER}'
 
-if type -P -f 'exa' >/dev/null 2>&1; then
+if command_exists 'exa'; then
   alias exa='exa --classify --group-directories-first --icons --header --time-style=long-iso --color-scale --git'
   alias ls='exa'
   alias ll='exa --long'
@@ -84,17 +84,17 @@ else
   alias llar='lla -R'
 fi
 
-if type -P -f 'broot' >/dev/null 2>&1; then
+if command_exists 'broot'; then
   alias br='br -dhp'
   alias bs='br --sizes'
 fi
 
-if type -P -f 'curl' >/dev/null 2>&1; then
+if command_exists 'curl'; then
   alias wanip='curl ifconfig.me/ip'
   alias wttr='curl wttr.in/${WTTR_CITY}'
 fi
 
-if type -P -f 'fasd' >/dev/null 2>&1; then
+if command_exists 'fasd'; then
   alias a='fasd -a'        # any
   alias s='fasd -si'       # show / search / select
   alias d='fasd -d'        # directory
@@ -105,7 +105,7 @@ if type -P -f 'fasd' >/dev/null 2>&1; then
   alias zz='fasd_cd -d -i' # cd with interactive selection
 fi
 
-if type -P -f 'git' >/dev/null 2>&1; then
+if command_exists 'git'; then
   alias g='git'
   alias ga='git add'
   alias gc='git commit'
@@ -114,31 +114,31 @@ if type -P -f 'git' >/dev/null 2>&1; then
   alias gm='git merge'
 fi
 
-if type -P -f 'gradle' >/dev/null 2>&1; then
+if command_exists 'gradle'; then
   alias gradle='gradle-or-gradlew'
 fi
 
-if type -P -f 'ip' >/dev/null 2>&1; then
+if command_exists 'ip'; then
   alias localip='ip -o route get to 8.8.8.8 | sed -n "s/.*src \([0-9.]\+\).*/\1/p"'
 fi
 
-if type -P -f 'journalctl' >/dev/null 2>&1; then
+if command_exists 'journalctl'; then
   alias coredumps='journalctl | command grep -F "dumped core"'
 fi
 
-if type -P -f 'kate' >/dev/null 2>&1; then
+if command_exists 'kate'; then
   alias k='kate'
 fi
 
-if type -P -f 'micro' >/dev/null 2>&1; then
+if command_exists 'micro'; then
   alias m='micro'
 fi
 
-if type -P -f 'msgcat' >/dev/null 2>&1; then
+if command_exists 'msgcat'; then
   alias colortest='msgcat --color=test'
 fi
 
-if type -P -f 'mvn' >/dev/null 2>&1; then
+if command_exists 'mvn'; then
   alias mvn='mvn-or-mvnw'
   alias sortpom='\
     mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort \
@@ -157,41 +157,41 @@ if type -P -f 'mvn' >/dev/null 2>&1; then
     -Dsort.sortDependencies=scope,groupId,artifactId'
 fi
 
-if type -P -f 'nano' >/dev/null 2>&1; then
+if command_exists 'nano'; then
   alias nano='nano -c'
   alias n='nano'
 fi
 
-if type -P -f 'notify-send' >/dev/null 2>&1; then
+if command_exists 'notify-send'; then
   # use like so: sleep 10; alert
   alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 fi
 
-if type -P -f 'nvim' >/dev/null 2>&1; then
+if command_exists 'nvim'; then
   alias vim='nvim'
   alias v='nvim'
-elif type -P -f 'vim' >/dev/null 2>&1; then
+elif command_exists 'vim'; then
   alias v='vim'
 else
   alias v='vi'
 fi
 
-if type -P -f 'safe-rm' >/dev/null 2>&1; then
+if command_exists 'safe-rm'; then
   alias rm='safe-rm -iv'
 fi
 
-if type -P -f 'tldr' >/dev/null 2>&1; then
+if command_exists 'tldr'; then
   alias t='tldr'
 fi
 
-if type -P -f 'tree' >/dev/null 2>&1; then
+if command_exists 'tree'; then
   alias tree='tree -Cugph'
 fi
 
-if type -P -f 'yay' >/dev/null 2>&1; then
+if command_exists 'yay'; then
   alias update='yay -Syyu && yay --clean'
   alias p='pacman'
   alias y='yay'
-elif type -P -f 'apt' >/dev/null 2>&1; then
+elif command_exists 'apt'; then
   alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
 fi

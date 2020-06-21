@@ -161,8 +161,6 @@ function hide() {
   return 0
 }
 
-
-
 function symlinks() {
   if [[ "$#" -eq 2 ]]; then
     local src_dir
@@ -196,14 +194,14 @@ function symlinks() {
   fi
 }
 
-if type -P -f 'fff' >/dev/null 2>&1; then
+if command_exists 'fff'; then
   function fff() {
     command fff "$@"
     cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit
   }
 fi
 
-if type -P -f 'gradle' >/dev/null 2>&1; then
+if command_exists 'gradle'; then
   function gradle-or-gradlew() {
     local dir="$PWD" project_root="$PWD"
     while [[ "$dir" != / ]]; do
@@ -222,13 +220,13 @@ if type -P -f 'gradle' >/dev/null 2>&1; then
 }
 fi
 
-if type -P -f 'kate' >/dev/null 2>&1; then
+if command_exists 'kate'; then
   function kate() {
     command kate "$@" >/dev/null 2>&1 &
   }
 fi
 
-if type -P -f 'mvn' >/dev/null 2>&1; then
+if command_exists 'mvn'; then
   function mvn-or-mvnw() {
     local dir="$PWD" project_root="$PWD"
     while [[ "$dir" != / ]]; do
@@ -247,7 +245,7 @@ if type -P -f 'mvn' >/dev/null 2>&1; then
   }
 fi
 
-if type -P -f 'pygmentize' >/dev/null 2>&1; then
+if command_exists 'pygmentize'; then
 
   function pcat() {
     for var; do
@@ -340,7 +338,7 @@ function check_setup() {
     'visualvm' \
     'xsel' \
     'zip'; do
-    type -P -f "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
+    command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
   done
 
   for func in \
