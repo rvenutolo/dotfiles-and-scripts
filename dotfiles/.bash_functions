@@ -161,6 +161,12 @@ function hide() {
   return 0
 }
 
+if type -P -f 'kate' >/dev/null 2>&1; then
+  function kate() {
+    command kate "$@" >/dev/null 2>&1 &
+  }
+fi
+
 if type -P -f 'pygmentize' >/dev/null 2>&1; then
 
   function pcat() {

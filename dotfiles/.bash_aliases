@@ -37,7 +37,7 @@ alias q='exit'
 alias h='history'
 alias mvn='mvn-or-mvnw'
 alias gradle='gradle-or-gradlew'
-alias ntfsrsync='rsync --recursive --verbose --human-readable --progress --chmod=D2755,F644 --perms'
+alias ntfsrsync='rsync --recursive --verbose --human-readable --progress --whole-file --compress-level=0 --chmod=D2755,F644 --perms'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -72,7 +72,6 @@ if type -P -f 'git' >/dev/null 2>&1; then
 fi
 
 if type -P -f 'kate' >/dev/null 2>&1; then
-  alias kate='kate >/dev/null 2>&1'
   alias k='kate'
 fi
 
