@@ -4,6 +4,14 @@ err() {
   echo "$@" >&2
 }
 
+function edit() {
+  command "${EDITOR}" "$@" >/dev/null 2>&1 &
+}
+
+function fm() {
+  command "${FILE_MANAGER}" "$@" >/dev/null 2>&1 &
+}
+
 function manswitch() {
   man "$1" | less -p "^ +$2"
 }

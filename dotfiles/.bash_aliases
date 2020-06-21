@@ -35,7 +35,7 @@ alias cls='clear'
 alias q='exit'
 alias h='history'
 
-alias ntfsrsync='rsync --recursive --verbose --human-readable --progress --whole-file --compress-level=0 --chmod=D2755,F644 --perms'
+alias ntfsrsync='rsync --recursive --update --verbose --human-readable --progress --compress-level=0 --chmod=D2755,F644 --perms'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -49,10 +49,8 @@ alias c='cd ${CODE_DIR}'
 alias brc='source ${HOME}/.bashrc'
 alias sdf='${CODE_DIR}/dotfiles-and-scripts/bin/sync-dotfiles-and-scripts; brc'
 
-alias edit='${EDITOR}'
 alias e='edit'
 alias pager='${PAGER}'
-alias fm='${FILE_MANAGER}'
 
 if command_exists 'exa'; then
   alias exa='exa --classify --group-directories-first --icons --header --time-style=long-iso --color-scale --git'
