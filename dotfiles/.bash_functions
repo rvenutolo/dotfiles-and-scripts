@@ -262,19 +262,24 @@ function check_setup() {
   for cmd in \
     '7z' \
     'aws' \
+    'bat' \
     'bmon' \
     'broot' \
     'bunzip2' \
     'cabextract' \
     'cargo' \
     'checkbashisms' \
+    'colordiff' \
+    'ctop' \
     'dash' \
+    'diff-so-fancy' \
     'docker' \
     'dos2unix' \
     'exa' \
     'fasd' \
     'fd' \
     'fff' \
+    'fzf' \
     'git' \
     'glances' \
     'gradle' \
@@ -287,12 +292,14 @@ function check_setup() {
     'javac' \
     'jq' \
     'kotlin' \
+    'lazydocker' \
     'lf' \
     'locate' \
     'micro' \
     'mn' \
     'mvn' \
     'nano' \
+    'ncdu' \
     'neofetch' \
     'nnn' \
     'nvim' \
