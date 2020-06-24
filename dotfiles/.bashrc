@@ -75,6 +75,9 @@ for file in \
   '/etc/bash.bashrc' \
   '/etc/bashrc' \
   '/usr/share/bash-completion/bash_completion' \
+  '/etc/bash_completion' \
+  '/usr/local/etc/bash_completion' \
+  '/etc/bash_completion.d/'* \
   '/usr/share/git/completion/git-prompt.sh' \
   "${HOME}/.sdkman/bin/sdkman-init.sh" \
   "${HOME}/.config/broot/launcher/bash/br" \
