@@ -228,6 +228,12 @@ if command_exists 'gradle'; then
 }
 fi
 
+if command_exists 'jq'; then
+  function uriencode() { 
+    jq -nr --arg v "$1" '$v|@uri' 
+  }
+fi
+
 if command_exists 'kate'; then
   function kate() {
     command kate "$@" >/dev/null 2>&1 &
