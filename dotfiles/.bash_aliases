@@ -189,6 +189,7 @@ fi
 if command_exists 'xsel'; then
   alias clip='xsel -ib'
   alias paste='xsel -ob'
+  alias cwd='pwd | tr -d "\r\n" | clip'
 fi
 
 if command_exists 'yay'; then
