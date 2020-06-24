@@ -35,7 +35,7 @@ alias cls='clear'
 alias q='exit'
 alias h='history'
 
-alias ntfsrsync='rsync --recursive --update --verbose --human-readable --progress --compress-level=0 --chmod=D2755,F644 --perms'
+alias file_extensions='find . -type f | sed -n "s/..*\.//p" | sort | uniq -c'
 
 alias ..='cd ..'
 alias ...='cd ../..'
