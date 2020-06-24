@@ -292,6 +292,7 @@ function check_setup() {
     'colordiff' \
     'ctop' \
     'dash' \
+    'dig' \
     'diff-so-fancy' \
     'docker' \
     'dos2unix' \
