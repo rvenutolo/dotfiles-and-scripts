@@ -186,6 +186,11 @@ if command_exists 'tree'; then
   alias tree='tree -Cugph'
 fi
 
+if command_exists 'xsel'; then
+  alias clip='xsel -ib'
+  alias paste='xsel -ob'
+fi
+
 if command_exists 'yay'; then
   alias update='yay -Syyu && yay --clean'
   alias p='pacman'
