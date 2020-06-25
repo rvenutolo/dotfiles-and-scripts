@@ -5,7 +5,7 @@ err() {
 }
 
 function edit() {
-  nohup "${EDITOR}" "$@" >/dev/null 2>&1 &
+  command "${EDITOR}" "$@"
 }
 
 function fm() {
