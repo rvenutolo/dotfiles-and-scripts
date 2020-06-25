@@ -55,31 +55,33 @@ alias pager='${PAGER}'
 if command_exists 'exa'; then
   alias exa='exa --classify --group-directories-first --icons --header --time-style=long-iso --color-scale --git'
   alias ls='exa'
+  alias l='exa'
   alias ll='exa --long'
   alias la='exa --all'
   alias lla='exa --long --all'
-  alias llx='ll --sort=extension'
-  alias llax='lla --sort=extension'
-  alias lls='ll --sort=size'
-  alias llas='lla --sort=size'
-  alias llc='ll --sort=mod'
-  alias llac='lla --sort=mod'
-  alias llr='ll --recurse'
-  alias llar='lla --recurse'
-  alias tree='ll --tree'
+  alias llx='exa --long --sort=extension'
+  alias llax='exa --long --all --sort=extension'
+  alias lls='exa --long --sort=size'
+  alias llas='exa --long --all --sort=size'
+  alias llc='exa --long --sort=mod'
+  alias llac='exa --long --all --sort=mod'
+  alias llr='exa --long --recurse'
+  alias llar='exa --long --all --recurse'
+  alias tree='exa --long --tree'
 else
   alias ls="ls -hF --color --group-directories-first"
+  alias l='ls'
   alias ll='ls -l'
   alias la='ls -A'
   alias lla='ls -Al'
-  alias llx='ll -XB' # sort by extension
-  alias llax='lla -XB'
-  alias lls='ll -lSr' # sort by size, biggest last
-  alias llas='lla -lSr'
-  alias llc='ll -tcr' # sort by and show change time, most recent last
-  alias llac='lla -tcr'
-  alias llr='ll -R' # recursive ls
-  alias llar='lla -R'
+  alias llx='ls -l -XB' # sort by extension
+  alias llax='ls -Al -XB'
+  alias lls='ls -l -lSr' # sort by size, biggest last
+  alias llas='ls -Al -lSr'
+  alias llc='ls -l -tcr' # sort by and show change time, most recent last
+  alias llac='ls -Al -tcr'
+  alias llr='ls -l -R' # recursive ls
+  alias llar='ls -Al -R'
 fi
 
 if command_exists 'broot'; then
