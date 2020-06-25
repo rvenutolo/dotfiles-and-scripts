@@ -140,7 +140,7 @@ function getcertnames() {
   fi
 }
 
-dataurl() {
+function dataurl() {
 	local mimeType
 	mimeType=$(file -b --mime-type "$1")
 	if [[ $mimeType == text/* ]]; then
@@ -150,7 +150,7 @@ dataurl() {
 }
 
 # Get colors in manual pages
-man() {
+function man() {
 	env \
 		LESS_TERMCAP_mb="$(printf '\e[1;31m')" \
 		LESS_TERMCAP_md="$(printf '\e[1;31m')" \
@@ -224,92 +224,76 @@ function symlinks() {
   fi
 }
 
-if command_exists 'fff'; then
-  function fff() {
-    command fff "$@"
-    cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit
-  }
-fi
-
-if command_exists 'gradle'; then
-  function gradle-or-gradlew() {
-    local dir="$PWD" project_root="$PWD"
-    while [[ "$dir" != / ]]; do
-      if [[ -f "$dir/settings.gradle" || -f "$dir/settings.gradle.kts" || -f "$dir/gradlew" ]]; then
-        project_root="$dir"
-        break
-      fi
-      dir="${dir:h}"
-    done
-    if [[ -f "$project_root/gradlew" ]]; then
-      echo "Executing gradlew instead of gradle"
-      "$project_root/gradlew" "$@"
-    else
-      command gradle "$@"
-    fi
+function fff() {
+  command fff "$@"
+  cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit
 }
-fi
 
-if command_exists 'jq'; then
-  function uriencode() { 
-    jq -nr --arg v "$1" '$v|@uri' 
-  }
-fi
-
-if command_exists 'kate'; then
-  function kate() {
-    command kate "$@" >/dev/null 2>&1 & disown
-  }
-fi
-
-if command_exists 'mpv'; then
-  function mpv() {
-    command mpv "$@" >/dev/null 2>&1 & disown
-  }
-fi
-
-if command_exists 'mvn'; then
-  function mvn-or-mvnw() {
-    local dir="$PWD" project_root="$PWD"
-    while [[ "$dir" != / ]]; do
-      if [[ -f "$dir/pom.xml" || -f "$dir/mvnw" ]]; then
-        project_root="$dir"
-        break
-      fi
-      dir="${dir:h}"
-    done
-    if [[ -f "$project_root/mvnw" ]]; then
-      echo "Executing mvnw instead of mvn"
-      "$project_root/mvnw" "$@"
-    else
-      command mvn "$@"
+function gradle-or-gradlew() {
+  local dir="$PWD" project_root="$PWD"
+  while [[ "$dir" != / ]]; do
+    if [[ -f "$dir/settings.gradle" || -f "$dir/settings.gradle.kts" || -f "$dir/gradlew" ]]; then
+      project_root="$dir"
+      break
     fi
-  }
-fi
+    dir="${dir:h}"
+  done
+  if [[ -f "$project_root/gradlew" ]]; then
+    echo "Executing gradlew instead of gradle"
+    "$project_root/gradlew" "$@"
+  else
+    command gradle "$@"
+  fi
+}
 
-if command_exists 'pygmentize'; then
+function uriencode() { 
+  jq -nr --arg v "$1" '$v|@uri' 
+}
 
-  function pcat() {
-    for var; do
-      pygmentize -g "${var}"
-    done
-    return 0
-  }
+function kate() {
+  command kate "$@" >/dev/null 2>&1 & disown
+}
 
-  function pless() {
-    if [[ "$#" -eq 1 ]]; then
-      pygmentize -g "$1" | less -r
-    elif [[ "$#" -gt 1 ]]; then
-      err "${FUNCNAME[0]} does not support multiple files"
-    elif [[ ! -t 0 ]]; then
-      pygmentize -g | less -r
-    else
-      err "${FUNCNAME[0]} - No file or stdin"
+function mpv() {
+  command mpv "$@" >/dev/null 2>&1 & disown
+}
+
+function mvn-or-mvnw() {
+  local dir="$PWD" project_root="$PWD"
+  while [[ "$dir" != / ]]; do
+    if [[ -f "$dir/pom.xml" || -f "$dir/mvnw" ]]; then
+      project_root="$dir"
+      break
     fi
-    return 0
-  }
+    dir="${dir:h}"
+  done
+  if [[ -f "$project_root/mvnw" ]]; then
+    echo "Executing mvnw instead of mvn"
+    "$project_root/mvnw" "$@"
+  else
+    command mvn "$@"
+  fi
+}
 
-fi
+function pcat() {
+  for var; do
+    pygmentize -g "${var}"
+  done
+  return 0
+}
+
+function pless() {
+  if [[ "$#" -eq 1 ]]; then
+    pygmentize -g "$1" | less -r
+  elif [[ "$#" -gt 1 ]]; then
+    err "${FUNCNAME[0]} does not support multiple files"
+  elif [[ ! -t 0 ]]; then
+    pygmentize -g | less -r
+  else
+    err "${FUNCNAME[0]} - No file or stdin"
+  fi
+  return 0
+}
 
 function check_setup() {
 
