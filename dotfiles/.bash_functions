@@ -5,11 +5,11 @@ err() {
 }
 
 function edit() {
-  command "${EDITOR}" "$@" >/dev/null 2>&1 &
+  nohup "${EDITOR}" "$@" >/dev/null 2>&1 &
 }
 
 function fm() {
-  command "${FILE_MANAGER}" "$@" >/dev/null 2>&1 &
+  nohup "${FILE_MANAGER}" "$@" >/dev/null 2>&1 &
 }
 
 function manswitch() {
@@ -258,7 +258,13 @@ fi
 
 if command_exists 'kate'; then
   function kate() {
-    command kate "$@" >/dev/null 2>&1 &
+    nohup kate "$@" >/dev/null 2>&1 &
+  }
+fi
+
+if command_exists 'mpv'; then
+  function mpv() {
+    nohup mpv "$@" >/dev/null 2>&1 &
   }
 fi
 
