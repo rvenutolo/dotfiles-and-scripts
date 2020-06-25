@@ -435,7 +435,7 @@ function check_setup() {
     'vm.dirty_background_ratio 5' \
     'vm.dirty_ratio 5' \
     'vm.swappiness 10'; do
-    IFS=' ' read k v <<< "${kvals}"
+    IFS=' ' read -r k v <<< "${kvals}"
     [[ $(sysctl -n "${k}") -le "${v}" ]] || echo "Kernel variable ${k} is >${v}: $(sysctl -n "${k}")"
   done
 
