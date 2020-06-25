@@ -9,7 +9,7 @@ function edit() {
 }
 
 function fm() {
-  nohup "${FILE_MANAGER}" "$@" >/dev/null 2>&1 &
+  "${FILE_MANAGER}" "$@" >/dev/null 2>&1 & disown
 }
 
 function manswitch() {
@@ -258,13 +258,13 @@ fi
 
 if command_exists 'kate'; then
   function kate() {
-    nohup kate "$@" >/dev/null 2>&1 &
+    command kate "$@" >/dev/null 2>&1 & disown
   }
 fi
 
 if command_exists 'mpv'; then
   function mpv() {
-    nohup mpv "$@" >/dev/null 2>&1 &
+    command mpv "$@" >/dev/null 2>&1 & disown
   }
 fi
 
