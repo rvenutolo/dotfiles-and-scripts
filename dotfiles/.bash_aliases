@@ -128,6 +128,7 @@ alias sortpomanddependencies='\
 if command_exists 'yay'; then
   alias update='yay -Syyu && yay --clean'
   alias p='pacman'
+  alias yay='yay --nodiffmenu'
   alias y='yay'
 elif command_exists 'apt'; then
   alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
