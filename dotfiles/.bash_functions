@@ -299,6 +299,7 @@ function check_setup() {
 
   for cmd in \
     '7z' \
+    'authy' \
     'aws' \
     'bat' \
     'bmon' \
@@ -310,6 +311,7 @@ function check_setup() {
     'colordiff' \
     'ctop' \
     'dash' \
+    'ddd' \
     'dig' \
     'diff-so-fancy' \
     'docker' \
@@ -321,6 +323,7 @@ function check_setup() {
     'fzf' \
     'git' \
     'glances' \
+    'gparted' \
     'gradle' \
     'groovy' \
     'gtop' \
@@ -342,8 +345,8 @@ function check_setup() {
     'neofetch' \
     'nnn' \
     'nvim' \
-    'openconnect' \
     'pandoc' \
+    'postman' \
     'pygmentize' \
     'ranger' \
     'rg' \
@@ -356,6 +359,7 @@ function check_setup() {
     'spring' \
     'tar' \
     'tldr' \
+    'trash-empty' \
     'tree' \
     'uncompress' \
     'unlzma' \
@@ -388,6 +392,7 @@ function check_setup() {
     'EDITOR' \
     'FILE_MANAGER' \
     'JAVA_HOME' \
+    'HOME_OR_NOT' \
     'PAGER' \
     'VISUAL'; do
     [[ -z "${!var}" ]] && echo "Environment variable not set: ${var}"
@@ -430,7 +435,7 @@ function check_setup() {
     'sys'; do
     groups "${USER}" | grep -wq "${group}" || echo "User is not in group: ${group}"
   done
-
+  
   for kvals in \
     'vm.dirty_background_ratio 5' \
     'vm.dirty_ratio 5' \
@@ -441,6 +446,33 @@ function check_setup() {
 
   # There may be a better way to detect if bash-completion is present
   type -t '_init_completion' >/dev/null 2>&1 || echo 'bash-completion not present'
+  
+  if [[ "${HOME_OR_NOT}" == 'home' ]]; then
+    
+    for cmd in \
+      'backintime' \
+      'openconnect' \
+      'timeshift' \
+      'virt-manager' \
+      'virsh'; do
+      command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
+    done
+
+    for service in \
+      'CrashPlanServic' \
+      'libvirtd' \
+      'nfsd' \
+      'virtlogd'; do
+      pgrep -x "${service}" >/dev/null 2>&1 || echo "Service not running: ${service}"
+    done
+
+    for group in \
+      'libvirt' \
+      'wheel'; do
+      groups "${USER}" | grep -wq "${group}" || echo "User is not in group: ${group}"
+    done
+    
+  fi
 
   return 0
 }
