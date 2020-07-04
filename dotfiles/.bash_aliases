@@ -50,6 +50,7 @@ alias k='kate'
 alias m='micro'
 alias nano='nano -c'
 alias n='nano'
+alias x='xdg-open'
 if command_exists 'nvim'; then
   alias vim='nvim'
   alias v='nvim'
