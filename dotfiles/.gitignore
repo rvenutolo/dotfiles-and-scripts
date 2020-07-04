@@ -27,7 +27,7 @@ out/
 .directory
 .Trash-*
 .nfs*
-.directory
+.swp
 
 ### Misc
 *.bak
