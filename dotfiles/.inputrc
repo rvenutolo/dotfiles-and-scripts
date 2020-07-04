@@ -47,3 +47,6 @@ set convert-meta off
 # Enable Alt-arrows
 "\e[1;5D": backward-word ### Alt left
 "\e[1;5C": forward-word ### Alt right
+
+# Hop up directories
+"\C-u":"cd ..\n ### Ctrl U
