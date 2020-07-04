@@ -134,9 +134,10 @@ elif command_exists 'apt'; then
   alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
 fi
 
-alias clip='xsel -ib'
+alias copy='xsel -ib'
 alias paste='xsel -ob'
-alias cwd='pwd | tr -d "\r\n" | clip'
+alias cwd='pwd | tr -d "\r\n" | copy'
+alias shrug='echo -n "¯\_(ツ)_/¯" | copy'
 
 alias ln='ln -v'
 alias jobs='jobs -l'
