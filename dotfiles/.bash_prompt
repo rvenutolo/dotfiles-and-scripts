@@ -60,31 +60,54 @@ GIT_PS1_HIDE_IF_PWD_IGNORED=false
 __prompt_command() {
 
   local exit_code="$?"
-
-  ## nord color theme assumed
+  
+  local regular_black='\[\e[0;30m\]'
+  local regular_red='\[\e[0;31m\]'
+  local regular_green='\[\e[0;32m\]'
+  local regular_yellow='\[\e[0;33m\]'
+  local regular_blue='\[\e[0;34m\]'
+  local regular_purple='\[\e[0;35m\]'
+  local regular_cyan='\[\e[0;36m\]'
+  local regular_white='\[\e[0;37m\]'
+  local bold_black='\[\e[1;30m\]'
+  local bold_red='\[\e[1;31m\]'
+  local bold_green='\[\e[1;32m\]'
+  local bold_yellow='\[\e[1;33m\]'
+  local bold_blue='\[\e[1;34m\]'
+  local bold_purple='\[\e[1;35m\]'
+  local bold_cyan='\[\e[1;36m\]'
+  local bold_white='\[\e[1;37m\]'
+  local underline_black='\[\e[4;30m\]'
+  local underline_red='\[\e[4;31m\]'
+  local underline_green='\[\e[4;32m\]'
+  local underline_yellow='\[\e[4;33m\]'
+  local underline_blue='\[\e[4;34m\]'
+  local underline_purple='\[\e[4;35m\]'
+  local underline_cyan='\[\e[4;36m\]'
+  local underline_white='\[\e[4;37m\]'
+  local background_black='\[\e[40m\]'
+  local background_red='\[\e[41m\]'
+  local background_green='\[\e[42m\]'
+  local background_yellow='\[\e[43m\]'
+  local background_blue='\[\e[44m\]'
+  local background_purple='\[\e[45m\]'
+  local background_cyan='\[\e[46m\]'
+  local background_white='\[\e[47m\]'
+  local regular_reset='\[\e[0m\]'
   local reset='\[\e[0m\]'
-  local grey='\[\e[1;30m\]'
-  local red='\[\e[1;31m\]'
-  local green='\[\e[1;32m\]'
-  local yellow='\[\e[1;33m\]'
-  local blue='\[\e[1;34m\]'
-  local purple='\[\e[1;35m\]'
-  local cyan='\[\e[1;36m\]'
-  local white='\[\e[1;37m\]'
 
-  local nonzero_color="${red}"
-  local user_color="${blue}"
-  local at_color="${white}"
-  local host_color="${blue}"
-  local arrow_color="${white}"
-  local dir_color="${cyan}"
-  local branch_icon_color="${white}"
-  local branch_color="${purple}"
-  local timestamp_color="${cyan}"
-  local prompt_color="${white}"
-
+  local nonzero_color="${bold_red}"
+  local user_color="${bold_blue}"
+  local at_color="${bold_white}"
+  local host_color="${bold_blue}"
+  local arrow_color="${bold_white}"
+  local dir_color="${bold_cyan}"
+  local branch_icon_color="${bold_white}"
+  local branch_color="${bold_purple}"
+  local timestamp_color="${bold_cyan}"
+  local prompt_color="${bold_white}"
   if [[ "${USER}" == 'root' ]]; then
-    user_color="${red}"
+    user_color="${bold_red}"
   fi
 
   local nonzero_exit="${nonzero_color}Non-zero exit code: ${exit_code}"
