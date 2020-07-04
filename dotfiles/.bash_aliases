@@ -89,6 +89,9 @@ alias dl='cd ${HOME}/Downloads'
 alias dt='cd ${HOME}/Desktop'
 alias c='cd ${CODE_DIR}'
 
+alias tarc="tar -cvzf"
+alias tarx="tar -xf"
+
 alias br='br -dhp'
 alias bs='br --sizes'
 
