@@ -49,4 +49,4 @@ set convert-meta off
 "\e[1;5C": forward-word ### Alt right
 
 # Hop up directories
-"\C-u":"cd ..\n ### Ctrl U
+"\C-u":"cd ..\n" ### Ctrl U
