@@ -31,6 +31,7 @@ out/
 
 ### Misc
 *.bak
+*.private
 /conf
 /input
 /output
