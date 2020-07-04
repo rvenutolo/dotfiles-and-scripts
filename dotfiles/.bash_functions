@@ -21,6 +21,23 @@ function ff() {
   find . -type f -iname '*'"$1"'*' -ls
 }
 
+# Change up a variable number of directories
+# E.g:
+#   cu   -> cd ../
+#   cu 2 -> cd ../../
+#   cu 3 -> cd ../../../
+function cu {
+    local count=$1
+    if [ -z "${count}" ]; then
+        count=1
+    fi
+    local path=""
+    for i in $(seq 1 ${count}); do
+        path="${path}../"
+    done
+    cd $path
+}
+
 # Move filenames to lowercase
 function lowercase() {
   for file; do
