@@ -94,7 +94,7 @@ __prompt_command() {
   local arrow="${arrow_color}→"
   local dir="${dir_color}\w"
   GIT_PS1_STATESEPARATOR='|'
-  local git_status="\$(__git_ps1 ' ${branch_icon_color} ${branch_color}%s${reset}')"
+  local git_status="\$(declare -f -F '__git_ps1' >/dev/null 2>&1 && __git_ps1 ' ${branch_icon_color} ${branch_color}%s${reset}')"
   local timestamp="${timestamp_color}\D{%I:%M:%S}"
   local prompt="${prompt_color}\\$"
 
