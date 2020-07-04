@@ -38,6 +38,11 @@ function cu {
     cd $path
 }
 
+# "| order" is very handy for counting duplicated lines in a file or listing
+function order() {
+    sort | uniq -c | sort -rn
+}
+
 # Move filenames to lowercase
 function lowercase() {
   for file; do
