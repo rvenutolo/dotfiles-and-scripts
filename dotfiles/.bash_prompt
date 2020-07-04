@@ -60,7 +60,7 @@ GIT_PS1_HIDE_IF_PWD_IGNORED=false
 __prompt_command() {
 
   local exit_code="$?"
-  
+
   local regular_black='\[\e[0;30m\]'
   local regular_red='\[\e[0;31m\]'
   local regular_green='\[\e[0;32m\]'
@@ -121,7 +121,7 @@ __prompt_command() {
   local timestamp="${timestamp_color}\D{%I:%M:%S}"
   local prompt="${prompt_color}\\$"
 
-  PS1=""
+  PS1="\[\033[G\]"
   if [[ "$exit_code" != 0 ]]; then
     PS1+="${nonzero_exit}\n"
   fi
@@ -130,7 +130,6 @@ __prompt_command() {
   fi
   PS1+="${arrow} ${dir}${git_status}\n"
   PS1+="${timestamp} ${prompt}${reset} "
-  PS1+=""
 
   PS2=""
   PS2+="  ${arrow} "
