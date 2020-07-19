@@ -66,7 +66,7 @@ alias fgrep='grep -F'
 
 alias du='du -ckh'
 alias du1='du --max-depth=1'
-alias df='df -kTh'
+alias df='df -kTh -x squashfs'
 alias free='free -m'
 
 alias chux='chmod u+x'
