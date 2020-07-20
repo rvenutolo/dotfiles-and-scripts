@@ -489,6 +489,8 @@ function check_setup() {
     done
 
     for group in \
+      'kvm' \
+      'input' \
       'libvirt' \
       'wheel'; do
       groups "${USER}" | grep -wq "${group}" || echo "User is not in group: ${group}"
