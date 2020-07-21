@@ -367,6 +367,7 @@ function check_setup() {
     'neofetch' \
     'nnn' \
     'nvim' \
+    'oneshot' \
     'pandoc' \
     'postman' \
     'pygmentize' \
