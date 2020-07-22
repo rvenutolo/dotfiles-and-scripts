@@ -10,6 +10,10 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+### Spark
+metastore_db/
+spark-warehouse/
+
 ### Java HotSpot Error
 hs_err_pid*
 
@@ -33,7 +37,7 @@ out/
 *.bak
 *.private
 *.old
+*.log
 /conf
 /input
 /output
-
