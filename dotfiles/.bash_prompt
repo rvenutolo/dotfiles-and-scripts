@@ -57,9 +57,38 @@ GIT_PS1_SHOWCOLORHINTS=false
 # Also configurable per repository via "bash.hideIfPwdIgnored".
 GIT_PS1_HIDE_IF_PWD_IGNORED=false
 
+function __prompt_timer_now() {
+  date '+%s%3N'
+}
+
+function __prompt_timer_start() {
+  [[ -z "${__prompt_timer}" ]] && __prompt_timer="$(__prompt_timer_now)"
+}
+
+function __prompt_timer_stop() {
+  local total_ms=$(("$(__prompt_timer_now)" - "${__prompt_timer}"))
+  local total_s=$((total_ms / 1000))
+  local ms=$((total_ms % 1000))
+  local s=$((total_s % 60))
+  local m=$(((total_s / 60) % 60))
+  local h=$((total_s / 3600))
+  if ((h > 0)); then 
+    __prompt_timer_string="${h}h${m}m"
+  elif ((m > 0)); then 
+    __prompt_timer_string="${m}m${s}s"
+  elif ((s > 0)); then 
+    __prompt_timer_string="${s}s${ms}ms"
+  else 
+    __prompt_timer_string="${ms}ms"
+  fi
+  unset __prompt_timer
+}
+
 __prompt_command() {
 
   local exit_code="$?"
+  
+  __prompt_timer_stop
   
   local regular_black='\[\e[0;30m\]'
   local regular_red='\[\e[0;31m\]'
@@ -103,8 +132,9 @@ __prompt_command() {
   local arrow_color="${bold_white}"
   local dir_color="${bold_cyan}"
   local branch_icon_color="${bold_white}"
-  local branch_color="${bold_purple}"
+  local branch_color="${bold_blue}"
   local timestamp_color="${bold_cyan}"
+  local last_command_time_color="${bold_cyan}"
   local prompt_color="${bold_white}"
   if [[ "${USER}" == 'root' ]]; then
     user_color="${bold_red}"
@@ -119,6 +149,7 @@ __prompt_command() {
   GIT_PS1_STATESEPARATOR='|'
   local git_status="\$(declare -f -F '__git_ps1' >/dev/null 2>&1 && __git_ps1 ' ${branch_icon_color} ${branch_color}%s${reset}')"
   local timestamp="${timestamp_color}\D{%I:%M:%S}"
+  local last_command_time="${last_command_time_color}${__prompt_timer_string}"
   local prompt="${prompt_color}\\$"
 
   # Glue the prompt to always go to the first column (http://jonisalonen.com/2012/your-bash-prompt-needs-this/)
@@ -126,14 +157,14 @@ __prompt_command() {
   if [[ "$exit_code" != 0 ]]; then
     PS1+="${nonzero_exit}\n"
   fi
-  PS1+="${bold_white}["
   PS1+="${timestamp}"
-  PS1+="${bold_white}]─["
+  PS1+="${bold_white} / "
+  PS1+="${last_command_time}"
+  PS1+="${bold_white} / "
   if [[ -n "${SSH_CONNECTION}" ]] || [[ "${USER}" == 'root' ]] || [[ "${LOGNAME}" != "${USER}" ]]; then
     PS1+="${user}${at}${host}:"
   fi  
   PS1+="${dir}${git_status}"
-  PS1+="${bold_white}]"
   PS1+="\n"
   PS1+="${prompt} "
   PS1+="${reset}"
@@ -144,5 +175,5 @@ __prompt_command() {
 
 }
 
-PROMPT_COMMAND=__prompt_command
-PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#${HOME}/\~}"'
+trap '__prompt_timer_start' DEBUG
+PROMPT_COMMAND=__prompt_command;printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#${HOME}/\~}"
