@@ -376,6 +376,7 @@ function check_setup() {
     'safe-rm' \
     'sbt' \
     'scala' \
+    'sd' \
     'shellcheck' \
     'shfmt' \
     'spark-submit' \
