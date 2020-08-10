@@ -268,8 +268,8 @@ function gradle-or-gradlew() {
   fi
 }
 
-function uriencode() { 
-  jq -nr --arg v "$1" '$v|@uri' 
+function uriencode() {
+  jq -nr --arg v "$1" '$v|@uri'
 }
 
 function kate() {
@@ -323,6 +323,7 @@ function check_setup() {
     '7z' \
     'authy' \
     'aws' \
+    'bashtop' \
     'bat' \
     'bmon' \
     'broot' \
@@ -459,7 +460,7 @@ function check_setup() {
     'sys'; do
     groups "${USER}" | grep -wq "${group}" || echo "User is not in group: ${group}"
   done
-  
+
   for kvals in \
     'vm.dirty_background_ratio 5' \
     'vm.dirty_ratio 5' \
@@ -470,9 +471,9 @@ function check_setup() {
 
   # There may be a better way to detect if bash-completion is present
   type -t '_init_completion' >/dev/null 2>&1 || echo 'bash-completion not present'
-  
+
   if [[ "${HOME_OR_NOT}" == 'home' ]]; then
-    
+
     for cmd in \
       'backintime' \
       'openconnect' \
@@ -497,7 +498,7 @@ function check_setup() {
       'wheel'; do
       groups "${USER}" | grep -wq "${group}" || echo "User is not in group: ${group}"
     done
-    
+
   fi
 
   return 0
