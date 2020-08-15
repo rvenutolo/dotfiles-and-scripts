@@ -353,6 +353,7 @@ function check_setup() {
     'gunzip' \
     'http' \
     'iconv' \
+    'incrontab' \
     'java' \
     'javac' \
     'jq' \
