@@ -353,7 +353,7 @@ function check_setup() {
     'gunzip' \
     'http' \
     'iconv' \
-    'incrontab' \
+    'inotifywait' \
     'java' \
     'javac' \
     'jq' \
@@ -486,7 +486,6 @@ function check_setup() {
 
     for service in \
       'CrashPlanServic' \
-      'incrond' \
       'libvirtd' \
       'nfsd' \
       'virtlogd'; do
