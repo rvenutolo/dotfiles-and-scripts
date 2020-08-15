@@ -486,6 +486,7 @@ function check_setup() {
 
     for service in \
       'CrashPlanServic' \
+      'incrond' \
       'libvirtd' \
       'nfsd' \
       'virtlogd'; do
