@@ -345,6 +345,7 @@ function check_setup() {
     'fff' \
     'fzf' \
     'git' \
+    'gitui' \
     'glances' \
     'gparted' \
     'gradle' \
