@@ -82,8 +82,10 @@ alias 775='chomd 775'
 
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
+alias .3='cd ../../..'
+alias .4='cd ../../..'
+alias .5='cd ../../../..'
+alias .6='cd ../../../../..'
 alias home='cd ${HOME}'
 alias dl='cd ${HOME}/Downloads'
 alias dt='cd ${HOME}/Desktop'
@@ -111,6 +113,9 @@ alias gs='git status'
 alias gb='git checkout'
 alias gm='git merge'
 
+alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
+alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
+
 alias gradle='gradle-or-gradlew'
 alias mvn='mvn-or-mvnw'
 alias sortpom='\
@@ -130,7 +135,7 @@ alias sortpomanddependencies='\
   -Dsort.sortDependencies=scope,groupId,artifactId'
 
 if command_exists 'yay'; then
-  alias update='yay -Syyu && yay --clean'
+  alias update='yay -Syyu --noconfirm && yay --clean'
   alias p='pacman'
   alias yay='yay --nodiffmenu'
   alias y='yay'
@@ -143,6 +148,15 @@ alias paste='xsel -ob'
 alias cwd='pwd | tr -d "\r\n" | copy'
 alias shrug='echo -n "¯\_(ツ)_/¯" | copy'
 
+## get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+
+## get top process eating cpu ##
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+
+alias jctl="journalctl -p 3 -xb"
 alias ln='ln -v'
 alias jobs='jobs -l'
 alias map='xargs -n1'
@@ -164,5 +178,3 @@ alias colortest='msgcat --color=test'
 alias localip='ip -o route get to 8.8.8.8 | sed -n "s/.*src \([0-9.]\+\).*/\1/p"'
 alias wanip='curl ifconfig.me/ip'
 alias wttr='curl wttr.in/${WTTR_CITY}'
-
-
