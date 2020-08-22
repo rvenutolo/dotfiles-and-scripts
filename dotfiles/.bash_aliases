@@ -135,7 +135,7 @@ alias sortpomanddependencies='\
   -Dsort.sortDependencies=scope,groupId,artifactId'
 
 if command_exists 'yay'; then
-  alias update='yay -Syyu --noconfirm && yay --clean'
+  alias update='yay -Syyu && yay --clean'
   alias p='pacman'
   alias yay='yay --nodiffmenu'
   alias y='yay'
