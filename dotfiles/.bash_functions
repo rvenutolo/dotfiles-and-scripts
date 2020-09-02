@@ -360,6 +360,7 @@ function check_setup() {
     'jq' \
     'kotlin' \
     'lazydocker' \
+    'lazygit' \
     'lf' \
     'locate' \
     'micro' \
