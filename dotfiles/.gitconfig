@@ -151,6 +151,9 @@
 
   # Use `hexdump` to diff binary files
   textconv = hexdump -v -C
+  
+[fetch]
+  prune = true
 
 [help]
 
