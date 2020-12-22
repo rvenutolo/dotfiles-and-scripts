@@ -385,6 +385,7 @@ function check_setup() {
     'shfmt' \
     'spark-submit' \
     'spring' \
+    'stacer' \
     'tar' \
     'tldr' \
     'trash-empty' \
@@ -479,7 +480,17 @@ function check_setup() {
 
     for cmd in \
       'backintime' \
+      'dnuos' \
+      'flac' \
+      'flac2all' \
+      'flac2mp3' \
+      'lame' \
+      'mediainfo' \
+      'mp3splt' \
       'openconnect' \
+      'puddletag' \
+      'soundkonverter' \
+      'sox' \
       'timeshift' \
       'virt-manager' \
       'virsh'; do
