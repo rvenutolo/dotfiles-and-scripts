@@ -484,6 +484,7 @@ function check_setup() {
       'flac' \
       'flac2all' \
       'flac2mp3' \
+      'imagemajick' \
       'lame' \
       'mediainfo' \
       'mp3splt' \
