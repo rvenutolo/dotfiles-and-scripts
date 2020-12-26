@@ -483,10 +483,10 @@ function check_setup() {
       'dnuos' \
       'flac' \
       'flac2all' \
-      'flac2mp3' \
-      'imagemajick' \
+      'flac2mp3.pl' \
       'lame' \
       'mediainfo' \
+      'mogrify' \
       'mp3splt' \
       'openconnect' \
       'puddletag' \
