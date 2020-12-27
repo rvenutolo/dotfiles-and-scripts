@@ -258,7 +258,7 @@ function gradle-or-gradlew() {
       project_root="$dir"
       break
     fi
-    dir="${dir:h}"
+    dir="$(dirname ${dir})"
   done
   if [[ -f "$project_root/gradlew" ]]; then
     echo "Executing gradlew instead of gradle"
@@ -287,7 +287,7 @@ function mvn-or-mvnw() {
       project_root="$dir"
       break
     fi
-    dir="${dir:h}"
+    dir="$(dirname ${dir})"
   done
   if [[ -f "$project_root/mvnw" ]]; then
     echo "Executing mvnw instead of mvn"
