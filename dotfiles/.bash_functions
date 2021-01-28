@@ -374,6 +374,7 @@ function check_setup() {
     'oneshot' \
     'pandoc' \
     'postman' \
+    'procs' \
     'pygmentize' \
     'ranger' \
     'rg' \
@@ -388,6 +389,7 @@ function check_setup() {
     'stacer' \
     'tar' \
     'tldr' \
+    'tokei' \
     'trash-empty' \
     'tree' \
     'uncompress' \
@@ -481,6 +483,7 @@ function check_setup() {
     for cmd in \
       'backintime' \
       'dnuos' \
+      'eyeD3' \
       'flac' \
       'flac2all' \
       'flac2mp3.pl' \
@@ -492,6 +495,7 @@ function check_setup() {
       'puddletag' \
       'soundkonverter' \
       'sox' \
+      'tageditor' \
       'timeshift' \
       'virt-manager' \
       'virsh'; do
