@@ -373,6 +373,7 @@ function check_setup() {
     'nvim' \
     'oneshot' \
     'pandoc' \
+    'paru' \
     'postman' \
     'procs' \
     'pygmentize' \
