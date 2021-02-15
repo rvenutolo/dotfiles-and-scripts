@@ -135,7 +135,6 @@ alias sortpomanddependencies='\
   -Dsort.sortDependencies=scope,groupId,artifactId'
 
 alias yay='yay --nodiffmenu'
-alias paru='paru --nodiffmenu'
 alias update='paru -Syyu && paru --clean'
 
 alias copy='xsel -ib'
