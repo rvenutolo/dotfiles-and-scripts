@@ -133,9 +133,15 @@ alias sortpomanddependencies='\
   -Dsort.lineSeparator="\n" \
   -Dsort.nrOfIndentSpace=4 \
   -Dsort.sortDependencies=scope,groupId,artifactId'
-
-alias yay='yay --nodiffmenu'
-alias update='paru -Syyu && paru --clean'
+  
+if command_exists 'yay'; then
+  alias update='yay -Syyu && yay --clean'
+  alias p='pacman'
+  alias yay='yay --nodiffmenu'
+  alias y='yay'
+elif command_exists 'apt'; then
+  alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
+fi
 
 alias copy='xsel -ib'
 alias paste='xsel -ob'
