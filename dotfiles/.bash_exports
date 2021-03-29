@@ -19,6 +19,8 @@ export CODE_DIR="${HOME}/Code"
 
 export SDKMAN_DIR="${HOME}/.sdkman"
 
+export GOPATH="${HOME}/.go"
+
 export GPGKEY='64DAC28A'
 
 export WTTR_CITY='Atlanta'
