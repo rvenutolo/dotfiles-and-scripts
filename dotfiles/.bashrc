@@ -80,6 +80,7 @@ for file in \
   '/etc/bash_completion.d/'* \
   '/usr/share/git/completion/git-prompt.sh' \
   "${HOME}/.sdkman/bin/sdkman-init.sh" \
+  "${HOME}/.cargo/env" \
   "${HOME}/.config/broot/launcher/bash/br" \
   "${HOME}/.bash_exports" \
   "${HOME}/.bash_functions" \
