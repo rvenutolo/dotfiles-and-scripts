@@ -334,7 +334,6 @@ function check_setup() {
     'colordiff' \
     'ctop' \
     'dash' \
-    'ddd' \
     'dig' \
     'diff-so-fancy' \
     'docker' \
@@ -374,7 +373,6 @@ function check_setup() {
     'oneshot' \
     'pandoc' \
     'paru' \
-    'postman' \
     'procs' \
     'pygmentize' \
     'ranger' \
