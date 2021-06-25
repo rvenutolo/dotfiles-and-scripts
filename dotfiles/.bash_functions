@@ -432,15 +432,18 @@ function check_setup() {
     'Code New Roman' \
     'Fantasque Sans Mono' \
     'Fira Code' \
+    'FreeMono' \
     'Hack' \
     'Hasklig' \
     'Inconsolata' \
     'Input' \
     'Iosevka' \
     'JetBrains Mono' \
+    'JoyPixels' \
     'Menlo' \
     'Monoid' \
     'Mononoki' \
+    'Noto Color Emoji' \
     'Roboto Mono' \
     'Source Code Pro' \
     'Terminess' \
