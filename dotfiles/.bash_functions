@@ -125,43 +125,6 @@ function ii() {
   return 0
 }
 
-# Show all the names (CNs and SANs) listed in the SSL certificate
-# for a given domain
-function getcertnames() {
-  if [[ -z "$1" ]]; then
-    err "No domain specified"
-    return 1
-  fi
-
-  local domain
-  domain="$1"
-  echo "Testing ${domain}…"
-  echo ""
-
-  local tmp
-  tmp="$(echo -e "GET / HTTP/1.0\nEOT" |
-    openssl s_client -connect "${domain}:443" -servername "${domain}" 2>&1)"
-
-  if [[ "${tmp}" = *"-----BEGIN CERTIFICATE-----"* ]]; then
-    local certText
-    certText="$(echo "${tmp}" |
-      openssl x509 -text -certopt "no_aux, no_header, no_issuer, no_pubkey, \
-            no_serial, no_sigdump, no_signame, no_validity, no_version")"
-    echo "Common Name:"
-    echo ""
-    echo "${certText}" | grep "Subject:" | sed -e "s/^.*CN=//" | sed -e "s/\/emailAddress=.*//"
-    echo ""
-    echo "Subject Alternative Name(s):"
-    echo ""
-    echo "${certText}" | grep -A '1' "Subject Alternative Name:" |
-      sed -e "2s/DNS://g" -e "s/ //g" | tr "," "\n" | tail -n +2
-    return 0
-  else
-    err "Certificate not found"
-    return 1
-  fi
-}
-
 function dataurl() {
 	local mimeType
 	mimeType=$(file -b --mime-type "$1")
@@ -213,39 +176,6 @@ function hide() {
   return 0
 }
 
-function symlinks() {
-  if [[ "$#" -eq 2 ]]; then
-    local src_dir
-    local target_dir
-    src_dir="$1"
-    target_dir="$2"
-    ! [[ -d "${src_dir}" ]] && err "${src_dir} is not a directory" && return 1
-    ! [[ -d "${target_dir}" ]] && err "${target_dir} is not a directory" && return 1
-    src_dir="$(readlink -m "${src_dir}")"
-    target_dir="$(readlink -m "${target_dir}")"
-    echo "Creating symlinks of all files in ${src_dir} in ${target_dir}"
-    for src_file in "${src_dir}"/*; do
-      local target_file
-      target_file="$target_dir/$(basename "${src_file}")"
-      if [[ -e "${target_file}" ]]; then
-        if [[ -L "${target_file}" ]]; then
-          echo "${target_file} symlink exists; did not overwrite"
-        else
-          echo "${target_file} file exists; did not overwrite"
-        fi
-      else
-        ln -s "${src_file}" "${target_file}" || exit 1
-        echo "Created ${target_file} symlink"
-      fi
-    done
-    return 0
-  else
-    err "Error: bad arguments"
-    err "Usage: '${FUNCNAME[0]} /path/to/src_dir /path/to/target_dir"
-    return 1
-  fi
-}
-
 function fff() {
   command fff "$@"
   cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit
@@ -268,18 +198,6 @@ function gradle-or-gradlew() {
   fi
 }
 
-function uriencode() {
-  jq -nr --arg v "$1" '$v|@uri'
-}
-
-function kate() {
-  command kate "$@" >/dev/null 2>&1 & disown
-}
-
-function mpv() {
-  command mpv "$@" >/dev/null 2>&1 & disown
-}
-
 function mvn-or-mvnw() {
   local dir="$PWD" project_root="$PWD"
   while [[ "$dir" != / ]]; do
@@ -295,6 +213,18 @@ function mvn-or-mvnw() {
   else
     command mvn "$@"
   fi
+}
+
+function uriencode() {
+  jq -nr --arg v "$1" '$v|@uri'
+}
+
+function kate() {
+  command kate "$@" >/dev/null 2>&1 & disown
+}
+
+function mpv() {
+  command mpv "$@" >/dev/null 2>&1 & disown
 }
 
 function pcat() {
@@ -317,7 +247,7 @@ function pless() {
   return 0
 }
 
-function check_setup() {
+function check-setup() {
 
   for cmd in \
     '7z' \
