@@ -316,6 +316,7 @@ function check-setup() {
     'spark-submit' \
     'spring' \
     'stacer' \
+    'tabs2spaces' \
     'tar' \
     'tldr' \
     'tokei' \
