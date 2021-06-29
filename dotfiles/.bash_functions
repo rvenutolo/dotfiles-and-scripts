@@ -303,6 +303,7 @@ function check-setup() {
     'oneshot' \
     'pandoc' \
     'paru' \
+    'pcmanfm' \
     'procs' \
     'pygmentize' \
     'ranger' \
