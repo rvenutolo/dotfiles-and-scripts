@@ -308,7 +308,6 @@ function check-setup() {
     'pygmentize' \
     'ranger' \
     'rg' \
-    'safe-rm' \
     'sbt' \
     'scala' \
     'sd' \
@@ -386,7 +385,7 @@ function check-setup() {
       fc-list : family | grep -wiq "$(echo -e "${font}TTF" | tr -d '[:space:]')" ||
       echo "Font not available: ${font}"
   done
-  
+
   for service in \
     'docker' \
     'cups' \
@@ -435,14 +434,14 @@ function check-setup() {
       'virsh'; do
       command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
     done
-    
+
     for service in \
       'crashplan-pro' \
       'nfs-server' \
       'virtlogd'; do
       systemctl is-active --quiet "${service}" || systemctl is-active --user --quiet "${service}" || echo "Service not running: ${service}"
     done
-    
+
     # libvirtd goes inactive, but is still enabled
     for service in \
       'libvirtd'; do
