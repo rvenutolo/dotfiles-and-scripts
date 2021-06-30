@@ -386,13 +386,13 @@ function check-setup() {
       fc-list : family | grep -wiq "$(echo -e "${font}TTF" | tr -d '[:space:]')" ||
       echo "Font not available: ${font}"
   done
-
+  
   for service in \
-    'dockerd' \
-    'cupsd' \
+    'docker' \
+    'cups' \
     'ssh-agent' \
     'sshd'; do
-    pgrep -x "${service}" >/dev/null 2>&1 || echo "Service not running: ${service}"
+    systemctl is-active --quiet "${service}" || systemctl is-active --user --quiet "${service}" || echo "Service not running: ${service}"
   done
 
   for group in \
@@ -435,13 +435,18 @@ function check-setup() {
       'virsh'; do
       command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
     done
-
+    
     for service in \
-      'CrashPlanServic' \
-      'libvirtd' \
-      'nfsd' \
+      'crashplan-pro' \
+      'nfs-server' \
       'virtlogd'; do
-      pgrep -x "${service}" >/dev/null 2>&1 || echo "Service not running: ${service}"
+      systemctl is-active --quiet "${service}" || systemctl is-active --user --quiet "${service}" || echo "Service not running: ${service}"
+    done
+    
+    # libvirtd goes inactive, but is still enabled
+    for service in \
+      'libvirtd'; do
+      systemctl is-enabled --quiet "${service}" || systemctl is-enabled --user --quiet "${service}" || echo "Service not enabled: ${service}"
     done
 
     for group in \
