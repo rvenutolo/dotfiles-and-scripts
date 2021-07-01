@@ -72,13 +72,13 @@ function __prompt_timer_stop() {
   local s=$((total_s % 60))
   local m=$(((total_s / 60) % 60))
   local h=$((total_s / 3600))
-  if ((h > 0)); then 
+  if ((h > 0)); then
     __prompt_timer_string="${h}h${m}m"
-  elif ((m > 0)); then 
+  elif ((m > 0)); then
     __prompt_timer_string="${m}m${s}s"
-  elif ((s > 0)); then 
+  elif ((s > 0)); then
     __prompt_timer_string="${s}s${ms}ms"
-  else 
+  else
     __prompt_timer_string="${ms}ms"
   fi
   unset __prompt_timer
@@ -87,9 +87,9 @@ function __prompt_timer_stop() {
 __prompt_command() {
 
   local exit_code="$?"
-  
+
   __prompt_timer_stop
-  
+
   local regular_black='\[\e[0;30m\]'
   local regular_red='\[\e[0;31m\]'
   local regular_green='\[\e[0;32m\]'
@@ -164,7 +164,7 @@ __prompt_command() {
   PS1+="${bold_white}|"
   if [[ -n "${SSH_CONNECTION}" ]] || [[ "${USER}" == 'root' ]] || [[ "${LOGNAME}" != "${USER}" ]]; then
     PS1+="${user}${at}${host}:"
-  fi  
+  fi
   PS1+="${dir}${git_status}"
   PS1+="${bold_white}]"
   PS1+="\n"
