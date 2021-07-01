@@ -6,16 +6,16 @@
 # +--- Dirty State ---+
 # Show unstaged (*) and staged (+) changes.
 # Also configurable per repository via "bash.showDirtyState".
-GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWDIRTYSTATE=true
 
 # +--- Stash State ---+
 # Show currently stashed ($) changes.
-GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
 
 # +--- Untracked Files ---+
 # Show untracked (%) changes.
 # Also configurable per repository via "bash.showUntrackedFiles".
-GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
 
 # +--- Upstream Difference ---+
 # Show indicator for difference between HEAD and its upstream.
@@ -35,7 +35,7 @@ GIT_PS1_SHOWUNTRACKEDFILES=true
 #
 # By default, __git_ps1 will compare HEAD to SVN upstream ('@{upstream}' if not available).
 # Also configurable per repository via "bash.showUpstream".
-GIT_PS1_SHOWUPSTREAM=""
+export GIT_PS1_SHOWUPSTREAM=""
 
 # +--- Describe Style ---+
 # Show more information about the identity of commits checked out as a detached HEAD.
@@ -45,17 +45,17 @@ GIT_PS1_SHOWUPSTREAM=""
 #   branch    Relative to newer tag or branch (master~4)
 #   describe  Relative to older annotated tag (v1.6.3.1-13-gdd42c2f)
 #   default   Exactly matching tag
-GIT_PS1_DESCRIBE_STYLE="contains"
+export GIT_PS1_DESCRIBE_STYLE="contains"
 
 # +--- Colored Hints ---+
 # Show colored hints about the current dirty state. The colors are based on the colored output of "git status -sb".
 # NOTE: Only available when using __git_ps1 for PROMPT_COMMAND!
-GIT_PS1_SHOWCOLORHINTS=false
+export GIT_PS1_SHOWCOLORHINTS=false
 
 # +--- pwd Ignore ---+
 # Disable __git_ps1 output when the current directory is set up to be ignored by git.
 # Also configurable per repository via "bash.hideIfPwdIgnored".
-GIT_PS1_HIDE_IF_PWD_IGNORED=false
+export GIT_PS1_HIDE_IF_PWD_IGNORED=false
 
 function __prompt_timer_now() {
   date '+%s%3N'
