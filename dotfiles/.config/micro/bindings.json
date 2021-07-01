@@ -75,11 +75,13 @@
     "CtrlJ":          "PlayMacro",
     "Insert":         "ToggleOverwriteMode",
 
+    // Emacs-style keybindings
     "Alt-f": "WordRight",
     "Alt-b": "WordLeft",
     "Alt-a": "StartOfLine",
     "Alt-e": "EndOfLine",
 
+    // Integration with file managers
     "F2":  "Save",
     "F3":  "Find",
     "F4":  "Quit",
@@ -87,6 +89,7 @@
     "F10": "Quit",
     "Esc": "Escape",
 
+    // Mouse bindings
     "MouseWheelUp":   "ScrollUp",
     "MouseWheelDown": "ScrollDown",
     "MouseLeft":      "MousePress",
@@ -99,5 +102,5 @@
     "Alt-m":        "SpawnMultiCursorSelect",
     "Alt-p":        "RemoveMultiCursor",
     "Alt-c":        "RemoveAllMultiCursors",
-    "Alt-x":        "SkipMultiCursor"
+    "Alt-x":        "SkipMultiCursor",
 }
