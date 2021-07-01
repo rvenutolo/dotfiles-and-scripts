@@ -35,7 +35,7 @@ function cu {
     for i in $(seq 1 ${count}); do
         path="${path}../"
     done
-    cd $path
+    cd $path || exit
 }
 
 # "| order" is very handy for counting duplicated lines in a file or listing
@@ -188,7 +188,7 @@ function gradle-or-gradlew() {
       project_root="$dir"
       break
     fi
-    dir="$(dirname ${dir})"
+    dir="$(dirname "${dir}")"
   done
   if [[ -f "$project_root/gradlew" ]]; then
     echo "Executing gradlew instead of gradle"
@@ -205,7 +205,7 @@ function mvn-or-mvnw() {
       project_root="$dir"
       break
     fi
-    dir="$(dirname ${dir})"
+    dir="$(dirname "${dir}")"
   done
   if [[ -f "$project_root/mvnw" ]]; then
     echo "Executing mvnw instead of mvn"
