@@ -118,22 +118,20 @@ alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=sta
 
 alias gradle='gradle-or-gradlew'
 alias mvn='mvn-or-mvnw'
-alias sortpom='\
-  mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort \
-  -Dsort.keepBlankLines=true \
-  -Dsort.predefinedSortOrder="recommended_2008_06" \
-  -Dsort.encoding="UTF-8" \
-  -Dsort.lineSeparator="\n" \
-  -Dsort.nrOfIndentSpace=4'
-alias sortpomanddependencies='\
-  mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort \
-  -Dsort.keepBlankLines=true \
-  -Dsort.predefinedSortOrder="recommended_2008_06" \
-  -Dsort.encoding="UTF-8" \
-  -Dsort.lineSeparator="\n" \
-  -Dsort.nrOfIndentSpace=4 \
-  -Dsort.sortDependencies=scope,groupId,artifactId'
-  
+alias sortpom="mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort"\
+" -Dsort.keepBlankLines=true"\
+" -Dsort.predefinedSortOrder='recommended_2008_06'"\
+" -Dsort.encoding='UTF-8'"\
+" -Dsort.lineSeparator='\n'"\
+" -Dsort.nrOfIndentSpace=4"
+alias sortpomanddependencies="mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort"\
+" -Dsort.keepBlankLines=true"\
+" -Dsort.predefinedSortOrder='recommended_2008_06'"\
+" -Dsort.encoding='UTF-8'"\
+" -Dsort.lineSeparator='\n'"\
+" -Dsort.nrOfIndentSpace=4"\
+" -Dsort.sortDependencies=scope,groupId,artifactId"
+
 if command_exists 'yay'; then
   alias update='yay -Syyu && yay --clean'
   alias p='pacman'
