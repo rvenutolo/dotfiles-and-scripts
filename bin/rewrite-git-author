@@ -2,9 +2,9 @@
 
 set -euo pipefail
 
-read -p 'Email address to replace: ' old_email
-read -p 'New email address: ' new_email
-read -p 'New name: ' new_name
+read -r -p 'Email address to replace: ' old_email
+read -r -p 'New email address: ' new_email
+read -r -p 'New name: ' new_name
 
 # adapted from https://help.github.com/articles/changing-author-info/
 git filter-branch -f --env-filter "
