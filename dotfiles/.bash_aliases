@@ -133,7 +133,7 @@ alias sortpomanddependencies="mvn com.github.ekryd.sortpom:sortpom-maven-plugin:
 " -Dsort.sortDependencies=scope,groupId,artifactId"
 
 if command_exists 'yay'; then
-  alias update='yay -Syyu && yay --clean'
+  alias update='yay -Syyu && yay -Yc'
   alias p='pacman'
   alias yay='yay --nodiffmenu'
   alias y='yay'
