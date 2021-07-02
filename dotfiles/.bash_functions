@@ -308,6 +308,7 @@ function check-setup() {
     'pygmentize' \
     'ranger' \
     'rg' \
+    'rustup' \
     'sbt' \
     'scala' \
     'sd' \
