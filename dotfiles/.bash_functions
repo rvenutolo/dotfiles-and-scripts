@@ -412,6 +412,8 @@ function check-setup() {
   # There may be a better way to detect if bash-completion is present
   type -t '_init_completion' >/dev/null 2>&1 || echo 'bash-completion not present'
 
+  [[ "$(rustup toolchain list)" != stable* ]] && echo "rust toolchain is not 'stable'"
+
   if [[ "${HOME_OR_NOT}" == 'home' ]]; then
 
     for cmd in \
