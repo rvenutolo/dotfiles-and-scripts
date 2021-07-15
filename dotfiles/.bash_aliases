@@ -118,6 +118,7 @@ alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=sta
 
 alias gradle='gradle-or-gradlew'
 alias mvn='mvn-or-mvnw'
+alias mvnsources='mvn dependency:sources && mvn dependency:resolve -Dclassifier=javadoc'
 alias sortpom="mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort"\
 " -Dsort.keepBlankLines=true"\
 " -Dsort.predefinedSortOrder='recommended_2008_06'"\
