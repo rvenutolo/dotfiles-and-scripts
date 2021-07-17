@@ -113,8 +113,8 @@ alias gs='git status'
 alias gb='git checkout'
 alias gm='git merge'
 
-alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
-alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
+alias docker-clean-images='docker rmi $(docker images -a --filter=dangling=true -q)'
+alias docker-clean-ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
 
 alias gradle='gradle-or-gradlew'
 alias mvn='mvn-or-mvnw'
@@ -150,7 +150,7 @@ alias pscpu='ps auxf | sort -nr -k 3'
 alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
 
 alias jctl="journalctl -p3 -xb"
-alias jctl_last"journalctl -p3 -xb1"
+alias jctl-last="journalctl -p3 -xb1"
 
 alias ln='ln -v'
 alias jobs='jobs -l'
@@ -160,8 +160,8 @@ alias path='echo -e ${PATH//:/\\n}'
 alias cls='clear'
 alias q='exit'
 alias h='history'
-alias file_extensions='find . -type f | sed -n "s/..*\.//p" | sort | uniq -c | sort -nr'
-alias file_counts='du -a | cut -d/ -f2 | sort | uniq -c | sort -nr'
+alias file-extensions='find . -type f | sed -n "s/..*\.//p" | sort | uniq -c | sort -nr'
+alias file-counts='du -a | cut -d/ -f2 | sort | uniq -c | sort -nr'
 alias pager='${PAGER}'
 alias t='tldr'
 alias tree='tree -Cugph'
