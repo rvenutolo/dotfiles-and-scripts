@@ -133,10 +133,8 @@ alias sortpomanddependencies="mvn com.github.ekryd.sortpom:sortpom-maven-plugin:
 " -Dsort.nrOfIndentSpace=4"\
 " -Dsort.sortDependencies=scope,groupId,artifactId"
 
-if command_exists 'paru'; then
-  alias update='paru -Syu && paru -c'
-  alias p='paru'
-fi
+alias update='paru -Syu && paru -c'
+alias p='paru'
 
 alias copy='xsel -ib'
 alias paste='xsel -ob'
@@ -151,7 +149,9 @@ alias psmem10='ps auxf | sort -nr -k 4 | head -10'
 alias pscpu='ps auxf | sort -nr -k 3'
 alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
 
-alias jctl="journalctl -p 3 -xb"
+alias jctl="journalctl -p3 -xb"
+alias jctl_last"journalctl -p3 -xb1"
+
 alias ln='ln -v'
 alias jobs='jobs -l'
 alias map='xargs -n1'
