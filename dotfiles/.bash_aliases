@@ -40,10 +40,14 @@ fi
 alias mkdir='mkdir -pv'
 alias cp='cp -iv'
 alias mv='mv -iv'
-alias rm='rm -iv'
+alias rm='rm -Iv --preserve-root'
 if command_exists 'safe-rm'; then
   alias rm='safe-rm -iv'
 fi
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+
 
 alias e='edit'
 alias k='kate'
