@@ -252,6 +252,7 @@ function check-setup() {
   for cmd in \
     '7z' \
     'authy' \
+    'aura' \
     'aws' \
     'bashtop' \
     'bat' \
@@ -330,6 +331,7 @@ function check-setup() {
     'unzip' \
     'visualvm' \
     'xsel' \
+    'yay' \
     'zip'; do
     command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
   done
