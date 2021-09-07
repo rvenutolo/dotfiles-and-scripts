@@ -257,12 +257,14 @@ function check-setup() {
     'bashtop' \
     'bat' \
     'bmon' \
+    'bpytop' \
     'broot' \
     'bunzip2' \
     'cabextract' \
     'cargo' \
     'checkbashisms' \
     'colordiff' \
+    'cpufetch' \
     'ctop' \
     'dash' \
     'dig' \
@@ -274,6 +276,7 @@ function check-setup() {
     'fd' \
     'fff' \
     'fzf' \
+    'gdu' \
     'git' \
     'gitui' \
     'glances' \
@@ -293,6 +296,7 @@ function check-setup() {
     'lazygit' \
     'lf' \
     'locate' \
+    'magick' \
     'micro' \
     'mn' \
     'mvn' \
@@ -322,7 +326,7 @@ function check-setup() {
     'tar' \
     'tldr' \
     'tokei' \
-    'trash-empty' \
+    'trash' \
     'tree' \
     'uncompress' \
     'unlzma' \
@@ -433,6 +437,7 @@ function check-setup() {
       'puddletag' \
       'soundkonverter' \
       'sox' \
+      'speedtest' \
       'tageditor' \
       'timeshift' \
       'virt-manager' \
