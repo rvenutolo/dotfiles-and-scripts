@@ -144,6 +144,9 @@ alias paste='xsel -ob'
 alias cwd='pwd | tr -d "\r\n" | copy'
 alias shrug='echo -n "¯\_(ツ)_/¯" | copy'
 
+alias psa='ps aux'
+alias psaf='ps auxf'
+
 ## get top process eating memory
 alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
