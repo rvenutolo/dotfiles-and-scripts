@@ -307,6 +307,7 @@ function check-setup() {
     'nvim' \
     'oneshot' \
     'pandoc' \
+    'parallel' \
     'paru' \
     'pcmanfm' \
     'procs' \
