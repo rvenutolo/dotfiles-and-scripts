@@ -137,7 +137,8 @@ alias sortpomanddependencies="mvn com.github.ekryd.sortpom:sortpom-maven-plugin:
 " -Dsort.nrOfIndentSpace=4"\
 " -Dsort.sortDependencies=scope,groupId,artifactId"
 
-alias update='sudo aura -Syyu && aura -Auax && sudo aura -Oj'
+alias update='paru -Syu && paru -c'
+alias p='paru'
 alias update-mirrors='sudo pacman-mirrors --country United_States,Canada && sudo pacman-mirrors --fasttrack && sudo pacman -Syyu'
 
 alias copy='xsel -ib'
