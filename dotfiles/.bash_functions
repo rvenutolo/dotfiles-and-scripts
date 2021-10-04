@@ -306,6 +306,7 @@ function check-setup() {
     'nnn' \
     'nvim' \
     'oneshot' \
+    'pageres' \
     'pandoc' \
     'parallel' \
     'paru' \
