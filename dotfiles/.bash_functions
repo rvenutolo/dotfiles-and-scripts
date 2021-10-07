@@ -321,6 +321,7 @@ function check-setup() {
     'sd' \
     'shellcheck' \
     'shfmt' \
+    'sntp' \
     'spark-submit' \
     'spring' \
     'stacer' \
@@ -421,6 +422,8 @@ function check-setup() {
   type -t '_init_completion' >/dev/null 2>&1 || echo 'bash-completion not present'
 
   [[ "$(rustup toolchain list)" != stable* ]] && echo "rust toolchain is not 'stable'"
+  
+  [[ $(timedatectl show) != *'NTP=yes'* ]] && echo "timedatectl set-ntp is not set" 
 
   if [[ "${HOME_OR_NOT}" == 'home' ]]; then
 
