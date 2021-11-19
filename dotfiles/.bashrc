@@ -99,6 +99,7 @@ for dir in \
   "$(ruby -e 'puts Gem.user_dir')/bin" \
   "${HOME}/.local/bin" \
   "${HOME}/.cargo/bin" \
+  "${HOME}/.local/share/coursier/bin" \
   "${HOME}/.bin"; do
   [[ -d "${dir}" ]] && [[ "${PATH}" != *"${dir}"* ]] && PATH="${dir}:${PATH}"
 done
