@@ -48,6 +48,7 @@ alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 
+alias rsync-bak='rsync -ahEP --stats'
 
 alias e='edit'
 alias k='kate'
