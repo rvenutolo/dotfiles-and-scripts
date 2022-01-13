@@ -252,12 +252,10 @@ function check-setup() {
   for cmd in \
     '7z' \
     'authy' \
-    'aura' \
     'aws' \
     'bashtop' \
     'bat' \
     'bmon' \
-    'bpytop' \
     'broot' \
     'bunzip2' \
     'cabextract' \
@@ -296,20 +294,18 @@ function check-setup() {
     'lazygit' \
     'lf' \
     'locate' \
-    'magick' \
     'micro' \
     'mn' \
     'mvn' \
+    'mvnd' \
     'nano' \
     'ncdu' \
     'neofetch' \
     'nnn' \
     'nvim' \
     'oneshot' \
-    'pageres' \
     'pandoc' \
     'parallel' \
-    'paru' \
     'pcmanfm' \
     'procs' \
     'pygmentize' \
@@ -338,7 +334,6 @@ function check-setup() {
     'unzip' \
     'visualvm' \
     'xsel' \
-    'yay' \
     'zip'; do
     command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
   done
@@ -422,12 +417,13 @@ function check-setup() {
   type -t '_init_completion' >/dev/null 2>&1 || echo 'bash-completion not present'
 
   [[ "$(rustup toolchain list)" != stable* ]] && echo "rust toolchain is not 'stable'"
-  
-  [[ $(timedatectl show) != *'NTP=yes'* ]] && echo "timedatectl set-ntp is not set" 
+
+  [[ $(timedatectl show) != *'NTP=yes'* ]] && echo "timedatectl set-ntp is not set"
 
   if [[ "${HOME_OR_NOT}" == 'home' ]]; then
 
     for cmd in \
+      'aura' \
       'backintime' \
       'dnuos' \
       'eyeD3' \
@@ -435,10 +431,12 @@ function check-setup() {
       'flac2all' \
       'flac2mp3.pl' \
       'lame' \
+      'magick' \
       'mediainfo' \
       'mogrify' \
       'mp3splt' \
       'openconnect' \
+      'paru' \
       'puddletag' \
       'soundkonverter' \
       'sox' \
@@ -446,7 +444,8 @@ function check-setup() {
       'tageditor' \
       'timeshift' \
       'virt-manager' \
-      'virsh'; do
+      'virsh'\
+      'yay'; do
       command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
     done
 
