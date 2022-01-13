@@ -138,8 +138,20 @@ alias sortpomanddependencies="mvn com.github.ekryd.sortpom:sortpom-maven-plugin:
 " -Dsort.nrOfIndentSpace=4"\
 " -Dsort.sortDependencies=scope,groupId,artifactId"
 
-alias update='paru -Syu && paru -c'
-alias p='paru'
+
+if command_exists 'paru'; then
+  alias update='paru -Syu && paru -c'
+  alias p='paru'
+elif command_exists 'yay'; then
+  alias update='yay -Syyu && yay -Yc'
+  alias yay='yay --nodiffmenu'
+  alias y='yay'
+elif command_exists 'pacman'; then
+  alias update='sudo pacman -Syu'
+elif command_exists 'apt'; then
+  alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
+fi
+
 alias update-mirrors='sudo pacman-mirrors --country United_States,Canada && sudo pacman-mirrors --fasttrack && sudo pacman -Syyu'
 
 alias copy='xsel -ib'
