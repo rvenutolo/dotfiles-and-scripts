@@ -251,6 +251,7 @@ function check-setup() {
 
   for cmd in \
     '7z' \
+    'alacritty' \
     'authy' \
     'aws' \
     'bashtop' \
@@ -263,7 +264,9 @@ function check-setup() {
     'checkbashisms' \
     'colordiff' \
     'cpufetch' \
+    'crontab' \
     'ctop' \
+    'curl' \
     'dash' \
     'dig' \
     'diff-so-fancy' \
@@ -278,6 +281,7 @@ function check-setup() {
     'git' \
     'gitui' \
     'glances' \
+    'go' \
     'gparted' \
     'gradle' \
     'groovy' \
@@ -307,13 +311,16 @@ function check-setup() {
     'pandoc' \
     'parallel' \
     'pcmanfm' \
+    'pip' \
     'procs' \
     'pygmentize' \
     'ranger' \
     'rg' \
+    'ruby' \
     'rustup' \
     'sbt' \
     'scala' \
+    'screen' \
     'sd' \
     'shellcheck' \
     'shfmt' \
@@ -333,6 +340,7 @@ function check-setup() {
     'unxz' \
     'unzip' \
     'visualvm' \
+    'wget' \
     'xsel' \
     'zip'; do
     command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
