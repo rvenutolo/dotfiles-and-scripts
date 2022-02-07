@@ -112,11 +112,6 @@ alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # cd with interactive selection
 
 alias g='git'
-alias ga='git add'
-alias gc='git commit'
-alias gs='git status'
-alias gb='git checkout'
-alias gm='git merge'
 
 alias docker-clean-images='docker rmi $(docker images -a --filter=dangling=true -q)'
 alias docker-clean-ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
@@ -138,11 +133,7 @@ alias sortpomanddependencies="mvn com.github.ekryd.sortpom:sortpom-maven-plugin:
 " -Dsort.nrOfIndentSpace=4"\
 " -Dsort.sortDependencies=scope,groupId,artifactId"
 
-
-if command_exists 'paru'; then
-  alias update='paru -Syu && paru -c'
-  alias p='paru'
-elif command_exists 'yay'; then
+if command_exists 'yay'; then
   alias update='yay -Syyu && yay -Yc'
   alias yay='yay --nodiffmenu'
   alias y='yay'
