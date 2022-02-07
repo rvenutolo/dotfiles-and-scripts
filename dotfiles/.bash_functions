@@ -254,10 +254,10 @@ function check-setup() {
     'alacritty' \
     'authy' \
     'aws' \
-    'bashtop' \
     'bat' \
     'bmon' \
     'broot' \
+    'btop' \
     'bunzip2' \
     'cabextract' \
     'cargo' \
@@ -285,7 +285,6 @@ function check-setup() {
     'gparted' \
     'gradle' \
     'groovy' \
-    'gtop' \
     'gunzip' \
     'http' \
     'iconv' \
