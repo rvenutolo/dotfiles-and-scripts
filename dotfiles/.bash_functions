@@ -262,6 +262,7 @@ function check-setup() {
     'cabextract' \
     'cargo' \
     'checkbashisms' \
+    'cmake' \
     'colordiff' \
     'cpufetch' \
     'crontab' \
