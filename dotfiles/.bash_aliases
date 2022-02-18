@@ -134,16 +134,30 @@ alias sortpomanddependencies="mvn com.github.ekryd.sortpom:sortpom-maven-plugin:
 " -Dsort.sortDependencies=scope,groupId,artifactId"
 
 if command_exists 'yay'; then
+  update_command='yay -Syyu && yay -Yc'
   alias update='yay -Syyu && yay -Yc'
   alias yay='yay --nodiffmenu'
   alias y='yay'
 elif command_exists 'pacman'; then
-  alias update='sudo pacman -Syu'
+  update_command='sudo pacman -Syu'
 elif command_exists 'apt'; then
-  alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
+  update_command='sudo apt update && sudo apt upgrade && sudo apt autoremove'
 fi
+if command_exists 'snap'; then
+  update_command="${update_command} && sudo snap refresh"
+fi
+if command_exists 'cargo' && cargo install --list | grep -qF 'cargo-install-update' ; then
+  update_command="${update_command} && cargo install-update --all"
+fi
+if command_exists 'gem'; then
+  update_command="${update_command} && gem update"
+fi
+alias update="${update_command}"
+unset update_command
 
-alias update-mirrors='sudo pacman-mirrors --country United_States,Canada && sudo pacman-mirrors --fasttrack && sudo pacman -Syyu'
+if command_exists 'pacman-mirrors'; then
+  alias update-mirrors='sudo pacman-mirrors --country United_States,Canada && sudo pacman-mirrors --fasttrack && sudo pacman -Syyu'
+fi
 
 alias copy='xsel -ib'
 alias paste='xsel -ob'
@@ -180,7 +194,7 @@ alias tree='tree -Cugph'
 # use like so: sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias brc='source ${HOME}/.bashrc'
-alias sdf='${CODE_DIR}/dotfiles-and-scripts/bin/sync-dotfiles-and-scripts; brc'
+alias sdf='${CODE_DIR}/dotfiles-and-scripts/bin/sync-dotfiles-and-scripts && brc'
 alias coredumps='journalctl | command grep -F "dumped core"'
 alias colortest='msgcat --color=test'
 alias localip='ip -o route get to 8.8.8.8 | sed -n "s/.*src \([0-9.]\+\).*/\1/p"'
