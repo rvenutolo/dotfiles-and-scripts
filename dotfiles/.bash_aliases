@@ -150,7 +150,7 @@ if command_exists 'cargo' && cargo install --list | grep -qF 'cargo-install-upda
   update_command="${update_command} && cargo install-update --all"
 fi
 if command_exists 'gem'; then
-  update_command="${update_command} && gem update"
+  update_command="${update_command} && sudo gem update"
 fi
 alias update="${update_command}"
 unset update_command
