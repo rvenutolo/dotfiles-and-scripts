@@ -307,6 +307,7 @@ function check-setup() {
     'neofetch' \
     'nnn' \
     'nvim' \
+    'onefetch' \
     'oneshot' \
     'pandoc' \
     'parallel' \
