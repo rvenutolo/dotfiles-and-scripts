@@ -201,3 +201,4 @@ alias localip='ip -o route get to 8.8.8.8 | sed -n "s/.*src \([0-9.]\+\).*/\1/p"
 alias wanip='curl ifconfig.me/ip'
 alias wttr='curl wttr.in/${WTTR_CITY}'
 alias flac2v0='flac2mp3.pl --quiet --lameargs="-V0 --noreplaygain --nohist --quiet" --processes="$(nproc)" . .'
+alias compress-pdf='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=compressed_PDF_file.pdf'
