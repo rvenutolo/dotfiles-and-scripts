@@ -180,7 +180,7 @@ alias jctl-last="journalctl -p3 -xb1"
 
 alias ln='ln -v'
 alias jobs='jobs -l'
-alias map='xargs -n1'
+alias map='xargs -P"$(grep -c ^processor /proc/cpuinfo)" -n1'
 alias which='type -a'
 alias path='echo -e ${PATH//:/\\n}'
 alias cls='clear'
