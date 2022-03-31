@@ -315,6 +315,7 @@ function check-setup() {
     'pip' \
     'procs' \
     'pygmentize' \
+    'pv' \
     'ranger' \
     'rg' \
     'ruby' \
