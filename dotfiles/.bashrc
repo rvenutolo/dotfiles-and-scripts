@@ -84,9 +84,9 @@ for file in \
   "${HOME}/.config/broot/launcher/bash/br" \
   "${HOME}/.bash_exports" \
   "${HOME}/.bash_functions" \
-  "${HOME}/.bash_extra" \
   "${HOME}/.bash_aliases" \
-  "${HOME}/.bash_prompt"; do
+  "${HOME}/.bash_prompt" \
+  "${HOME}/.bash_extra"; do
   [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}"
 done
 unset file
