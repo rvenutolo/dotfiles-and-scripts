@@ -433,7 +433,6 @@ function check-setup() {
   if [[ "${HOME_OR_NOT}" == 'home' ]]; then
 
     for cmd in \
-      'aura' \
       'backintime' \
       'dnuos' \
       'eyeD3' \
