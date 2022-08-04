@@ -151,7 +151,7 @@
 
   # Use `hexdump` to diff binary files
   textconv = hexdump -v -C
-  
+
 [fetch]
   prune = true
 
@@ -167,10 +167,12 @@
 
 [push]
 
-  # https://git-scm.com/docs/git-config#git-config-pushdefault
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
   default = simple
   # Make `git push` push relevant annotated tags when pushing branches out.
   followTags = true
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushautoSetupRemote
+  autoSetupRemote = true
 
 [pull]
 
