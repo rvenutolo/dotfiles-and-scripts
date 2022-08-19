@@ -19,6 +19,7 @@ spark-warehouse/
 
 ### Java HotSpot Error
 hs_err_pid*
+replay_pid*
 
 ### IntelliJ
 *.iml
@@ -44,3 +45,16 @@ out/
 /conf
 /input
 /output
+
+### Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
