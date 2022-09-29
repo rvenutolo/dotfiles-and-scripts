@@ -181,7 +181,7 @@ function fff() {
   cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit
 }
 
-function gradle-or-gradlew() {
+function gradle() {
   local dir="$PWD" project_root="$PWD"
   while [[ "$dir" != / ]]; do
     if [[ -f "$dir/settings.gradle" || -f "$dir/settings.gradle.kts" || -f "$dir/gradlew" ]]; then
@@ -198,7 +198,7 @@ function gradle-or-gradlew() {
   fi
 }
 
-function mvn-or-mvnw() {
+function mvn() {
   local dir="$PWD" project_root="$PWD"
   while [[ "$dir" != / ]]; do
     if [[ -f "$dir/pom.xml" || -f "$dir/mvnw" ]]; then
@@ -210,6 +210,8 @@ function mvn-or-mvnw() {
   if [[ -f "$project_root/mvnw" ]]; then
     echo "Executing mvnw instead of mvn"
     "$project_root/mvnw" "$@"
+  elif command_exists 'mvnd'; then
+    command mvnd "$@"
   else
     command mvn "$@"
   fi

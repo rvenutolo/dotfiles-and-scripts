@@ -116,8 +116,6 @@ alias g='git'
 alias docker-clean-images='docker rmi $(docker images -a --filter=dangling=true -q)'
 alias docker-clean-ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
 
-alias gradle='gradle-or-gradlew'
-alias mvn='mvn-or-mvnw'
 alias mvnsources='mvn dependency:sources && mvn dependency:resolve -Dclassifier=javadoc'
 alias sortpom="mvn com.github.ekryd.sortpom:sortpom-maven-plugin:sort"\
 " -Dsort.keepBlankLines=true"\
