@@ -150,6 +150,9 @@ fi
 if command_exists 'gem'; then
   update_command="${update_command} && sudo gem update"
 fi
+if command_exists 'tldr'; then
+  update_command="${update_command} && tldr -u"
+fi
 alias update="${update_command}"
 unset update_command
 
