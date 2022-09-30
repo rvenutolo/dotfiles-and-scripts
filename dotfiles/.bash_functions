@@ -264,6 +264,7 @@ function check-setup() {
     'cabextract' \
     'cargo' \
     'checkbashisms' \
+    'clamscan' \
     'cmake' \
     'colordiff' \
     'cpufetch' \
@@ -300,6 +301,7 @@ function check-setup() {
     'lazygit' \
     'lf' \
     'locate' \
+    'maldet' \
     'micro' \
     'mn' \
     'mvn' \
@@ -447,6 +449,7 @@ function check-setup() {
       'mogrify' \
       'mp3splt' \
       'openconnect' \
+      'pacseek' \
       'paru' \
       'puddletag' \
       'soundkonverter' \
