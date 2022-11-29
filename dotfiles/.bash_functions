@@ -9,7 +9,7 @@ function edit() {
 }
 
 function fm() {
-  "${FILE_MANAGER}" "$@" > /dev/null 2>&1 &
+  "${FILE_MANAGER}" "$@" >/dev/null 2>&1 &
   disown
 }
 
