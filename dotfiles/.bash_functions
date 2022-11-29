@@ -261,8 +261,8 @@ function check-setup() {
     'inotifywait' 'java' 'javac' 'jq' 'kotlin' 'lazydocker' 'lazygit' 'lf' 'locate' 'maldet' 'micro' 'mn' 'mvn' 'mvnd'
     'nano' 'ncdu' 'neofetch' 'nnn' 'nvim' 'onefetch' 'oneshot' 'pandoc' 'parallel' 'pcmanfm' 'pip' 'postman' 'procs'
     'pygmentize' 'pv' 'ranger' 'rg' 'ruby' 'rustup' 'sbt' 'scala' 'screen' 'sd' 'shellcheck' 'shfmt' 'sntp'
-    'spark-submit' 'spring' 'stacer' 'tabs2spaces' 'tar' 'tldr' 'tokei' 'trash' 'tree' 'uncompress' 'unlzma' 'unrar'
-    'unxz' 'unzip' 'visualvm' 'wget' 'xsel' 'zip'
+    'spark-submit' 'spring' 'stacer' 'starship' 'tabs2spaces' 'tar' 'tldr' 'tokei' 'trash' 'tree' 'uncompress' 'unlzma'
+    'unrar' 'unxz' 'unzip' 'visualvm' 'wget' 'xsel' 'zip'
   )
   if [[ "${HOME_OR_NOT}" == 'home' ]]; then
     expected_cmds+=(
