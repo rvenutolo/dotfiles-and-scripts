@@ -251,153 +251,48 @@ function pless() {
 
 function check-setup() {
 
-  for cmd in \
-    '7z' \
-    'alacritty' \
-    'authy' \
-    'aws' \
-    'bat' \
-    'bmon' \
-    'broot' \
-    'btop' \
-    'bunzip2' \
-    'cabextract' \
-    'cargo' \
-    'checkbashisms' \
-    'clamscan' \
-    'cmake' \
-    'colordiff' \
-    'cpufetch' \
-    'crontab' \
-    'ctop' \
-    'curl' \
-    'dash' \
-    'dig' \
-    'diff-so-fancy' \
-    'docker' \
-    'dos2unix' \
-    'exa' \
-    'fasd' \
-    'fd' \
-    'fff' \
-    'fzf' \
-    'gdu' \
-    'git' \
-    'gitui' \
-    'glances' \
-    'go' \
-    'gparted' \
-    'gradle' \
-    'groovy' \
-    'gunzip' \
-    'http' \
-    'iconv' \
-    'inotifywait' \
-    'java' \
-    'javac' \
-    'jq' \
-    'kotlin' \
-    'lazydocker' \
-    'lazygit' \
-    'lf' \
-    'locate' \
-    'maldet' \
-    'micro' \
-    'mn' \
-    'mvn' \
-    'mvnd' \
-    'nano' \
-    'ncdu' \
-    'neofetch' \
-    'nnn' \
-    'nvim' \
-    'onefetch' \
-    'oneshot' \
-    'pandoc' \
-    'parallel' \
-    'pcmanfm' \
-    'pip' \
-    'procs' \
-    'pygmentize' \
-    'pv' \
-    'ranger' \
-    'rg' \
-    'ruby' \
-    'rustup' \
-    'sbt' \
-    'scala' \
-    'screen' \
-    'sd' \
-    'shellcheck' \
-    'shfmt' \
-    'sntp' \
-    'spark-submit' \
-    'spring' \
-    'stacer' \
-    'tabs2spaces' \
-    'tar' \
-    'tldr' \
-    'tokei' \
-    'trash' \
-    'tree' \
-    'uncompress' \
-    'unlzma' \
-    'unrar' \
-    'unxz' \
-    'unzip' \
-    'visualvm' \
-    'wget' \
-    'xsel' \
-    'zip'; do
+  local expected_cmds=(
+    '7z' 'alacritty' 'authy' 'aws' 'bat' 'bmon' 'broot' 'btop' 'bunzip2' 'cabextract' 'cargo' 'checkbashisms' 'clamscan'
+    'cmake' 'colordiff' 'cpufetch' 'crontab' 'ctop' 'curl' 'dash' 'dig' 'diff-so-fancy' 'distrobox' 'docker' 'dos2unix'
+    'exa' 'fasd' 'fd' 'fff' 'fzf' 'gdu' 'git' 'gitui' 'glances' 'go' 'gparted' 'gradle' 'groovy' 'gunzip' 'http' 'iconv'
+    'inotifywait' 'java' 'javac' 'jq' 'kotlin' 'lazydocker' 'lazygit' 'lf' 'locate' 'maldet' 'micro' 'mn' 'mvn' 'mvnd'
+    'nano' 'ncdu' 'neofetch' 'nnn' 'nvim' 'onefetch' 'oneshot' 'pandoc' 'parallel' 'pcmanfm' 'pip' 'postman' 'procs'
+    'pygmentize' 'pv' 'ranger' 'rg' 'ruby' 'rustup' 'sbt' 'scala' 'screen' 'sd' 'shellcheck' 'shfmt' 'sntp'
+    'spark-submit' 'spring' 'stacer' 'tabs2spaces' 'tar' 'tldr' 'tokei' 'trash' 'tree' 'uncompress' 'unlzma' 'unrar'
+    'unxz' 'unzip' 'visualvm' 'wget' 'xsel' 'zip'
+  )
+  if [[ "${HOME_OR_NOT}" == 'home' ]]; then
+    expected_cmds+=(
+      'backintime' 'clapper' 'dnuos' 'eyeD3' 'flac' 'flac2all' 'flac2mp3.pl' 'lame' 'magick' 'mediainfo' 'mogrify'
+      'mp3splt' 'openconnect' 'pacseek' 'paru' 'puddletag' 'soundkonverter' 'sox' 'speedtest' 'tageditor' 'timeshift'
+      'virt-manager' 'virsh' 'yay'
+    )
+  fi
+  for cmd in "${expected_cmds[@]}"; do
     command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
   done
 
-  for func in \
-    '__git_ps1' \
-    'br' \
-    'sdk'; do
+  local expected_funcs=('__git_ps1' 'br' 'sdk')
+  for func in "${expected_funcs[@]}"; do
     declare -f -F "${func}" >/dev/null 2>&1 || echo "Function not available: ${func}"
   done
 
-  for file in \
-    "${HOME}/.bash_extra" \
-    "${HOME}/.gitconfig.private" \
-    "${HOME}/.ssh/config.private"; do
+  local expected_files=("${HOME}/.bash_extra" "${HOME}/.gitconfig.private" "${HOME}/.ssh/config.private")
+  for file in "${expected_files[@]}"; do
     [[ -f "${file}" ]] || echo "Missing file: ${file}"
   done
 
-  for var in \
-    'BROWSER' \
-    'DE' \
-    'EDITOR' \
-    'FILE_MANAGER' \
-    'JAVA_HOME' \
-    'HOME_OR_NOT' \
-    'PAGER' \
-    'VISUAL'; do
+  local expected_vars=('BROWSER' 'DE' 'EDITOR' 'FILE_MANAGER' 'JAVA_HOME' 'HOME_OR_NOT' 'PAGER' 'VISUAL')
+  for var in "${expected_vars[@]}"; do
     [[ -z "${!var}" ]] && echo "Environment variable not set: ${var}"
   done
 
-  for font in \
-    'Code New Roman' \
-    'Fantasque Sans Mono' \
-    'Fira Code' \
-    'FreeMono' \
-    'Hack' \
-    'Hasklig' \
-    'Inconsolata' \
-    'Input' \
-    'Iosevka' \
-    'JetBrains Mono' \
-    'JoyPixels' \
-    'Menlo' \
-    'Monoid' \
-    'Mononoki' \
-    'Noto Color Emoji' \
-    'Roboto Mono' \
-    'Source Code Pro' \
-    'Terminess' \
-    'Ubuntu Mono'; do
+  local expected_fonts=(
+    'Code New Roman' 'Fantasque Sans Mono' 'Fira Code' 'FreeMono' 'Hack' 'Hasklig' 'Inconsolata' 'Input' 'Iosevka'
+    'JetBrains Mono' 'JoyPixels' 'Menlo' 'Monoid' 'Mononoki' 'Noto Color Emoji' 'Roboto Mono' 'Source Code Pro'
+    'Terminess' 'Ubuntu Mono'
+  )
+  for font in "${expected_fonts[@]}"; do
     fc-list : family | grep -wiq "${font}" ||
       fc-list : family | grep -wiq "${font}TTF" ||
       fc-list : family | grep -wiq "$(echo -e "${font}" | tr -d '[:space:]')" ||
@@ -405,25 +300,36 @@ function check-setup() {
       echo "Font not available: ${font}"
   done
 
-  for service in \
-    'docker' \
-    'cups' \
-    'ssh-agent' \
-    'sshd'; do
-    systemctl is-active --quiet "${service}" || systemctl is-active --user --quiet "${service}" || echo "Service not running: ${service}"
+  local expected_services=('docker' 'cups' 'ssh-agent' 'sshd')
+  if [[ "${HOME_OR_NOT}" == 'home' ]]; then
+    expected_services+=('crashplan-pro' 'nfs-server' 'virtlogd')
+  fi
+  for service in "${expected_services[@]}"; do
+    systemctl is-active --quiet "${service}" ||
+      systemctl is-active --user --quiet "${service}" ||
+      echo "Service not running: ${service}"
   done
 
-  for group in \
-    'docker' \
-    'sys'; do
+  if [[ "${HOME_OR_NOT}" == 'home' ]]; then
+    # libvirtd goes inactive, but is still enabled
+    systemctl is-enabled --quiet 'libvirtd' || systemctl is-enabled --user --quiet 'libvirtd' || echo "Service not enabled: libvirtd"
+  fi
+
+  local expected_groups=('docker' 'sys')
+  if [[ "${HOME_OR_NOT}" == 'home' ]]; then
+    expected_groups+=('kvm' 'input' 'libvirt' 'wheel')
+  fi
+  for group in "${expected_groups[@]}"; do
     groups "${USER}" | grep -wq "${group}" || echo "User is not in group: ${group}"
   done
 
-  for kvals in \
-    'vm.dirty_background_ratio 5' \
-    'vm.dirty_ratio 5' \
-    'vm.swappiness 10'; do
-    IFS=' ' read -r k v <<< "${kvals}"
+  local expected_kvals=(
+    'vm.dirty_background_ratio 5'
+    'vm.dirty_ratio 5'
+    'vm.swappiness 10'
+  )
+  for kvals in "${expected_kvals[@]}"; do
+    IFS=' ' read -r k v <<<"${kvals}"
     [[ $(sysctl -n "${k}") -le "${v}" ]] || echo "Kernel variable ${k} is >${v}: $(sysctl -n "${k}")"
   done
 
@@ -433,58 +339,6 @@ function check-setup() {
   [[ "$(rustup toolchain list)" != stable* ]] && echo "rust toolchain is not 'stable'"
 
   [[ $(timedatectl show) != *'NTP=yes'* ]] && echo "timedatectl set-ntp is not set"
-
-  if [[ "${HOME_OR_NOT}" == 'home' ]]; then
-
-    for cmd in \
-      'backintime' \
-      'dnuos' \
-      'eyeD3' \
-      'flac' \
-      'flac2all' \
-      'flac2mp3.pl' \
-      'lame' \
-      'magick' \
-      'mediainfo' \
-      'mogrify' \
-      'mp3splt' \
-      'openconnect' \
-      'pacseek' \
-      'paru' \
-      'puddletag' \
-      'soundkonverter' \
-      'sox' \
-      'speedtest' \
-      'tageditor' \
-      'timeshift' \
-      'virt-manager' \
-      'virsh'\
-      'yay'; do
-      command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
-    done
-
-    for service in \
-      'crashplan-pro' \
-      'nfs-server' \
-      'virtlogd'; do
-      systemctl is-active --quiet "${service}" || systemctl is-active --user --quiet "${service}" || echo "Service not running: ${service}"
-    done
-
-    # libvirtd goes inactive, but is still enabled
-    for service in \
-      'libvirtd'; do
-      systemctl is-enabled --quiet "${service}" || systemctl is-enabled --user --quiet "${service}" || echo "Service not enabled: ${service}"
-    done
-
-    for group in \
-      'kvm' \
-      'input' \
-      'libvirt' \
-      'wheel'; do
-      groups "${USER}" | grep -wq "${group}" || echo "User is not in group: ${group}"
-    done
-
-  fi
 
   return 0
 }
