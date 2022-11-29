@@ -223,12 +223,12 @@ function uriencode() {
 }
 
 function kate() {
-  command kate "$@" > /dev/null 2>&1 &
+  command kate "$@" >/dev/null 2>&1 &
   disown
 }
 
 function mpv() {
-  command mpv "$@" > /dev/null 2>&1 &
+  command mpv "$@" >/dev/null 2>&1 &
   disown
 }
 
