@@ -133,13 +133,14 @@ alias sortpomanddependencies="mvn com.github.ekryd.sortpom:sortpom-maven-plugin:
 
 if command_exists 'yay'; then
   update_command='yay -Syyu && yay -Yc'
-  alias update='yay -Syyu && yay -Yc'
   alias yay='yay --nodiffmenu'
   alias y='yay'
 elif command_exists 'pacman'; then
   update_command='sudo pacman -Syu'
 elif command_exists 'apt'; then
   update_command='sudo apt update && sudo apt upgrade && sudo apt autoremove'
+elif command_exists 'dnf'; then
+  update_command='sudo dnf upgrade && sudo dnf autoremove'
 fi
 if command_exists 'snap'; then
   update_command="${update_command} && sudo snap refresh"
