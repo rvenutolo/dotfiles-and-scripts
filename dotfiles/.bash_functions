@@ -9,7 +9,8 @@ function edit() {
 }
 
 function fm() {
-  "${FILE_MANAGER}" "$@" >/dev/null 2>&1 & disown
+  "${FILE_MANAGER}" "$@" > /dev/null 2>&1 &
+  disown
 }
 
 function manswitch() {
@@ -27,20 +28,20 @@ function ff() {
 #   cu 2 -> cd ../../
 #   cu 3 -> cd ../../../
 function cu {
-    local count=$1
-    if [ -z "${count}" ]; then
-        count=1
-    fi
-    local path=""
-    for i in $(seq 1 ${count}); do
-        path="${path}../"
-    done
-    cd $path || exit
+  local count=$1
+  if [ -z "${count}" ]; then
+    count=1
+  fi
+  local path=""
+  for i in $(seq 1 ${count}); do
+    path="${path}../"
+  done
+  cd $path || exit
 }
 
 # "| order" is very handy for counting duplicated lines in a file or listing
 function order() {
-    sort | uniq -c | sort -rn
+  sort | uniq -c | sort -rn
 }
 
 # Move filenames to lowercase
@@ -222,11 +223,13 @@ function uriencode() {
 }
 
 function kate() {
-  command kate "$@" >/dev/null 2>&1 & disown
+  command kate "$@" > /dev/null 2>&1 &
+  disown
 }
 
 function mpv() {
-  command mpv "$@" >/dev/null 2>&1 & disown
+  command mpv "$@" > /dev/null 2>&1 &
+  disown
 }
 
 function pcat() {
