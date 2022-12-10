@@ -142,6 +142,9 @@ elif command_exists 'apt'; then
 elif command_exists 'dnf'; then
   update_command='sudo dnf upgrade && sudo dnf autoremove'
 fi
+if command_exists 'flatpak'; then
+  update_command="${update_command} && sudo flatpak update && sudo flatpak remove --unused"
+fi
 if command_exists 'snap'; then
   update_command="${update_command} && sudo snap refresh"
 fi
@@ -153,6 +156,9 @@ if command_exists 'gem'; then
 fi
 if command_exists 'tldr'; then
   update_command="${update_command} && tldr -u"
+fi
+if command_exists 'fwupdmgr'; then
+  update_command="${update_command} && fwupdmgr refresh && fwupdmgr update"
 fi
 alias update="${update_command}"
 unset update_command
