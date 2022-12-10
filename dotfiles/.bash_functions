@@ -348,6 +348,16 @@ function check-setup() {
     for dnf_conf_val in "${expected_dnf_conf_vals[@]}"; do
       [[ -z $(grep -F "${dnf_conf_val}" /etc/dnf/dnf.conf | cut -d'=' -f2 | xargs) ]] && echo "/etc/dnf/dnf.conf ${dnf_conf_val} is not set"
     done
+    local installed_packages="$(dnf list --installed | cut -d' ' -f1)"
+    local expected_rpm_fusions_packages=(
+      'rpmfusion-free-appstream-data'
+      'rpmfusion-free-release'
+      'rpmfusion-nonfree-appstream-data'
+      'rpmfusion-nonfree-release'
+    )
+    for rpm_fusion_pacakge in "${expected_rpm_fusions_packages[@]}"; do
+      grep -qF "${rpm_fusion_pacakge}" <<< "${installed_packages}" || echo "${rpm_fusion_pacakge} is not installed"
+    done
   fi
 
   return 0
