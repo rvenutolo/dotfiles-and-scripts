@@ -131,38 +131,6 @@ alias sortpomanddependencies="mvn com.github.ekryd.sortpom:sortpom-maven-plugin:
 " -Dsort.nrOfIndentSpace=4"\
 " -Dsort.sortDependencies=scope,groupId,artifactId"
 
-if command_exists 'yay'; then
-  update_command='yay -Syyu && yay -Yc'
-  alias yay='yay --nodiffmenu'
-  alias y='yay'
-elif command_exists 'pacman'; then
-  update_command='sudo pacman -Syu'
-elif command_exists 'apt'; then
-  update_command='sudo apt update && sudo apt upgrade && sudo apt autoremove'
-elif command_exists 'dnf'; then
-  update_command='sudo dnf upgrade && sudo dnf autoremove'
-fi
-if command_exists 'flatpak'; then
-  update_command="${update_command} && sudo flatpak update && sudo flatpak remove --unused"
-fi
-if command_exists 'snap'; then
-  update_command="${update_command} && sudo snap refresh"
-fi
-if command_exists 'cargo' && cargo install --list | grep -qF 'cargo-install-update' ; then
-  update_command="${update_command} && cargo install-update --all"
-fi
-if command_exists 'gem'; then
-  update_command="${update_command} && sudo gem update"
-fi
-if command_exists 'tldr'; then
-  update_command="${update_command} && tldr -u"
-fi
-if command_exists 'fwupdmgr'; then
-  update_command="${update_command} && fwupdmgr refresh && fwupdmgr update"
-fi
-alias update="${update_command}"
-unset update_command
-
 if command_exists 'pacman-mirrors'; then
   alias update-mirrors='sudo pacman-mirrors --country United_States,Canada && sudo pacman-mirrors --fasttrack && sudo pacman -Syyu'
 fi

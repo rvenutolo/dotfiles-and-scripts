@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function command_exists() {
+  type -P -f "$1" >/dev/null 2>&1
+}
+
+if command_exists 'yay'; then
+  yay -Syyu && yay -Yc
+elif command_exists 'pacman'; then
+  sudo pacman -Syu
+elif command_exists 'apt'; then
+  sudo apt update && sudo apt upgrade && sudo apt autoremove
+elif command_exists 'dnf'; then
+  sudo dnf upgrade && sudo dnf autoremove
+fi
+
+if command_exists 'flatpak'; then
+  sudo flatpak update && sudo flatpak remove --unused
+fi
+
+if command_exists 'snap'; then
+  sudo snap refresh
+fi
+
+if command_exists 'cargo' && cargo install --list | grep -qF 'cargo-install-update' ; then
+  cargo install-update --all
+fi
+
+if command_exists 'gem'; then
+  sudo gem update
+fi
+
+if command_exists 'tldr'; then
+  tldr -u
+fi
+
+if command_exists 'fwupdmgr'; then
+  fwupdmgr refresh && fwupdmgr update
+fi
+
+if command_exists 'aws'; then
+  readonly ts="$(date -u +%Y%m%d_%H%M%S)"
+  readonly zip_file="/tmp/awscliv2_${ts}.zip"
+  readonly extracted_dir="/tmp/awscliv2_${ts}"
+  curl -s 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip' -o "${zip_file}"
+  unzip -q "${zip_file}" -d "${extracted_dir}"
+  sudo "${extracted_dir}/aws/install" --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
+fi
