@@ -343,6 +343,10 @@ function check-setup() {
 
   [[ $(timedatectl show) != *'NTP=yes'* ]] && echo 'timedatectl set-ntp is not set'
 
+  if command_exists 'flatpak'; then
+    flatpak remotes | grep -qwF 'flathub' || echo "Flathub flatpak repo is not installed"
+  fi
+
   if [[ -f /etc/dnf/dnf.conf ]]; then
     local expected_dnf_conf_vals=('max_parallel_downloads' 'defaultyes' 'keepcache')
     for dnf_conf_val in "${expected_dnf_conf_vals[@]}"; do
