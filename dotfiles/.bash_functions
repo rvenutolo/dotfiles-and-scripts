@@ -315,7 +315,7 @@ function check-setup() {
 
   if [[ "${HOME_OR_NOT}" == 'home' ]]; then
     # libvirtd goes inactive, but is still enabled
-    systemctl is-enabled --quiet 'libvirtd' || systemctl is-enabled --user --quiet 'libvirtd' || echo "Service not enabled: libvirtd"
+    systemctl is-enabled --quiet 'libvirtd' || systemctl is-enabled --user --quiet 'libvirtd' || echo 'Service not enabled: libvirtd'
   fi
 
   local expected_groups=('docker' 'sys')
@@ -341,7 +341,14 @@ function check-setup() {
 
   [[ "$(rustup toolchain list)" != stable* ]] && echo "rust toolchain is not 'stable'"
 
-  [[ $(timedatectl show) != *'NTP=yes'* ]] && echo "timedatectl set-ntp is not set"
+  [[ $(timedatectl show) != *'NTP=yes'* ]] && echo 'timedatectl set-ntp is not set'
+
+  if [[ -f /etc/dnf/dnf.conf ]]; then
+    local expected_dnf_conf_vals=('max_parallel_downloads' 'defaultyes' 'keepcache')
+    for dnf_conf_val in "${expected_dnf_conf_vals[@]}"; do
+      [[ -z $(grep -F "${dnf_conf_val}" /etc/dnf/dnf.conf | cut -d'=' -f2 | xargs) ]] && echo "/etc/dnf/dnf.conf ${dnf_conf_val} is not set"
+    done
+  fi
 
   return 0
 }
