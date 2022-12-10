@@ -7,44 +7,55 @@ function command_exists() {
 }
 
 if command_exists 'yay'; then
+  echo "Updating packages with yay"
   yay -Syyu && yay -Yc
 elif command_exists 'pacman'; then
+  echo "Updating packages with pacman"
   sudo pacman -Syu
 elif command_exists 'apt'; then
+  echo "Updating packages with apt"
   sudo apt update && sudo apt upgrade && sudo apt autoremove
 elif command_exists 'dnf'; then
+  echo "Updating packages with dnf"
   sudo dnf upgrade && sudo dnf autoremove
 fi
 
 if command_exists 'flatpak'; then
+  echo "Updating Flatpaks"
   sudo flatpak update && sudo flatpak remove --unused
 fi
 
 if command_exists 'snap'; then
+  echo "Updating Snaps"
   sudo snap refresh
 fi
 
 if command_exists 'cargo' && cargo install --list | grep -qF 'cargo-install-update' ; then
+  echo "Updating Rust crates"
   cargo install-update --all
 fi
 
 if command_exists 'gem'; then
+  echo "Updating Ruby gems"
   sudo gem update
 fi
 
 if command_exists 'tldr'; then
+  echo "Updating tldr cache"
   tldr -u
 fi
 
-if command_exists 'fwupdmgr'; then
-  fwupdmgr refresh && fwupdmgr update
-fi
-
 if command_exists 'aws'; then
+  echo "Updating AWS CLI v2"
   readonly ts="$(date -u +%Y%m%d_%H%M%S)"
   readonly zip_file="/tmp/awscliv2_${ts}.zip"
   readonly extracted_dir="/tmp/awscliv2_${ts}"
   curl -s 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip' -o "${zip_file}"
   unzip -q "${zip_file}" -d "${extracted_dir}"
   sudo "${extracted_dir}/aws/install" --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
+fi
+
+if command_exists 'fwupdmgr'; then
+  echo "Updating firmwares"
+  fwupdmgr refresh --force && fwupdmgr update
 fi
