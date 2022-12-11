@@ -6,6 +6,10 @@ function command_exists() {
   type -P -f "$1" >/dev/null 2>&1
 }
 
+function file_exists() {
+  [[ -r "$1" ]] && [[ -f "$1" ]]
+}
+
 function is_home() {
   set +u
   [[ ${HOME_OR_NOT} == 'home' ]] && is_home='true' || is_home='false'
@@ -43,7 +47,7 @@ expected_files=(
   '/usr/share/git/completion/git-prompt.sh'
 )
 for file in "${expected_files[@]}"; do
-  [[ -f "${file}" ]] || echo "Missing file: ${file}"
+  file_exists "${file}" || echo "Missing file: ${file}"
 done
 
 expected_vars=('BROWSER' 'DE' 'EDITOR' 'FILE_MANAGER' 'JAVA_HOME' 'HOME_OR_NOT' 'PAGER' 'VISUAL')
@@ -108,10 +112,11 @@ if command_exists 'flatpak'; then
   flatpak remotes | grep -qwF 'flathub' || echo "Flathub flatpak repo is not installed"
 fi
 
-if [[ -f /etc/dnf/dnf.conf ]]; then
+dnf_conf_file='/etc/dnf/dnf.conf'
+if file_exists "${dnf_conf_file}"; then
   expected_dnf_conf_vals=('max_parallel_downloads' 'defaultyes' 'keepcache')
   for dnf_conf_val in "${expected_dnf_conf_vals[@]}"; do
-    [[ -z $(grep -F "${dnf_conf_val}" /etc/dnf/dnf.conf | cut -d'=' -f2 | xargs) ]] && echo "/etc/dnf/dnf.conf ${dnf_conf_val} is not set"
+    [[ -z $(grep -F "${dnf_conf_val}" "${dnf_conf_file}" | cut -d'=' -f2 | xargs) ]] && echo "dnf conf ${dnf_conf_val} is not set"
   done
   installed_packages="$(dnf list --installed | cut -d' ' -f1)"
   expected_rpm_fusions_packages=(
