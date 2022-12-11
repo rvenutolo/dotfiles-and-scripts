@@ -62,7 +62,7 @@ expected_fonts=(
   'JetBrains Mono' 'JoyPixels' 'Menlo' 'Monoid' 'Mononoki' 'Noto Color Emoji' 'Roboto Mono' 'Source Code Pro'
   'Terminess' 'Ubuntu Mono'
 )
-installed_fonts=$(fc-list : family)
+installed_fonts="$(fc-list : family)"
 for font in "${expected_fonts[@]}"; do
   grep -wiq "${font}" <<<"${installed_fonts}" ||
     grep -wiq "${font}TTF" <<<"${installed_fonts}" ||
@@ -90,8 +90,9 @@ expected_groups=('docker' 'sys')
 if is_home; then
   expected_groups+=('kvm' 'input' 'libvirt' 'wheel')
 fi
+actual_groups="$(groups "${USER}")"
 for group in "${expected_groups[@]}"; do
-  groups "${USER}" | grep -wq "${group}" || echo "User is not in group: ${group}"
+  grep -wq "${group}" <<<"${actual_groups}" || echo "User is not in group: ${group}"
 done
 
 expected_kvals=(
@@ -112,11 +113,11 @@ if command_exists 'flatpak'; then
   flatpak remotes | grep -qwF 'flathub' || echo "Flathub flatpak repo is not installed"
 fi
 
-dnf_conf_file='/etc/dnf/dnf.conf'
-if file_exists "${dnf_conf_file}"; then
+if command_exists 'dnf'; then
   expected_dnf_conf_vals=('max_parallel_downloads' 'defaultyes' 'keepcache')
+  dnf_conf_text="$(cat '/etc/dnf/dnf.conf')"
   for dnf_conf_val in "${expected_dnf_conf_vals[@]}"; do
-    [[ -z $(grep -F "${dnf_conf_val}" "${dnf_conf_file}" | cut -d'=' -f2 | xargs) ]] && echo "dnf conf ${dnf_conf_val} is not set"
+    [[ -z $(grep -F "${dnf_conf_val}" <<<"${dnf_conf_text}" | cut -d'=' -f2 | xargs) ]] && echo "dnf conf ${dnf_conf_val} is not set"
   done
   installed_packages="$(dnf list --installed | cut -d' ' -f1)"
   expected_rpm_fusions_packages=(
