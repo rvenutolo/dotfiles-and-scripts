@@ -34,15 +34,14 @@ for cmd in "${expected_cmds[@]}"; do
   command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
 done
 
-## TODO figure out how to test for these
-#expected_funcs=('__git_ps1' 'br' 'sdk')
-#for func in "${expected_funcs[@]}"; do
-#  declare -f -F "${func}" >/dev/null 2>&1 || echo "Function not available: ${func}"
-#done
-## There may be a better way to detect if bash-completion is present
-#type -t '_init_completion' >/dev/null 2>&1 || echo 'bash-completion not present'
-
-expected_files=("${HOME}/.bash_extra" "${HOME}/.gitconfig.private" "${HOME}/.ssh/config.private")
+expected_files=(
+  "${HOME}/.bash_extra"
+  "${HOME}/.gitconfig.private"
+  "${HOME}/.ssh/config.private"
+  "${HOME}/.sdkman/bin/sdkman-init.sh"
+  "${HOME}/.config/broot/launcher/bash/br"
+  '/usr/share/git/completion/git-prompt.sh'
+)
 for file in "${expected_files[@]}"; do
   [[ -f "${file}" ]] || echo "Missing file: ${file}"
 done
