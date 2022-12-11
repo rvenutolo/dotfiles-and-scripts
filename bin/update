@@ -10,38 +10,44 @@ function file_exists() {
   [[ -r "$1" ]] && [[ -f "$1" ]]
 }
 
+function log() {
+  echo '----------------------------------------'
+  echo "Updating $1"
+  echo '----------------------------------------'
+}
+
 if command_exists 'yay'; then
-  echo ">>> Updating packages with yay"
+  log 'packages with yay'
   yay -Syyu
   yay -Yc
 elif command_exists 'pacman'; then
-  echo ">>> Updating packages with pacman"
+  log 'packages with pacman'
   sudo pacman -Syu
 elif command_exists 'apt'; then
-  echo ">>> Updating packages with apt"
+  log 'packages with apt'
   sudo apt update
   sudo apt upgrade
   sudo apt autoremove
 elif command_exists 'dnf'; then
-  echo ">>> Updating packages with dnf"
+  log 'packages with dnf'
   sudo dnf upgrade
   sudo dnf autoremove
 fi
 
 if command_exists 'flatpak'; then
-  echo ">>> Updating Flatpaks"
+  log 'Flatpaks'
   sudo flatpak update
   sudo flatpak remove --unused
 fi
 
 if command_exists 'snap'; then
-  echo ">>> Updating Snaps"
+  log 'Snaps'
   sudo snap refresh
 fi
 
 sdkman_init_script="${HOME}/.sdkman/bin/sdkman-init.sh"
 if file_exists "${sdkman_init_script}"; then
-  echo ">>> Updating SDKMAN"
+  log 'SDKMAN'
   set +ue
   source "${sdkman_init_script}"
   sdk selfupdate
@@ -51,22 +57,22 @@ if file_exists "${sdkman_init_script}"; then
 fi
 
 if command_exists 'cargo' && cargo install --list | grep -qF 'cargo-install-update'; then
-  echo ">>> Updating Rust crates"
+  log 'Rust crates'
   cargo install-update --all
 fi
 
 if command_exists 'gem'; then
-  echo ">>> Updating Ruby gems"
+  log 'Ruby gems'
   sudo gem update
 fi
 
 if command_exists 'tldr'; then
-  echo ">>> Updating tldr cache"
+  log 'tldr cache'
   tldr -u
 fi
 
 if command_exists 'aws'; then
-  echo ">>> Updating AWS CLI v2"
+  log 'AWS CLI v2'
   readonly ts="$(date -u +%Y%m%d_%H%M%S)"
   readonly zip_file="/tmp/awscliv2_${ts}.zip"
   readonly extracted_dir="/tmp/awscliv2_${ts}"
@@ -76,7 +82,7 @@ if command_exists 'aws'; then
 fi
 
 if command_exists 'fwupdmgr'; then
-  echo ">>> Updating firmwares"
+  log 'firmwares with fwupdmgr'
   fwupdmgr refresh --force
   fwupdmgr update
 fi
