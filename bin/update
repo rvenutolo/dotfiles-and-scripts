@@ -42,12 +42,12 @@ fi
 sdkman_init_script="${HOME}/.sdkman/bin/sdkman-init.sh"
 if file_exists "${sdkman_init_script}"; then
   echo ">>> Updating SDKMAN"
-  set +u
+  set +ue
   source "${sdkman_init_script}"
   sdk selfupdate
   sdk update
   sdk upgrade
-  set -u
+  set -ue
 fi
 
 if command_exists 'cargo' && cargo install --list | grep -qF 'cargo-install-update'; then
