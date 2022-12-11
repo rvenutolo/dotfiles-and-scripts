@@ -42,7 +42,6 @@ done
 ## There may be a better way to detect if bash-completion is present
 #type -t '_init_completion' >/dev/null 2>&1 || echo 'bash-completion not present'
 
-
 expected_files=("${HOME}/.bash_extra" "${HOME}/.gitconfig.private" "${HOME}/.ssh/config.private")
 for file in "${expected_files[@]}"; do
   [[ -f "${file}" ]] || echo "Missing file: ${file}"
@@ -62,10 +61,10 @@ expected_fonts=(
 )
 installed_fonts=$(fc-list : family)
 for font in "${expected_fonts[@]}"; do
-  grep -wiq "${font}" <<< "${installed_fonts}" ||
-    grep -wiq "${font}TTF" <<< "${installed_fonts}"||
-    grep -wiq "$(echo -e "${font}" | tr -d '[:space:]')" <<< "${installed_fonts}" ||
-    grep -wiq "$(echo -e "${font}TTF" | tr -d '[:space:]')" <<< "${installed_fonts}" ||
+  grep -wiq "${font}" <<<"${installed_fonts}" ||
+    grep -wiq "${font}TTF" <<<"${installed_fonts}" ||
+    grep -wiq "$(echo -e "${font}" | tr -d '[:space:]')" <<<"${installed_fonts}" ||
+    grep -wiq "$(echo -e "${font}TTF" | tr -d '[:space:]')" <<<"${installed_fonts}" ||
     echo "Font not available: ${font}"
 done
 
@@ -123,6 +122,6 @@ if [[ -f /etc/dnf/dnf.conf ]]; then
     'rpmfusion-nonfree-release'
   )
   for rpm_fusion_pacakge in "${expected_rpm_fusions_packages[@]}"; do
-    grep -qF "${rpm_fusion_pacakge}" <<< "${installed_packages}" || echo "${rpm_fusion_pacakge} is not installed"
+    grep -qF "${rpm_fusion_pacakge}" <<<"${installed_packages}" || echo "${rpm_fusion_pacakge} is not installed"
   done
 fi
