@@ -35,6 +35,14 @@ if command_exists 'snap'; then
   sudo snap refresh
 fi
 
+sdkman_init_script="${HOME}/.sdkman/bin/sdkman-init.sh"
+if [[ -r "${sdkman_init_script}" ]] && [[ -f "${sdkman_init_script}" ]]; then
+  source "${sdkman_init_script}"
+  sdk selfupdate
+  sdk update
+  sdk upgrade
+fi
+
 if command_exists 'cargo' && cargo install --list | grep -qF 'cargo-install-update' ; then
   echo ">>> Updating Rust crates"
   cargo install-update --all
