@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function command_exists() {
+  type -P -f "$1" >/dev/null 2>&1
+}
+
+function is_home() {
+  set +u
+  [[ ${HOME_OR_NOT} == 'home' ]] && is_home='true' || is_home='false'
+  set -u
+  [[ ${is_home} == 'true' ]]
+}
+
+expected_cmds=(
+  '7z' 'alacritty' 'authy' 'aws' 'bat' 'bmon' 'broot' 'btop' 'bunzip2' 'cabextract' 'cargo' 'checkbashisms' 'clamscan'
+  'cmake' 'colordiff' 'cpufetch' 'crontab' 'ctop' 'curl' 'dash' 'dig' 'diff-so-fancy' 'distrobox' 'docker' 'dos2unix'
+  'exa' 'fasd' 'fd' 'fff' 'fzf' 'gdu' 'git' 'gitui' 'glances' 'go' 'gparted' 'gradle' 'groovy' 'gunzip' 'http' 'iconv'
+  'inotifywait' 'java' 'javac' 'jq' 'kotlin' 'lazydocker' 'lazygit' 'lf' 'locate' 'maldet' 'micro' 'mn' 'mvn' 'mvnd'
+  'nano' 'ncdu' 'neofetch' 'nnn' 'nvim' 'onefetch' 'oneshot' 'pandoc' 'parallel' 'pcmanfm' 'pip' 'postman' 'procs'
+  'pygmentize' 'pv' 'ranger' 'rg' 'ruby' 'rustup' 'sbt' 'scala' 'screen' 'sd' 'shellcheck' 'shfmt' 'sntp'
+  'spark-submit' 'spring' 'stacer' 'starship' 'tabs2spaces' 'tar' 'tldr' 'tokei' 'trash' 'tree' 'uncompress' 'unlzma'
+  'unrar' 'unxz' 'unzip' 'visualvm' 'wget' 'xsel' 'zip'
+)
+if is_home; then
+  expected_cmds+=(
+    'backintime' 'clapper' 'dnuos' 'eyeD3' 'flac' 'flac2all' 'flac2mp3.pl' 'lame' 'magick' 'mediainfo' 'mogrify'
+    'mp3splt' 'openconnect' 'pacseek' 'paru' 'puddletag' 'soundkonverter' 'sox' 'speedtest' 'tageditor' 'timeshift'
+    'virt-manager' 'virsh' 'yay'
+  )
+fi
+for cmd in "${expected_cmds[@]}"; do
+  command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
+done
+
+## TODO figure out how to test for these
+#expected_funcs=('__git_ps1' 'br' 'sdk')
+#for func in "${expected_funcs[@]}"; do
+#  declare -f -F "${func}" >/dev/null 2>&1 || echo "Function not available: ${func}"
+#done
+## There may be a better way to detect if bash-completion is present
+#type -t '_init_completion' >/dev/null 2>&1 || echo 'bash-completion not present'
+
+
+expected_files=("${HOME}/.bash_extra" "${HOME}/.gitconfig.private" "${HOME}/.ssh/config.private")
+for file in "${expected_files[@]}"; do
+  [[ -f "${file}" ]] || echo "Missing file: ${file}"
+done
+
+expected_vars=('BROWSER' 'DE' 'EDITOR' 'FILE_MANAGER' 'JAVA_HOME' 'HOME_OR_NOT' 'PAGER' 'VISUAL')
+set +u
+for var in "${expected_vars[@]}"; do
+  [[ -z "${!var}" ]] && echo "Environment variable not set: ${var}"
+done
+set -u
+
+expected_fonts=(
+  'Code New Roman' 'Fantasque Sans Mono' 'Fira Code' 'FreeMono' 'Hack' 'Hasklig' 'Inconsolata' 'Input' 'Iosevka'
+  'JetBrains Mono' 'JoyPixels' 'Menlo' 'Monoid' 'Mononoki' 'Noto Color Emoji' 'Roboto Mono' 'Source Code Pro'
+  'Terminess' 'Ubuntu Mono'
+)
+installed_fonts=$(fc-list : family)
+for font in "${expected_fonts[@]}"; do
+  grep -wiq "${font}" <<< "${installed_fonts}" ||
+    grep -wiq "${font}TTF" <<< "${installed_fonts}"||
+    grep -wiq "$(echo -e "${font}" | tr -d '[:space:]')" <<< "${installed_fonts}" ||
+    grep -wiq "$(echo -e "${font}TTF" | tr -d '[:space:]')" <<< "${installed_fonts}" ||
+    echo "Font not available: ${font}"
+done
+
+expected_services=('docker' 'cups' 'ssh-agent' 'sshd')
+if is_home; then
+  expected_services+=('crashplan-pro' 'nfs-server')
+fi
+for service in "${expected_services[@]}"; do
+  systemctl is-active --quiet "${service}" ||
+    systemctl is-active --user --quiet "${service}" ||
+    echo "Service not running: ${service}"
+done
+
+if is_home; then
+  # libvirtd goes inactive, but is still enabled
+  systemctl is-enabled --quiet 'libvirtd' || echo 'Service not enabled: libvirtd'
+fi
+
+expected_groups=('docker' 'sys')
+if is_home; then
+  expected_groups+=('kvm' 'input' 'libvirt' 'wheel')
+fi
+for group in "${expected_groups[@]}"; do
+  groups "${USER}" | grep -wq "${group}" || echo "User is not in group: ${group}"
+done
+
+expected_kvals=(
+  'vm.dirty_background_ratio 5'
+  'vm.dirty_ratio 5'
+  'vm.swappiness 10'
+)
+for kvals in "${expected_kvals[@]}"; do
+  IFS=' ' read -r k v <<<"${kvals}"
+  [[ $(sysctl -n "${k}") -le "${v}" ]] || echo "Kernel variable ${k} is >${v}: $(sysctl -n "${k}")"
+done
+
+[[ "$(rustup toolchain list)" != stable* ]] && echo "rust toolchain is not 'stable'"
+
+[[ $(timedatectl show) != *'NTP=yes'* ]] && echo 'timedatectl set-ntp is not set'
+
+if command_exists 'flatpak'; then
+  flatpak remotes | grep -qwF 'flathub' || echo "Flathub flatpak repo is not installed"
+fi
+
+if [[ -f /etc/dnf/dnf.conf ]]; then
+  expected_dnf_conf_vals=('max_parallel_downloads' 'defaultyes' 'keepcache')
+  for dnf_conf_val in "${expected_dnf_conf_vals[@]}"; do
+    [[ -z $(grep -F "${dnf_conf_val}" /etc/dnf/dnf.conf | cut -d'=' -f2 | xargs) ]] && echo "/etc/dnf/dnf.conf ${dnf_conf_val} is not set"
+  done
+  installed_packages="$(dnf list --installed | cut -d' ' -f1)"
+  expected_rpm_fusions_packages=(
+    'rpmfusion-free-appstream-data'
+    'rpmfusion-free-release'
+    'rpmfusion-nonfree-appstream-data'
+    'rpmfusion-nonfree-release'
+  )
+  for rpm_fusion_pacakge in "${expected_rpm_fusions_packages[@]}"; do
+    grep -qF "${rpm_fusion_pacakge}" <<< "${installed_packages}" || echo "${rpm_fusion_pacakge} is not installed"
+  done
+fi
