@@ -6,6 +6,10 @@ function command_exists() {
   type -P -f "$1" >/dev/null 2>&1
 }
 
+function file_exists() {
+  [[ -r "$1" ]] && [[ -f "$1" ]]
+}
+
 if command_exists 'yay'; then
   echo ">>> Updating packages with yay"
   yay -Syyu
@@ -36,14 +40,17 @@ if command_exists 'snap'; then
 fi
 
 sdkman_init_script="${HOME}/.sdkman/bin/sdkman-init.sh"
-if [[ -r "${sdkman_init_script}" ]] && [[ -f "${sdkman_init_script}" ]]; then
+if file_exists "${sdkman_init_script}"; then
+  echo ">>> Updating SDKMAN"
+  set +u
   source "${sdkman_init_script}"
   sdk selfupdate
   sdk update
   sdk upgrade
+  set -u
 fi
 
-if command_exists 'cargo' && cargo install --list | grep -qF 'cargo-install-update' ; then
+if command_exists 'cargo' && cargo install --list | grep -qF 'cargo-install-update'; then
   echo ">>> Updating Rust crates"
   cargo install-update --all
 fi
