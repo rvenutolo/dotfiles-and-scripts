@@ -10,29 +10,47 @@ function file_exists() {
   [[ -r "$1" ]] && [[ -f "$1" ]]
 }
 
-function is_home() {
+function is_distro() {
+  hostnamectl | grep -F 'Operating System:' | cut -d':' -f2 | grep -iwqF "$1"
+}
+
+function is_desktop_env() {
+  echo "${XDG_CURRENT_DESKTOP}" | grep -iwqF "$1"
+}
+
+## 'desktop' 'laptop' 'work'
+function is_computer() {
   set +u
-  [[ ${HOME_OR_NOT} == 'home' ]] && is_home='true' || is_home='false'
+  [[ ${RVENUTOLO_COMPUTER,,} == "$1" ]] && is_env='true' || is_env='false'
   set -u
-  [[ ${is_home} == 'true' ]]
+  [[ ${is_env} == 'true' ]]
 }
 
 expected_cmds=(
   '7z' 'alacritty' 'authy' 'aws' 'bat' 'bmon' 'broot' 'btop' 'bunzip2' 'cabextract' 'cargo' 'checkbashisms' 'clamscan'
   'cmake' 'colordiff' 'cpufetch' 'crontab' 'ctop' 'curl' 'dash' 'dig' 'diff-so-fancy' 'distrobox' 'docker' 'dos2unix'
-  'exa' 'fasd' 'fd' 'fff' 'fzf' 'gdu' 'git' 'gitui' 'glances' 'go' 'gparted' 'gradle' 'groovy' 'gunzip' 'http' 'iconv'
-  'inotifywait' 'java' 'javac' 'jq' 'kotlin' 'lazydocker' 'lazygit' 'lf' 'locate' 'maldet' 'micro' 'mn' 'mvn' 'mvnd'
-  'nano' 'ncdu' 'neofetch' 'nnn' 'nvim' 'onefetch' 'oneshot' 'pandoc' 'parallel' 'pcmanfm' 'pip' 'postman' 'procs'
-  'pygmentize' 'pv' 'ranger' 'rg' 'ruby' 'rustup' 'sbt' 'scala' 'screen' 'sd' 'shellcheck' 'shfmt' 'sntp'
-  'spark-submit' 'spring' 'stacer' 'starship' 'tabs2spaces' 'tar' 'tldr' 'tokei' 'trash' 'tree' 'uncompress' 'unlzma'
-  'unrar' 'unxz' 'unzip' 'visualvm' 'wget' 'xsel' 'zip'
+  'exa' 'fasd' 'fd' 'fish' 'flatpak' 'flatseal' 'fff' 'fzf' 'gdu' 'git' 'gitkraken' 'gitui' 'glances' 'go' 'gparted'
+  'gradle' 'groovy' 'gunzip' 'http' 'iconv' 'inotifywait' 'java' 'javac' 'jq' 'kotlin' 'lazydocker' 'lazygit' 'lf'
+  'locate' 'maldet' 'micro' 'mn' 'mvn' 'mvnd' 'nano' 'ncdu' 'neofetch' 'nnn' 'nvim' 'onefetch' 'oneshot' 'openconnect'
+  'openvpn' 'pandoc' 'parallel' 'pcmanfm' 'pip' 'postman' 'procs' 'pygmentize' 'pv' 'ranger' 'rg' 'ruby' 'rustup' 'sbt'
+  'scala' 'screen' 'sd' 'shellcheck' 'shfmt' 'snap' 'sntp' 'spark-submit' 'spring' 'stacer' 'starship' 'tabs2spaces'
+  'tar' 'tldr' 'tokei' 'trash' 'tree' 'uncompress' 'unlzma' 'unrar' 'unxz' 'unzip' 'visualvm' 'vlc' 'wget' 'xsel' 'zip'
 )
-if is_home; then
+if is_computer 'desktop' || is_computer 'laptop'; then
   expected_cmds+=(
     'backintime' 'clapper' 'dnuos' 'eyeD3' 'flac' 'flac2all' 'flac2mp3.pl' 'lame' 'magick' 'mediainfo' 'mogrify'
-    'mp3splt' 'openconnect' 'pacseek' 'paru' 'puddletag' 'soundkonverter' 'sox' 'speedtest' 'tageditor' 'timeshift'
-    'virt-manager' 'virsh' 'yay'
+    'mp3splt' 'puddletag' 'soundkonverter' 'sox' 'speedtest' 'tageditor' 'timeshift' 'virt-manager' 'virsh' 'zoom'
   )
+fi
+if is_distro 'fedora'; then
+  expected_cmds+=('fedy')
+fi
+if is_distro 'arch' || is_distro 'manjaro'; then
+  expected_cmds+=('pacseek' 'paru' 'yay')
+fi
+if is_desktop_env 'gnome'; then
+  ## TODO move these checks to package checks
+  expected_cmds+=('gnome-tweaks' 'gnome-extensions-app')
 fi
 for cmd in "${expected_cmds[@]}"; do
   command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
@@ -50,7 +68,7 @@ for file in "${expected_files[@]}"; do
   file_exists "${file}" || echo "Missing file: ${file}"
 done
 
-expected_vars=('BROWSER' 'DE' 'EDITOR' 'FILE_MANAGER' 'JAVA_HOME' 'HOME_OR_NOT' 'PAGER' 'VISUAL')
+expected_vars=('BROWSER' 'DE' 'EDITOR' 'FILE_MANAGER' 'JAVA_HOME' 'PAGER' 'RVENUTOLO_COMPUTER' 'VISUAL')
 set +u
 for var in "${expected_vars[@]}"; do
   [[ -z "${!var}" ]] && echo "Environment variable not set: ${var}"
@@ -64,16 +82,19 @@ expected_fonts=(
 )
 installed_fonts="$(fc-list : family)"
 for font in "${expected_fonts[@]}"; do
-  grep -wiq "${font}" <<<"${installed_fonts}" ||
-    grep -wiq "${font}TTF" <<<"${installed_fonts}" ||
-    grep -wiq "$(echo -e "${font}" | tr -d '[:space:]')" <<<"${installed_fonts}" ||
-    grep -wiq "$(echo -e "${font}TTF" | tr -d '[:space:]')" <<<"${installed_fonts}" ||
+  grep -wiqF "${font}" <<<"${installed_fonts}" ||
+    grep -wiqF "${font}TTF" <<<"${installed_fonts}" ||
+    grep -wiqF "$(echo -e "${font}" | tr -d '[:space:]')" <<<"${installed_fonts}" ||
+    grep -wiqF "$(echo -e "${font}TTF" | tr -d '[:space:]')" <<<"${installed_fonts}" ||
     echo "Font not available: ${font}"
 done
 
 expected_services=('docker' 'cups' 'ssh-agent' 'sshd')
-if is_home; then
-  expected_services+=('crashplan-pro' 'nfs-server')
+if is_computer 'desktop'; then
+  expected_services+=('nfs-server')
+fi
+if is_computer 'desktop' || is_computer 'laptop'; then
+  expected_services+=('crashplan-pro')
 fi
 for service in "${expected_services[@]}"; do
   systemctl is-active --quiet "${service}" ||
@@ -81,14 +102,14 @@ for service in "${expected_services[@]}"; do
     echo "Service not running: ${service}"
 done
 
-if is_home; then
+if is_computer 'desktop'; then
   # libvirtd goes inactive, but is still enabled
   systemctl is-enabled --quiet 'libvirtd' || echo 'Service not enabled: libvirtd'
 fi
 
-expected_groups=('docker' 'sys')
-if is_home; then
-  expected_groups+=('kvm' 'input' 'libvirt' 'wheel')
+expected_groups=('docker' 'sys' 'wheel')
+if is_computer 'desktop'; then
+  expected_services+=('kvm' 'input' 'libvirt')
 fi
 actual_groups="$(groups "${USER}")"
 for group in "${expected_groups[@]}"; do
@@ -113,7 +134,7 @@ if command_exists 'flatpak'; then
   flatpak remotes | grep -qwF 'flathub' || echo "Flathub flatpak repo is not installed"
 fi
 
-if command_exists 'dnf'; then
+if is_distro 'fedora'; then
   expected_dnf_conf_vals=('max_parallel_downloads' 'defaultyes' 'keepcache')
   dnf_conf_text="$(cat '/etc/dnf/dnf.conf')"
   for dnf_conf_val in "${expected_dnf_conf_vals[@]}"; do
