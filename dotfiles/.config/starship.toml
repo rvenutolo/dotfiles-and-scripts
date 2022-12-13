@@ -1,3 +1,6 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
 format = """
 $username\
 $hostname\
@@ -10,7 +13,6 @@ $git_commit\
 $git_state\
 $git_metrics\
 $git_status\
-$hg_branch\
 $docker_context\
 $package\
 $c\
@@ -28,7 +30,6 @@ $scala\
 $terraform\
 $memory_usage\
 $aws\
-$env_var\
 $sudo\
 $cmd_duration\
 $line_break\
@@ -39,94 +40,270 @@ $status\
 $container\
 $shell\
 $character"""
+right_format = "" # default: ""
+scan_timeout = 30 # ms, default: 30
+command_timeout = 500 # ms, default: 500
+add_newline = true # default: true
 
 [aws]
-symbol = "  " # nerd font symbol
-format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]' # bracketed segments
+format = 'on [$symbol($profile )(\($region\) )(\[$duration\] )]($style)' # default
+#format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]' # bracketed segments
+#symbol = "☁️ " # default
+symbol = "  " # nerd font
+force_display = false # default: false
+disabled = false # default: false
+
+[battery]
+format = "[$symbol$percentage]($style) " # default
+disabled = false # default: false
 
 [c]
-symbol = " " # nerd font symbol
-format = '\[[$symbol($version(-$name))]($style)\]' # bracketed segments
+format = "via [$symbol($version(-$name) )]($style)" # default
+#format = '\[[$symbol($version(-$name))]($style)\]' # bracketed segments
+version_format = "v${raw}" # available vars are 'raw', 'major', 'minor', & 'patch', default: 'v${raw}'
+#symbol = "C " # default
+symbol = " " # nerd font
+disabled = false # default: false
+
+[character]
+format = "$symbol " # default
+disabled = false # default: false
+
+[cmd_duration]
+format = "took [$duration]($style) " # default
+min_time = 2_000 #ms, default: 2_000
+show_milliseconds = false # default: false
+show_notifications = false # show desktop notifications when command completes, default: false
+min_time_to_notify = 45_000 # ms, default: 45_000
+disabled = false # default: false
+
+[container]
+format = '[$symbol \[$name\]]($style) ' # default
+symbol = "⬢" # default
+disabled = false # default: false
 
 [directory]
-read_only = " " # nerd font symbol
+format = "[$path]($style)[$read_only]($read_only_style) " # default
+repo_root_format = "[$before_root_path]($style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) " # default
+#read_only	= "🔒" # default
+read_only = " " # nerd font
+home_symbol = "~" # default: "~"
+truncation_length = 3 # default: 3
+truncate_to_repo = true # default: true
+truncation_symbol = "" # default: ""
+disabled = false # default: false
 
 [docker_context]
-symbol = " " # nerd font symbol
-format = '\[[$symbol$context]($style)\]' # bracketed segments
+format = "via [$symbol$context]($style) " # default
+#format = '\[[$symbol$context]($style)\]' # bracketed segments
+#symbol	= "🐳 " # default
+symbol = " " # nerd font
+disabled = false # default: false
 
 [git_branch]
-symbol = " " # nerd font symbol
-format = '\[[$symbol$branch]($style)\]' # bracketed segments
+format = "on [$symbol$branch(:$remote_branch)]($style) " # default
+#format = '\[[$symbol$branch]($style)\]' # bracketed segments
+#symbol = " " # default
+symbol = " " # nerd font
+always_show_remote = false # default: false
+truncation_symbol = "…" # default: "…"
+only_attached = false # default: false
+disabled = false # default: false
+
+[git_commit]
+format = '[\($hash$tag\)]($style) ' # default
+commit_hash_length = 7 # default: 7
+only_detached = true # default: true
+tag_disabled = true # default: true
+tag_symbol = " 🏷 " # default
+disabled = false # default: false
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) ' # default
+disabled = false # default: false
+
+[git_metrics]
+format = "([+$added]($added_style) )([-$deleted]($deleted_style) )" # default
+only_nonzero_diffs = true # default: true
+disabled = false # default: true
 
 [git_status]
-format = '([\[$all_status$ahead_behind\]]($style))' # bracketed segments
+format = '([\[$all_status$ahead_behind\]]($style) )' # default
+#format = '([\[$all_status$ahead_behind\]]($style))' # bracketed segments
+ignore_submodules = false
+disabled = false
 
 [golang]
-symbol = " " # nerd font symbol
-format = '\[[$symbol($version)]($style)\]' # bracketed segments
+format = "via [$symbol($version )]($style)" # default
+#format = '\[[$symbol($version)]($style)\]' # bracketed segments
+version_format = "v${raw}" # available vars are 'raw', 'major', 'minor', & 'patch', default: 'v${raw}'
+#symbol = "🐹 " # default
+symbol = " " # nerd font
+disabled = false # default: false
 
 [haskell]
-symbol = " " # nerd font symbol
-format = '\[[$symbol($version)]($style)\]' # bracketed segments
+format = "via [$symbol($version )]($style)" # default
+#format = '\[[$symbol($version)]($style)\]' # bracketed segments
+#symbol = "λ " # default
+symbol = " " # nerd font
+disabled = false # default: false
 
-[hg_branch]
-symbol = " " # nerd font symbol
-format = '\[[$symbol$branch]($style)\]' # bracketed segments
+[hostname]
+format = "[$ssh_symbol$hostname]($style) in " # default
+ssh_only = true # default: true
+ssh_symbol = "🌐 " # default
+trim_at = "." # default: "."
+disabled = false # default: false
 
 [java]
-symbol = " " # nerd font symbol
-format = '\[[$symbol($version)]($style)\]' # bracketed segments
+format = "via [${symbol}(${version} )]($style)" # default
+#format = '\[[$symbol($version)]($style)\]' # bracketed segments
+version_format = "v${raw}" # available vars are 'raw', 'major', 'minor', & 'patch', default: 'v${raw}'
+#symbol = "☕ " # default
+symbol = " " # nerd font
+disabled = false # default: false
+
+[jobs]
+format = "[$symbol$number]($style) " # default
+symbol = "✦" # default
+threshold = 1 # default: 1
+symbol_threshold = 1 # default: 1
+number_threshold = 2 # default: 2
+disabled = false # default: false
 
 [kotlin]
-format = '\[[$symbol($version)]($style)\]' # bracketed segments
+format = "via [$symbol($version )]($style)" # default
+#format = '\[[$symbol($version)]($style)\]' # bracketed segments
+version_format = "v${raw}" # available vars are 'raw', 'major', 'minor', & 'patch', default: 'v${raw}'
+symbol = "🅺 " # default
+disabled = false
 
 [kubernetes]
-format = '\[[$symbol$context( \($namespace\))]($style)\]' # bracketed segments
+format = '[$symbol$context( \($namespace\))]($style) in ' # default
+#format = '\[[$symbol$context( \($namespace\))]($style)\]' # bracketed segments
+symbol = "☸ " # default
+disabled = false # default: false
+
+[line_break]
+disabled = false # default: false
+
+[localip]
+format = "[$localipv4]($style) " # default
+ssh_only = true # default: true
+disabled = false # default: true
 
 [lua]
-symbol = " " # nerd font symbol
-format = '\[[$symbol($version)]($style)\]' # bracketed segments
+format = "via [$symbol($version )]($style)" # default
+#format = '\[[$symbol($version)]($style)\]' # bracketed segments
+version_format = "v${raw}" # available vars are 'raw', 'major', 'minor', & 'patch', default: 'v${raw}'
+#symbol = "🌙 " # default
+symbol = " " # nerd font
+disabled = false # default: false
 
 [memory_usage]
-symbol = " " # nerd font symbol
-format = '\[$symbol[$ram( | $swap)]($style)\]' # bracketed segments
+format = "via $symbol [${ram}( \\| ${swap})]($style) " # default
+#format = '\[$symbol[$ram( | $swap)]($style)\]' # bracketed segments
+#symbol = "🐏" # default
+symbol = " " # nerd font
+disabled = false # default: true
 
 [nodejs]
-symbol = " " # nerd font symbol
-format = '\[[$symbol($version)]($style)\]' # bracketed segments
+format = "via [$symbol($version )]($style)" # default
+#format = '\[[$symbol($version)]($style)\]' # bracketed segments
+version_format = "v${raw}" # available vars are 'raw', 'major', 'minor', & 'patch', default: 'v${raw}'
+#symbol = " " # default
+symbol = " " # nerd font
+disabled = false # default: false
 
 [package]
-symbol = " " # nerd font symbol
-format = '\[[$symbol$version]($style)\]' # bracketed segments
+format = "is [$symbol$version]($style) " # default
+#format = '\[[$symbol$version]($style)\]' # bracketed segments
+version_format = "v${raw}" # available vars are 'raw', 'major', 'minor', & 'patch', default: 'v${raw}'
+#symbol = "📦 " # default
+symbol = " " # nerd font
+display_private = false # default: false
+disabled = false # default: false
 
 [perl]
-format = '\[[$symbol($version)]($style)\]' # bracketed segments
+format = "via [$symbol($version )]($style)" # default
+#format = '\[[$symbol($version)]($style)\]' # bracketed segments
+version_format = "v${raw}" # available vars are 'raw', 'major', 'minor', & 'patch', default: 'v${raw}'
+symbol = "🐪 " # default
+disabled = false # default: false
 
 [python]
-symbol = " " # nerd font symbol
-format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]' # bracketed segments
+format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)' # default
+#format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]' # bracketed segments
+version_format = "v${raw}" # available vars are 'raw', 'major', 'minor', & 'patch', default: 'v${raw}'
+#symbol = "🐍 " # default
+symbol = " " # nerd font
+pyenv_version_name = false # default: false
+disabled = false # default: false
 
 [ruby]
-symbol = " " # nerd font symbol
-format = '\[[$symbol($version)]($style)\]' # bracketed segments
+format = "via [$symbol($version )]($style)" # default
+#format = '\[[$symbol($version)]($style)\]' # bracketed segments
+version_format = "v${raw}" # available vars are 'raw', 'major', 'minor', & 'patch', default: 'v${raw}'
+#symbol = "💎 " # default
+symbol = " " # nerd font
+disabled = false # default: false
 
 [rust]
-symbol = " " # nerd font symbol
-format = '\[[$symbol($version)]($style)\]' # bracketed segments
+format = "via [$symbol($version )]($style)" # default
+#format = '\[[$symbol($version)]($style)\]' # bracketed segments
+version_format = "v${raw}" # available vars are 'raw', 'major', 'minor', & 'patch', default: 'v${raw}'
+#symbol = "🦀 " # default
+symbol = " " # nerd font
+disabled = false # default: false
 
 [scala]
-symbol = " " # nerd font symbol
-format = '\[[$symbol($version)]($style)\]' # bracketed segments
+format = "via [${symbol}(${version} )]($style)" # default
+#format = '\[[$symbol($version)]($style)\]' # bracketed segments
+version_format = "v${raw}" # available vars are 'raw', 'major', 'minor', & 'patch', default: 'v${raw}'
+#symbol = "🆂 " # default
+symbol = " " # nerd font
+disabled = false # default: false
+
+[shell]
+format = "[$indicator]($style) " # default
+disabled = false # default: true
+
+[shlvl]
+format = "[$symbol$shlvl]($style) " # default
+symbol = "↕️ " # default
+repeat = false # default: false
+threshold = 2 # default: 2
+disabled = true #  # default: true
+
+[status]
+format = "[$symbol$status]($style) " # default
+recognize_signal_code	= true # default: true
+map_symbol = false # default: false
+pipestatus = false # default: false
+pipestatus_format ='\[$pipestatus\] => [$symbol$common_meaning$signal_name$maybe_int]($style)' # default
+disabled = false # default: true
 
 [sudo]
-format = '\[[as $symbol]\]' # bracketed segments
+format = "[as $symbol]($style)" # default
+#format = '\[[as $symbol]\]' # bracketed segments
+symbol = "🧙 " # default
+disabled = false # default: true
 
 [terraform]
-format = '\[[$symbol$workspace]($style)\]' # bracketed segments
+format = "via [$symbol$workspace]($style) " # default
+#format = '\[[$symbol$workspace]($style)\]' # bracketed segments
+version_format = "v${raw}" # available vars are 'raw', 'major', 'minor', & 'patch', default: 'v${raw}'
+symbol = "💠" # default
+disabled = false # default: false
 
 [time]
-format = '\[[$time]($style)\]' # bracketed segments
+format = "at [$time]($style) " # default
+#format = '\[[$time]($style)\]' # bracketed segments
+use_12hr = false # default: false
+disabled = false # default: true
 
 [username]
-format = '\[[$user]($style)\]' # bracketed segments
+format = "[$user]($style) in " # default
+#format = '\[[$user]($style)\]' # bracketed segments
+show_always = false # default: false
+disabled = false # default: false
