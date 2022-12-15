@@ -78,6 +78,7 @@ for file in \
   '/usr/local/etc/bash_completion' \
   '/etc/bash_completion.d/'* \
   '/usr/share/git/completion/git-prompt.sh' \
+  '/etc/profile.d/autojump.sh' \
   "${HOME}/.sdkman/bin/sdkman-init.sh" \
   "${HOME}/.cargo/env" \
   "${HOME}/.config/broot/launcher/bash/br" \
