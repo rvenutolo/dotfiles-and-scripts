@@ -251,3 +251,17 @@ function pless() {
   fi
   return 0
 }
+
+function cless() {
+  case "$1" in
+      *.md) glow -s dark "$1" | less -r;;
+      *) highlight -O ansi "$1" --force | less -r;;
+  esac
+}
+
+function ccat() {
+  case "$1" in
+      *.md) glow -s dark "$1";;
+      *) highlight -O ansi "$1" --force;;
+  esac
+}
