@@ -43,7 +43,7 @@ if is_computer 'desktop' || is_computer 'laptop'; then
   )
 fi
 if is_distro 'fedora'; then
-  expected_cmds+=('fedy')
+  expected_cmds+=('alien' 'fedy')
 fi
 if is_distro 'arch' || is_distro 'manjaro'; then
   expected_cmds+=('pacseek' 'paru' 'yay')
