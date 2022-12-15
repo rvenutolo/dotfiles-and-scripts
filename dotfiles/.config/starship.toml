@@ -11,7 +11,6 @@ $directory\
 $git_branch\
 $git_commit\
 $git_state\
-$git_metrics\
 $git_status\
 $docker_context\
 $package\
@@ -29,8 +28,6 @@ $rust\
 $scala\
 $terraform\
 $memory_usage\
-$aws\
-$sudo\
 $cmd_duration\
 $line_break\
 $jobs\
@@ -38,12 +35,14 @@ $battery\
 $time\
 $status\
 $container\
-$shell\
 $character"""
 right_format = "" # default: ""
 scan_timeout = 30 # ms, default: 30
 command_timeout = 500 # ms, default: 500
 add_newline = true # default: true
+
+#continuation_prompt = '[∙](bright-black)' # default
+continuation_prompt = "▶▶"
 
 [aws]
 format = 'on [$symbol($profile )(\($region\) )(\[$duration\] )]($style)' # default
@@ -51,7 +50,7 @@ format = 'on [$symbol($profile )(\($region\) )(\[$duration\] )]($style)' # defau
 #symbol = "☁️ " # default
 symbol = "  " # nerd font
 force_display = false # default: false
-disabled = false # default: false
+disabled = true # default: false
 
 [battery]
 format = "[$symbol$percentage]($style) " # default
@@ -67,11 +66,13 @@ disabled = false # default: false
 
 [character]
 format = "$symbol " # default
+success_symbol = '[❯](bold green)'
+error_symbol = '[❯](bold red)'
 disabled = false # default: false
 
 [cmd_duration]
 format = "took [$duration]($style) " # default
-min_time = 2_000 #ms, default: 2_000
+min_time = 0 #ms, default: 2_000
 show_milliseconds = false # default: false
 show_notifications = false # show desktop notifications when command completes, default: false
 min_time_to_notify = 45_000 # ms, default: 45_000
@@ -100,6 +101,10 @@ format = "via [$symbol$context]($style) " # default
 symbol = " " # nerd font
 disabled = false # default: false
 
+[fill]
+symbol = "." # default
+disabled = false # default: false
+
 [git_branch]
 format = "on [$symbol$branch(:$remote_branch)]($style) " # default
 #format = '\[[$symbol$branch]($style)\]' # bracketed segments
@@ -125,7 +130,7 @@ disabled = false # default: false
 [git_metrics]
 format = "([+$added]($added_style) )([-$deleted]($deleted_style) )" # default
 only_nonzero_diffs = true # default: true
-disabled = false # default: true
+disabled = true # default: true
 
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style) )' # default
@@ -166,8 +171,7 @@ disabled = false # default: false
 [jobs]
 format = "[$symbol$number]($style) " # default
 symbol = "✦" # default
-threshold = 1 # default: 1
-symbol_threshold = 1 # default: 1
+symbol_threshold = 2 # default: 1
 number_threshold = 2 # default: 2
 disabled = false # default: false
 
@@ -201,10 +205,12 @@ symbol = " " # nerd font
 disabled = false # default: false
 
 [memory_usage]
-format = "via $symbol [${ram}( \\| ${swap})]($style) " # default
+#format = 'via $symbol [${ram}( | ${swap})]($style) ' # default
+format = 'via $symbol [${ram}]($style) ' # default
 #format = '\[$symbol[$ram( | $swap)]($style)\]' # bracketed segments
 #symbol = "🐏" # default
 symbol = " " # nerd font
+threshold = 1 # default: 75
 disabled = false # default: true
 
 [nodejs]
@@ -266,14 +272,14 @@ disabled = false # default: false
 
 [shell]
 format = "[$indicator]($style) " # default
-disabled = false # default: true
+disabled = true # default: true
 
 [shlvl]
 format = "[$symbol$shlvl]($style) " # default
 symbol = "↕️ " # default
 repeat = false # default: false
 threshold = 2 # default: 2
-disabled = true #  # default: true
+disabled = false #  # default: true
 
 [status]
 format = "[$symbol$status]($style) " # default
@@ -287,7 +293,7 @@ disabled = false # default: true
 format = "[as $symbol]($style)" # default
 #format = '\[[as $symbol]\]' # bracketed segments
 symbol = "🧙 " # default
-disabled = false # default: true
+disabled = true # default: true
 
 [terraform]
 format = "via [$symbol$workspace]($style) " # default
@@ -305,5 +311,5 @@ disabled = false # default: true
 [username]
 format = "[$user]($style) in " # default
 #format = '\[[$user]($style)\]' # bracketed segments
-show_always = false # default: false
+show_always = true # default: false
 disabled = false # default: false
