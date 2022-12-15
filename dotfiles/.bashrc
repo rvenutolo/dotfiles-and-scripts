@@ -66,7 +66,6 @@ shopt -u xpg_echo
 
 unalias -a
 
-## function placed here as it is used all over my dotfiles
 function command_exists() {
   type -P -f "$1" >/dev/null 2>&1
 }
@@ -103,3 +102,5 @@ unset dir
 [[ -r "${HOME}/.dir_colors" ]] && [[ -f "${HOME}/.dir_colors" ]] && eval "$(dircolors "${HOME}/.dir_colors")"
 command_exists 'fasd' && eval "$(fasd --init auto)"
 command_exists 'starship' && eval "$(starship init bash)"
+
+unset -f command_exists

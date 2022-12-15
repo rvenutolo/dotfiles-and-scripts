@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+function command_exists() {
+  type -P -f "$1" >/dev/null 2>&1
+}
+
 alias sudo='sudo '
 alias _='sudo'
 alias please='sudo $(fc -ln -1)'
