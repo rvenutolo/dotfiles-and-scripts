@@ -89,7 +89,7 @@ alias 655='chmod 655'
 alias 700='chmod 700'
 alias 744='chmod 744'
 alias 755='chmod 755'
-alias 775='chomd 775'
+alias 775='chmod 775'
 
 alias ..='cd ..'
 alias ...='cd ../..'
