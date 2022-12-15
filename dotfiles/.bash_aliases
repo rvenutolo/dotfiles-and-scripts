@@ -50,6 +50,12 @@ alias chgrp='chgrp --preserve-root'
 
 alias rsync-bak='rsync -ahEP --stats'
 
+alias trp='trash-put'
+alias tre='trash-empty'
+alias trl='trash-list'
+alias trr='trash-restore'
+alias trm='trash-rm'
+
 alias e='edit'
 alias k='kate'
 alias m='micro'
