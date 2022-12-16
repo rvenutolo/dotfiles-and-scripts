@@ -83,31 +83,30 @@ function swap() {
 }
 
 function un() {
-  if [[ "$#" -ne 1 ]]; then
-    err "Usage: ${FUNCNAME[0]} <path/file_name>.<7z|bz2|exe|gz|lzma|rar|tar|tar.bz2|tar.gz|tar.xz|tbz2|tgz|Z|zip|zx>"
-    return 1
-  fi
-  if [[ -f "$1" ]]; then
-    case "$1" in
-      *.tar.bz2 | *.tbz2) tar xvjf "$1" && return 0 ;;
-      *.tar.gz | *.tgz) tar xvzf "$1" && return 0 ;;
-      *.tar.xz) tar xvJf "$1" && return 0 ;;
-      *.7z) 7z x "$1" && return 0 ;;
-      *.bz2) bunzip2 "$1" && return 0 ;;
-      *.exe) cabextract "$1" && return 0 ;;
-      *.gz) gunzip "$1" && return 0 ;;
-      *.lzma) unlzma "$1" && return 0 ;;
-      *.rar) unrar x "$1" && return 0 ;;
-      *.tar) tar xvf "$1" && return 0 ;;
-      *.Z) uncompress "$1" && return 0 ;;
-      *.zip) unzip "$1" && return 0 ;;
-      *.zx) unxz "$1" && return 0 ;;
-      *) err "${FUNCNAME[0]} $1 - unknown archive method" && return 1 ;;
-    esac
-  else
-    err "'$1' does not exist"
-    return 1
-  fi
+  for archive in "$@"; do
+    if [ -f "${archive}" ]; then
+      case "${archive}" in
+        *.tar.bz2) tar xvjf "${archive}" ;;
+        *.tar.gz) tar xvzf "${archive}" ;;
+        *.tar.xz) tar xvJf "${archive}" ;;
+        *.bz2) bunzip2 "${archive}" ;;
+        *.rar) rar x "${archive}" ;;
+        *.gz) gunzip "${archive}" ;;
+        *.tar) tar xvf "${archive}" ;;
+        *.tbz2) tar xvjf "${archive}" ;;
+        *.tgz) tar xvzf "${archive}" ;;
+        *.zip) unzip "${archive}" ;;
+        *.zx) unxz "${archive}" ;;
+        *.Z) uncompress "${archive}" ;;
+        *.7z) 7z x "${archive}" ;;
+        *.exe) cabextract "${archive}" ;;
+        *.lzma) unlzma "$1" && return 0 ;;
+        *) echo "don't know how to extract '${archive}'..." ;;
+      esac
+    else
+      echo "'${archive}' is not a valid file!"
+    fi
+  done
 }
 
 # Get current host related info.
