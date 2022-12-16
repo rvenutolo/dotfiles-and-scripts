@@ -22,23 +22,6 @@ function ff() {
   find . -type f -iname '*'"$1"'*' -ls
 }
 
-# Change up a variable number of directories
-# E.g:
-#   cu   -> cd ../
-#   cu 2 -> cd ../../
-#   cu 3 -> cd ../../../
-function cu {
-  local count=$1
-  if [ -z "${count}" ]; then
-    count=1
-  fi
-  local path=""
-  for i in $(seq 1 ${count}); do
-    path="${path}../"
-  done
-  cd $path || exit
-}
-
 # "| order" is very handy for counting duplicated lines in a file or listing
 function order() {
   sort | uniq -c | sort -rn
@@ -209,10 +192,27 @@ function cpp() {
   END { print "" }' total_size="$(stat -c '%s' "${1}")" count=0
 }
 
+# Change up a variable number of directories
+# E.g:
+#   cu   -> cd ../
+#   cu 2 -> cd ../../
+#   cu 3 -> cd ../../../
+function cu {
+  local count=$1
+  if [ -z "${count}" ]; then
+    count=1
+  fi
+  local path=""
+  for i in $(seq 1 ${count}); do
+    path="${path}../"
+  done
+  cd $path || exit
+}
+
 # Goes up a specified number of directories  (i.e. up 4)
 function up() {
   local d=""
-  limit=$1
+  limit=${1:-1}
   for ((i = 1; i <= limit; i++)); do
     d=$d/..
   done
