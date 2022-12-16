@@ -44,21 +44,21 @@ fi
 alias mkdir='mkdir -pv'
 alias cp='cp -iv'
 alias mv='mv -iv'
-alias rm='rm -Iv --preserve-root'
 if command_exists 'safe-rm'; then
   alias rm='safe-rm -iv'
+else
+  alias rm='rm -iv'
 fi
-alias chown='chown --preserve-root'
-alias chmod='chmod --preserve-root'
-alias chgrp='chgrp --preserve-root'
-
-alias rsync-bak='rsync -ahEP --stats'
-
 alias trp='trash-put'
 alias tre='trash-empty'
 alias trl='trash-list'
 alias trr='trash-restore'
 alias trm='trash-rm'
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+
+alias rsync-bak='rsync -ahEP --stats'
 
 alias e='edit'
 alias k='kate'
