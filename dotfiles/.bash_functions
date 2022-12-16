@@ -125,6 +125,18 @@ function ii() {
   return 0
 }
 
+# Show current network information
+function netinfo() {
+  echo "--------------- Network Information ---------------"
+  /sbin/ifconfig | awk /'inet addr/ {print $2}'
+  echo ""
+  /sbin/ifconfig | awk /'Bcast/ {print $3}'
+  echo ""
+  /sbin/ifconfig | awk /'inet addr/ {print $4}'
+  /sbin/ifconfig | awk /'HWaddr/ {print $4,$5}'
+  echo "---------------------------------------------------"
+}
+
 function dataurl() {
   local mimeType
   mimeType=$(file -b --mime-type "$1")
