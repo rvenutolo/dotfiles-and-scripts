@@ -170,6 +170,9 @@ alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
 alias jctl="journalctl -p3 -xb"
 alias jctl-last="journalctl -p3 -xb1"
 
+alias rebootsafe='sudo shutdown -r now'
+alias rebootforce='sudo shutdown -r -n now'
+
 alias ln='ln -v'
 alias jobs='jobs -l'
 alias map='xargs -P"$(grep -c ^processor /proc/cpuinfo)" -n1'
