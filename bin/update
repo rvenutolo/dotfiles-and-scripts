@@ -86,3 +86,7 @@ if command_exists 'fwupdmgr'; then
   fwupdmgr refresh --force
   fwupdmgr update
 fi
+
+if command_exists 'freshclam'; then
+  sudo freshclam
+fi
