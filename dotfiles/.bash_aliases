@@ -95,8 +95,13 @@ alias 744='chmod -R 744'
 alias 755='chmod -R 755'
 alias 775='chmod -R 775'
 
+alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../..'
 alias .5='cd ../../../..'
@@ -105,6 +110,7 @@ alias home='cd ${HOME}'
 alias dl='cd ${HOME}/Downloads'
 alias dt='cd ${HOME}/Desktop'
 alias c='cd ${CODE_DIR}'
+alias bd='cd "$OLDPWD"'
 
 alias tarc="tar -cvzf"
 alias tarx="tar -xf"
