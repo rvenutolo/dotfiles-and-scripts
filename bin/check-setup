@@ -26,6 +26,13 @@ function is_computer() {
   [[ ${is_env} == 'true' ]]
 }
 
+expected_vars=('BROWSER' 'DE' 'EDITOR' 'FILE_MANAGER' 'JAVA_HOME' 'PAGER' 'RVENUTOLO_COMPUTER' 'VISUAL')
+set +u
+for var in "${expected_vars[@]}"; do
+  [[ -z "${!var}" ]] && echo "Environment variable not set: ${var}"
+done
+set -u
+
 expected_cmds=(
   '7z' 'alacritty' 'autojump' 'authy' 'aws' 'bat' 'bmon' 'broot' 'btop' 'bunzip2' 'cabextract' 'cargo' 'checkbashisms'
   'clamscan' 'cmake' 'colordiff' 'cpufetch' 'crontab' 'ctop' 'curl' 'dash' 'dig' 'diff-so-fancy' 'distrobox' 'docker'
@@ -68,13 +75,6 @@ expected_files=(
 for file in "${expected_files[@]}"; do
   file_exists "${file}" || echo "Missing file: ${file}"
 done
-
-expected_vars=('BROWSER' 'DE' 'EDITOR' 'FILE_MANAGER' 'JAVA_HOME' 'PAGER' 'RVENUTOLO_COMPUTER' 'VISUAL')
-set +u
-for var in "${expected_vars[@]}"; do
-  [[ -z "${!var}" ]] && echo "Environment variable not set: ${var}"
-done
-set -u
 
 expected_fonts=(
   'Code New Roman' 'Fantasque Sans Mono' 'Fira Code' 'FreeMono' 'Hack' 'Hasklig' 'Inconsolata' 'Input' 'Iosevka'
