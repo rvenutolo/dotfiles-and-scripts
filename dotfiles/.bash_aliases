@@ -173,6 +173,13 @@ alias jctl-last="journalctl -p3 -xb1"
 alias rebootsafe='sudo shutdown -r now'
 alias rebootforce='sudo shutdown -r -n now'
 
+alias mktar='tar -cvf'
+alias mkbz2='tar -cvjf'
+alias mkgz='tar -cvzf'
+alias untar='tar -xvf'
+alias unbz2='tar -xvjf'
+alias ungz='tar -xvzf'
+
 alias ln='ln -v'
 alias jobs='jobs -l'
 alias map='xargs -P"$(grep -c ^processor /proc/cpuinfo)" -n1'
