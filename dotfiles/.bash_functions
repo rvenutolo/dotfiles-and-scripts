@@ -108,27 +108,6 @@ function ii() {
   return 0
 }
 
-# Show current network information
-function netinfo() {
-  echo "--------------- Network Information ---------------"
-  /sbin/ifconfig | awk /'inet addr/ {print $2}'
-  echo ""
-  /sbin/ifconfig | awk /'Bcast/ {print $3}'
-  echo ""
-  /sbin/ifconfig | awk /'inet addr/ {print $4}'
-  /sbin/ifconfig | awk /'HWaddr/ {print $4,$5}'
-  echo "---------------------------------------------------"
-}
-
-function whatismyip() {
-  # Dumps a list of all IP addresses for every device
-  # /sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }' |awk -F: '{ print $1 ": " $3 }';
-  echo -n "Internal IP: "
-  /sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}'
-  echo -n "External IP: "
-  wget http://smart-ip.net/myip -O - -q
-}
-
 function dataurl() {
   local mimeType
   mimeType=$(file -b --mime-type "$1")
