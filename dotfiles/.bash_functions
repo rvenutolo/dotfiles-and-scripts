@@ -188,6 +188,20 @@ function cpp() {
   END { print "" }' total_size="$(stat -c '%s' "${1}")" count=0
 }
 
+# Goes up a specified number of directories  (i.e. up 4)
+function up() {
+  local d=""
+  limit=$1
+  for ((i = 1; i <= limit; i++)); do
+    d=$d/..
+  done
+  d=$(echo $d | sed 's/^\///')
+  if [ -z "$d" ]; then
+    d=..
+  fi
+  cd $d
+}
+
 function hide() {
   for file in "$@"; do
     mv -v "${file}" "$(dirname "${file}")"/."$(basename "${file}")" || exit 1
