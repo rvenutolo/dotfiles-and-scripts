@@ -129,6 +129,10 @@ alias zz='fasd_cd -d -i' # cd with interactive selection
 
 alias g='git'
 
+if command_exists 'riff'; then
+  alias diff='riff'
+fi
+
 alias docker-clean-images='docker rmi $(docker images -a --filter=dangling=true -q)'
 alias docker-clean-ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
 
