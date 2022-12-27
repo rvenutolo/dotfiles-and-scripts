@@ -83,7 +83,7 @@ alias rg='rg --sort path'
 alias du='du -ckh'
 alias du1='du --max-depth=1'
 alias df='df -kTh -x squashfs'
-alias free='free -m'
+alias free='free -mt'
 
 alias chux='chmod u+x'
 alias chax='chmod a+x'
