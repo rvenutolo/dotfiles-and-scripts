@@ -78,6 +78,7 @@ fi
 alias grep='grep --exclude-dir=.idea --exclude-dir=.git --colour=auto'
 alias egrep='grep -E'
 alias fgrep='grep -F'
+alias rg='rg --sort path'
 
 alias du='du -ckh'
 alias du1='du --max-depth=1'
