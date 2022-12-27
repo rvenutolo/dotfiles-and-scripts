@@ -47,7 +47,8 @@ expected_cmds=(
 if is_computer 'desktop' || is_computer 'laptop'; then
   expected_cmds+=(
     'backintime' 'clapper' 'dnuos' 'eyeD3' 'flac' 'flac2all' 'flac2mp3.pl' 'lame' 'magick' 'mediainfo' 'mogrify'
-    'mp3splt' 'puddletag' 'soundkonverter' 'sox' 'speedtest' 'tageditor' 'timeshift' 'virt-manager' 'virsh' 'zoom'
+    'mp3splt' 'puddletag' 'soundkonverter' 'sox' 'speedtest' 'tageditor' 'timeshift' 'ventoy' 'virt-manager' 'virsh'
+    'zoom'
   )
 fi
 if is_distro 'fedora'; then
