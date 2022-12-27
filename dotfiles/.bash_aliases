@@ -163,6 +163,7 @@ alias shrug='echo -n "¯\_(ツ)_/¯" | copy'
 
 alias psa='ps aux'
 alias psaf='ps auxf'
+alias psgrep='ps aux | grep -v grep | grep -i -e VSZ -e'
 
 ## get top process eating memory
 alias psmem='ps auxf | sort -nr -k 4'
