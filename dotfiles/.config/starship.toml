@@ -2,7 +2,8 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 # ░▒▓  
-format = """
+## TODO docker & terraform & container
+format = """\
 [](fg:#2E3440 bg:#8FBCBB)\
 [](fg:#8FBCBB bg:#3B4252)\
 $username\
@@ -30,7 +31,6 @@ $python\
 $ruby\
 $rust\
 $scala\
-$terraform\
 [](fg:#81A1C1 bg:#8FBCBB)\
 [](fg:#8FBCBB bg:#2E3440)\
 $fill\
@@ -45,6 +45,12 @@ scan_timeout = 30
 command_timeout = 500
 add_newline = true
 continuation_prompt = '▶▶'
+
+[c]
+format = '[${symbol} ($version(-$name))]($style)'
+style = 'bg:#81A1C1 bold'
+# C 
+symbol = ''
 
 [character]
 format = '$symbol '
@@ -99,6 +105,17 @@ disabled = false
 format = '([ \[$all_status$ahead_behind\]]($style))'
 style = 'fg:#D08770 bg:#4C566A bold'
 
+[golang]
+format = '[${symbol} (${version})]($style)'
+style = 'bg:#81A1C1 bold'
+symbol = ''
+
+[haskell]
+format = '[${symbol} (${version})]($style)'
+style = 'bg:#81A1C1 bold'
+# λ 
+symbol = ''
+
 [hostname]
 format = '[@$hostname]($style)'
 style = 'bg:#3B4252 bold'
@@ -116,11 +133,59 @@ style = 'fg:#81A1C1 bold'
 symbol = '✦'
 symbol_threshold = 1
 
+[kotlin]
+format = '[${symbol} (${version})]($style)'
+style = 'bg:#81A1C1 bold'
+# Ⓚ ⓚ 𝐊 🄚 🄺 🅚 🅺 🇰
+symbol = '𝐊'
+
+[lua]
+format = '[${symbol} (${version})]($style)'
+style = 'bg:#81A1C1 bold'
+#🌙 
+symbol = ''
+
+[nodejs]
+format = '[${symbol} (${version})]($style)'
+style = 'bg:#81A1C1 bold'
+# 
+symbol = ''
+
 [package]
 format = '[$symbol $version]($style)'
 style = 'bg:#5E81AC bold'
 # 📦    
 symbol = ''
+
+[perl]
+format = '[${symbol} (${version})]($style)'
+style = 'bg:#81A1C1 bold'
+# 🐪
+symbol = 'pl'
+
+[python]
+format = '[${symbol}${pyenv_prefix} (${version})]($style)'
+style = 'bg:#81A1C1 bold'
+# 🐍 
+symbol = ''
+
+[ruby]
+format = '[${symbol} (${version})]($style)'
+style = 'bg:#81A1C1 bold'
+# 💎 
+symbol = ''
+
+[rust]
+format = '[${symbol} (${version})]($style)'
+style = 'bg:#81A1C1 bold'
+# 🦀 
+symbol = ''
+
+[scala]
+format = '[${symbol} (${version})]($style)'
+style = 'bg:#81A1C1 bold'
+# 🆂 
+symbol = ''
 
 [status]
 format = '[$symbol]($style) '
