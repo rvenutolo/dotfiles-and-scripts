@@ -104,6 +104,7 @@ unset dir
 
 [[ -r "${HOME}/.dir_colors" ]] && [[ -f "${HOME}/.dir_colors" ]] && eval "$(dircolors "${HOME}/.dir_colors")"
 command_exists 'fasd' && eval "$(fasd --init auto)"
+command_exists 'zoxide' && eval "$(zoxide init bash)"
 command_exists 'starship' && eval "$(starship init bash)"
 
 unset -f command_exists
