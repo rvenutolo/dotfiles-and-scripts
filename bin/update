@@ -2,6 +2,12 @@
 
 set -euo pipefail
 
+if [[ "$#" -ne 0 ]]; then
+  readonly script_name="${0##*/}"
+  echo "${script_name}: Expected no arguments" >&2
+  exit 2
+fi
+
 function command_exists() {
   type -P -f "$1" >/dev/null 2>&1
 }
@@ -88,5 +94,6 @@ if command_exists 'fwupdmgr'; then
 fi
 
 if command_exists 'freshclam'; then
+  log 'ClamAV virus definitions'
   sudo freshclam
 fi
