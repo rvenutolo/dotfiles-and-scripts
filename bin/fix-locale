@@ -2,6 +2,12 @@
 
 set -euo pipefail
 
+if [[ "$#" -ne 0 ]]; then
+  readonly script_name="${0##*/}"
+  echo "${script_name}: Expected no arguments" >&2
+  exit 2
+fi
+
 echo 'LC_ALL=en_US.UTF-8' | sudo tee -a '/etc/environment'
 echo 'en_US.UTF-8 UTF-8' | sudo tee -a '/etc/locale.gen'
 echo 'LANG=en_US.UTF-8' | sudo tee -a '/etc/locale.conf'

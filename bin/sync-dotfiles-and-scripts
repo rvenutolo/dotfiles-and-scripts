@@ -2,6 +2,12 @@
 
 set -euo pipefail
 
+if [[ "$#" -ne 0 ]]; then
+  readonly script_name="${0##*/}"
+  echo "${script_name}: Expected no arguments" >&2
+  exit 2
+fi
+
 readonly dotfiles_target_dir="${HOME}"
 readonly scripts_target_dir="${HOME}/.bin"
 
