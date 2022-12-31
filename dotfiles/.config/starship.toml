@@ -192,7 +192,7 @@ symbol = ''
 threshold = 1
 format = '[$symbol$shlvl]($style) '
 symbol = '↕'
-style = 'fg:#EBCB8B'
+style = 'fg:#EBCB8B bold'
 disabled = false
 
 [status]
