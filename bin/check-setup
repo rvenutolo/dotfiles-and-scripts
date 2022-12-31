@@ -32,7 +32,10 @@ function is_computer() {
   [[ ${is_env} == 'true' ]]
 }
 
-expected_vars=('BROWSER' 'DE' 'EDITOR' 'FILE_MANAGER' 'JAVA_HOME' 'PAGER' 'RVENUTOLO_COMPUTER' 'VISUAL')
+expected_vars=(
+  'BROWSER' 'CODE_DIR' 'DE' 'EDITOR' 'FILE_MANAGER' 'GOPATH' 'JAVA_HOME' 'LANGUAGE' 'LANG' 'MANPAGER' 'PAGER'
+  'RVENUTOLO_COMPUTER' 'SDKMAN_DIR' 'VISUAL'
+)
 set +u
 for var in "${expected_vars[@]}"; do
   [[ -z "${!var}" ]] && echo "Environment variable not set: ${var}"
