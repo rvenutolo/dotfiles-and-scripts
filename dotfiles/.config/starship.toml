@@ -37,6 +37,7 @@ $fill\
 $status\
 $cmd_duration\
 $jobs\
+$shlvl\
 $time\
 $line_break\
 $character\
@@ -186,6 +187,13 @@ format = '[${symbol} (${version})]($style)'
 style = 'bg:#81A1C1 bold'
 # 🆂 
 symbol = ''
+
+[shlvl]
+threshold = 1
+format = '[$symbol$shlvl]($style) '
+symbol = '↕'
+style = 'fg:#EBCB8B'
+disabled = false
 
 [status]
 format = '[$symbol]($style) '
