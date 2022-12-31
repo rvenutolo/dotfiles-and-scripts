@@ -3,8 +3,7 @@
 set -euo pipefail
 
 if [[ "$#" -gt 1 ]]; then
-  readonly script_name="${0##*/}"
-  echo "${script_name}: Expected at most 1 argument" >&2
+  echo "${0##*/}: Expected at most 1 argument" >&2
   exit 2
 fi
 

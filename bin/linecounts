@@ -3,14 +3,12 @@
 set -euo pipefail
 
 if [[ "$#" -ne 0 ]]; then
-  readonly script_name="${0##*/}"
-  echo "${script_name}: Expected no arguments" >&2
+  echo "${0##*/}: Expected no arguments" >&2
   exit 2
 fi
 
 if [[ -t 0 ]]; then
-  readonly script_name="${0##*/}"
-  echo "${script_name}: Expected STDIN" >&2
+  echo "${0##*/}: Expected STDIN" >&2
   exit 2
 fi
 
