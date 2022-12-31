@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ "$#" -ne 2 ]]; then
+  readonly script_name="${0##*/}"
+  echo "${script_name}: Expected exactly 2 arguments" >&2
+  exit 2
+fi
+
+man "$1" | less -p "^ +$2"

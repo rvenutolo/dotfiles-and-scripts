@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+if [[ -z "${SDKMAN_DIR}" ]]; then
+  echo 'SDKMAN_DIR is not set' >&2
+  exit 2
+fi
+
+set -euo pipefail
+
+sdkman_init="${SDKMAN_DIR}/bin/sdkman-init.sh"
+if [[ -r "${sdkman_init}" ]] && [[ -f "${sdkman_init}" ]]; then
+  set +ue
+  source "${sdkman_init}"
+  set -ue
+else
+  echo 'SDKMAN init script does not exist' >&2
+  exit 2
+fi
+
+readonly sdkman_gradle="${SDKMAN_DIR}/candidates/gradle/current/bin/gradle"
+
+dir="$PWD"
+project_root="$PWD"
+while [[ "$dir" != / ]]; do
+  if [[ -f "$dir/settings.gradle" || -f "$dir/settings.gradle.kts" || -f "$dir/gradlew" ]]; then
+    project_root="$dir"
+    break
+  fi
+  dir="$(dirname "${dir}")"
+done
+
+if [[ -x "$project_root/gradlew" ]]; then
+  echo "Executing gradlew instead of gradle"
+  "${project_root}/gradlew" "$@"
+elif [[ -x "${sdkman_gradle}" ]]; then
+  "${sdkman_gradle}" "$@"
+else
+  echo 'No gradlew or gradle' >&2
+  exit 2
+fi

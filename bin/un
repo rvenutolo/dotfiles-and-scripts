@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ "$#" -eq 0 ]]; then
+  readonly script_name="${0##*/}"
+  echo "${script_name}: Expected at least 1 argument" >&2
+  exit 2
+fi
+
+for archive in "$@"; do
+  if [ -f "${archive}" ]; then
+    case "${archive}" in
+      *.tar.bz2) tar xvjf "${archive}" ;;
+      *.tar.gz) tar xvzf "${archive}" ;;
+      *.tar.xz) tar xvJf "${archive}" ;;
+      *.bz2) bunzip2 "${archive}" ;;
+      *.rar) rar x "${archive}" ;;
+      *.gz) gunzip "${archive}" ;;
+      *.tar) tar xvf "${archive}" ;;
+      *.tbz2) tar xvjf "${archive}" ;;
+      *.tgz) tar xvzf "${archive}" ;;
+      *.zip) unzip "${archive}" ;;
+      *.zx) unxz "${archive}" ;;
+      *.Z) uncompress "${archive}" ;;
+      *.7z) 7z x "${archive}" ;;
+      *.exe) cabextract "${archive}" ;;
+      *.lzma) unlzma "$1" && return 0 ;;
+      *) echo "don't know how to extract '${archive}'..." ;;
+    esac
+  else
+    echo "'${archive}' is not a valid file!"
+  fi
+done

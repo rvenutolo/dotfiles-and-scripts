@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ "$#" -ne 1 ]]; then
+  readonly script_name="${0##*/}"
+  echo "${script_name}: Expected exactly 1 argument" >&2
+  exit 2
+fi
+
+jq -nr --arg v "$1" '$v|@uri'

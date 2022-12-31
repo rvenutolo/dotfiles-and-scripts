@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ "$#" -eq 0 ]]; then
+  readonly script_name="${0##*/}"
+  echo "${script_name}: Expected at least 1 argument" >&2
+  exit 2
+fi
+
+for file in "$@"; do
+  pygmentize -g "${file}"
+done

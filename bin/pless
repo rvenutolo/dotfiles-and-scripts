@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ "$#" -gt 1 ]]; then
+  readonly script_name="${0##*/}"
+  echo "${script_name}: Expected at most 1 argument" >&2
+  exit 2
+fi
+
+if [[ "$#" -eq 1 ]]; then
+  pygmentize -g "$1" | less -r
+elif [[ ! -t 0 ]]; then
+  pygmentize -g | less -r
+fi

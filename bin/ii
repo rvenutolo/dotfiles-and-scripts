@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ "$#" -ne 0 ]]; then
+  readonly script_name="${0##*/}"
+  echo "${script_name}: Expected no arguments" >&2
+  exit 2
+fi
+
+echo -e "\nYou are logged on $(hostname)"
+echo -e "\nAdditional information: "
+uname -a
+echo -e "\nUsers logged on: "
+w -h
+echo -e "\nCurrent date: "
+date
+echo -e "\nMachine stats: "
+uptime
+echo -e "\nMemory stats: "
+free
