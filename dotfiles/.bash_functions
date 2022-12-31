@@ -1,29 +1,5 @@
 #!/usr/bin/env bash
 
-# Move filenames to lowercase
-function lowercase() {
-  for file; do
-    local filename
-    filename="${file##*/}"
-    case "${filename}" in
-      */*) dirname="${file%/*}" ;;
-      *) dirname="." ;;
-    esac
-    local nf
-    nf="$(echo "${filename}" | tr '[:upper:]' '[:lower:]')"
-    local newname
-    newname="${dirname}/${nf}"
-    if [[ "${nf}" != "${filename}" ]]; then
-      mv "${file}" "${newname}" || exit 1
-      echo "${FUNCNAME[0]}: ${file} --> ${newname}"
-      return 0
-    else
-      echo "${FUNCNAME[0]}: ${file} not changed"
-      return 0
-    fi
-  done
-}
-
 # Swap 2 filenames around, if they exist
 function swap() {
   local temp_file
