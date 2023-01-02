@@ -2,11 +2,18 @@
 
 set -euo pipefail
 
-if [[ "$#" -eq 0 ]]; then
-  echo "${0##*/}: Expected at least 1 argument" >&2
+if [[ "$#" -eq 0 ]] && [[ -t 0 ]]; then
+  echo "${0##*/}: Expected STDIN" >&2
   exit 2
 fi
 
-for file in "$@"; do
-  pygmentize -g "${file}"
-done
+if [[ "$#" -eq 0 ]]; then
+  highlight -O ansi --force
+else
+  for file in "$@"; do
+    case "${file}" in
+      *.md) glow "${file}" ;;
+      *) highlight ${HIGHLIGHT_OPTIONS} "${file}" ;;
+    esac
+  done
+fi

@@ -61,6 +61,7 @@ else
 fi
 export VISUAL="${EDITOR}"
 
+export HIGHLIGHT_OPTIONS='-O ansi --force'
 export CODE_DIR="${HOME}/Code"
 export SDKMAN_DIR="${HOME}/.sdkman"
 export GOPATH="${HOME}/.go"
