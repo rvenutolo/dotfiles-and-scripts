@@ -2,23 +2,24 @@
 
 set -euo pipefail
 
-if [[ "$#" -eq 0 ]]; then
-  if [[ -t 0 ]]; then
-    echo "${0##*/}: Expected STDIN" >&2
-    exit 2
-  fi
-  tr '[:upper:]' '[:lower:]'
+if [[ "$#" -eq 0 ]] && [[ -t 0 ]]; then
+  echo "${0##*/}: Expected STDIN" >&2
+  exit 2
 fi
 
-for file; do
-  dirname="$(dirname "${file}")"
-  filename="$(basename "${file}")"
-  lower_filename="$(echo "${filename}" | tr '[:upper:]' '[:lower:]')"
-  target_file="${dirname}/${lower_filename}"
-  if [[ "${lower_filename}" != "${filename}" ]]; then
-    mv "${file}" "${target_file}"
-    echo "${0##*/}: ${file} -> ${target_file}"
-  else
-    echo "${0##*/}: ${file} not renamed"
-  fi
-done
+if [[ "$#" -eq 0 ]]; then
+  tr '[:upper:]' '[:lower:]'
+else
+  for file; do
+    dirname="$(dirname "${file}")"
+    filename="$(basename "${file}")"
+    lower_filename="$(echo "${filename}" | tr '[:upper:]' '[:lower:]')"
+    target_file="${dirname}/${lower_filename}"
+    if [[ "${lower_filename}" != "${filename}" ]]; then
+      mv "${file}" "${target_file}"
+      echo "${0##*/}: ${file} -> ${target_file}"
+    else
+      echo "${0##*/}: ${file} not renamed"
+    fi
+  done
+fi
