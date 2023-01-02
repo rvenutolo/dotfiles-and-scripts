@@ -6,6 +6,7 @@ function command_exists() {
 
 alias sudo='sudo '
 alias _='sudo'
+alias sued='sudo --edit'
 alias please='sudo $(fc -ln -1)'
 alias plz='please'
 
