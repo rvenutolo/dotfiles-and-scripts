@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-if [[ "$#" -eq 0 ]] && [[ -t 0 ]]; then
+if [[ "$#" -eq 0 && -t 0 ]]; then
   echo "${0##*/}: Expected STDIN" >&2
   exit 2
 fi
@@ -10,7 +10,7 @@ fi
 if [[ "$#" -eq 0 ]]; then
   highlight -O ansi --force
 else
-  for file in "$@"; do
+  for file; do
     case "${file}" in
       *.md) glow "${file}" ;;
       *) highlight ${HIGHLIGHT_OPTIONS} "${file}" ;;

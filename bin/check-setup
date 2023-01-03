@@ -12,7 +12,7 @@ function command_exists() {
 }
 
 function file_exists() {
-  [[ -r "$1" ]] && [[ -f "$1" ]]
+  [[ -r "$1" && -f "$1" ]]
 }
 
 function is_distro() {
@@ -141,7 +141,7 @@ done
 [[ $(timedatectl show) != *'NTP=yes'* ]] && echo 'timedatectl set-ntp is not set'
 
 if command_exists 'flatpak'; then
-  flatpak remotes | grep -qwF 'flathub' || echo "Flathub flatpak repo is not installed"
+  flatpak remotes | grep -qwF 'flathub' || echo 'Flathub flatpak repo is not installed'
 fi
 
 if is_distro 'fedora'; then

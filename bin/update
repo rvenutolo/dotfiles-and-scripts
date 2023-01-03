@@ -12,13 +12,13 @@ function command_exists() {
 }
 
 function file_exists() {
-  [[ -r "$1" ]] && [[ -f "$1" ]]
+  [[ -r "$1" && -f "$1" ]]
 }
 
 function log() {
-  echo '----------------------------------------'
-  echo "Updating $1"
-  echo '----------------------------------------'
+  echo '----------------------------------------' >&2
+  echo "Updating $1" >&2
+  echo '----------------------------------------' >&2
 }
 
 if command_exists 'yay'; then

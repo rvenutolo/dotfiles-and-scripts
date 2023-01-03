@@ -20,7 +20,7 @@ done
 readonly sdkman_gradle="${SDKMAN_DIR}/candidates/gradle/current/bin/gradle"
 
 if [[ -x "$project_root/gradlew" ]]; then
-  echo "Executing gradlew instead of gradle"
+  echo 'Executing gradlew instead of gradle' >&2
   "${project_root}/gradlew" "$@"
 elif [[ -x "${sdkman_gradle}" ]]; then
   "${sdkman_gradle}" "$@"

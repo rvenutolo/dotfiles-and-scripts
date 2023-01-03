@@ -28,4 +28,4 @@ then
 fi
 " --tag-name-filter cat -- --branches --tags
 
-echo "Check the log, then push changes with: git push --force --tags origin 'refs/heads/*'"
+echo "Check the log, then push changes with: git push --force --tags origin 'refs/heads/*'" >&2

@@ -7,6 +7,10 @@ if [[ "$#" -eq 0 ]]; then
   exit 2
 fi
 
-for file in "$@"; do
-  mv -v "${file}" "$(dirname "${file}")"/."$(basename "${file}")" || exit 1
+for file; do
+  dirname="$(dirname "${file}")"
+  filename="$(basename "${file}")"
+  target_file="${dirname}/.${filename}"
+  mv "${file}" "${target_file}"
+  echo "${0##*/}: ${file} -> ${target_file}" >&2
 done
