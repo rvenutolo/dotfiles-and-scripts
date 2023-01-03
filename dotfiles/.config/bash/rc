@@ -93,8 +93,8 @@ for dir in \
   "${HOME}/.local/bin" \
   "${HOME}/.cargo/bin" \
   "${HOME}/.local/share/coursier/bin" \
-  "${HOME}/.bin/other" \
-  "${HOME}/.bin"; do
+  "${HOME}/.bin" \
+  "${HOME}/.bin/other"; do
   [[ -d "${dir}" ]] && [[ "${PATH}" != *"${dir}"* ]] && PATH="${dir}:${PATH}"
 done
 unset dir
