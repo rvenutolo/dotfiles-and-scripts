@@ -215,3 +215,4 @@ alias compress-pdf='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=
 alias da='date "+%Y-%m-%d %A %T %Z"'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias update-fc='sudo fc-cache -fv'
+alias shfmt='shfmt --indent 2 --case-indent'
