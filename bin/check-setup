@@ -74,7 +74,7 @@ for cmd in "${expected_cmds[@]}"; do
 done
 
 expected_files=(
-  "${HOME}/.bash_extra"
+  "${HOME}/.config/bash/extra"
   "${HOME}/.gitconfig.private"
   "${HOME}/.ssh/config.private"
   "${HOME}/.sdkman/bin/sdkman-init.sh"
