@@ -17,14 +17,17 @@ while [[ "$dir" != / ]]; do
   dir="$(dirname "${dir}")"
 done
 
-readonly sdkman_gradle="${SDKMAN_DIR}/candidates/gradle/current/bin/gradle"
-
 if [[ -x "$project_root/gradlew" ]]; then
   echo 'Executing gradlew instead of gradle' >&2
   "${project_root}/gradlew" "$@"
-elif [[ -x "${sdkman_gradle}" ]]; then
-  "${sdkman_gradle}" "$@"
-else
-  echo 'No gradlew or gradle available' >&2
+  exit 0
+fi
+
+readonly sdkman_gradle="${SDKMAN_DIR}/candidates/gradle/current/bin/gradle"
+
+if [[ ! -x "${sdkman_gradle}" ]]; then
+  echo 'SDKMAN gradle not available' >&2
   exit 2
 fi
+
+"${sdkman_gradle}" "$@"
