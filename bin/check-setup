@@ -45,12 +45,12 @@ expected_cmds=(
   '7z' 'alacritty' 'autojump' 'authy' 'aws' 'bat' 'bmon' 'broot' 'btop' 'bunzip2' 'cabextract' 'cargo' 'checkbashisms'
   'clamscan' 'cmake' 'colordiff' 'cpufetch' 'crontab' 'ctop' 'curl' 'dash' 'dig' 'diff-so-fancy' 'distrobox' 'docker'
   'dos2unix' 'edex-ui' 'exa' 'fasd' 'fd' 'fish' 'flatpak' 'flatseal' 'fff' 'fzf' 'gdu' 'git' 'gitkraken' 'gitui'
-  'glances' 'glow' 'go' 'gparted' 'gradle' 'groovy' 'gunzip' 'highlight' 'http' 'iconv' 'inotifywait' 'java' 'javac'
-  'jq' 'kotlin' 'lazydocker' 'lazygit' 'lf' 'locate' 'maldet' 'micro' 'mn' 'moar' 'mvn' 'mvnd' 'nano' 'ncdu' 'neofetch'
-  'nnn' 'nvim' 'onefetch' 'oneshot' 'openconnect' 'openvpn' 'pandoc' 'parallel' 'pcmanfm' 'pip' 'podman' 'postman'
-  'procs' 'ptop' 'pv' 'px' 'ranger' 'rg' 'riff' 'ruby' 'rustup' 'sbt' 'scala' 'screen' 'sd' 'shellcheck' 'shfmt' 'snap'
-  'sntp' 'spark-submit' 'spring' 'stacer' 'starship' 'tabs2spaces' 'tar' 'tldr' 'tokei' 'trash' 'tree' 'uncompress'
-  'unlzma' 'unrar' 'unxz' 'unzip' 'visualvm' 'vlc' 'wget' 'xsel' 'zip' 'zoxide'
+  'glances' 'glow' 'go' 'gparted' 'gradle' 'groovy' 'gunzip' 'highlight' 'hstr' 'http' 'iconv' 'inotifywait' 'java'
+  'javac' 'jq' 'kotlin' 'lazydocker' 'lazygit' 'lf' 'locate' 'maldet' 'micro' 'mn' 'moar' 'mvn' 'mvnd' 'nano' 'ncdu'
+  'neofetch' 'nnn' 'nvim' 'onefetch' 'oneshot' 'openconnect' 'openvpn' 'pandoc' 'parallel' 'pcmanfm' 'pip' 'podman'
+  'postman' 'procs' 'ptop' 'pv' 'px' 'ranger' 'rg' 'riff' 'ruby' 'rustup' 'sbt' 'scala' 'screen' 'sd' 'shellcheck'
+  'shfmt' 'snap' 'sntp' 'spark-submit' 'spring' 'stacer' 'starship' 'tabs2spaces' 'tar' 'tldr' 'tokei' 'trash' 'tree'
+  'uncompress' 'unlzma' 'unrar' 'unxz' 'unzip' 'visualvm' 'vlc' 'wget' 'xsel' 'zip' 'zoxide'
 )
 if is_computer 'desktop' || is_computer 'laptop'; then
   expected_cmds+=(
