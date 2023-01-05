@@ -88,14 +88,19 @@ for file in \
 done
 unset file
 
+function prepend_path() {
+  if [[ -d "${dir}" ]]; then
+    echo -e "${PATH//:/\\n}" | grep -q ^"${dir}"$ || PATH="${dir}:${PATH}"
+  fi
+}
+
 for dir in \
   "$(ruby -e 'puts Gem.user_dir')/bin" \
   "${HOME}/.local/bin" \
   "${HOME}/.cargo/bin" \
-  "${HOME}/.local/share/coursier/bin" \
   "${HOME}/.bin/other" \
   "${HOME}/.bin"; do
-  [[ -d "${dir}" ]] && echo "$PATH" | grep -Eq "(^|:)${dir}(:|$)" || PATH="${dir}:${PATH}"
+  prepend_path "${dir}"
 done
 unset dir
 
@@ -109,4 +114,5 @@ command_exists 'zoxide' && eval "$(zoxide init bash)"
 command_exists 'starship' && eval "$(starship init bash)"
 command_exists 'aws_completer' && complete -C 'aws_completer' aws
 
+unset -f prepend_path
 unset -f command_exists
