@@ -107,5 +107,6 @@ function command_exists() {
 command_exists 'fasd' && eval "$(fasd --init auto)"
 command_exists 'zoxide' && eval "$(zoxide init bash)"
 command_exists 'starship' && eval "$(starship init bash)"
+command_exists 'aws_completer' && complete -C 'aws_completer' aws
 
 unset -f command_exists
