@@ -134,14 +134,6 @@ alias psa='ps aux'
 alias psaf='ps auxf'
 alias psgrep='ps aux | grep -v grep | grep -i -e VSZ -e'
 
-## get top process eating memory
-alias psmem='ps auxf | sort -nr -k 4'
-alias psmem10='ps auxf | sort -nr -k 4 | head -10'
-
-## get top process eating cpu ##
-alias pscpu='ps auxf | sort -nr -k 3'
-alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
-
 alias jctl="journalctl -p3 -xb"
 alias jctl-last="journalctl -p3 -xb1"
 
