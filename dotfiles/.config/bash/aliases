@@ -125,10 +125,6 @@ if command_exists 'riff'; then
   alias diff='riff'
 fi
 
-if command_exists 'pacman-mirrors'; then
-  alias update-mirrors='sudo pacman-mirrors --country United_States,Canada && sudo pacman-mirrors --fasttrack && sudo pacman -Syyu'
-fi
-
 alias copy='xsel -ib'
 alias paste='xsel -ob'
 alias cwd='pwd | tr -d "\r\n" | copy'
