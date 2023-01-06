@@ -7,4 +7,7 @@ if [[ "$#" -ne 0 ]]; then
   exit 2
 fi
 
-docker rmi "$(docker images -a --filter=dangling=true -q)"
+readonly images="$(docker images -a --filter=dangling=true -q)"
+if [[ -n "${images}" ]]; then
+  docker rmi "${images}"
+fi
