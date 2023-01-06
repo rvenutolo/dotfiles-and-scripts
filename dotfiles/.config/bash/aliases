@@ -125,10 +125,6 @@ if command_exists 'riff'; then
   alias diff='riff'
 fi
 
-alias docker-clean-images='docker rmi $(docker images -a --filter=dangling=true -q)'
-alias docker-clean-ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
-
-
 if command_exists 'pacman-mirrors'; then
   alias update-mirrors='sudo pacman-mirrors --country United_States,Canada && sudo pacman-mirrors --fasttrack && sudo pacman -Syyu'
 fi
