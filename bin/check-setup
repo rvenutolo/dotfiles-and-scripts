@@ -33,7 +33,7 @@ function is_computer() {
 
 expected_vars=(
   'BROWSER' 'CODE_DIR' 'DE' 'EDITOR' 'FILE_MANAGER' 'GOPATH' 'HIGHLIGHT_OPTIONS' 'JAVA_HOME' 'LANGUAGE' 'LANG'
-  'MANPAGER' 'PAGER' 'RVENUTOLO_COMPUTER' 'SDKMAN_DIR' 'VISUAL'
+  'MANPAGER' 'PAGER' 'RVENUTOLO_COMPUTER' 'SDKMAN_DIR' 'VISUAL' 'WTTR_CITY'
 )
 set +u
 for var in "${expected_vars[@]}"; do
