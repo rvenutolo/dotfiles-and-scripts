@@ -66,6 +66,24 @@ shopt -u xpg_echo
 
 unalias -a
 
+function path_remove () {
+  PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
+}
+
+function path_append () {
+  path_remove "$1"
+  PATH="$PATH:$1"
+}
+
+function path_prepend () {
+  path_remove "$1"
+  PATH="$1:$PATH"
+}
+
+function command_exists() {
+  type -P -f "$1" >/dev/null 2>&1
+}
+
 for file in \
   '/etc/bash.bashrc' \
   '/etc/bashrc' \
@@ -88,25 +106,15 @@ for file in \
 done
 unset file
 
-function prepend_path() {
-  if [[ -d "${dir}" ]]; then
-    echo -e "${PATH//:/\\n}" | grep -q ^"${dir}"$ || PATH="${dir}:${PATH}"
-  fi
-}
-
 for dir in \
   "$(ruby -e 'puts Gem.user_dir')/bin" \
   "${HOME}/.local/bin" \
   "${HOME}/.cargo/bin" \
   "${HOME}/.bin/other" \
   "${HOME}/.bin"; do
-  prepend_path "${dir}"
+  path_prepend "${dir}"
 done
 unset dir
-
-function command_exists() {
-  type -P -f "$1" >/dev/null 2>&1
-}
 
 [[ -r "${HOME}/.dir_colors" ]] && [[ -f "${HOME}/.dir_colors" ]] && eval "$(dircolors "${HOME}/.dir_colors")"
 command_exists 'fasd' && eval "$(fasd --init auto)"
@@ -114,5 +122,7 @@ command_exists 'zoxide' && eval "$(zoxide init bash)"
 command_exists 'starship' && eval "$(starship init bash)"
 command_exists 'aws_completer' && complete -C 'aws_completer' aws
 
-unset -f prepend_path
+unset -f path_remove
+unset -f path_append
+unset -f path_prepend
 unset -f command_exists
