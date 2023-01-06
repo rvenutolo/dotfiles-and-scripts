@@ -69,6 +69,14 @@ if is_desktop_env 'gnome'; then
   ## TODO move these checks to package checks
   expected_cmds+=('gnome-tweaks' 'gnome-extensions-app')
 fi
+
+## remove my bin dirs from path so scripts that mask commands are no longer on PATH, ex: mvn
+function path_remove () {
+  PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
+}
+path_remove '/home/rvenutolo/.bin'
+path_remove '/home/rvenutolo/.bin/other'
+
 for cmd in "${expected_cmds[@]}"; do
   command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
 done
