@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if [[ -z "${CODE_DIR}" ]]; then
+  echo 'CODE_DIR is not set' >&2
+  exit 2
+fi
+
+set -euo pipefail
+
+if [[ "$#" -ne 0 ]]; then
+  echo "${0##*/}: Expected no arguments" >&2
+  exit 2
+fi
+
+"${CODE_DIR}/dotfiles-and-scripts/bin/sync-dotfiles-and-scripts"
