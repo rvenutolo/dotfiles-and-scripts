@@ -13,7 +13,7 @@ if [[ -t 0 ]]; then
 fi
 
 # ex:
-# echo file1 file2 file2 | map basename
+# echo file1 file2 file2 | foreach basename
 # runs:
 # basename file1
 # basename file2
