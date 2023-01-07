@@ -134,9 +134,6 @@ alias psa='ps aux'
 alias psaf='ps auxf'
 alias psgrep='ps aux | grep -v grep | grep -i -e VSZ -e'
 
-alias jctl="journalctl -p3 -xb"
-alias jctl-last="journalctl -p3 -xb1"
-
 alias rebootsafe='sudo shutdown -r now'
 alias rebootforce='sudo shutdown -r -n now'
 
