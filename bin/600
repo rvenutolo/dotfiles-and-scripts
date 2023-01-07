@@ -7,4 +7,4 @@ if [[ "$#" -eq 0 ]]; then
   exit 2
 fi
 
-chmod -R 600 "$@"
+chmod --preserve-root -R 600 "$@"
