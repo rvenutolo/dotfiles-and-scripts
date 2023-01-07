@@ -125,8 +125,6 @@ if command_exists 'riff'; then
   alias diff='riff'
 fi
 
-alias copy='xsel -ib'
-alias paste='xsel -ob'
 alias cwd='pwd | tr -d "\r\n" | copy'
 alias shrug='echo -n "¯\_(ツ)_/¯" | copy'
 
