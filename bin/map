@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ "$#" -ne 1 ]]; then
+  echo "${0##*/}: Expected exactly 1 argument" >&2
+  exit 2
+fi
+
+if [[ -t 0 ]]; then
+  echo "${0##*/}: Expected STDIN" >&2
+  exit 2
+fi
+
+# ex:
+# echo file1 file2 file2 | map basename
+# runs:
+# basename file1
+# basename file2
+# basename file2
+xargs -P"$(nproc)" -n1 "$1"

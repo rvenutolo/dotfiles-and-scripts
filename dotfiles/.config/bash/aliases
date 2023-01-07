@@ -144,7 +144,6 @@ alias ungz='tar -xvzf'
 
 alias ln='ln -v'
 alias jobs='jobs -l'
-alias map='xargs -P"$(grep -c ^processor /proc/cpuinfo)" -n1'
 alias which='type -a'
 alias cls='clear'
 alias q='exit'
