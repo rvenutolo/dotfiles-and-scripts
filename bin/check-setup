@@ -44,7 +44,7 @@ set -u
 expected_cmds=(
   '7z' 'alacritty' 'autojump' 'authy' 'aws' 'aws_completer' 'bat' 'bmon' 'broot' 'btop' 'bunzip2' 'cabextract' 'cargo'
   'checkbashisms' 'clamscan' 'cmake' 'colordiff' 'cpufetch' 'crontab' 'ctop' 'curl' 'dash' 'dig' 'diff-so-fancy'
-  'distrobox' 'docker' 'dos2unix' 'edex-ui' 'exa' 'fasd' 'fd' 'fish' 'flatpak' 'flatseal' 'fff' 'fzf' 'gdu' 'git'
+  'distrobox' 'docker' 'dos2unix' 'edex-ui' 'exa' 'fd' 'fish' 'flatpak' 'flatseal' 'fff' 'fzf' 'gdu' 'git'
   'gitkraken' 'gitui' 'glances' 'glow' 'go' 'gparted' 'gradle' 'groovy' 'gunzip' 'highlight' 'hstr' 'http' 'iconv'
   'inotifywait' 'java' 'javac' 'jq' 'kotlin' 'lazydocker' 'lazygit' 'lf' 'locate' 'maldet' 'micro' 'mn' 'moar' 'mvn'
   'mvnd' 'nano' 'ncdu' 'neofetch' 'nnn' 'nvim' 'onefetch' 'oneshot' 'openconnect' 'openvpn' 'pandoc' 'parallel' 'pcmanfm'
