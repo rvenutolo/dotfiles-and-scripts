@@ -123,9 +123,6 @@ alias psa='ps aux'
 alias psaf='ps auxf'
 alias psgrep='ps aux | grep -v grep | grep -i -e VSZ -e'
 
-alias rebootsafe='sudo shutdown -r now'
-alias rebootforce='sudo shutdown -r -n now'
-
 alias mktar='tar -cvf'
 alias mkbz2='tar -cvjf'
 alias mkgz='tar -cvzf'
