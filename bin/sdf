@@ -13,3 +13,4 @@ if [[ "$#" -ne 0 ]]; then
 fi
 
 "${CODE_DIR}/dotfiles-and-scripts/bin/sync-dotfiles-and-scripts"
+echo "Remember to run: source ~/.bashrc"
