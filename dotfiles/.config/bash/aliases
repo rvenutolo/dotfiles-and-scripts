@@ -118,7 +118,6 @@ fi
 
 alias psa='ps aux'
 alias psaf='ps auxf'
-alias psgrep='ps aux | grep -v grep | grep -i -e VSZ -e'
 
 alias mktar='tar -cvf'
 alias mkbz2='tar -cvjf'
