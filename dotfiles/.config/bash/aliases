@@ -116,9 +116,6 @@ if command_exists 'riff'; then
   alias diff='riff'
 fi
 
-alias cwd='pwd | tr -d "\r\n" | copy'
-alias shrug='echo -n "¯\_(ツ)_/¯" | copy'
-
 alias psa='ps aux'
 alias psaf='ps auxf'
 alias psgrep='ps aux | grep -v grep | grep -i -e VSZ -e'
