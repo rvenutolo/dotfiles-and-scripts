@@ -51,3 +51,5 @@ export CODE_DIR="${HOME}/Code"
 export SDKMAN_DIR="${HOME}/.sdkman"
 export GOPATH="${HOME}/.go"
 export WTTR_CITY='Atlanta'
+
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgreprc"
