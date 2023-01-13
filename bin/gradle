@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-if [[ -z "${SDKMAN_DIR}" ]]; then
-  echo 'SDKMAN_DIR is not set' >&2
-  exit 2
-fi
-
 set -euo pipefail
+
+function path_remove() {
+  PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
+}
+
+# remove this dir from the path so executing `gradle` doesn't execute this script
+path_remove "$(dirname -- "$(readlink -f -- "$0")")"
 
 dir="$PWD"
 project_root="$PWD"
@@ -20,14 +22,6 @@ done
 if [[ -x "$project_root/gradlew" ]]; then
   echo 'Executing gradlew instead of gradle' >&2
   "${project_root}/gradlew" "$@"
-  exit 0
+else
+  gradle "$@"
 fi
-
-readonly sdkman_gradle="${SDKMAN_DIR}/candidates/gradle/current/bin/gradle"
-
-if [[ ! -x "${sdkman_gradle}" ]]; then
-  echo 'SDKMAN gradle not available' >&2
-  exit 2
-fi
-
-"${sdkman_gradle}" "$@"
