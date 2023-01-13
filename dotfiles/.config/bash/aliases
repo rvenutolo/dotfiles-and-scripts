@@ -116,7 +116,7 @@ else
   alias v='vi'
 fi
 
-# misc - shorter alias
+## misc - shorter alias
 alias g='git'
 alias o='xdg-open'
 alias q='exit'
@@ -127,7 +127,7 @@ alias ms='manswitch'
 alias cls='clear'
 alias pager='${PAGER}'
 
-# misc - replace commands
+## misc - replace commands
 if command_exists 'riff'; then
   alias diff='riff'
 fi
@@ -135,7 +135,7 @@ if command_exists 'type'; then
   alias which='type -a'
 fi
 
-# misc - adds flags
+## misc - adds flags
 alias du='du -ckh'
 alias df='df -kTh -x squashfs'
 alias free='free -mt'
@@ -145,7 +145,7 @@ alias jobs='jobs -l'
 alias tree='tree -Cugph'
 alias shfmt='shfmt --indent 2 --case-indent'
 
-# misc - other
+## misc - other
 alias du1='du --max-depth=1'
 alias bs='br --sizes'
 alias brc='source ${HOME}/.bashrc'
