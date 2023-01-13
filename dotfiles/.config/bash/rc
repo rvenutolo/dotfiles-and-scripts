@@ -64,8 +64,7 @@ shopt -u shift_verbose
 shopt -s sourcepath
 shopt -u xpg_echo
 
-unalias -a
-
+## util functions
 function path_remove () {
   PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
 }
@@ -84,6 +83,8 @@ function command_exists() {
   type -P -f "$1" >/dev/null 2>&1
 }
 
+## files to source
+unalias -a
 for file in \
   '/etc/bash.bashrc' \
   '/etc/bashrc' \
@@ -106,6 +107,7 @@ for file in \
 done
 unset file
 
+## dirs to put on path
 for dir in \
   "$(ruby -e 'puts Gem.user_dir')/bin" \
   "${HOME}/.local/bin" \
@@ -116,11 +118,13 @@ for dir in \
 done
 unset dir
 
+## misc init stuff
 [[ -r "${HOME}/.dir_colors" ]] && [[ -f "${HOME}/.dir_colors" ]] && eval "$(dircolors "${HOME}/.dir_colors")"
 command_exists 'zoxide' && eval "$(zoxide init bash)"
 command_exists 'starship' && eval "$(starship init bash)"
 command_exists 'aws_completer' && complete -C 'aws_completer' aws
 
+## unset utility functions
 unset -f path_remove
 unset -f path_append
 unset -f path_prepend
