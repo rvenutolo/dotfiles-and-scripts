@@ -4,15 +4,23 @@ function command_exists() {
   type -P -f "$1" >/dev/null 2>&1
 }
 
-export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
+## personal
+export CODE_DIR="${HOME}/Code"
+export WTTR_CITY='Atlanta'
 
-export HISTCONTROL='ignorespace:ignoredups'
-export HISTIGNORE='ls:ll:lla:pwd:bg:fg:history:h'
-export HISTSIZE='100000'
-export HISTFILESIZE="${HISTSIZE}"
-export HISTTIMEFORMAT='%F %T%t'
-export HISTFILE="${HOME}/.bash_history"
+## editor/visual
+if command_exists 'micro'; then
+  export EDITOR='micro'
+elif command_exist 'nano'; then
+  export EDITOR='nano'
+elif command_exists 'nvim'; then
+  export EDITOR='nvim'
+else
+  export EDITOR='vim'
+fi
+export VISUAL="${EDITOR}"
 
+## pager/manpager
 if command_exists 'moar'; then
   export PAGER='moar'
 else
@@ -20,6 +28,15 @@ else
 fi
 export MANPAGER="${PAGER}"
 
+## history stuff
+export HISTCONTROL='ignorespace:ignoredups'
+export HISTIGNORE='ls:ll:lla:pwd:bg:fg:history:h'
+export HISTSIZE='100000'
+export HISTFILESIZE="${HISTSIZE}"
+export HISTTIMEFORMAT='%F %T%t'
+export HISTFILE="${HOME}/.bash_history"
+
+## less
 LESS_TERMCAP_mb=$(tput -T ansi blink) # start blink
 LESS_TERMCAP_md=$(tput -T ansi setaf 2 ; tput -T ansi bold) # start bold
 LESS_TERMCAP_me=$(tput -T ansi sgr0)  # turn off bold, blink and underline
@@ -35,21 +52,13 @@ export LESS_TERMCAP_so
 export LESS_TERMCAP_ue
 export LESS_TERMCAP_us
 
-if command_exists 'micro'; then
-  export EDITOR='micro'
-elif command_exist 'nano'; then
-  export EDITOR='nano'
-elif command_exists 'nvim'; then
-  export EDITOR='nvim'
-else
-  export EDITOR='vim'
-fi
-export VISUAL="${EDITOR}"
-
-export HIGHLIGHT_OPTIONS='-O ansi --force'
-export CODE_DIR="${HOME}/Code"
+# dirs
 export SDKMAN_DIR="${HOME}/.sdkman"
 export GOPATH="${HOME}/.go"
-export WTTR_CITY='Atlanta'
 
+# files
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rc"
+
+# misc
+export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
+export HIGHLIGHT_OPTIONS='-O ansi --force'
