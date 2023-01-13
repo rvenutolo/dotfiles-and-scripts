@@ -73,6 +73,9 @@ set tabstospaces
 # as part of a word.
 set wordbounds
 
+# Constantly display the cursor position in the status bar.
+set constantshow
+
 #apacheconf
 #include "~/.nano.d/syntax-highlighting/apacheconf.nanorc"
 #asm
