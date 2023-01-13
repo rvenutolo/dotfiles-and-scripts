@@ -4,12 +4,33 @@ function command_exists() {
   type -P -f "$1" >/dev/null 2>&1
 }
 
+## sudo
 alias sudo='sudo '
 alias _='sudo'
 alias sued='sudo --edit'
 alias please='sudo $(fc -ln -1)'
 alias plz='please'
 
+## cd
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .1='cd ..'
+alias .2='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../..'
+alias .5='cd ../../../..'
+alias .6='cd ../../../../..'
+alias home='cd ${HOME}'
+alias dl='cd ${HOME}/Downloads'
+alias dt='cd ${HOME}/Desktop'
+alias c='cd ${CODE_DIR}'
+alias bd='cd "$OLDPWD"'
+
+## ls
 if command_exists 'exa'; then
   alias exa='exa --classify --group-directories-first --icons --header --time-style=long-iso --color-scale --git'
   alias ls='exa'
@@ -42,6 +63,7 @@ else
   alias llar='ls -Al -R'
 fi
 
+## cp, mv, rm, mkdir
 alias mkdir='mkdir -pv'
 alias cp='cp -iv'
 alias mv='mv -iv'
@@ -50,23 +72,41 @@ if command_exists 'safe-rm'; then
 else
   alias rm='rm -iv'
 fi
+
+## trash
 alias trp='trash-put'
 alias tre='trash-empty'
 alias trl='trash-list'
 alias trr='trash-restore'
 alias trm='trash-rm'
+
+## chown, chmod, chgrp
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 
-alias rsync-bak='rsync -ahEP --stats'
+## grep
+alias grep="grep --exclude-dir='.*' --colour=auto"
+alias egrep='grep -E'
+alias fgrep='grep -F'
 
+## tar
+alias mktar='tar -cvf'
+alias mkbz2='tar -cvjf'
+alias mkgz='tar -cvzf'
+alias untar='tar -xvf'
+alias unbz2='tar -xvjf'
+alias ungz='tar -xvzf'
+
+## ps
+alias psa='ps aux'
+alias psaf='ps auxf'
+
+## editors
 alias e='edit'
 alias k='kate'
 alias m='micro'
-alias nano='nano -c'
 alias n='nano'
-alias x='xdg-open'
 if command_exists 'nvim'; then
   alias vim='nvim'
   alias v='nvim'
@@ -76,72 +116,36 @@ else
   alias v='vi'
 fi
 
-alias grep='grep --exclude-dir=.idea --exclude-dir=.git --colour=auto'
-alias egrep='grep -E'
-alias fgrep='grep -F'
-alias rg='rg --sort path'
-
-alias du='du -ckh'
-alias du1='du --max-depth=1'
-alias df='df -kTh -x squashfs'
-alias free='free -mt'
-
-alias cd..='cd ..'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
-alias .1='cd ..'
-alias .2='cd ../..'
-alias .3='cd ../../..'
-alias .4='cd ../../..'
-alias .5='cd ../../../..'
-alias .6='cd ../../../../..'
-alias home='cd ${HOME}'
-alias dl='cd ${HOME}/Downloads'
-alias dt='cd ${HOME}/Desktop'
-alias c='cd ${CODE_DIR}'
-alias bd='cd "$OLDPWD"'
-
-alias tarc="tar -cvzf"
-alias tarx="tar -xf"
-
-alias br='br -dhp'
-alias bs='br --sizes'
-
+# misc - shorter alias
 alias g='git'
+alias o='xdg-open'
+alias q='exit'
+alias h='history'
+alias t='tldr'
+alias hh='hstr'
+alias ms='manswitch'
+alias cls='clear'
+alias pager='${PAGER}'
 
+# misc - replace commands
 if command_exists 'riff'; then
   alias diff='riff'
 fi
+if command_exists 'type'; then
+  alias which='type -a'
+fi
 
-alias psa='ps aux'
-alias psaf='ps auxf'
-
-alias mktar='tar -cvf'
-alias mkbz2='tar -cvjf'
-alias mkgz='tar -cvzf'
-alias untar='tar -xvf'
-alias unbz2='tar -xvjf'
-alias ungz='tar -xvzf'
-
+# misc - adds flags
+alias du='du -ckh'
+alias df='df -kTh -x squashfs'
+alias free='free -mt'
+alias br='br -dhp'
 alias ln='ln -v'
 alias jobs='jobs -l'
-alias which='type -a'
-alias cls='clear'
-alias q='exit'
-alias h='history'
-alias pager='${PAGER}'
-alias t='tldr'
 alias tree='tree -Cugph'
-# use like so: sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-alias brc='source ${HOME}/.bashrc'
-alias colortest='msgcat --color=test'
-alias compress-pdf='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=compressed_PDF_file.pdf'
-alias da='date "+%Y-%m-%d %A %T %Z"'
-alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-alias update-fc='sudo fc-cache -fv'
 alias shfmt='shfmt --indent 2 --case-indent'
-alias hh='hstr'
+
+# misc - other
+alias du1='du --max-depth=1'
+alias bs='br --sizes'
+alias brc='source ${HOME}/.bashrc'
