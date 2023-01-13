@@ -10,7 +10,7 @@ fi
 if [[ "$#" -eq 0 ]]; then
   readonly dir="."
 else
-  readonly dir="${1}"
+  readonly dir="$1"
 fi
 
 find "${dir}" -type f | awk -F '/' '{

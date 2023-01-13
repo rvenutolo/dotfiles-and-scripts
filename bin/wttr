@@ -10,5 +10,5 @@ fi
 if [[ "$#" -eq 0 ]]; then
   curl "wttr.in/${WTTR_CITY}"
 else
-  curl "wttr.in/${1}"
+  curl "wttr.in/$1"
 fi
