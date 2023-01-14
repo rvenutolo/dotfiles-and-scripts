@@ -71,6 +71,12 @@ if command_exists 'gem'; then
   sudo gem update
 fi
 
+if command_exists 'brew'; then
+  log 'Homebrew packages'
+  brew update
+  brew upgrade
+fi
+
 if command_exists 'tldr'; then
   log 'tldr cache'
   tldr -u
