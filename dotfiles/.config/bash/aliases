@@ -107,14 +107,6 @@ alias e='edit'
 alias k='kate'
 alias m='micro'
 alias n='nano'
-if command_exists 'nvim'; then
-  alias vim='nvim'
-  alias v='nvim'
-elif command_exists 'vim'; then
-  alias v='vim'
-else
-  alias v='vi'
-fi
 
 ## misc - shorter alias
 alias g='git'
