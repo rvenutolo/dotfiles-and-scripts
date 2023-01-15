@@ -2,6 +2,10 @@
 
 # https://unix.stackexchange.com/questions/9123/is-there-a-one-liner-that-allows-me-to-create-a-directory-and-move-into-it-at-th/9124#9124
 function mkcd() {
+  if [[ "$#" -ne 1 ]]; then
+    echo "${0##*/}: Expected exactly 1 argument" >&2
+    exit 2
+  fi
   case "$1" in
     */.. | */../) cd -- "$1" ;; # that doesn't make any sense unless the directory already exists
     /*/../*) (cd "${1%/../*}/.." && mkdir -p "./${1##*/../}") && cd -- "$1" ;;
@@ -15,6 +19,16 @@ function mkcd() {
 function fff() {
   command fff "$@"
   cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit
+}
+
+function whereis-bash-func() {
+  for func; do
+    if (typeset -F "${func}" >/dev/null 2>&1); then
+      (shopt -s extdebug; declare -F "${func}") | awk '{ print $1 " --> " $3 ":" $2 }'
+    else
+      echo "${func} --> function does not exist"
+    fi
+  done
 }
 
 #function executable_exists() {
