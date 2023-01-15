@@ -21,7 +21,7 @@ function path_remove() {
 }
 
 function is_distro() {
-  hostnamectl | uniq --grep --fixed-strings 'Operating System:' | cut -d':' -f2 | grep -iwqF "$1"
+  hostnamectl | grep --fixed-strings 'Operating System:' | cut -d':' -f2 | grep -iwqF "$1"
 }
 
 function is_desktop_env() {
@@ -212,7 +212,7 @@ if is_distro 'fedora'; then
   expected_dnf_conf_vals=('max_parallel_downloads' 'defaultyes' 'keepcache')
   dnf_conf_text="$(cat '/etc/dnf/dnf.conf')"
   for dnf_conf_val in "${expected_dnf_conf_vals[@]}"; do
-    [[ -z $(uniq --grep --fixed-strings "${dnf_conf_val}" <<<"${dnf_conf_text}" | cut -d'=' -f2 | xargs) ]] && echo "dnf conf ${dnf_conf_val} is not set"
+    [[ -z $(grep --fixed-strings "${dnf_conf_val}" <<<"${dnf_conf_text}" | cut -d'=' -f2 | xargs) ]] && echo "dnf conf ${dnf_conf_val} is not set"
   done
   installed_packages="$(dnf list --installed | cut -d' ' -f1)"
   expected_rpm_fusions_packages=(

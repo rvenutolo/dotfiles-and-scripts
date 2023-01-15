@@ -14,7 +14,7 @@ else
 fi
 
 find "${dir}" -type f -printf "%f\n" \
-  | uniq --grep --fixed-strings '.' \
+  | grep --fixed-strings '.' \
   | awk -F '.' '{print "." $NF}' \
   | sort \
   | uniq --count \
