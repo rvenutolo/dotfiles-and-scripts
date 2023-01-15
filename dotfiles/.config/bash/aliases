@@ -124,11 +124,10 @@ alias pager='${PAGER}'
 if executable_exists 'riff'; then
   alias diff='riff'
 fi
-if command_exists 'type'; then
-  alias which='type -a'
-fi
+alias which='type'
 
 ## misc - adds flags
+alias type='type -a'
 alias du='du -ckh'
 alias df='df -kTh -x squashfs'
 alias free='free -mt'
