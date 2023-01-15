@@ -62,4 +62,4 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rc"
 
 # misc
 export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
-export HIGHLIGHT_OPTIONS='-O ansi --force'
+export HIGHLIGHT_OPTIONS='--out-format=ansi --force'
