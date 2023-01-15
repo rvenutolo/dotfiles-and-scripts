@@ -7,4 +7,4 @@ if [[ "$#" -ne 0 ]]; then
   exit 2
 fi
 
-echo -n "¯\_(ツ)_/¯" | xsel -ib
+echo -n "¯\_(ツ)_/¯" | xsel --input --clipboard

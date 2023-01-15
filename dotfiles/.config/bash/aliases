@@ -49,29 +49,29 @@ if executable_exists 'exa'; then
   alias llar='exa --long --all --recurse'
   alias tree='exa --long --tree'
 else
-  alias ls="ls -hF --color --group-directories-first"
+  alias ls='ls --classify --human-readable --color --group-directories-first'
   alias l='ls'
   alias ll='ls -l'
-  alias la='ls -A'
-  alias lla='ls -Al'
-  alias llx='ls -l -XB' # sort by extension
-  alias llax='ls -Al -XB'
-  alias lls='ls -l -lSr' # sort by size, biggest last
-  alias llas='ls -Al -lSr'
-  alias llc='ls -l -tcr' # sort by and show change time, most recent last
-  alias llac='ls -Al -tcr'
-  alias llr='ls -l -R' # recursive ls
-  alias llar='ls -Al -R'
+  alias la='ls --almost-all'
+  alias lla='ls -l --almost-all'
+  alias llx='ls -lX' # sort by extension
+  alias llax='ls -lX --almost-all'
+  alias lls='ls -lS --reverse' # sort by size, biggest last
+  alias llas='ls -lS --almost-all --reverse'
+  alias llc='ls -ltc --reverse' # sort by and show change time, most recent last
+  alias llac='ls -ltc --almost-all --reverse'
+  alias llr='ls -l --recursive' # recursive ls
+  alias llar='ls -l --almost-all --recursive'
 fi
 
 ## cp, mv, rm, mkdir
-alias mkdir='mkdir -pv'
-alias cp='cp -iv'
-alias mv='mv -iv'
+alias mkdir='mkdir --parents --verbose'
+alias cp='cp --interactive --verbose'
+alias mv='mv --interactive --verbose'
 if executable_exists 'safe-rm'; then
-  alias rm='safe-rm -iv'
+  alias rm='safe-rm --interactive --verbose'
 else
-  alias rm='rm -iv'
+  alias rm='rm --interactive --verbose'
 fi
 
 ## trash
@@ -88,16 +88,16 @@ alias chgrp='chgrp --preserve-root'
 
 ## grep
 alias grep="grep --exclude-dir='.*' --colour=auto"
-alias egrep='grep -E'
-alias fgrep='grep -F'
+alias egrep='grep --extended-regexp'
+alias fgrep='grep --fixed-strings'
 
 ## tar
-alias mktar='tar -cvf'
-alias mkbz2='tar -cvjf'
-alias mkgz='tar -cvzf'
-alias untar='tar -xvf'
-alias unbz2='tar -xvjf'
-alias ungz='tar -xvzf'
+alias mktar='tar -cvf --create --verbose --file'
+alias mkbz2='tar -cvjf --create --verbose --bzip2 --file'
+alias mkgz='tar -cvzf --create --verbose --gzip --file'
+alias untar='tar -xvf --extract --verbose --file'
+alias unbz2='tar -xvjf --extract --verbose --bzip2 --file'
+alias ungz='tar -xvzf --extract --verbose --gzip --file'
 
 ## ps
 alias psa='ps aux'
@@ -128,13 +128,13 @@ alias which='type'
 
 ## misc - adds flags
 alias type='type -a'
-alias du='du -ckh'
-alias df='df -kTh -x squashfs'
-alias free='free -mt'
-alias br='br -dhp'
-alias ln='ln -v'
+alias du='du --total --human-readable --block-size=1K'
+alias df='df --block-size=1K --print-type --human-readable --exclude-type squashfs'
+alias free='free --total --human --si'
+alias br='br --dates --hidden --permissions'
+alias ln='ln --verbose'
 alias jobs='jobs -l'
-alias tree='tree -Cugph'
+alias tree='tree -Cph --si'
 alias shfmt='shfmt --indent 2 --case-indent'
 
 ## misc - other

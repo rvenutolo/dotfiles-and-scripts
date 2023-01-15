@@ -87,7 +87,7 @@ if command_exists 'aws'; then
   readonly ts="$(date -u +%Y%m%d_%H%M%S)"
   readonly zip_file="/tmp/awscliv2_${ts}.zip"
   readonly extracted_dir="/tmp/awscliv2_${ts}"
-  curl -s 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip' -o "${zip_file}"
+  curl --silent 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip' --output "${zip_file}"
   unzip -q "${zip_file}" -d "${extracted_dir}"
   sudo "${extracted_dir}/aws/install" --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
 fi

@@ -7,4 +7,4 @@ if [[ "$#" -ne 2 ]]; then
   exit 2
 fi
 
-man "$1" | less -p "^ +$2"
+man "$1" | less --pattern="^ +$2"

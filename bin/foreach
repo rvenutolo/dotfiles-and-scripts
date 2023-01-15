@@ -18,4 +18,4 @@ fi
 # basename file1
 # basename file2
 # basename file2
-xargs -P"$(nproc)" -n1 "$1"
+xargs --max-procs="$(nproc)" --max-args=1 "$1"

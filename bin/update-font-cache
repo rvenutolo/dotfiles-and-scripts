@@ -7,4 +7,4 @@ if [[ "$#" -ne 0 ]]; then
   exit 2
 fi
 
-sudo fc-cache -fv
+sudo fc-cache --force --verbose

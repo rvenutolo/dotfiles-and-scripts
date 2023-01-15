@@ -11,7 +11,7 @@ function path_remove() {
 }
 
 # remove this dir from the path so executing `mvn` doesn't execute this script
-path_remove "$(dirname -- "$(readlink -f -- "$0")")"
+path_remove "$(dirname -- "$(readlink --canonicalize -- "$0")")"
 
 dir="$PWD"
 project_root="$PWD"

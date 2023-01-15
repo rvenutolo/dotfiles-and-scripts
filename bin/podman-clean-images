@@ -7,7 +7,7 @@ if [[ "$#" -ne 0 ]]; then
   exit 2
 fi
 
-readonly images="$(docker images -a --filter=dangling=true -q)"
+readonly images="$(docker images --all --filter=dangling=true --quiet)"
 if [[ -n "${images}" ]]; then
   podman rmi "${images}"
 fi

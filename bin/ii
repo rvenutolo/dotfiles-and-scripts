@@ -9,9 +9,9 @@ fi
 
 echo -e "\nYou are logged on $(hostname)"
 echo -e "\nAdditional information: "
-uname -a
+uname --all
 echo -e "\nUsers logged on: "
-w -h
+w --no-header
 echo -e "\nCurrent date: "
 date
 echo -e "\nMachine stats: "

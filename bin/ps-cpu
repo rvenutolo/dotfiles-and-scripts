@@ -8,4 +8,4 @@ if [[ "$#" -ne 0 ]]; then
 fi
 
 ## get top process eating cpu ##
-ps auxf | sort -nr -k 3
+ps auxf | sort --numeric-sort --reverse --key=3

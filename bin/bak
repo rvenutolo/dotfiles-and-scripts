@@ -13,7 +13,7 @@ for file; do
     dirname="$(dirname "${file}")"
     filename="$(basename "${file}")"
     target_file="${dirname}/${filename}.${filetime}.bak"
-    cp -a "${file}" "${target_file}"
+    cp --archive "${file}" "${target_file}"
     echo "${0##*/}: ${file} -> ${target_file}" >&2
   else
     echo "${0##*/}: ${file} is not a regular file or directory" >&2

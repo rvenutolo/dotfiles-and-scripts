@@ -7,4 +7,4 @@ if [[ "$#" -ne 1 ]]; then
   exit 2
 fi
 
-jq -nr --arg v "$1" '$v|@uri'
+jq --null-input --raw-output --arg v "$1" '$v|@uri'

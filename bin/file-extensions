@@ -13,4 +13,9 @@ else
   readonly dir="$1"
 fi
 
-find "${dir}" -type f -printf "%f\n" | grep -F '.' | awk -F '.' '{print "." $NF}' | sort | uniq -c | sort -nr
+find "${dir}" -type f -printf "%f\n" \
+  | uniq --grep --fixed-strings '.' \
+  | awk -F '.' '{print "." $NF}' \
+  | sort \
+  | uniq --count \
+  | sort --numeric-sort --reverse

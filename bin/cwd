@@ -7,4 +7,4 @@ if [[ "$#" -ne 0 ]]; then
   exit 2
 fi
 
-pwd | tr -d "\r\n" | xsel -ib
+pwd | tr --delete "\r\n" | xsel --input --clipboard

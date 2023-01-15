@@ -8,12 +8,12 @@ if [[ "$#" -eq 0 && -t 0 ]]; then
 fi
 
 if [[ "$#" -eq 0 ]]; then
-  highlight -O ansi --force
+  highlight --out-format=ansi --force
 else
   for file; do
     case "${file}" in
       *.md) glow "${file}" ;;
-      *) highlight ${HIGHLIGHT_OPTIONS} "${file}" ;;
+      *) highlight --out-format=ansi --force "${file}" ;;
     esac
   done
 fi

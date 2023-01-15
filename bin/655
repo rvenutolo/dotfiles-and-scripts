@@ -7,4 +7,4 @@ if [[ "$#" -eq 0 ]]; then
   exit 2
 fi
 
-chmod --preserve-root -R 655 "$@"
+chmod --preserve-root --recursive 655 "$@"

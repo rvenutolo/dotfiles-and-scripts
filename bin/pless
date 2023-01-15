@@ -13,10 +13,10 @@ if [[ "$#" -eq 0 && -t 0 ]]; then
 fi
 
 if [[ "$#" -eq 0 ]]; then
-  highlight ${HIGHLIGHT_OPTIONS} | less -r
+  highlight --out-format=ansi --force | less --raw-control-chars
 else
   case "$1" in
-    *.md) glow "$1" | less -r ;;
-    *) highlight ${HIGHLIGHT_OPTIONS} "$1" | less -r ;;
+    *.md) glow "$1" | less --raw-control-chars ;;
+    *) highlight --out-format=ansi --force "$1" | less --raw-control-chars ;;
   esac
 fi

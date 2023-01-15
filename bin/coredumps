@@ -7,4 +7,4 @@ if [[ "$#" -ne 0 ]]; then
   exit 2
 fi
 
-journalctl | command grep -F "dumped core"
+journalctl | grep --fixed-strings 'dumped core'
