@@ -21,7 +21,7 @@ function fff() {
   cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit
 }
 
-function whereis-bash-func() {
+function whereis-func() {
   for func; do
     if (typeset -F "${func}" >/dev/null 2>&1); then
       (shopt -s extdebug; declare -F "${func}") | awk '{ print $1 " --> " $3 ":" $2 }'
