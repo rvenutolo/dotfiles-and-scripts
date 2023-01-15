@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-function command_exists() {
-  type -P -f "$1" >/dev/null 2>&1
+function executable_exists() {
+    # executables / no builtins, aliases, or functions
+    type -aPf "$1" >/dev/null 2>&1
 }
 
 ## personal
@@ -9,11 +10,11 @@ export CODE_DIR="${HOME}/Code"
 export WTTR_CITY='Atlanta'
 
 ## editor/visual
-if command_exists 'micro'; then
+if executable_exists 'micro'; then
   export EDITOR='micro'
-elif command_exist 'nano'; then
+elif executable_exists 'nano'; then
   export EDITOR='nano'
-elif command_exists 'nvim'; then
+elif executable_exists 'nvim'; then
   export EDITOR='nvim'
 else
   export EDITOR='vim'
@@ -21,7 +22,7 @@ fi
 export VISUAL="${EDITOR}"
 
 ## pager/manpager
-if command_exists 'moar'; then
+if executable_exists 'moar'; then
   export PAGER='moar'
 else
   export PAGER='less -Fi'

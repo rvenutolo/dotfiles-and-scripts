@@ -7,12 +7,17 @@ if [[ "$#" -ne 0 ]]; then
   exit 2
 fi
 
-function command_exists() {
-  type -P -f "$1" >/dev/null 2>&1
+function executable_exists() {
+  # executables / no builtins, aliases, or functions
+  type -aPf "$1" >/dev/null 2>&1
 }
 
 function file_exists() {
   [[ -r "$1" && -f "$1" ]]
+}
+
+function path_remove () {
+  PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
 }
 
 function is_distro() {
@@ -41,7 +46,7 @@ for var in "${expected_vars[@]}"; do
 done
 set -u
 
-expected_cmds=(
+expected_executables=(
   '7z' 'alacritty' 'autojump' 'authy' 'aws' 'aws_completer' 'bat' 'bmon' 'broot' 'btop' 'bunzip2' 'cabextract' 'cargo'
   'checkbashisms' 'clamscan' 'cmake' 'colordiff' 'cpufetch' 'crontab' 'ctop' 'curl' 'dash' 'dig' 'diff-so-fancy'
   'distrobox' 'docker' 'dos2unix' 'edex-ui' 'exa' 'fd' 'fish' 'flatpak' 'flatseal' 'fff' 'fzf' 'gdu' 'git' 'gitkraken'
@@ -54,32 +59,29 @@ expected_cmds=(
   'vlc' 'wget' 'xsel' 'zip' 'zoxide'
 )
 if is_computer 'desktop' || is_computer 'laptop'; then
-  expected_cmds+=(
+  expected_executables+=(
     'backintime' 'clapper' 'dnuos' 'eyeD3' 'flac' 'flac2all' 'flac2mp3.pl' 'lame' 'magick' 'mediainfo' 'mogrify'
     'mp3splt' 'puddletag' 'soundkonverter' 'sox' 'speedtest' 'tageditor' 'timeshift' 'ventoy' 'virt-manager' 'virsh'
     'zoom'
   )
 fi
 if is_distro 'fedora'; then
-  expected_cmds+=('alien' 'fedy')
+  expected_executables+=('alien' 'fedy')
 fi
 if is_distro 'arch' || is_distro 'manjaro'; then
-  expected_cmds+=('pacseek' 'paru' 'yay')
+  expected_executables+=('pacseek' 'paru' 'yay')
 fi
-if is_desktop_env 'gnome'; then
-  ## TODO move these checks to package checks
-  expected_cmds+=('gnome-tweaks' 'gnome-extensions-app')
-fi
+### TODO move these checks to package checks
+#if is_desktop_env 'gnome'; then
+#  expected_executables+=('gnome-tweaks' 'gnome-extensions-app')
+#fi
 
 ## remove my bin dirs from path so scripts that mask commands are no longer on PATH, ex: mvn
-function path_remove () {
-  PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
-}
 path_remove '/home/rvenutolo/.bin'
 path_remove '/home/rvenutolo/.bin/other'
 
-for cmd in "${expected_cmds[@]}"; do
-  command_exists "${cmd}" >/dev/null 2>&1 || echo "Command not available: ${cmd}"
+for executable in "${expected_executables[@]}"; do
+  executable_exists "${executable}" >/dev/null 2>&1 || echo "Executable not available: ${executable}"
 done
 
 expected_files=(
@@ -149,7 +151,7 @@ done
 
 [[ $(timedatectl show) != *'NTP=yes'* ]] && echo 'timedatectl set-ntp is not set'
 
-if command_exists 'flatpak'; then
+if executable_exists 'flatpak'; then
   flatpak remotes | grep -qwF 'flathub' || echo 'Flathub flatpak repo is not installed'
 fi
 

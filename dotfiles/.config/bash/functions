@@ -16,3 +16,27 @@ function fff() {
   command fff "$@"
   cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit
 }
+
+#function executable_exists() {
+#  # executables / no builtins, aliases, or functions
+#  type -aPf "$1" >/dev/null 2>&1
+#}
+#
+#function command_exists() {
+#  # executables and builtins / no aliases or functions
+#  type -Pf "$1" >/dev/null 2>&1
+#}
+#
+#function path_remove () {
+#  PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
+#}
+#
+#function path_append () {
+#  path_remove "$1"
+#  PATH="$PATH:$1"
+#}
+#
+#function path_prepend () {
+#  path_remove "$1"
+#  PATH="$1:$PATH"
+#}
