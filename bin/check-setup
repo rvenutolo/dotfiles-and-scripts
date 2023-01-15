@@ -16,7 +16,7 @@ function file_exists() {
   [[ -r "$1" && -f "$1" ]]
 }
 
-function path_remove () {
+function path_remove() {
   PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
 }
 
@@ -37,8 +37,21 @@ function is_computer() {
 }
 
 expected_vars=(
-  'BROWSER' 'CODE_DIR' 'DE' 'EDITOR' 'FILE_MANAGER' 'GOPATH' 'JAVA_HOME' 'LANGUAGE' 'LANG'
-  'MANPAGER' 'PAGER' 'RVENUTOLO_COMPUTER' 'SDKMAN_DIR' 'VISUAL' 'WTTR_CITY'
+  'BROWSER'
+  'CODE_DIR'
+  'DE'
+  'EDITOR'
+  'FILE_MANAGER'
+  'GOPATH'
+  'JAVA_HOME'
+  'LANGUAGE'
+  'LANG'
+  'MANPAGER'
+  'PAGER'
+  'RVENUTOLO_COMPUTER'
+  'SDKMAN_DIR'
+  'VISUAL'
+  'WTTR_CITY'
 )
 set +u
 for var in "${expected_vars[@]}"; do
@@ -47,21 +60,45 @@ done
 set -u
 
 expected_executables=(
-  '7z' 'alacritty' 'autojump' 'authy' 'aws' 'aws_completer' 'bat' 'bmon' 'broot' 'btop' 'bunzip2' 'cabextract' 'cargo'
-  'checkbashisms' 'clamscan' 'cmake' 'colordiff' 'cpufetch' 'crontab' 'ctop' 'curl' 'dash' 'dig' 'diff-so-fancy'
-  'distrobox' 'docker' 'dos2unix' 'edex-ui' 'exa' 'fd' 'fish' 'flatpak' 'flatseal' 'fff' 'fzf' 'gdu' 'git' 'gitkraken'
-  'gitui' 'glances' 'glow' 'go' 'gparted' 'gradle' 'groovy' 'gs' 'gunzip' 'highlight' 'hstr' 'http' 'iconv'
-  'inotifywait' 'java' 'javac' 'jq' 'kotlin' 'lazydocker' 'lazygit' 'lf' 'locate' 'maldet' 'mcs' 'micro' 'mn' 'moar'
-  'mvn' 'mvnd' 'nano' 'ncdu' 'neofetch' 'nnn' 'nvim' 'onefetch' 'oneshot' 'openconnect' 'openvpn' 'pandoc' 'parallel'
-  'pcmanfm' 'pip' 'pip3' 'podman' 'pomchecker' 'postman' 'procs' 'psgrep' 'ptop' 'pv' 'px' 'ranger' 'rg' 'riff' 'ruby'
-  'rustup' 'sbt' 'scala' 'screen' 'sd' 'shellcheck' 'shfmt' 'skeletal' 'snap' 'sntp' 'spark-submit' 'spring' 'stacer'
-  'starship' 'tabs2spaces' 'tar' 'tldr' 'tokei' 'trash' 'tree' 'uncompress' 'unlzma' 'unrar' 'unxz' 'unzip' 'visualvm'
-  'vlc' 'wget' 'xsel' 'zip' 'zoxide'
+  '7z'
+  'alacritty' 'autojump' 'authy' 'aws' 'aws_completer'
+  'bat' 'bmon' 'broot' 'btop' 'bunzip2'
+  'cabextract' 'cargo' 'checkbashisms' 'clamscan' 'cmake' 'colordiff' 'cpufetch' 'crontab' 'ctop' 'curl'
+  'dash' 'dig' 'diff-so-fancy' 'distrobox' 'docker' 'dos2unix'
+  'edex-ui' 'exa'
+  'fd' 'fish' 'flatpak' 'flatseal' 'fff' 'fzf'
+  'gdu' 'git' 'gitkraken' 'gitui' 'glances' 'glow' 'go' 'gparted' 'gradle' 'groovy' 'gs' 'gunzip'
+  'highlight' 'hstr' 'http'
+  'iconv' 'inotifywait'
+  'java' 'javac' 'jq'
+  'kotlin'
+  'lazydocker' 'lazygit' 'lf' 'locate'
+  'maldet' 'mcs' 'micro' 'mn' 'moar' 'mvn' 'mvnd'
+  'nano' 'ncdu' 'neofetch' 'nnn' 'nvim'
+  'onefetch' 'oneshot' 'openconnect' 'openvpn'
+  'pandoc' 'parallel' 'pcmanfm' 'pip' 'pip3' 'podman' 'pomchecker' 'postman' 'procs' 'psgrep' 'ptop' 'pv' 'px'
+  'ranger' 'rg' 'riff' 'ruby' 'rustup'
+  'sbt' 'scala' 'screen' 'sd' 'shellcheck' 'shfmt' 'skeletal' 'snap' 'sntp' 'spark-submit' 'spring' 'stacer' 'starship'
+  'tabs2spaces' 'tar' 'tldr' 'tokei' 'trash' 'tree'
+  'uncompress' 'unlzma' 'unrar' 'unxz' 'unzip'
+  'visualvm' 'vlc'
+  'wget'
+  'xsel'
+  'zip' 'zoxide'
 )
 if is_computer 'desktop' || is_computer 'laptop'; then
   expected_executables+=(
-    'backintime' 'clapper' 'dnuos' 'eyeD3' 'flac' 'flac2all' 'flac2mp3.pl' 'lame' 'magick' 'mediainfo' 'mogrify'
-    'mp3splt' 'puddletag' 'soundkonverter' 'sox' 'speedtest' 'tageditor' 'timeshift' 'ventoy' 'virt-manager' 'virsh'
+    'backintime'
+    'clapper'
+    'dnuos'
+    'eyeD3'
+    'flac' 'flac2all' 'flac2mp3.pl'
+    'lame'
+    'magick' 'mediainfo' 'mogrify' 'mp3splt'
+    'puddletag'
+    'soundkonverter' 'sox' 'speedtest'
+    'tageditor' 'timeshift'
+    'ventoy' 'virt-manager' 'virsh'
     'zoom'
   )
 fi
@@ -97,9 +134,25 @@ for file in "${expected_files[@]}"; do
 done
 
 expected_fonts=(
-  'Code New Roman' 'Fantasque Sans Mono' 'Fira Code' 'FreeMono' 'Hack' 'Hasklig' 'Inconsolata' 'Input' 'Iosevka'
-  'JetBrains Mono' 'JoyPixels' 'Menlo' 'Monoid' 'Mononoki' 'Noto Color Emoji' 'Roboto Mono' 'Source Code Pro'
-  'Terminess' 'Ubuntu Mono'
+  'Code New Roman'
+  'Fantasque Sans Mono'
+  'Fira Code'
+  'FreeMono'
+  'Hack'
+  'Hasklig'
+  'Inconsolata'
+  'Input'
+  'Iosevka'
+  'JetBrains Mono'
+  'JoyPixels'
+  'Menlo'
+  'Monoid'
+  'Mononoki'
+  'Noto Color Emoji'
+  'Roboto Mono'
+  'Source Code Pro'
+  'Terminess'
+  'Ubuntu Mono'
 )
 installed_fonts="$(fc-list : family)"
 for font in "${expected_fonts[@]}"; do
