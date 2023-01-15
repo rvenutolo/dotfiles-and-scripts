@@ -24,7 +24,10 @@ function fff() {
 function whereis-func() {
   for func; do
     if (typeset -F "${func}" >/dev/null 2>&1); then
-      (shopt -s extdebug; declare -F "${func}") | awk '{ print $1 " --> " $3 ":" $2 }'
+      (
+        shopt -s extdebug
+        declare -F "${func}"
+      ) | awk '{ print $1 " --> " $3 ":" $2 }'
     else
       echo "${func} --> function does not exist"
     fi
@@ -49,16 +52,16 @@ function command_exists() {
   type -Pf "$1" >/dev/null 2>&1
 }
 
-function path_remove () {
+function path_remove() {
   PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
 }
 
-function path_append () {
+function path_append() {
   path_remove "$1"
   PATH="$PATH:$1"
 }
 
-function path_prepend () {
+function path_prepend() {
   path_remove "$1"
   PATH="$1:$PATH"
 }
