@@ -2,8 +2,9 @@
 
 set -euox pipefail
 
-function command_exists() {
-  type -P -f "$1" >/dev/null 2>&1
+function executable_exists() {
+  # executables / no builtins, aliases, or functions
+  type -aPf "$1" >/dev/null 2>&1
 }
 
 function path_remove() {
@@ -26,7 +27,7 @@ done
 if [[ -x "$project_root/mvnw" ]]; then
   echo 'Executing mvnw instead of mvn' >&2
   "${project_root}/mvnw" "$@"
-elif command_exists 'mvnd'; then
+elif executable_exists 'mvnd'; then
   echo 'Executing mvnd instead of mvn' >&2
   mvnd "$@"
 else
