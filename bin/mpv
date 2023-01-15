@@ -2,5 +2,12 @@
 
 set -euo pipefail
 
-/usr/bin/mpv "$@" >/dev/null 2>&1 &
+function path_remove() {
+  PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
+}
+
+# remove this dir from the path so executing `mpv` doesn't execute this script
+path_remove "$(dirname -- "$(readlink --canonicalize -- "$0")")"
+
+mpv "$@" >/dev/null 2>&1 &
 disown
