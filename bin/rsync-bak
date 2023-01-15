@@ -8,14 +8,14 @@ if [[ "$#" -lt 2 ]]; then
 fi
 
 rsync \
---archive \
---itemize-changes \
---human-readable \
---executability \
---partial \
---progress \
---atimes \
---stats \
---links \
---ignore-existing \
-"$@"
+  --archive \
+  --itemize-changes \
+  --human-readable \
+  --executability \
+  --partial \
+  --progress \
+  --atimes \
+  --stats \
+  --links \
+  --ignore-existing \
+  "$@"

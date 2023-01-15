@@ -8,20 +8,20 @@ if [[ "$#" -eq 0 ]]; then
 fi
 
 rsync \
---archive \
---itemize-changes \
---human-readable \
---executability \
---partial \
---progress \
---atimes \
---stats \
---links \
---ignore-existing \
---exclude '.cache/' \
---exclude '.local/share/Trash/' \
---exclude '.m2/repository/' \
---exclude '.stack/' \
---exclude 'snap/' \
---exclude 'VMs/' \
-"$HOME" "$@"
+  --archive \
+  --itemize-changes \
+  --human-readable \
+  --executability \
+  --partial \
+  --progress \
+  --atimes \
+  --stats \
+  --links \
+  --ignore-existing \
+  --exclude '.cache/' \
+  --exclude '.local/share/Trash/' \
+  --exclude '.m2/repository/' \
+  --exclude '.stack/' \
+  --exclude 'snap/' \
+  --exclude 'VMs/' \
+  "$HOME" "$@"
