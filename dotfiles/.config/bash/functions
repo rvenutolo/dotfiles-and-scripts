@@ -14,12 +14,12 @@ function mkcd() {
 }
 
 function cl() {
-  builtin cd "$@" && eval ll
+  cd "$@" && eval ll
 }
 
 function fff() {
   command fff "$@"
-  builtin cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || return 2
+  cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || return 2
 }
 
 function functions() {
