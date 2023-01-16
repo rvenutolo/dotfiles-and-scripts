@@ -31,7 +31,13 @@ function functions() {
 }
 
 function aliases() {
-  alias | cut -d' ' -f2-
+  PS4='+$BASH_SOURCE ' BASH_XTRACEFD=7 bash -xic ':' 7> >(
+    grep --perl-regexp '^\++\S+ alias ' |
+      sed 's/^\+*//' |
+      sed --regexp-extended "s#([^\])'#\1#g" |
+      awk -F' alias ' '{ print $2 " (from: " $1 ")" }' |
+      LC_COLLATE=C sort
+  )
 }
 
 function executable_exists() {
