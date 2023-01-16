@@ -114,8 +114,8 @@ fi
 #fi
 
 ## remove my bin dirs from path so scripts that mask commands are no longer on PATH, ex: mvn
-path_remove '/home/rvenutolo/.bin'
-path_remove '/home/rvenutolo/.bin/other'
+path_remove "${HOME}/.bin"
+path_remove "${HOME}/.bin/other"
 
 for executable in "${expected_executables[@]}"; do
   executable_exists "${executable}" >/dev/null 2>&1 || echo "Executable not available: ${executable}"
