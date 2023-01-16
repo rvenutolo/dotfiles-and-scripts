@@ -22,11 +22,11 @@ function fff() {
 }
 
 function functions() {
-  typeset -F | cut -d' ' -f3 | while read func; do
+  typeset -F | cut --delimiter=' ' --fields=3 | while read func; do
     (
       shopt -s extdebug
       declare -F "${func}"
-    ) | awk '{ print $1 " --> " $3 ":" $2 }'
+    ) | awk '{ print $1 " (from: " $3 ":" $2 ")" }'
   done
 }
 
