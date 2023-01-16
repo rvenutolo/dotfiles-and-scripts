@@ -64,24 +64,27 @@ shopt -u shift_verbose
 shopt -s sourcepath
 shopt -u xpg_echo
 
-## util functions
-function path_remove () {
-  PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
-}
-
-function path_append () {
-  path_remove "$1"
-  PATH="$PATH:$1"
-}
-
-function path_prepend () {
-  path_remove "$1"
-  PATH="$1:$PATH"
-}
-
+## util functions used in this and other scripts
 function executable_exists() {
   # executables / no builtins, aliases, or functions
   type -aPf "$1" >/dev/null 2>&1
+}
+
+function command_exists() {
+  # executables and builtins / no aliases or functions
+  type -Pf "$1" >/dev/null 2>&1
+}
+
+function path_remove() {
+  PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
+}
+
+function path_append() {
+  path_remove "$1" && PATH="$PATH:$1"
+}
+
+function path_prepend() {
+  path_remove "$1" && PATH="$1:$PATH"
 }
 
 ## files to source
@@ -125,8 +128,3 @@ executable_exists 'zoxide' && eval "$(zoxide init bash)"
 executable_exists 'starship' && eval "$(starship init bash)"
 executable_exists 'aws_completer' && complete -C 'aws_completer' aws
 
-## unset utility functions
-unset -f path_remove
-unset -f path_append
-unset -f path_prepend
-unset -f executable_exists

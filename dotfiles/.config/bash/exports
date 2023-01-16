@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-function executable_exists() {
-    # executables / no builtins, aliases, or functions
-    type -aPf "$1" >/dev/null 2>&1
-}
-
 ## personal
 export CODE_DIR="${HOME}/Code"
 export WTTR_CITY='Atlanta'
