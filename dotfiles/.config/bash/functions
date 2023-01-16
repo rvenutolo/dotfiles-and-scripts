@@ -23,11 +23,13 @@ function fff() {
 
 function functions() {
   typeset -F | cut --delimiter=' ' --fields=3 | while read func; do
-      (
-        shopt -s extdebug
-        declare -F "${func}"
-      ) | awk '{ print $1, $3":"$2 }'
-    done | column --table --table-columns 'FUNCTION,SOURCE'
+    (
+      shopt -s extdebug
+      declare -F "${func}"
+    ) | awk '{ print $1, $3":"$2 }'
+  done |
+    sed "s#${HOME}#~#g" |
+    column --table --table-columns 'FUNCTION,SOURCE' --table-truncate 1
 }
 
 function aliases() {
