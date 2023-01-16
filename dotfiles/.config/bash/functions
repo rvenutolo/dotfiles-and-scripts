@@ -21,24 +21,16 @@ function fff() {
   cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit
 }
 
-function whereis-func() {
-  for func; do
-    if (typeset -F "${func}" >/dev/null 2>&1); then
-      (
-        shopt -s extdebug
-        declare -F "${func}"
-      ) | awk '{ print $1 " --> " $3 ":" $2 }'
-    else
-      echo "${func} --> function does not exist"
-    fi
+function functions() {
+  typeset -F | cut -d' ' -f3 | while read func; do
+    (
+      shopt -s extdebug
+      declare -F "${func}"
+    ) | awk '{ print $1 " --> " $3 ":" $2 }'
   done
 }
 
-function list-functions() {
-  typeset -F | cut -d' ' -f3
-}
-
-function list-aliases() {
+function aliases() {
   alias | cut -d' ' -f2-
 }
 
