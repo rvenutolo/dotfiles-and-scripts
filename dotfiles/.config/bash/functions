@@ -35,9 +35,11 @@ function aliases() {
     grep --perl-regexp '^\++\S+ alias ' |
       sed 's/^\+*//' |
       sed --regexp-extended "s#([^\])'#\1#g" |
-      awk -F' alias ' '{ print $2 " (from: " $1 ")" }' |
+      awk -F' alias ' -v OFS='‽' '{ print $2, $1 }' |
       LC_COLLATE=C sort
-  )
+  ) |
+    sed "s#${HOME}#~#g" |
+    column --separator '‽' --table --table-columns 'ALIAS,SOURCE' --table-columns-limit 2 --table-truncate 1
 }
 
 function executable_exists() {
