@@ -2,17 +2,14 @@
 
 # https://unix.stackexchange.com/questions/9123/is-there-a-one-liner-that-allows-me-to-create-a-directory-and-move-into-it-at-th/9124#9124
 function mkcd() {
-  if [[ "$#" -ne 1 ]]; then
-    echo "${0##*/}: Expected exactly 1 argument" >&2
-    exit 2
-  fi
+  [[ "$#" -ne 1 ]] && echo "${0##*/}: Expected exactly 1 argument" >&2 && return 2
   case "$1" in
-    */.. | */../) cd -- "$1" ;; # that doesn't make any sense unless the directory already exists
-    /*/../*) (cd "${1%/../*}/.." && mkdir -p "./${1##*/../}") && cd -- "$1" ;;
-    /*) mkdir -p "$1" && cd "$1" ;;
-    */../*) (cd "./${1%/../*}/.." && mkdir -p "./${1##*/../}") && cd "./$1" ;;
-    ../*) (cd .. && mkdir -p "${1#.}") && cd "$1" ;;
-    *) mkdir -p "./$1" && cd "./$1" ;;
+    */.. | */../) cd -- "$1" || return 2 ;; # that doesn't make any sense unless the directory already exists
+    /*/../*) (cd "${1%/../*}/.." && mkdir -p "./${1##*/../}") && cd -- "$1" || return 2 ;;
+    /*) mkdir -p "$1" && cd "$1" || return 2 ;;
+    */../*) (cd "./${1%/../*}/.." && mkdir -p "./${1##*/../}") && cd "./$1" || return 2 ;;
+    ../*) (cd .. && mkdir -p "${1#.}") && cd "$1" || return 2 ;;
+    *) mkdir -p "./$1" && cd "./$1" || return 2 ;;
   esac
 }
 
@@ -22,7 +19,7 @@ function cl() {
 
 function fff() {
   command fff "$@"
-  cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || exit
+  builtin cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")" || return 2
 }
 
 function functions() {
@@ -63,11 +60,9 @@ function path_remove() {
 }
 
 function path_append() {
-  path_remove "$1"
-  PATH="$PATH:$1"
+  path_remove "$1" && PATH="$PATH:$1"
 }
 
 function path_prepend() {
-  path_remove "$1"
-  PATH="$1:$PATH"
+  path_remove "$1" && PATH="$1:$PATH"
 }
