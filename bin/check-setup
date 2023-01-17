@@ -122,7 +122,7 @@ for executable in "${expected_executables[@]}"; do
 done
 
 expected_files=(
-  "${HOME}/.config/bash/extra"
+  "${HOME}/.config/bash/local"
   "${HOME}/.gitconfig.private"
   "${HOME}/.ssh/config.private"
   "${HOME}/.sdkman/bin/sdkman-init.sh"
