@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ "$#" -eq 0 ]]; then
+  echo "${0##*/}: Expected at least 1 argument" >&2
+  exit 2
+fi
+
+readonly file="$1"
+shift
+case "${file}" in
+  *.tar.bz2) tar --create --verbose --bzip2 --file "${file}" "$@" ;;
+  *.tar.gz) tar --create --verbose --gzip --file "${file}" "$@" ;;
+  *.tgz) tar --create --verbose --gzip --file "${file}" "$@" ;;
+  *.zip) zip --verbose "${file}" "$@" ;;
+  *.rar) rar v "${file}" "$@" ;;
+  *) echo "Filetype not recognized: ${file}" >&2 && exit 2 ;;
+esac
