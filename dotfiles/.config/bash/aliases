@@ -61,12 +61,13 @@ fi
 
 ## cp, mv, rm, mkdir
 alias mkdir='mkdir --parents --verbose'
-alias cp='cp --interactive --verbose'
-alias mv='mv --interactive --verbose'
+alias cp='cp --verbose'
+alias mv='mv --verbose'
 if executable_exists 'safe-rm'; then
-  alias rm='safe-rm --interactive --verbose'
+  alias safe-rm='safe-rm --verbose'
+  alias rm='safe-rm'
 else
-  alias rm='rm --interactive --verbose'
+  alias rm='rm --verbose'
 fi
 
 ## trash
