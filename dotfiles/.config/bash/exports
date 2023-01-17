@@ -51,6 +51,8 @@ export LESS_TERMCAP_us
 # dirs
 export SDKMAN_DIR="${HOME}/.sdkman"
 export GOPATH="${HOME}/.go"
+export GOBIN="${HOME}/.go/bin"
+
 
 # files
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rc"
