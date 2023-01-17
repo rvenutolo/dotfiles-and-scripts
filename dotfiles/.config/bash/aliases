@@ -88,12 +88,12 @@ alias egrep='grep --extended-regexp'
 alias fgrep='grep --fixed-strings'
 
 ## tar
-alias mktar='tar -cvf --create --verbose --file'
-alias mkbz2='tar -cvjf --create --verbose --bzip2 --file'
-alias mkgz='tar -cvzf --create --verbose --gzip --file'
-alias untar='tar -xvf --extract --verbose --file'
-alias unbz2='tar -xvjf --extract --verbose --bzip2 --file'
-alias ungz='tar -xvzf --extract --verbose --gzip --file'
+alias mktar='tar --create --verbose --file'
+alias mkbz2='tar --create --verbose --bzip2 --file'
+alias mkgz='tar --create --verbose --gzip --file'
+alias untar='tar --extract --verbose --file'
+alias unbz2='tar --extract --verbose --bzip2 --file'
+alias ungz='tar --extract --verbose --gzip --file'
 
 ## ps
 alias psa='ps aux'
