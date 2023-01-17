@@ -104,7 +104,7 @@ for file in \
   "${HOME}/.config/bash/extra"; do
   [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}"
 done
-unset file
+unset -v file
 
 ## completions
 for file in \
@@ -118,7 +118,7 @@ for file in \
   '/usr/share/git/completion/git-completion.bash'; do
   [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}"
 done
-unset file
+unset -v file
 
 ## dirs to put on path
 for dir in \
@@ -129,7 +129,7 @@ for dir in \
   "${HOME}/.bin"; do
   path_prepend "${dir}"
 done
-unset dir
+unset -v dir
 
 ## misc init stuff
 [[ -r "${HOME}/.dir_colors" ]] && [[ -f "${HOME}/.dir_colors" ]] && eval "$(dircolors "${HOME}/.dir_colors")"
