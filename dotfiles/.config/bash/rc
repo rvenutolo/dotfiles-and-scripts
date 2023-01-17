@@ -92,14 +92,9 @@ function path_prepend() {
 for file in \
   '/etc/bash.bashrc' \
   '/etc/bashrc' \
-  '/usr/share/bash-completion/bash_completion' \
-  '/etc/bash_completion' \
-  '/usr/local/etc/bash_completion' \
-  '/etc/bash_completion.d/'* \
   '/usr/share/git/completion/git-prompt.sh' \
-  '/etc/profile.d/autojump.sh' \
-  '/usr/share/autojump/autojump.sh' \
   '/usr/share/autojump/autojump.bash' \
+  '/usr/share/fzf/key-bindings.bash' \
   "${HOME}/.sdkman/bin/sdkman-init.sh" \
   "${HOME}/.cargo/env" \
   "${HOME}/.config/broot/launcher/bash/br" \
@@ -107,6 +102,20 @@ for file in \
   "${HOME}/.config/bash/functions" \
   "${HOME}/.config/bash/aliases" \
   "${HOME}/.config/bash/extra"; do
+  [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}"
+done
+unset file
+
+## completions
+for file in \
+  '/etc/bash_completion' \
+  '/etc/bash_completion.d/'* \
+  '/usr/local/etc/bash_completion' \
+  '/usr/share/bash/bash-completion/completions/'* \
+  '/usr/share/bash-completion/bash_completion' \
+  '/usr/share/bash-completion/completions/'* \
+  '/usr/share/fzf/completion.bash' \
+  '/usr/share/git/completion/git-completion.bash'; do
   [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}"
 done
 unset file
