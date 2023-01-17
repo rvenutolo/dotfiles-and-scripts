@@ -135,4 +135,3 @@ unset -v dir
 executable_exists 'zoxide' && eval "$(zoxide init bash)"
 executable_exists 'starship' && eval "$(starship init bash)"
 executable_exists 'aws_completer' && complete -C 'aws_completer' aws
-
