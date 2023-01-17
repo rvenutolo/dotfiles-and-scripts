@@ -129,7 +129,7 @@ for dir in \
   "${HOME}/.go/bin" \
   "${HOME}/.bin/other" \
   "${HOME}/.bin"; do
-  path_prepend "${dir}"
+  [[ -d "${dir}" ]] && path_prepend "${dir}"
 done
 unset -v dir
 
