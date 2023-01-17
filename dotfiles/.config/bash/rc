@@ -113,7 +113,6 @@ for file in \
   '/usr/local/etc/bash_completion' \
   '/usr/share/bash/bash-completion/completions/'* \
   '/usr/share/bash-completion/bash_completion' \
-  '/usr/share/bash-completion/completions/'* \
   '/usr/share/fzf/completion.bash' \
   '/usr/share/git/completion/git-completion.bash'; do
   [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}"
