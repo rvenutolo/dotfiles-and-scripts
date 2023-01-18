@@ -10,10 +10,14 @@ fi
 readonly file="$1"
 shift
 case "${file}" in
-  *.tar.bz2) tar --create --verbose --bzip2 --file "${file}" "$@" ;;
-  *.tar.gz) tar --create --verbose --gzip --file "${file}" "$@" ;;
-  *.tgz) tar --create --verbose --gzip --file "${file}" "$@" ;;
+  *.tar | *.tar.* | *.tbz2 | *.tgz) tar --create --verbose --auto-compress --file "${file}" "$@" ;;
+  *.bz2) bzip2 --verbose "${file}" "$@" ;;
+  *.gz) gzip --verbose "${file}" "$@" ;;
+  *.lzma) xz --verbose --format=lzma "${file}" "$@" ;;
+  *.rar) rar a "${file}" "$@" ;;
+  *.xz) xz --verbose "${file}" "$@" ;;
   *.zip) zip --verbose "${file}" "$@" ;;
-  *.rar) rar v "${file}" "$@" ;;
+  *.7z) 7z a "${file}" "$@" ;;
   *) echo "Filetype not recognized: ${file}" >&2 && exit 2 ;;
 esac
+echo "${0##*/}: compressed '${file}'" >&2
