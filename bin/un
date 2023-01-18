@@ -13,19 +13,18 @@ for archive in "$@"; do
       *.tar.bz2) tar --extract --verbose --bzip2 --file "${archive}" ;;
       *.tar.gz) tar --extract --verbose --gzip --file "${archive}" ;;
       *.tar.xz) tar --extract --verbose --xz --file "${archive}" ;;
-      *.bz2) bunzip2 "${archive}" ;;
+      *.bz2) bzip2 --decompress --verbose "${archive}" ;;
+      *.exe) cabextract "${archive}" ;;
+      *.gz) gzip --decompress --verbose "${archive}" ;;
+      *.lzma) xz --decompress --verbose --format=lzma "${archive}" ;;
       *.rar) rar x "${archive}" ;;
-      *.gz) gunzip "${archive}" ;;
       *.tar) tar --extract --verbose --file "${archive}" ;;
       *.tbz2) tar --extract --verbose --bzip2 --file ;;
       *.tgz) tar --extract --verbose --gzip --file "${archive}" ;;
-      *.zip) unzip "${archive}" ;;
-      *.zx) unxz "${archive}" ;;
-      *.Z) uncompress "${archive}" ;;
+      *.xz) xz --decompress --verbose "${archive}" ;;
+      *.zip) unzip -v "${archive}" ;;
       *.7z) 7z x "${archive}" ;;
-      *.exe) cabextract "${archive}" ;;
-      *.lzma) unlzma "$1" && return 0 ;;
-      *) echo "don't know how to extract '${archive}'..." >&2 && exit 2 ;;
+      *) echo "${0##*/}: Don't know how to extract '${archive}'..." >&2 && exit 2 ;;
     esac
     echo "${0##*/}: extracted '${archive}'" >&2
   else
