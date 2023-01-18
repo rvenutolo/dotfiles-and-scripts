@@ -80,6 +80,16 @@ alias trm='trash-rm'
 ## chown, chmod, chgrp
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
+alias chax='chmod a+x'
+alias chux='chmod u+x'
+alias 600='chmod --recursive 600'
+alias 640='chmod --recursive 640'
+alias 644='chmod --recursive 644'
+alias 655='chmod --recursive 655'
+alias 700='chmod --recursive 700'
+alias 744='chmod --recursive 744'
+alias 755='chmod --recursive 755'
+alias 775='chmod --recursive 775'
 alias chgrp='chgrp --preserve-root'
 
 ## grep
@@ -138,4 +148,6 @@ alias shfmt='shfmt --indent 2 --case-indent'
 alias du1='du --max-depth=1'
 alias bs='br --sizes'
 alias brc='source ${HOME}/.bashrc'
+alias da="date '+%Y-%m-%d %A %T %Z'"
+alias edit='${EDITOR}'
 alias gh='history | grep'
