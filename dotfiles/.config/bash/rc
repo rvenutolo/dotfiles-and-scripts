@@ -116,11 +116,8 @@ unset -v file
 
 ## dirs to put on path
 for dir in \
-  '/var/lib/flatpak/exports/bin' \
-  "${HOME}/.local/bin" \
   "$(ruby -e 'puts Gem.user_dir')/bin" \
   "${HOME}/.cargo/bin" \
-  "${HOME}/.fzf/bin" \
   "${HOME}/.go/bin" \
   "${HOME}/.bin/other" \
   "${HOME}/.bin"; do
