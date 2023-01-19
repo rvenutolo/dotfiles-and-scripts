@@ -12,7 +12,7 @@ unalias -a
 
 # shopt -p | sort -k3
 shopt -u assoc_expand_once
-shopt -u autocd
+shopt -s autocd
 shopt -u cdable_vars
 shopt -s cdspell
 shopt -s checkhash
