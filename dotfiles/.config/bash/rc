@@ -104,6 +104,7 @@ for file in \
   '/usr/share/autojump/autojump.bash' \
   '/usr/share/git/completion/git-completion.bash' \
   '/usr/share/doc/mcfly/mcfly.bash' \
+  '/usr/share/doc/pkgfile/command-not-found.bash' \
   "${HOME}/.sdkman/bin/sdkman-init.sh" \
   "${HOME}/.config/broot/launcher/bash/br" \
   "${HOME}/.config/bash/exports" \
