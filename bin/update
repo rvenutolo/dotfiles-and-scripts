@@ -7,8 +7,9 @@ if [[ "$#" -ne 0 ]]; then
   exit 2
 fi
 
-function command_exists() {
-  type -P -f "$1" >/dev/null 2>&1
+function executable_exists() {
+  # executables / no builtins, aliases, or functions
+  type -aPf "$1" >/dev/null 2>&1
 }
 
 function file_exists() {
@@ -21,31 +22,31 @@ function log() {
   echo '----------------------------------------' >&2
 }
 
-if command_exists 'yay'; then
+if executable_exists 'yay'; then
   log 'packages with yay'
   yay -Syyu
   yay -Yc
-elif command_exists 'pacman'; then
+elif executable_exists 'pacman'; then
   log 'packages with pacman'
   sudo pacman -Syu
-elif command_exists 'apt'; then
+elif executable_exists 'apt'; then
   log 'packages with apt'
   sudo apt update
   sudo apt upgrade
   sudo apt autoremove
-elif command_exists 'dnf'; then
+elif executable_exists 'dnf'; then
   log 'packages with dnf'
   sudo dnf upgrade
   sudo dnf autoremove
 fi
 
-if command_exists 'flatpak'; then
+if executable_exists 'flatpak'; then
   log 'Flatpaks'
   sudo flatpak update
   sudo flatpak remove --unused
 fi
 
-if command_exists 'snap'; then
+if executable_exists 'snap'; then
   log 'Snaps'
   sudo snap refresh
 fi
@@ -61,28 +62,28 @@ if file_exists "${sdkman_init_script}"; then
   set -ue
 fi
 
-if command_exists 'cargo' && cargo install --list | grep -qF 'cargo-install-update'; then
+if executable_exists 'cargo' && cargo install --list | grep -qF 'cargo-install-update'; then
   log 'Rust crates'
   cargo install-update --all
 fi
 
-if command_exists 'gem'; then
+if executable_exists 'gem'; then
   log 'Ruby gems'
   sudo gem update
 fi
 
-if command_exists 'brew'; then
+if executable_exists 'brew'; then
   log 'Homebrew packages'
   brew update
   brew upgrade
 fi
 
-if command_exists 'tldr'; then
+if executable_exists 'tldr'; then
   log 'tldr cache'
   tldr -u
 fi
 
-if command_exists 'aws'; then
+if executable_exists 'aws'; then
   log 'AWS CLI v2'
   readonly ts="$(date -u +%Y%m%d_%H%M%S)"
   readonly zip_file="/tmp/awscliv2_${ts}.zip"
@@ -96,13 +97,13 @@ if command_exist 'pkgfile'; then
   sudo pkgfile --update
 fi
 
-if command_exists 'fwupdmgr'; then
+if executable_exists 'fwupdmgr'; then
   log 'firmwares with fwupdmgr'
   fwupdmgr refresh --force
   fwupdmgr update
 fi
 
-if command_exists 'freshclam'; then
+if executable_exists 'freshclam'; then
   log 'ClamAV virus definitions'
   sudo freshclam
 fi
