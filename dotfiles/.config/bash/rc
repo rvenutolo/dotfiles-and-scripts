@@ -88,6 +88,15 @@ function path_prepend() {
   path_remove "$1" && PATH="$1:$PATH"
 }
 
+# Arch Box Sourcing
+# /etc/profile
+#   /etc/profile.d/*.sh
+#     (bunch of program-specific stuff, like autojump, safe-rm, snap, etc.)
+#   /etc/bash.bashrc
+#     /usr/share/bash-completion/bash_completion
+#       /etc/bash_completion.d/*
+#       ~/.bash_completion
+
 ## files to source
 for file in \
   '/etc/bash.bashrc' \
