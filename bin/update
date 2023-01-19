@@ -92,6 +92,10 @@ if command_exists 'aws'; then
   sudo "${extracted_dir}/aws/install" --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
 fi
 
+if command_exist 'pkgfile'; then
+  sudo pkgfile --update
+fi
+
 if command_exists 'fwupdmgr'; then
   log 'firmwares with fwupdmgr'
   fwupdmgr refresh --force
