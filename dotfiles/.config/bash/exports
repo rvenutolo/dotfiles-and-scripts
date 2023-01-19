@@ -48,14 +48,13 @@ export LESS_TERMCAP_so
 export LESS_TERMCAP_ue
 export LESS_TERMCAP_us
 
-# dirs
+## dirs
 export SDKMAN_DIR="${HOME}/.sdkman"
 export GOPATH="${HOME}/.go"
 export GOBIN="${HOME}/.go/bin"
 
-
-# files
+## files
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rc"
 
-# misc
+## misc
 export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
