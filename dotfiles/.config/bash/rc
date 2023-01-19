@@ -99,31 +99,17 @@ function path_prepend() {
 
 ## files to source
 for file in \
-  '/etc/bash.bashrc' \
-  '/etc/bashrc' \
-  '/usr/share/git/completion/git-prompt.sh' \
-  '/usr/share/autojump/autojump.bash' \
   '/usr/share/fzf/key-bindings.bash' \
+  '/usr/share/fzf/completion.bash' \
+  '/usr/share/autojump/autojump.bash' \
+  '/usr/share/git/completion/git-completion.bash' \
+  '/usr/share/doc/mcfly/mcfly.bash' \
   "${HOME}/.sdkman/bin/sdkman-init.sh" \
-  "${HOME}/.cargo/env" \
   "${HOME}/.config/broot/launcher/bash/br" \
   "${HOME}/.config/bash/exports" \
   "${HOME}/.config/bash/functions" \
   "${HOME}/.config/bash/aliases" \
   "${HOME}/.config/bash/local"; do
-  [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}"
-done
-unset -v file
-
-## completions
-for file in \
-  '/etc/bash_completion' \
-  '/etc/bash_completion.d/'* \
-  '/usr/local/etc/bash_completion' \
-  '/usr/share/bash/bash-completion/completions/'* \
-  '/usr/share/bash-completion/bash_completion' \
-  '/usr/share/fzf/completion.bash' \
-  '/usr/share/git/completion/git-completion.bash'; do
   [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}"
 done
 unset -v file
