@@ -13,7 +13,7 @@ if version > 580
 endif
 
 let g:colors_name = "nord"
-let s:nord_vim_version="0.13.0"
+let s:nord_vim_version="0.19.0"
 set background=dark
 
 let s:nord0_gui = "#2E3440"
@@ -72,87 +72,54 @@ let s:nord3_gui_brightened = [
   \ "#7b88a1",
 \ ]
 
-if !exists("g:nord_bold")
-  let g:nord_bold = 1
-endif
+let g:nord_bold = get(g:, "nord_bold", 1)
+let s:bold = (g:nord_bold == 0) ? "" : "bold,"
 
-let s:bold = "bold,"
-if g:nord_bold == 0
-  let s:bold = ""
-endif
+let g:nord_underline = get(g:, "nord_underline", 1)
+let s:underline = (g:nord_underline == 0) ? "NONE," : "underline,"
 
-if !exists("g:nord_italic")
-  if has("gui_running") || $TERM_ITALICS == "true"
-    let g:nord_italic = 1
-  else
-    let g:nord_italic = 0
-  endif
-endif
+let g:nord_italic = get(g:, "nord_italic", (has("gui_running") || $TERM_ITALICS == "true"))
+let s:italic = (g:nord_italic == 0) ? "" : "italic,"
 
-let s:italic = "italic,"
-if g:nord_italic == 0
-  let s:italic = ""
-endif
+let g:nord_italic_comments = get(g:, "nord_italic_comments", 0)
+let s:italicize_comments = (g:nord_italic_comments == 0) ? "" : get(s:, "italic")
 
-let s:underline = "underline,"
-if ! get(g:, "nord_underline", 1)
-  let s:underline = "NONE,"
-endif
+let g:nord_uniform_status_lines = get(g:, "nord_uniform_status_lines", 0)
 
-let s:italicize_comments = ""
-if exists("g:nord_italic_comments")
-  if g:nord_italic_comments == 1
-    let s:italicize_comments = s:italic
-  endif
-endif
-
-if !exists('g:nord_uniform_status_lines')
-  let g:nord_uniform_status_lines = 0
-endif
-
-function! s:logWarning(msg)
-  echohl WarningMsg
-  echomsg 'nord: warning: ' . a:msg
-  echohl None
-endfunction
-
+let g:nord_bold_vertical_split_line = get(g:, "nord_bold_vertical_split_line", 0)
 if exists("g:nord_comment_brightness")
-  call s:logWarning('Variable g:nord_comment_brightness has been deprecated and will be removed in version 1.0.0!' .
+  echohl WarningMsg
+  echomsg 'nord: warning: Variable g:nord_comment_brightness has been deprecated and will be removed in version 1.0.0!' .
                    \' The comment color brightness has been increased by 10% by default.' .
-                   \' Please see https://github.com/arcticicestudio/nord-vim/issues/145 for more details.')
+                   \' Please see https://github.com/arcticicestudio/nord-vim/issues/145 for more details.'
+  echohl None
   let g:nord_comment_brightness = 10
 endif
-
-if !exists("g:nord_uniform_diff_background")
-  let g:nord_uniform_diff_background = 0
-endif
-
-if !exists("g:nord_cursor_line_number_background")
-  let g:nord_cursor_line_number_background = 0
-endif
-
-if !exists("g:nord_bold_vertical_split_line")
-  let g:nord_bold_vertical_split_line = 0
-endif
+let g:nord_cursor_line_number_background = get(g:, "nord_cursor_line_number_background", 0)
+let g:nord_uniform_diff_background = get(g:, "nord_uniform_diff_background", 0)
 
 function! s:hi(group, guifg, guibg, ctermfg, ctermbg, attr, guisp)
+  let cmd = ""
   if a:guifg != ""
-    exec "hi " . a:group . " guifg=" . a:guifg
+    let cmd = cmd . " guifg=" . a:guifg
   endif
   if a:guibg != ""
-    exec "hi " . a:group . " guibg=" . a:guibg
+    let cmd = cmd . " guibg=" . a:guibg
   endif
   if a:ctermfg != ""
-    exec "hi " . a:group . " ctermfg=" . a:ctermfg
+    let cmd = cmd . " ctermfg=" . a:ctermfg
   endif
   if a:ctermbg != ""
-    exec "hi " . a:group . " ctermbg=" . a:ctermbg
+    let cmd = cmd . " ctermbg=" . a:ctermbg
   endif
   if a:attr != ""
-    exec "hi " . a:group . " gui=" . a:attr . " cterm=" . substitute(a:attr, "undercurl", s:underline, "")
+    let cmd = cmd . " gui=" . a:attr . " cterm=" . substitute(a:attr, "undercurl", s:underline, "")
   endif
   if a:guisp != ""
-    exec "hi " . a:group . " guisp=" . a:guisp
+    let cmd = cmd . " guisp=" . a:guisp
+  endif
+  if cmd != ""
+    exec "hi " . a:group . cmd
   endif
 endfunction
 
@@ -168,15 +135,15 @@ call s:hi("Underline", "", "", "", "", s:underline, "")
 call s:hi("ColorColumn", "", s:nord1_gui, "NONE", s:nord1_term, "", "")
 call s:hi("Cursor", s:nord0_gui, s:nord4_gui, "", "NONE", "", "")
 call s:hi("CursorLine", "", s:nord1_gui, "NONE", s:nord1_term, "NONE", "")
-call s:hi("Error", s:nord0_gui, s:nord11_gui, "", s:nord11_term, "", "")
+call s:hi("Error", s:nord4_gui, s:nord11_gui, "", s:nord11_term, "", "")
 call s:hi("iCursor", s:nord0_gui, s:nord4_gui, "", "NONE", "", "")
-call s:hi("LineNr", s:nord3_gui, s:nord0_gui, s:nord3_term, "NONE", "", "")
+call s:hi("LineNr", s:nord3_gui, "NONE", s:nord3_term, "NONE", "", "")
 call s:hi("MatchParen", s:nord8_gui, s:nord3_gui, s:nord8_term, s:nord3_term, "", "")
 call s:hi("NonText", s:nord2_gui, "", s:nord3_term, "", "", "")
 call s:hi("Normal", s:nord4_gui, s:nord0_gui, "NONE", "NONE", "", "")
-call s:hi("PMenu", s:nord4_gui, s:nord2_gui, "NONE", s:nord1_term, "NONE", "")
+call s:hi("Pmenu", s:nord4_gui, s:nord2_gui, "NONE", s:nord1_term, "NONE", "")
 call s:hi("PmenuSbar", s:nord4_gui, s:nord2_gui, "NONE", s:nord1_term, "", "")
-call s:hi("PMenuSel", s:nord8_gui, s:nord3_gui, s:nord8_term, s:nord3_term, "", "")
+call s:hi("PmenuSel", s:nord8_gui, s:nord3_gui, s:nord8_term, s:nord3_term, "", "")
 call s:hi("PmenuThumb", s:nord8_gui, s:nord3_gui, "NONE", s:nord3_term, "", "")
 call s:hi("SpecialKey", s:nord3_gui, "", s:nord3_term, "", "", "")
 call s:hi("SpellBad", s:nord11_gui, s:nord0_gui, s:nord11_term, "NONE", "undercurl", s:nord11_gui)
@@ -185,19 +152,14 @@ call s:hi("SpellLocal", s:nord5_gui, s:nord0_gui, s:nord5_term, "NONE", "undercu
 call s:hi("SpellRare", s:nord6_gui, s:nord0_gui, s:nord6_term, "NONE", "undercurl", s:nord6_gui)
 call s:hi("Visual", "", s:nord2_gui, "", s:nord1_term, "", "")
 call s:hi("VisualNOS", "", s:nord2_gui, "", s:nord1_term, "", "")
-"+- Neovim Support -+
-call s:hi("healthError", s:nord11_gui, s:nord1_gui, s:nord11_term, s:nord1_term, "", "")
-call s:hi("healthSuccess", s:nord14_gui, s:nord1_gui, s:nord14_term, s:nord1_term, "", "")
-call s:hi("healthWarning", s:nord13_gui, s:nord1_gui, s:nord13_term, s:nord1_term, "", "")
-call s:hi("TermCursorNC", "", s:nord1_gui, "", s:nord1_term, "", "")
 
 "+- Vim 8 Terminal Colors -+
 if has('terminal')
   let g:terminal_ansi_colors = [s:nord1_gui, s:nord11_gui, s:nord14_gui, s:nord13_gui, s:nord9_gui, s:nord15_gui, s:nord8_gui, s:nord5_gui, s:nord3_gui, s:nord11_gui, s:nord14_gui, s:nord13_gui, s:nord9_gui, s:nord15_gui, s:nord7_gui, s:nord6_gui]
 endif
 
-"+- Neovim Terminal Colors -+
 if has('nvim')
+  "+- Neovim Terminal Colors -+
   let g:terminal_color_0 = s:nord1_gui
   let g:terminal_color_1 = s:nord11_gui
   let g:terminal_color_2 = s:nord14_gui
@@ -214,12 +176,36 @@ if has('nvim')
   let g:terminal_color_13 = s:nord15_gui
   let g:terminal_color_14 = s:nord7_gui
   let g:terminal_color_15 = s:nord6_gui
+
+  "+- Neovim Support -+
+  call s:hi("healthError", s:nord11_gui, s:nord1_gui, s:nord11_term, s:nord1_term, "", "")
+  call s:hi("healthSuccess", s:nord14_gui, s:nord1_gui, s:nord14_term, s:nord1_term, "", "")
+  call s:hi("healthWarning", s:nord13_gui, s:nord1_gui, s:nord13_term, s:nord1_term, "", "")
+  call s:hi("TermCursorNC", "", s:nord1_gui, "", s:nord1_term, "", "")
+
+  "+- Neovim Diagnostics API -+
+  call s:hi("DiagnosticWarn", s:nord13_gui, "", s:nord13_term, "", "", "")
+  call s:hi("DiagnosticError" , s:nord11_gui, "", s:nord11_term, "", "", "")
+  call s:hi("DiagnosticInfo" , s:nord8_gui, "", s:nord8_term, "", "", "")
+  call s:hi("DiagnosticHint" , s:nord10_gui, "", s:nord10_term, "", "", "")
+  call s:hi("DiagnosticUnderlineWarn" , s:nord13_gui, "", s:nord13_term, "", "undercurl", "")
+  call s:hi("DiagnosticUnderlineError" , s:nord11_gui, "", s:nord11_term, "", "undercurl", "")
+  call s:hi("DiagnosticUnderlineInfo" , s:nord8_gui, "", s:nord8_term, "", "undercurl", "")
+  call s:hi("DiagnosticUnderlineHint" , s:nord10_gui, "", s:nord10_term, "", "undercurl", "")
+
+  "+- Neovim DocumentHighlight -+
+  call s:hi("LspReferenceText", "", s:nord3_gui, "", s:nord3_term, "", "")
+  call s:hi("LspReferenceRead", "", s:nord3_gui, "", s:nord3_term, "", "")
+  call s:hi("LspReferenceWrite", "", s:nord3_gui, "", s:nord3_term, "", "")
+
+  "+- Neovim LspSignatureHelp -+
+  call s:hi("LspSignatureActiveParameter", s:nord8_gui, "", s:nord8_term, "", s:underline, "")
 endif
 
 "+--- Gutter ---+
 call s:hi("CursorColumn", "", s:nord1_gui, "NONE", s:nord1_term, "", "")
 if g:nord_cursor_line_number_background == 0
-  call s:hi("CursorLineNr", s:nord4_gui, s:nord0_gui, "NONE", "", "NONE", "")
+  call s:hi("CursorLineNr", s:nord4_gui, "", "NONE", "", "NONE", "")
 else
   call s:hi("CursorLineNr", s:nord4_gui, s:nord1_gui, "NONE", s:nord1_term, "NONE", "")
 endif
@@ -234,7 +220,7 @@ call s:hi("Directory", s:nord8_gui, "", s:nord8_term, "NONE", "", "")
 call s:hi("EndOfBuffer", s:nord1_gui, "", s:nord1_term, "NONE", "", "")
 call s:hi("ErrorMsg", s:nord4_gui, s:nord11_gui, "NONE", s:nord11_term, "", "")
 call s:hi("ModeMsg", s:nord4_gui, "", "", "", "", "")
-call s:hi("MoreMsg", s:nord4_gui, "", "", "", "", "")
+call s:hi("MoreMsg", s:nord8_gui, "", s:nord8_term, "", "", "")
 call s:hi("Question", s:nord4_gui, "", "NONE", "", "", "")
 if g:nord_uniform_status_lines == 0
   call s:hi("StatusLine", s:nord8_gui, s:nord3_gui, s:nord8_term, s:nord3_term, "NONE", "")
@@ -274,8 +260,10 @@ endif
 call s:hi("Boolean", s:nord9_gui, "", s:nord9_term, "", "", "")
 call s:hi("Character", s:nord14_gui, "", s:nord14_term, "", "", "")
 call s:hi("Comment", s:nord3_gui_bright, "", s:nord3_term, "", s:italicize_comments, "")
+call s:hi("Conceal", "", "NONE", "", "NONE", "", "")
 call s:hi("Conditional", s:nord9_gui, "", s:nord9_term, "", "", "")
 call s:hi("Constant", s:nord4_gui, "", "NONE", "", "", "")
+call s:hi("Decorator", s:nord12_gui, "", s:nord12_term, "", "", "")
 call s:hi("Define", s:nord9_gui, "", s:nord9_term, "", "", "")
 call s:hi("Delimiter", s:nord6_gui, "", s:nord6_term, "", "", "")
 call s:hi("Exception", s:nord9_gui, "", s:nord9_term, "", "", "")
@@ -300,8 +288,10 @@ call s:hi("Tag", s:nord4_gui, "", "", "", "", "")
 call s:hi("Todo", s:nord13_gui, "NONE", s:nord13_term, "NONE", "", "")
 call s:hi("Type", s:nord9_gui, "", s:nord9_term, "", "NONE", "")
 call s:hi("Typedef", s:nord9_gui, "", s:nord9_term, "", "", "")
+hi! link Annotation Decorator
 hi! link Macro Define
 hi! link PreCondit PreProc
+hi! link Variable Identifier
 
 "+-----------+
 "+ Languages +
@@ -347,6 +337,7 @@ hi! link awkVariables Identifier
 call s:hi("cIncluded", s:nord7_gui, "", s:nord7_term, "", "", "")
 hi! link cOperator Operator
 hi! link cPreCondit PreCondit
+hi! link cConstant Type
 
 call s:hi("cmakeGeneratorExpression", s:nord10_gui, "", s:nord10_term, "", "", "")
 
@@ -560,11 +551,33 @@ call s:hi("ALEWarning" , s:nord13_gui, "", s:nord13_term, "", "undercurl", "")
 call s:hi("ALEError" , s:nord11_gui, "", s:nord11_term, "", "undercurl", "")
 
 " Coc
-" > neoclide/coc
+" > neoclide/coc.vim
+call s:hi("CocWarningHighlight" , s:nord13_gui, "", s:nord13_term, "", "undercurl", "")
+call s:hi("CocErrorHighlight" , s:nord11_gui, "", s:nord11_term, "", "undercurl", "")
 call s:hi("CocWarningSign", s:nord13_gui, "", s:nord13_term, "", "", "")
 call s:hi("CocErrorSign" , s:nord11_gui, "", s:nord11_term, "", "", "")
 call s:hi("CocInfoSign" , s:nord8_gui, "", s:nord8_term, "", "", "")
 call s:hi("CocHintSign" , s:nord10_gui, "", s:nord10_term, "", "", "")
+
+if has('nvim')
+  " Neovim LSP
+  " > neovim/nvim-lspconfig
+  call s:hi("LspCodeLens", s:nord3_gui_bright, "", s:nord3_term, "", "", "")
+  if has("nvim-0.5")
+    call s:hi("LspDiagnosticsDefaultWarning", s:nord13_gui, "", s:nord13_term, "", "", "")
+    call s:hi("LspDiagnosticsDefaultError" , s:nord11_gui, "", s:nord11_term, "", "", "")
+    call s:hi("LspDiagnosticsDefaultInformation" , s:nord8_gui, "", s:nord8_term, "", "", "")
+    call s:hi("LspDiagnosticsDefaultHint" , s:nord10_gui, "", s:nord10_term, "", "", "")
+    call s:hi("LspDiagnosticsUnderlineWarning" , s:nord13_gui, "", s:nord13_term, "", "undercurl", "")
+    call s:hi("LspDiagnosticsUnderlineError" , s:nord11_gui, "", s:nord11_term, "", "undercurl", "")
+    call s:hi("LspDiagnosticsUnderlineInformation" , s:nord8_gui, "", s:nord8_term, "", "undercurl", "")
+    call s:hi("LspDiagnosticsUnderlineHint" , s:nord10_gui, "", s:nord10_term, "", "undercurl", "")
+  endif
+
+  " Gitsigns
+  " > lewis6991/gitsigns.nvim
+  hi! link GitSignsCurrentLineBlame Comment
+endif
 
 " GitGutter
 " > airblade/vim-gitgutter
@@ -579,6 +592,10 @@ call s:hi("SignifySignAdd", s:nord14_gui, "", s:nord14_term, "", "", "")
 call s:hi("SignifySignChange", s:nord13_gui, "", s:nord13_term, "", "", "")
 call s:hi("SignifySignChangeDelete", s:nord11_gui, "", s:nord11_term, "", "", "")
 call s:hi("SignifySignDelete", s:nord11_gui, "", s:nord11_term, "", "", "")
+
+" Sneak
+" > justinmk/vim-sneak
+hi! link Sneak Search
 
 " fugitive.vim
 " > tpope/vim-fugitive
@@ -600,6 +617,39 @@ hi! link NERDTreeHelp Comment
 " > ctrlpvim/ctrlp.vim
 hi! link CtrlPMatch Keyword
 hi! link CtrlPBufferHid Normal
+
+" vim-clap
+" > liuchengxu/vim-clap
+call s:hi("ClapDir", s:nord4_gui, "", "", "", "", "")
+call s:hi("ClapDisplay", s:nord4_gui, s:nord1_gui, "", s:nord1_term, "", "")
+call s:hi("ClapFile", s:nord4_gui, "", "", "NONE", "", "")
+call s:hi("ClapMatches", s:nord8_gui, "", s:nord8_term, "", "", "")
+call s:hi("ClapNoMatchesFound", s:nord13_gui, "", s:nord13_term, "", "", "")
+call s:hi("ClapSelected", s:nord7_gui, "", s:nord7_term, "", s:bold, "")
+call s:hi("ClapSelectedSign", s:nord9_gui, "", s:nord9_term, "", "", "")
+let s:clap_matches = [
+        \ [s:nord8_gui,  s:nord8_term] ,
+        \ [s:nord9_gui,  s:nord9_term] ,
+        \ [s:nord10_gui, s:nord10_term] ,
+        \ ]
+for s:nord_clap_match_i in range(1,12)
+  let clap_match_color = s:clap_matches[s:nord_clap_match_i % len(s:clap_matches) - 1]
+  call s:hi("ClapMatches" . s:nord_clap_match_i, clap_match_color[0], "", clap_match_color[1], "", "", "")
+  call s:hi("ClapFuzzyMatches" . s:nord_clap_match_i, clap_match_color[0], "", clap_match_color[1], "", "", "")
+endfor
+unlet s:nord_clap_match_i
+hi! link ClapCurrentSelection PmenuSel
+hi! link ClapCurrentSelectionSign ClapSelectedSign
+hi! link ClapInput Pmenu
+hi! link ClapPreview Pmenu
+hi! link ClapProviderAbout ClapDisplay
+hi! link ClapProviderColon Type
+hi! link ClapProviderId Type
+
+" vim-indent-guides
+" > nathanaelkane/vim-indent-guides
+call s:hi("IndentGuidesEven", "", s:nord1_gui, "", s:nord1_term, "", "")
+call s:hi("IndentGuidesOdd", "", s:nord2_gui, "", s:nord3_term, "", "")
 
 " vim-plug
 " > junegunn/vim-plug
@@ -638,6 +688,90 @@ hi! link jsNoise Delimiter
 hi! link jsPrototype Keyword
 hi! link jsRegexpString SpecialChar
 
+" Pandoc
+" > vim-pandoc/vim-pandoc-syntax
+call s:hi("pandocDefinitionBlockTerm", s:nord7_gui, "", s:nord7_term, "", s:italic, "")
+call s:hi("pandocTableDelims", s:nord3_gui, "", s:nord3_term, "", "", "")
+hi! link pandocAtxHeader markdownH1
+hi! link pandocBlockQuote markdownBlockquote
+hi! link pandocCiteAnchor Operator
+hi! link pandocCiteKey pandocReferenceLabel
+hi! link pandocDefinitionBlockMark Operator
+hi! link pandocEmphasis markdownItalic
+hi! link pandocFootnoteID pandocReferenceLabel
+hi! link pandocFootnoteIDHead markdownLinkDelimiter
+hi! link pandocFootnoteIDTail pandocFootnoteIDHead
+hi! link pandocGridTableDelims pandocTableDelims
+hi! link pandocGridTableHeader pandocTableDelims
+hi! link pandocOperator Operator
+hi! link pandocPipeTableDelims pandocTableDelims
+hi! link pandocReferenceDefinition pandocReferenceLabel
+hi! link pandocReferenceLabel markdownLinkText
+hi! link pandocReferenceURL markdownUrl
+hi! link pandocSimpleTableHeader pandocAtxHeader
+hi! link pandocStrong markdownBold
+hi! link pandocTableHeaderWord pandocAtxHeader
+hi! link pandocUListItemBullet Operator
+
+if has('nvim')
+  " tree-sitter
+  " > nvim-treesitter/nvim-treesitter
+  hi! link TSAnnotation Annotation
+  hi! link TSConstBuiltin Constant
+  hi! link TSConstructor Function
+  hi! link TSEmphasis Italic
+  hi! link TSFuncBuiltin Function
+  hi! link TSFuncMacro Function
+  hi! link TSStringRegex SpecialChar
+  hi! link TSStrong Bold
+  hi! link TSStructure Structure
+  hi! link TSTagDelimiter TSTag
+  hi! link TSUnderline Underline
+  hi! link TSVariable Variable
+  hi! link TSVariableBuiltin Keyword
+endif
+
+" TypeScript
+" > HerringtonDarkholme/yats.vim
+call s:hi("typescriptBOMWindowMethod", s:nord8_gui, "", s:nord8_term, "", s:italic, "")
+call s:hi("typescriptClassName", s:nord7_gui, "", s:nord7_term, "", "", "")
+call s:hi("typescriptDecorator", s:nord12_gui, "", s:nord12_term, "", "", "")
+call s:hi("typescriptInterfaceName", s:nord7_gui, "", s:nord7_term, "", s:bold, "")
+call s:hi("typescriptRegexpString", s:nord13_gui, "", s:nord13_term, "", "", "")
+" TypeScript JSX
+ call s:hi("tsxAttrib", s:nord7_gui, "", s:nord7_term, "", "", "")
+hi! link typescriptOperator Operator
+hi! link typescriptBinaryOp Operator
+hi! link typescriptAssign Operator
+hi! link typescriptMember Identifier
+hi! link typescriptDOMStorageMethod Identifier
+hi! link typescriptArrowFuncArg Identifier
+hi! link typescriptGlobal typescriptClassName
+hi! link typescriptBOMWindowProp Function
+hi! link typescriptArrowFuncDef Function
+hi! link typescriptAliasDeclaration Function
+hi! link typescriptPredefinedType Type
+hi! link typescriptTypeReference typescriptClassName
+hi! link typescriptTypeAnnotation Structure
+hi! link typescriptDocNamedParamType SpecialComment
+hi! link typescriptDocNotation Keyword
+hi! link typescriptDocTags Keyword
+hi! link typescriptImport Keyword
+hi! link typescriptExport Keyword
+hi! link typescriptTry Keyword
+hi! link typescriptVariable Keyword
+hi! link typescriptBraces Normal
+hi! link typescriptObjectLabel Normal
+hi! link typescriptCall Normal
+hi! link typescriptClassHeritage typescriptClassName
+hi! link typescriptFuncTypeArrow Structure
+hi! link typescriptMemberOptionality Structure
+hi! link typescriptNodeGlobal typescriptGlobal
+hi! link typescriptTypeBrackets Structure
+hi! link tsxEqual Operator
+hi! link tsxIntrinsicTagName htmlTag
+hi! link tsxTagName tsxIntrinsicTagName
+
 " Markdown
 " > plasticboy/vim-markdown
 call s:hi("mkdCode", s:nord7_gui, "", s:nord7_term, "", "", "")
@@ -662,6 +796,15 @@ hi! link mkdLinkDefTarget mkdURL
 hi! link mkdLinkTitle mkdInlineURL
 hi! link mkdDelimiter Keyword
 
+" PHP
+" > StanAngeloff/php.vim
+call s:hi("phpClass", s:nord7_gui, "", s:nord7_term, "", "", "")
+call s:hi("phpClassImplements", s:nord7_gui, "", s:nord7_term, "", s:bold, "")
+hi! link phpClassExtends phpClass
+hi! link phpFunction Function
+hi! link phpMethod Function
+hi! link phpUseClass phpClass
+
 " Vimwiki
 " > vimwiki/vimwiki
 if !exists("g:vimwiki_hl_headers") || g:vimwiki_hl_headers == 0
@@ -675,7 +818,6 @@ else
     call s:hi("VimwikiHeader".s:i, s:vimwiki_hcolor_guifg[s:i-1] , "", s:vimwiki_hcolor_ctermfg[s:i-1], "", s:bold, "")
   endfor
 endif
-
 call s:hi("VimwikiLink", s:nord8_gui, "", s:nord8_term, "", s:underline, "")
 hi! link VimwikiHeaderChar markdownHeadingDelimiter
 hi! link VimwikiHR Keyword
@@ -684,3 +826,17 @@ hi! link VimwikiList markdownListMarker
 " YAML
 " > stephpy/vim-yaml
 call s:hi("yamlKey", s:nord7_gui, "", s:nord7_term, "", "", "")
+
+"+------------+
+"+ Public API +
+"+------------+
+"+--- Functions ---+
+
+function! NordPalette() abort
+  let ret = {}
+  for color in range(16)
+    execute 'let ret["nord'.color.'"] = s:nord'.color.'_gui'
+  endfor
+  let ret["nord3_bright"] = s:nord3_gui_bright
+  return ret
+endfunction
