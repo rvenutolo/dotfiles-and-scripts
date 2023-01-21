@@ -88,6 +88,11 @@ function path_prepend() {
   path_remove "$1" && PATH="$1:$PATH"
 }
 
+# source exports first so they can be used immediately
+[[ -r "${XDG_CONFIG_HOME}/bash/exports" ]] &&
+  [[ -f "${XDG_CONFIG_HOME}/bash/exports" ]] &&
+  source "${XDG_CONFIG_HOME}/bash/exports"
+
 # Arch Box Sourcing
 # /etc/profile
 #   /etc/profile.d/*.sh (bunch of program-specific stuff, like autojump, safe-rm, snap, etc.)
@@ -98,7 +103,6 @@ function path_prepend() {
 
 ## files to source
 for file in \
-  "${XDG_CONFIG_HOME}/bash/exports" \
   '/usr/share/fzf/key-bindings.bash' \
   '/usr/share/fzf/completion.bash' \
   '/usr/share/autojump/autojump.bash' \
