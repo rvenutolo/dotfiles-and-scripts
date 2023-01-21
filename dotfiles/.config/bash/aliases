@@ -151,4 +151,4 @@ alias bs='br --sizes'
 alias brc='source ${HOME}/.bashrc'
 alias da="date '+%Y-%m-%d %A %T %Z'"
 alias edit='${EDITOR}'
-alias gh='history | grep'
+alias hg='history | grep'
