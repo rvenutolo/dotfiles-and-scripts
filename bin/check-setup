@@ -126,6 +126,11 @@ if executable_exists 'trash'; then
   trash --version | grep -qF 'rushsteve1/trash-d' || echo "trash command is not from trash-d"
 fi
 
+## check that the `tldr` command is from tealdeer
+if executable_exists 'tldr'; then
+  tldr --version | grep -qF 'tealdeer' || echo "tldr command is not from tealdeer"
+fi
+
 expected_files=(
   "${HOME}/.config/bash/local"
   "${HOME}/.gitconfig.private"
