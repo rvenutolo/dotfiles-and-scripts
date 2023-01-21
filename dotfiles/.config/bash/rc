@@ -90,8 +90,7 @@ function path_prepend() {
 
 # Arch Box Sourcing
 # /etc/profile
-#   /etc/profile.d/*.sh
-#     (bunch of program-specific stuff, like autojump, safe-rm, snap, etc.)
+#   /etc/profile.d/*.sh (bunch of program-specific stuff, like autojump, safe-rm, snap, etc.)
 #   /etc/bash.bashrc
 #     /usr/share/bash-completion/bash_completion
 #       /etc/bash_completion.d/*
