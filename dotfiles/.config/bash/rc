@@ -99,18 +99,18 @@ function path_prepend() {
 
 ## files to source
 for file in \
+  "${XDG_CONFIG_HOME}/bash/exports" \
   '/usr/share/fzf/key-bindings.bash' \
   '/usr/share/fzf/completion.bash' \
   '/usr/share/autojump/autojump.bash' \
   '/usr/share/git/completion/git-completion.bash' \
   '/usr/share/doc/mcfly/mcfly.bash' \
   '/usr/share/doc/pkgfile/command-not-found.bash' \
-  "${HOME}/.sdkman/bin/sdkman-init.sh" \
-  "${HOME}/.config/broot/launcher/bash/br" \
-  "${HOME}/.config/bash/exports" \
-  "${HOME}/.config/bash/functions" \
-  "${HOME}/.config/bash/aliases" \
-  "${HOME}/.config/bash/local"; do
+  "${SDKMAN_DIR}/bin/sdkman-init.sh" \
+  "${XDG_CONFIG_HOME}/broot/launcher/bash/br" \
+  "${XDG_CONFIG_HOME}/bash/functions" \
+  "${XDG_CONFIG_HOME}/bash/aliases" \
+  "${XDG_CONFIG_HOME}/bash/local"; do
   [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}"
 done
 unset -v file

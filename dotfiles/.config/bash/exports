@@ -54,7 +54,7 @@ export GOPATH="${HOME}/.go"
 export GOBIN="${HOME}/.go/bin"
 
 ## files
-export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/rc"
+export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/ripgrep/rc"
 
 ## misc
 export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'

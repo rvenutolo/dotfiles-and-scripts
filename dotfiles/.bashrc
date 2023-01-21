@@ -3,4 +3,4 @@
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
-source "${HOME}/.config/bash/rc"
+source "${XDG_CONFIG_HOME}/bash/rc"
