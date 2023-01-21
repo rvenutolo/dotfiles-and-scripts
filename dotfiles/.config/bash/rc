@@ -107,7 +107,6 @@ for file in \
   '/usr/share/fzf/completion.bash' \
   '/usr/share/autojump/autojump.bash' \
   '/usr/share/git/completion/git-completion.bash' \
-  '/usr/share/doc/mcfly/mcfly.bash' \
   '/usr/share/doc/pkgfile/command-not-found.bash' \
   "${SDKMAN_DIR}/bin/sdkman-init.sh" \
   "${XDG_CONFIG_HOME}/broot/launcher/bash/br" \
