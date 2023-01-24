@@ -59,11 +59,10 @@ else
   alias llar='ls -l --almost-all --recursive'
 fi
 
-## cp, mv, rm, mkdir, trash, safe-rm
+## cp, mv, rm, mkdir, trash
 alias mkdir='mkdir --parents --verbose'
 alias cp='cp --verbose'
 alias mv='mv --verbose'
-alias safe-rm='safe-rm --verbose'
 if executable_exists 'trash' && trash --version | grep -qF 'rushsteve1/trash-d'; then
   alias trash='trash --verbose'
   alias rm='trash'
