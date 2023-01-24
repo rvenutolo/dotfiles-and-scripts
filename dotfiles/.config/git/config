@@ -1,7 +1,7 @@
 [include]
 
   # for name, credentials, etc.
-  path = ~/.gitconfig.private
+  path = ~/.config/git/config.private
 
 [alias]
 
