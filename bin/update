@@ -94,6 +94,7 @@ if executable_exists 'aws'; then
 fi
 
 if executable_exists 'pkgfile'; then
+  log 'pkgfile database'
   sudo pkgfile --update
 fi
 
