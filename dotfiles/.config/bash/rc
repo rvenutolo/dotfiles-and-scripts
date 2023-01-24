@@ -129,7 +129,7 @@ done
 unset -v dir
 
 ## misc init stuff
-[[ -r "${HOME}/.dir_colors" ]] && [[ -f "${HOME}/.dir_colors" ]] && eval "$(dircolors "${HOME}/.dir_colors")"
+[[ -r "${XDG_CONFIG_HOME}/dircolors" ]] && [[ -f "${XDG_CONFIG_HOME}/dircolors" ]] && eval "$(dircolors "${XDG_CONFIG_HOME}/dircolors")"
 executable_exists 'zoxide' && eval "$(zoxide init bash)"
 executable_exists 'starship' && eval "$(starship init bash)"
 executable_exists 'aws_completer' && complete -C 'aws_completer' aws
