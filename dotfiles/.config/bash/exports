@@ -48,13 +48,29 @@ export LESS_TERMCAP_so
 export LESS_TERMCAP_ue
 export LESS_TERMCAP_us
 
-## dirs
-export SDKMAN_DIR="${HOME}/.sdkman"
-export GOPATH="${HOME}/.go"
+## dirs and files
+export ATOM_HOME="${XDG_DATA_HOME}/atom"
+export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
+export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
+export CARGO_HOME="${XDG_DATA_HOME}/cargo"
+export GEM_HOME="${XDG_DATA_HOME}/gem"
+export GEM_SPEC_CACHE="${XDG_CACHE_HOME}/gem"
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 export GOBIN="${HOME}/.go/bin"
-
-## files
+export GOPATH="${HOME}/.go"
+export GRADLE_USER_HOME="${XDG_DATA_HOME}/gradle"
+export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc"
+export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
+export KDEHOME="${XDG_CONFIG_HOME}/kde"
+export LESSHISTFILE="${XDG_STATE_HOME}/less/history"
+export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/ripgrep/rc"
+export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
+export SDKMAN_DIR="${XDG_DATA_HOME}/sdkman"
+export STACK_ROOT="${XDG_DATA_HOME}/stack"
+export TERMINFO="${XDG_DATA_HOME}/terminfo"
+export TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 
 ## misc
 export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
