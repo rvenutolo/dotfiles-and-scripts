@@ -132,11 +132,11 @@ if executable_exists 'tldr'; then
 fi
 
 expected_files=(
-  "${HOME}/.config/bash/local"
-  "${HOME}/.gitconfig.private"
+  "${XDG_CONFIG_HOME}/bash/local"
+  "${XDG_CONFIG_HOME}/broot/launcher/bash/br"
+  "${XDG_CONFIG_HOME}/git/config.private"
   "${HOME}/.ssh/config.private"
-  "${HOME}/.sdkman/bin/sdkman-init.sh"
-  "${HOME}/.config/broot/launcher/bash/br"
+  "${SDKMAN_DIR}/bin/sdkman-init.sh"
   '/usr/share/git/completion/git-prompt.sh'
 )
 for file in "${expected_files[@]}"; do
