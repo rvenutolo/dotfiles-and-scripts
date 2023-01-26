@@ -61,7 +61,7 @@ set -u
 
 expected_executables=(
   '7z'
-  'ag' 'alacritty' 'apropos' 'authy' 'autojump' 'autotrash' 'await' 'aws' 'aws_completer'
+  'ag' 'alacritty' 'apropos' 'authy' 'autotrash' 'await' 'aws' 'aws_completer'
   'bat' 'bc' 'bmon' 'broot' 'btm' 'btop' 'bzip2'
   'cabextract' 'cargo' 'checkbashisms' 'cheat' 'choose' 'clamscan' 'cmake' 'colordiff' 'column' 'cpufetch' 'crontab' 'ctop' 'curl' 'curlie'
   'dash' 'delta' 'diff' 'diff-so-fancy' 'dig' 'distrobox' 'docker' 'doggo' 'dos2unix' 'duf' 'dust'
