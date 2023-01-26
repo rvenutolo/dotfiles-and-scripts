@@ -62,6 +62,11 @@ if file_exists "${sdkman_init_script}"; then
   set -ue
 fi
 
+if executable_exists 'rustup'; then
+  log 'Rust toolchains'
+  rustup update
+fi
+
 if executable_exists 'cargo' && cargo install --list | grep -qF 'cargo-install-update'; then
   log 'Rust crates'
   cargo install-update --all
