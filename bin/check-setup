@@ -28,12 +28,12 @@ function is_desktop_env() {
   echo "${XDG_CURRENT_DESKTOP}" | grep -iwqF "$1"
 }
 
-## 'desktop' 'laptop' 'work'
+## expecting __RV_COMPUTER to be values like 'home desktop', 'work laptop'
 function is_computer() {
   set +u
-  [[ ${RVENUTOLO_COMPUTER,,} == "$1" ]] && is_env='true' || is_env='false'
+  [[ ${__RV_COMPUTER,,} == "$1" ]] && is_comp='true' || is_comp='false'
   set -u
-  [[ ${is_env} == 'true' ]]
+  [[ ${is_comp} == 'true' ]]
 }
 
 expected_vars=(
@@ -48,10 +48,10 @@ expected_vars=(
   'LANG'
   'MANPAGER'
   'PAGER'
-  'RVENUTOLO_COMPUTER'
   'SDKMAN_DIR'
   'VISUAL'
   'WTTR_CITY'
+  '__RV_COMPUTER'
 )
 set +u
 for var in "${expected_vars[@]}"; do
@@ -86,7 +86,7 @@ expected_executables=(
   'xargs' 'xh' 'xsel' 'xz'
   'zellij' 'zip' 'zoxide'
 )
-if is_computer 'desktop' || is_computer 'laptop'; then
+if is_computer 'home'; then
   expected_executables+=(
     'backintime'
     'clapper'
@@ -173,11 +173,11 @@ for font in "${expected_fonts[@]}"; do
     echo "Font not available: ${font}"
 done
 
-expected_services=('docker' 'cups' 'ssh-agent' 'sshd')
-if is_computer 'desktop'; then
+expected_services=('cups' 'ssh-agent' 'sshd')
+if is_computer 'home desktop'; then
   expected_services+=('nfs-server')
 fi
-if is_computer 'desktop' || is_computer 'laptop'; then
+if is_computer 'home'; then
   expected_services+=('crashplan-pro')
 fi
 for service in "${expected_services[@]}"; do
@@ -186,13 +186,13 @@ for service in "${expected_services[@]}"; do
     echo "Service not running: ${service}"
 done
 
-if is_computer 'desktop'; then
+if is_computer 'home desktop'; then
   # libvirtd goes inactive, but is still enabled
   systemctl is-enabled --quiet 'libvirtd' || echo 'Service not enabled: libvirtd'
 fi
 
 expected_groups=('docker' 'sys' 'wheel')
-if is_computer 'desktop'; then
+if is_computer 'home desktop'; then
   expected_services+=('kvm' 'input' 'libvirt')
 fi
 actual_groups="$(groups "${USER}")"
