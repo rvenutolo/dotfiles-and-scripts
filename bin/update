@@ -113,3 +113,8 @@ if executable_exists 'freshclam'; then
   log 'ClamAV virus definitions'
   sudo freshclam
 fi
+
+if executable_exists 'protonup'; then
+  log 'Proton-GE version'
+  protonup
+fi
