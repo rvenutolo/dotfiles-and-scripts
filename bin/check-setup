@@ -20,12 +20,16 @@ function path_remove() {
   PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
 }
 
+function contains_word() {
+  grep --quiet --fixed-strings --ignore-case --word-regex "$1"
+}
+
 function is_distro() {
-  hostnamectl | grep --fixed-strings 'Operating System:' | cut -d':' -f2 | grep -iwqF "$1"
+  hostnamectl | grep --fixed-strings 'Operating System:' | cut --delimiter=':' --fields=2 |  contains_word "$1"
 }
 
 function is_desktop_env() {
-  echo "${XDG_CURRENT_DESKTOP}" | grep -iwqF "$1"
+  echo "${XDG_CURRENT_DESKTOP}" | contains_word "$1"
 }
 
 ## expecting __RV_COMPUTER to be values like 'home desktop', 'work laptop'
@@ -124,12 +128,12 @@ done
 
 ## check that the `trash` command is from trash-d and not trash-cli
 if executable_exists 'trash'; then
-  trash --version | grep -qF 'rushsteve1/trash-d' || echo "trash command is not from trash-d"
+  trash --version | contains_word 'trash-d' || echo "trash command is not from trash-d"
 fi
 
 ## check that the `tldr` command is from tealdeer
 if executable_exists 'tldr'; then
-  tldr --version | grep -qF 'tealdeer' || echo "tldr command is not from tealdeer"
+  tldr --version | contains_word 'tealdeer' || echo "tldr command is not from tealdeer"
 fi
 
 expected_files=(
@@ -167,10 +171,10 @@ expected_fonts=(
 )
 installed_fonts="$(fc-list : family)"
 for font in "${expected_fonts[@]}"; do
-  grep -wiqF "${font}" <<<"${installed_fonts}" ||
-    grep -wiqF "${font}TTF" <<<"${installed_fonts}" ||
-    grep -wiqF "$(echo -e "${font}" | tr -d '[:space:]')" <<<"${installed_fonts}" ||
-    grep -wiqF "$(echo -e "${font}TTF" | tr -d '[:space:]')" <<<"${installed_fonts}" ||
+  contains_word "${font}" <<<"${installed_fonts}" ||
+    contains_word "${font}TTF" <<<"${installed_fonts}" ||
+    contains_word "$(echo -e "${font}" | tr --delete '[:space:]')" <<<"${installed_fonts}" ||
+    contains_word "$(echo -e "${font}TTF" | tr --delete '[:space:]')" <<<"${installed_fonts}" ||
     echo "Font not available: ${font}"
 done
 
@@ -198,7 +202,7 @@ if is_computer 'home desktop'; then
 fi
 actual_groups="$(groups "${USER}")"
 for group in "${expected_groups[@]}"; do
-  grep -wq "${group}" <<<"${actual_groups}" || echo "User is not in group: ${group}"
+  contains_word "${group}" <<<"${actual_groups}" || echo "User is not in group: ${group}"
 done
 
 expected_kvals=(
@@ -216,7 +220,7 @@ done
 [[ $(timedatectl show) != *'NTP=yes'* ]] && echo 'timedatectl set-ntp is not set'
 
 if executable_exists 'flatpak'; then
-  flatpak remotes | grep -qwF 'flathub' || echo 'Flathub flatpak repo is not installed'
+  flatpak remotes | contains_word 'flathub' || echo 'Flathub flatpak repo is not installed'
 fi
 
 if is_distro 'fedora'; then
@@ -233,6 +237,6 @@ if is_distro 'fedora'; then
     'rpmfusion-nonfree-release'
   )
   for rpm_fusion_pacakge in "${expected_rpm_fusions_packages[@]}"; do
-    grep -qF "${rpm_fusion_pacakge}" <<<"${installed_packages}" || echo "${rpm_fusion_pacakge} is not installed"
+    contains_word "${rpm_fusion_pacakge}" <<<"${installed_packages}" || echo "${rpm_fusion_pacakge} is not installed"
   done
 fi
