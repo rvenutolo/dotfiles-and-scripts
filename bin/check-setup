@@ -68,7 +68,7 @@ expected_executables=(
   'ag' 'alacritty' 'apropos' 'authy' 'autotrash' 'await' 'aws' 'aws_completer'
   'bat' 'bc' 'bmon' 'broot' 'btm' 'btop' 'bzip2'
   'cabextract' 'cargo' 'checkbashisms' 'cheat' 'choose' 'clamscan' 'cmake' 'colordiff' 'column' 'cpufetch' 'crontab' 'ctop' 'curl' 'curlie'
-  'dash' 'delta' 'diff' 'diff-so-fancy' 'dig' 'distrobox' 'docker' 'doggo' 'dos2unix' 'duf' 'dust'
+  'dash' 'delta' 'diff' 'diff-so-fancy' 'dig' 'distrobox' 'doggo' 'dos2unix' 'duf' 'dust'
   'edex-ui' 'exa'
   'fail2ban-client' 'fcp' 'fd' 'fff' 'find' 'fish' 'flatpak' 'flatpak-spawn' 'flatseal' 'free' 'fx' 'fzf'
   'gawk' 'gdu' 'git' 'gitkraken' 'gitui' 'glances' 'glow' 'go' 'gparted' 'gpg' 'gping' 'gradle' 'grep' 'groups' 'groovy' 'gs' 'gtop' 'gufw' 'gunzip' 'gzip'
@@ -197,7 +197,7 @@ if is_computer 'home desktop'; then
   systemctl is-enabled --quiet 'libvirtd' || echo 'Service not enabled: libvirtd'
 fi
 
-expected_groups=('docker' 'sys' 'wheel')
+expected_groups=('sys' 'wheel')
 if is_computer 'home desktop'; then
   expected_services+=('kvm' 'input' 'libvirt')
 fi
