@@ -70,8 +70,8 @@ expected_executables=(
   'cabextract' 'cargo' 'checkbashisms' 'cheat' 'choose' 'clamscan' 'cmake' 'colordiff' 'column' 'cpufetch' 'crontab' 'ctop' 'curl' 'curlie'
   'dash' 'delta' 'diff' 'diff-so-fancy' 'dig' 'distrobox' 'docker' 'doggo' 'dos2unix' 'duf' 'dust'
   'edex-ui' 'exa'
-  'fcp' 'fd' 'fff' 'find' 'fish' 'flatpak' 'flatpak-spawn' 'flatseal' 'free' 'fx' 'fzf'
-  'gawk' 'gdu' 'git' 'gitkraken' 'gitui' 'glances' 'glow' 'go' 'gparted' 'gpg' 'gping' 'gradle' 'grep' 'groups' 'groovy' 'gs' 'gtop' 'gunzip' 'gzip'
+  'fail2ban-client' 'fcp' 'fd' 'fff' 'find' 'fish' 'flatpak' 'flatpak-spawn' 'flatseal' 'free' 'fx' 'fzf'
+  'gawk' 'gdu' 'git' 'gitkraken' 'gitui' 'glances' 'glow' 'go' 'gparted' 'gpg' 'gping' 'gradle' 'grep' 'groups' 'groovy' 'gs' 'gtop' 'gufw' 'gunzip' 'gzip'
   'highlight' 'hostname' 'hstr' 'http' 'hyperfine'
   'iconv' 'inotifywait' 'ip'
   'java' 'javac' 'jq' 'just'
@@ -85,7 +85,7 @@ expected_executables=(
   'ranger' 'rg' 'riff' 'rsync' 'ruby' 'rustup'
   'sbt' 'scala' 'screen' 'sd' 'sed' 'shellcheck' 'shfmt' 'skeletal' 'slocate' 'snap' 'sntp' 'spark-submit' 'spring' 'ssh' 'stacer' 'starship' 'sudo'
   'tabs2spaces' 'tar' 'tcpdump' 'tldr' 'tmux' 'tokei' 'top' 'tracepath' 'traceroute' 'trash' 'tree'
-  'unlzma' 'unrar' 'unxz' 'unzip' 'usermod'
+  'ufw' 'unlzma' 'unrar' 'unxz' 'unzip' 'usermod'
   'visualvm' 'vlc'
   'wget' 'whatis' 'which'
   'xargs' 'xh' 'xsel' 'xz'
@@ -108,10 +108,10 @@ if is_computer 'home'; then
   )
 fi
 if is_distro 'fedora'; then
-  expected_executables+=('alien' 'fedy')
+  expected_executables+=('alien' 'fedy' 'sestatus')
 fi
 if is_distro 'arch' || is_distro 'manjaro'; then
-  expected_executables+=('pacseek' 'paru' 'yay')
+  expected_executables+=('aa-enabled' 'pacseek' 'paru' 'yay')
 fi
 ### TODO move these checks to package checks
 #if is_desktop_env 'gnome'; then
@@ -143,6 +143,7 @@ expected_files=(
   "${HOME}/.ssh/config.private"
   "${SDKMAN_DIR}/bin/sdkman-init.sh"
   '/usr/share/git/completion/git-prompt.sh'
+  '/etc/fail2ban/jail.local'
 )
 for file in "${expected_files[@]}"; do
   file_exists "${file}" || echo "Missing file: ${file}"
@@ -178,7 +179,7 @@ for font in "${expected_fonts[@]}"; do
     echo "Font not available: ${font}"
 done
 
-expected_services=('cups' 'ssh-agent' 'sshd')
+expected_services=('cups' 'fail2ban' 'ssh-agent' 'sshd' 'ufw')
 if is_computer 'home desktop'; then
   expected_services+=('nfs-server')
 fi
@@ -239,4 +240,15 @@ if is_distro 'fedora'; then
   for rpm_fusion_pacakge in "${expected_rpm_fusions_packages[@]}"; do
     contains_word "${rpm_fusion_pacakge}" <<<"${installed_packages}" || echo "${rpm_fusion_pacakge} is not installed"
   done
+fi
+
+if executable_exists 'ufw'; then
+  readonly ufw_status="$(sudo ufw status verbose)"
+  contains_word 'Status: active' <<<"${ufw_status}" || echo "UFW is not active"
+  contains_word 'deny (incoming)' <<<"${ufw_status}" || echo "UFW is not denying incoming by default"
+  contains_word 'allow (outgoing)' <<<"${ufw_status}" || echo "UFW is not allowing outgoing by default"
+fi
+
+if executable_exists 'aa-enabled'; then
+  aa-enabled | contains 'yes' || echo "AppArmor is not enabled"
 fi
