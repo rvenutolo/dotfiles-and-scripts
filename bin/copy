@@ -12,4 +12,4 @@ if [[ -t 0 ]]; then
   exit 2
 fi
 
-xsel -ib
+xsel --input --clipboard
