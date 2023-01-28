@@ -10,7 +10,7 @@ dir="$PWD"
 project_root="$PWD"
 while [[ "$dir" != / ]]; do
   if [[ -f "$dir/settings.gradle" || -f "$dir/settings.gradle.kts" || -f "$dir/gradlew" ]]; then
-    project_root="$dir"
+    readonly project_root="$dir"
     break
   fi
   dir="$(dirname "${dir}")"
