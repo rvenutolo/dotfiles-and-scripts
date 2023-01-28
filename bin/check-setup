@@ -9,7 +9,7 @@ fi
 
 function executable_exists() {
   # executables / no builtins, aliases, or functions
-  type -aPf "$1" >/dev/null 2>&1
+  type -aPf "$1" > /dev/null 2>&1
 }
 
 function file_exists() {
@@ -25,7 +25,7 @@ function contains_word() {
 }
 
 function is_distro() {
-  hostnamectl | grep --fixed-strings 'Operating System:' | cut --delimiter=':' --fields=2 |  contains_word "$1"
+  hostnamectl | grep --fixed-strings 'Operating System:' | cut --delimiter=':' --fields=2 | contains_word "$1"
 }
 
 function is_desktop_env() {
@@ -123,7 +123,7 @@ path_remove "${HOME}/.bin"
 path_remove "${HOME}/.bin/other"
 
 for executable in "${expected_executables[@]}"; do
-  executable_exists "${executable}" >/dev/null 2>&1 || echo "Executable not available: ${executable}"
+  executable_exists "${executable}" > /dev/null 2>&1 || echo "Executable not available: ${executable}"
 done
 
 ## check that the `trash` command is from trash-d and not trash-cli
@@ -172,10 +172,10 @@ expected_fonts=(
 )
 installed_fonts="$(fc-list : family)"
 for font in "${expected_fonts[@]}"; do
-  contains_word "${font}" <<<"${installed_fonts}" ||
-    contains_word "${font}TTF" <<<"${installed_fonts}" ||
-    contains_word "$(echo -e "${font}" | tr --delete '[:space:]')" <<<"${installed_fonts}" ||
-    contains_word "$(echo -e "${font}TTF" | tr --delete '[:space:]')" <<<"${installed_fonts}" ||
+  contains_word "${font}" <<< "${installed_fonts}" ||
+    contains_word "${font}TTF" <<< "${installed_fonts}" ||
+    contains_word "$(echo -e "${font}" | tr --delete '[:space:]')" <<< "${installed_fonts}" ||
+    contains_word "$(echo -e "${font}TTF" | tr --delete '[:space:]')" <<< "${installed_fonts}" ||
     echo "Font not available: ${font}"
 done
 
@@ -203,7 +203,7 @@ if is_computer 'home desktop'; then
 fi
 actual_groups="$(groups "${USER}")"
 for group in "${expected_groups[@]}"; do
-  contains_word "${group}" <<<"${actual_groups}" || echo "User is not in group: ${group}"
+  contains_word "${group}" <<< "${actual_groups}" || echo "User is not in group: ${group}"
 done
 
 expected_kvals=(
@@ -212,7 +212,7 @@ expected_kvals=(
   'vm.swappiness 10'
 )
 for kvals in "${expected_kvals[@]}"; do
-  IFS=' ' read -r k v <<<"${kvals}"
+  IFS=' ' read -r k v <<< "${kvals}"
   [[ $(sysctl -n "${k}") -le "${v}" ]] || echo "Kernel variable ${k} is >${v}: $(sysctl -n "${k}")"
 done
 
@@ -228,7 +228,7 @@ if is_distro 'fedora'; then
   expected_dnf_conf_vals=('max_parallel_downloads' 'defaultyes' 'keepcache')
   dnf_conf_text="$(cat '/etc/dnf/dnf.conf')"
   for dnf_conf_val in "${expected_dnf_conf_vals[@]}"; do
-    [[ -z $(grep --fixed-strings "${dnf_conf_val}" <<<"${dnf_conf_text}" | cut -d'=' -f2 | xargs) ]] && echo "dnf conf ${dnf_conf_val} is not set"
+    [[ -z $(grep --fixed-strings "${dnf_conf_val}" <<< "${dnf_conf_text}" | cut -d'=' -f2 | xargs) ]] && echo "dnf conf ${dnf_conf_val} is not set"
   done
   installed_packages="$(dnf list --installed | cut -d' ' -f1)"
   expected_rpm_fusions_packages=(
@@ -238,15 +238,15 @@ if is_distro 'fedora'; then
     'rpmfusion-nonfree-release'
   )
   for rpm_fusion_pacakge in "${expected_rpm_fusions_packages[@]}"; do
-    contains_word "${rpm_fusion_pacakge}" <<<"${installed_packages}" || echo "${rpm_fusion_pacakge} is not installed"
+    contains_word "${rpm_fusion_pacakge}" <<< "${installed_packages}" || echo "${rpm_fusion_pacakge} is not installed"
   done
 fi
 
 if executable_exists 'ufw'; then
   readonly ufw_status="$(sudo ufw status verbose)"
-  contains_word 'Status: active' <<<"${ufw_status}" || echo "UFW is not active"
-  contains_word 'deny (incoming)' <<<"${ufw_status}" || echo "UFW is not denying incoming by default"
-  contains_word 'allow (outgoing)' <<<"${ufw_status}" || echo "UFW is not allowing outgoing by default"
+  contains_word 'Status: active' <<< "${ufw_status}" || echo "UFW is not active"
+  contains_word 'deny (incoming)' <<< "${ufw_status}" || echo "UFW is not denying incoming by default"
+  contains_word 'allow (outgoing)' <<< "${ufw_status}" || echo "UFW is not allowing outgoing by default"
 fi
 
 if executable_exists 'aa-enabled'; then
