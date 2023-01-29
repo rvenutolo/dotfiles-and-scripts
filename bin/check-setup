@@ -76,7 +76,7 @@ expected_executables=(
   'iconv' 'inotifywait' 'ip'
   'java' 'javac' 'jq' 'just'
   'kotlin'
-  'lazydocker' 'lazygit' 'less' 'linpeas' 'lf' 'lfs' 'locate' 'lpass' 'lsof'
+  'lazydocker' 'lazygit' 'less' 'lf' 'lfs' 'locate' 'lpass' 'lsof'
   'maldet' 'man' 'mcs' 'micro' 'mn' 'moar' 'mtr' 'mvn' 'mvnd'
   'nano' 'navi' 'ncdu' 'neofetch' 'nmap' 'nnn' 'nvim'
   'onefetch' 'oneshot' 'openconnect' 'openssl' 'openvpn'
