@@ -1,6 +1,0 @@
-[Unit]
-Description=Deletes Systemd journal logs which are older than 365 days
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/journalctl --vacuum-time=365d
