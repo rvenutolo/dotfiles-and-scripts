@@ -81,4 +81,5 @@ export TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
 export WGETRC="${XDG_CONFIG_HOME}/wgetrc"
 
 ## misc
+export SYSTEMD_PAGER=''
 export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
