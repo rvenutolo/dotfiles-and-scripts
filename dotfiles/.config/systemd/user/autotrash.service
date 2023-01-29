@@ -4,6 +4,3 @@ Description=Deletes Trash items older than 30 days
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/autotrash -d 30
-
-[Install]
-WantedBy=default.target
