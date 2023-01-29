@@ -199,15 +199,15 @@ if is_computer 'home desktop'; then
   expected_enabled_system_services+=('libvirtd')
 fi
 for service in "${expected_enabled_system_services[@]}"; do
-  systemctl is-enabled  --quiet "${service}" || echo "System service not enabled: ${service}"
+  systemctl is-enabled --quiet "${service}" || echo "System service not enabled: ${service}"
 done
 
-expected_active_user_services=('ssh-agent')
+expected_active_user_services=('autotrash.timer journalctl-vacuum-time-365d.timer ssh-agent')
 for service in "${expected_active_user_services[@]}"; do
   systemctl is-active --user --quiet "${service}" || echo "User service not active: ${service}"
 done
 
-expected_enabled_user_services=('autotrash' 'journalctl-vacuum-time-365d')
+expected_enabled_user_services=()
 for service in "${expected_enabled_user_services[@]}"; do
   systemctl is-enabled --user --quiet "${service}" || echo "User service not enabled: ${service}"
 done
