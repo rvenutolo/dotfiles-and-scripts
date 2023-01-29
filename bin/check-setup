@@ -254,5 +254,5 @@ if executable_exists 'ufw'; then
 fi
 
 if executable_exists 'aa-enabled'; then
-  aa-enabled | contains 'yes' || echo "AppArmor is not enabled"
+  aa-enabled | contains_word 'yes' || echo "AppArmor is not enabled"
 fi
