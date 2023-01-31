@@ -18,7 +18,7 @@ while [[ "$dir" != / ]]; do
     readonly project_root="$dir"
     break
   fi
-  dir="$(dirname "${dir}")"
+  dir="$(dirname -- "${dir}")"
 done
 
 if [[ -x "$project_root/mvnw" ]]; then

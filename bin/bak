@@ -10,8 +10,8 @@ fi
 readonly filetime="$(date +%Y%m%d_%H%M%S)"
 for file; do
   if [[ -f "$file" || -d "$file" ]]; then
-    dirname="$(dirname "${file}")"
-    filename="$(basename "${file}")"
+    dirname="$(dirname -- "${file}")"
+    filename="$(basename -- "${file}")"
     target_file="${dirname}/${filename}.${filetime}.bak"
     cp --archive -- "${file}" "${target_file}"
     echo "${0##*/}: ${file} -> ${target_file}" >&2

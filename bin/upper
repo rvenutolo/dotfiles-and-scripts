@@ -11,8 +11,8 @@ if [[ "$#" -eq 0 ]]; then
   tr '[:lower:]' '[:upper:]'
 else
   for file; do
-    dirname="$(dirname "${file}")"
-    filename="$(basename "${file}")"
+    dirname="$(dirname -- "${file}")"
+    filename="$(basename -- "${file}")"
     lower_filename="$(echo "${filename}" | tr '[:lower:]' '[:upper:]')"
     target_file="${dirname}/${lower_filename}"
     if [[ "${lower_filename}" != "${filename}" ]]; then
