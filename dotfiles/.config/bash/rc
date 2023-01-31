@@ -99,12 +99,14 @@ unset -v file
 
 ## dirs to put on path
 for dir in \
-  "$(if executable_exists 'ruby' ; then echo "$(ruby -e 'puts Gem.user_dir')/bin" ; else echo '' ; fi)" \
-  "$(if executable_exists 'go' ; then echo "$(go env GOPATH)/bin" ; else echo '' ; fi)" \
-  "$(if [[ -n "${CARGO_HOME}" ]] ; then echo "${CARGO_HOME}/bin" ; else echo '' ; fi)" \
+  "$(if executable_exists 'ruby'; then echo "$(ruby -e 'puts Gem.user_dir')/bin"; else echo ''; fi)" \
+  "$(if executable_exists 'go'; then echo "$(go env GOPATH)/bin"; else echo ''; fi)" \
+  "$(if [[ -n "${CARGO_HOME}" ]]; then echo "${CARGO_HOME}/bin"; else echo ''; fi)" \
   "${HOME}/.bin/other" \
   "${HOME}/.bin"; do
-  [[ -n "${dir}" ]] && [[ -d "${dir}" ]] && path_prepend "${dir}"
+  if [[ -n "${dir}" && -d "${dir}" ]]; then
+    path_prepend "${dir}"
+  fi
 done
 unset -v dir
 
