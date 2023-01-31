@@ -38,7 +38,7 @@ shopt -s extquote
 shopt -u failglob
 shopt -s force_fignore
 shopt -s globasciiranges
-shopt -u globstar
+shopt -s globstar
 shopt -u gnu_errfmt
 shopt -s histappend
 shopt -u histreedit
