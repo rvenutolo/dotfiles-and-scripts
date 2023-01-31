@@ -35,7 +35,11 @@ function is_desktop_env() {
 ## expecting __RV_COMPUTER to be values like 'home desktop', 'work laptop'
 function is_computer() {
   set +u
-  [[ ${__RV_COMPUTER,,} == "$1" ]] && is_comp='true' || is_comp='false'
+  if [[ ${__RV_COMPUTER,,} == "$1" ]]; then
+    local is_comp='true'
+  else
+    local is_comp='false'
+  fi
   set -u
   [[ ${is_comp} == 'true' ]]
 }
