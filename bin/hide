@@ -11,6 +11,6 @@ for file; do
   dirname="$(dirname "${file}")"
   filename="$(basename "${file}")"
   target_file="${dirname}/.${filename}"
-  mv "${file}" "${target_file}"
+  mv -- "${file}" "${target_file}"
   echo "${0##*/}: ${file} -> ${target_file}" >&2
 done
