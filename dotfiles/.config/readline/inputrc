@@ -6,6 +6,9 @@ set echo-control-characters off
 # Make Tab autocomplete regardless of filename case
 set completion-ignore-case on
 
+# Treat hyphens and underscores as equivalent
+set completion-map-case on
+
 # List all matches in case multiple possible completions are possible
 set show-all-if-ambiguous on
 
@@ -16,6 +19,10 @@ set mark-symlinked-directories on
 # commands (i.e. more intelligent Up/Down behavior)
 "\e[B": history-search-forward
 "\e[A": history-search-backward
+
+# ensure that left and right continue to work correctly
+"\e[C": forward-char
+"\e[D": backward-char
 
 # Do not autocomplete hidden files unless the pattern explicitly begins with a dot
 set match-hidden-files off
@@ -36,6 +43,11 @@ set visible-stats on
 # Readline used by Bash 4.)
 set skip-completed-text on
 
+# Displays possible completions using different colors to indicate their file
+# type. The color definitions are taken from the value of the LS_COLORS
+# environment variable.
+set colored-stats on
+
 # Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
 set input-meta on
 set output-meta on
@@ -50,3 +62,9 @@ set convert-meta off
 
 # Hop up directories
 "\C-u":"cd ..\n" ### Ctrl U
+
+$if Bash
+  # Enable history expansion with space
+  # E.g. typing !!<space> will replace the !! with your last command
+  Space: magic-space
+$endif
