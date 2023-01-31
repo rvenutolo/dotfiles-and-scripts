@@ -89,10 +89,11 @@ for file in \
   '/usr/share/doc/pkgfile/command-not-found.bash' \
   "${SDKMAN_DIR}/bin/sdkman-init.sh" \
   "${XDG_CONFIG_HOME}/broot/launcher/bash/br" \
-  "${XDG_CONFIG_HOME}/bash/functions" \
   "${XDG_CONFIG_HOME}/bash/aliases" \
   "${XDG_CONFIG_HOME}/bash/local"; do
-  [[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}"
+  if is_readable_file "${file}"; then
+    source "${file}"
+  fi
 done
 unset -v file
 
