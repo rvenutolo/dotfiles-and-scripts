@@ -65,33 +65,13 @@ shopt -u shift_verbose
 shopt -s sourcepath
 shopt -u xpg_echo
 
-## util functions used in this and other scripts
-function executable_exists() {
-  # executables / no builtins, aliases, or functions
-  type -aPf "$1" >/dev/null 2>&1
-}
-
-function command_exists() {
-  # executables and builtins / no aliases or functions
-  type -Pf "$1" >/dev/null 2>&1
-}
-
-function path_remove() {
-  PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
-}
-
-function path_append() {
-  path_remove "$1" && PATH="$PATH:$1"
-}
-
-function path_prepend() {
-  path_remove "$1" && PATH="$1:$PATH"
-}
-
-# source exports first so they can be used immediately
-[[ -r "${XDG_CONFIG_HOME}/bash/exports" ]] &&
-  [[ -f "${XDG_CONFIG_HOME}/bash/exports" ]] &&
+# source function and exports first so they can be used immediately
+if [[ -f "${XDG_CONFIG_HOME}/bash/functions" && -r "${XDG_CONFIG_HOME}/bash/functions" ]]; then
+  source "${XDG_CONFIG_HOME}/bash/functions"
+fi
+if [[ -f "${XDG_CONFIG_HOME}/bash/exports" && -r "${XDG_CONFIG_HOME}/bash/exports" ]]; then
   source "${XDG_CONFIG_HOME}/bash/exports"
+fi
 
 # Arch Box Sourcing
 # /etc/profile

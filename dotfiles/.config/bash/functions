@@ -1,5 +1,31 @@
 #!/usr/bin/env bash
 
+function is_readable_file() {
+  [[ -f "$1" && -r "$1" ]]
+}
+
+function executable_exists() {
+  # executables / no builtins, aliases, or functions
+  type -aPf "$1" > /dev/null 2>&1
+}
+
+function command_exists() {
+  # executables and builtins / no aliases or functions
+  type -Pf "$1" > /dev/null 2>&1
+}
+
+function path_remove() {
+  PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
+}
+
+function path_append() {
+  path_remove "$1" && PATH="$PATH:$1"
+}
+
+function path_prepend() {
+  path_remove "$1" && PATH="$1:$PATH"
+}
+
 # https://unix.stackexchange.com/questions/9123/is-there-a-one-liner-that-allows-me-to-create-a-directory-and-move-into-it-at-th/9124#9124
 function mkcd() {
   [[ "$#" -ne 1 ]] && echo "${0##*/}: Expected exactly 1 argument" >&2 && return 2
